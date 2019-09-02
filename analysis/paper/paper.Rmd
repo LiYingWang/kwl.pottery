@@ -1,8 +1,8 @@
 ---
-title: "Title Goes Here"
+title: "Exploring pottery specialization during the colonial contact in the 17-19th century in northeast Taiwan"
 author:
-  - Author One
-  - Author Two
+  - Li-Ying Wang
+  - Ben Marwick
 date: "`r format(Sys.time(), '%d %B, %Y')`"
 output: 
     bookdown::html_document2:
@@ -34,11 +34,22 @@ knitr::opts_chunk$set(
 
 # Introduction
 
-Here is a citation [@Marwick2017]
+Pottery production can reflect prehistoric socioeconomic patterns since it relates to not only economic base for households but also societies as whole when specialized production was organized that hints changes in production systems. Craft specialization can provide further evidence about the type of production organization, and the presence of elite control (Arnold 2000; Blackman, et al. 1993; Costin 1991; Hirshman, et al. 2010). The underlying assumption is that the specialized mass production of ceramics will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers (Arnold 2000: 334). 
 
-# Background
+We observed pottery production in northeast Taiwan in the late Iron Age period and historical period (AD 600-100) presenting a high consistency in form throughout the region compared to other places in the island. 
+
+Here we examine pottery measurements and shapes from Kiwulan, a large multi-component archaeological site in NE Taiwan, to investigate if there are any changes resulting from different periods of foreign contact, European and then Chinese, that might indicate social changes in the indigenous society. We asked the questions: Did foreign contact have an impact on indigenous pottery production in Northeast Taiwan that can be detected in the shape of the vessels? Did the pottery production become more standardized and homogeneous in shape after foreign contact? Did the contact with European cause more homogeneous shape than Chinese contact period because of large scale exchange network? This is important because the 
+
+
+# Background and Research area
+
+# Hypotheses and expectations
+
+The goal for locally made pottery data collection is to explore whether pottery production could reflect the social change, from more corporate modes to more network modes after European contact. The level of craft specialization usually relates to the presence of elite control. In this case, if competitions for prestige and European resources among individuals gradually lead to change in social organization, then the production of pottery will show more homogeneous features after European contact due to the craft specialization. The standardization of metric attributes for pottery will be used to measure the craft specialization.
 
 # Methods
+
+In this study, I examine 291 pots recovered from Kiwulan site.  The layer from 1 to 6 could be divided into 3 time periods. Layer 5 and 6 represent pre-contact period, layer 4 represents contact period, and layer1, 2, and 3 represent post-contact period.  The amount of pots for each layer shows below. Although most pots are not complete, the thickness from rim, neck, to body can be measured. I have also measured the diameter of rim, neck, and body. For those pots that are incomplete, the diameter is measured by its curvature. Since the height is incomplete for most pots, this preliminary analysis focuses more on the possible change in thickness and diameter of pot for different parts, and their ratio over time.
 
 # Results
 
@@ -63,7 +74,7 @@ Here is an example of inline code `r x` in the middle of a sentence.
 
 # Conclusion
 
-# Acknowledgements
+# Acknowledgments
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
 ##### pagebreak
