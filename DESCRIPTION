@@ -30,3 +30,5 @@ Imports:
 Remotes: benmarwick/wordcountaddin
 Suggests1: devtools
 Suggests2: git2r
+URL: https://github.com/LiYingWang/kwl.pottery
+BugReports: https://github.com/LiYingWang/kwl.pottery/issues
