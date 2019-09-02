@@ -1,0 +1,30 @@
+Package: kwl.pottery
+Title: What the Package Does (One Line, Title Case)
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "First",
+           family = "Last",
+           role = c("aut", "cre"),
+           email = "first.last@example.com")
+Description: What the package does (one paragraph)
+License: MIT + file LICENSE
+ByteCompile: true
+Encoding: UTF-8
+LazyData: true
+Imports: 
+    bookdown,
+    here,
+    tidyverse, 
+    sf,
+    git2r,
+    devtools,
+    cowplot,
+    ggplot2 (>= 3.2.0),
+    knitr (>= 1.23),
+    maptools (>= 0.9-5),
+    raster (>= 2.9-5),
+    readxl (>= 1.3.1),
+    spatstat,
+    viridis,
+    ggsn
+Remotes: benmarwick/wordcountaddin
