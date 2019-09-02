@@ -1,7 +1,7 @@
 Package: kwl.pottery
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9000
-Authors@R: 
+Authors@R:
     person(given = "First",
            family = "Last",
            role = c("aut", "cre"),
@@ -11,7 +11,7 @@ License: MIT + file LICENSE
 ByteCompile: true
 Encoding: UTF-8
 LazyData: true
-Imports: 
+Imports:
     bookdown,
     here,
     tidyverse, 
@@ -28,3 +28,5 @@ Imports:
     viridis,
     ggsn
 Remotes: benmarwick/wordcountaddin
+Suggests1: devtools
+Suggests2: git2r
