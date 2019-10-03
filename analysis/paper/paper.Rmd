@@ -46,17 +46,25 @@ We find differences in shape and shape standardization of pottery that indicate 
 - review about pottery shape analysis recently 
 
 # Research area
-Kiwulan is located in the north part of Yilan plain in northeast Taiwan. Yilan is 
+Kiwulan is located at the north part of Yilan plain in northeast Taiwan. 
 
 # Hypotheses and expectations
-
 The goal for locally made pottery data collection is to explore whether pottery production could reflect the social change, from more corporate modes to more network modes after European contact. The level of craft specialization usually relates to the presence of elite control. In this case, if competitions for prestige and European resources among individuals gradually lead to change in social organization, then the production of pottery will show more homogeneous features after European contact due to the craft specialization. The standardization of metric attributes for pottery will be used to measure the craft specialization.
 
 # Methods
 
+## metric measurements
+
 In this study, we examine 291 pots recovered from Kiwulan site.  The layer from 1 to 6 could be divided into 3 time periods. Layer 5 and 6 represent pre-contact period, layer 4 represents contact period, and layer1, 2, and 3 represent post-contact period.  The amount of pots for each layer shows below. Although most pots are not complete, the thickness from rim, neck, to body can be measured. I have also measured the diameter of rim, neck, and body. For those pots that are incomplete, the diameter is measured by its curvature. Since the height is incomplete for most pots, this preliminary analysis focuses more on the possible change in thickness and diameter of pot for different parts, and their ratio over time.
 
+## geometric morphometric approach
+
+To prepare the data for shape analysis, we first traced the outlines of pottery from previously outline drawings done by excavation team using Inkscape software. The digitised outlines were converted into a list of x-y pixel coordinates for elliptic Fourier analysis (EFA), which can assess pottery morphological difference among pottery outlines from three occupation contexts. The EFA generates harmonic coefficients were analysed by principal component analysis (PCA) to identity major patterns in data through dimensionality reduction. The principal components (PCs) were analysed with a multivariate analysis of variance (MANOVA) to test for significant effects of the occupation context on shape variances. Finally, we computed a significance test for the equality of coefficients of variation (CVs) among multiple groups of PCs to understand the differences in shape standardisation. Outline analyses were carried out using the package Momocs in the software R.
+
 # Results
+
+Elliptic Fourier analysis (EFA): Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. The results of PCA show that the first three PCs explain 86% of shape variation. PC1 relates to height of vessel, PC2 relates to width of neck and mouth, and PC3 relates to width and flare of neck. The PCA biplot of vessel shape shows grouping by each occupation phase. MANOVA shows significant differences in shape between Pre-European and Post-European (p = 0.02) and Pre-European and Chinese contact shapes (p < 0.01). The distributions of the first three PCs for each vessel suggest variations in shape standardization by period. PC1 shows more variation in the pre-Euro period compared to the Chinese period. Standardization appears strong in the pre-Euro period but weak in the Chinese period. P-values for a modified signed-likelihood ratio test of equality of CVs of PC1 & PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
+
 
 ```{r get-data, eval = FALSE}
 # Note the path that we need to use to access our data files when rendering this document
