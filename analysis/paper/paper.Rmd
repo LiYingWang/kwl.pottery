@@ -34,6 +34,8 @@ knitr::opts_chunk$set(
 
 # Introduction
 
+- start with researches about shape analysis for artefacts and what is the implication. 
+
 Culture contact between indigenous people and colonizer with imperial power usually leads to profound changes in local indigenous societies. We explore the culture changes in indigenous societies in northeast Taiwan that experienced foreign contacts with the Europeans and Chinese since 17th century by examining the local pottery production. Pottery production can reflect prehistoric socioeconomic patterns since it relates to not only economic base for households but also societies as whole when specialized production was organized that hints changes in production systems. Based on the assumption that the specialized mass production will lead to uniformity of the product due to increased skills, routinization, and lower diversity of producers, we may be able to determine the type of production, and the presence of elite control, from artefact analysis (Arnold 2000: 334; Blackman, et al. 1993; Costin 1991; Hirshman, et al. 2010). 
 
 We observed pottery production in northeast Taiwan in the late Iron Age period and historical period (1400-1900 AD) presenting a high consistency in form and shape compared to other pottery found from other regions on this island that hints the emergence of pottery specialization. We asked the questions: Did foreign contact have an impact on indigenous pottery production in Northeast Taiwan that can be detected in the shape of the vessels? Did the pottery production become more standardized and homogeneous in shape after foreign contact? Did the contact with European cause more homogeneous shape than Chinese contact period because of large scale exchange network? 
@@ -45,13 +47,14 @@ We find differences in shape and shape standardization of pottery that indicate 
 # pottery shape analysis 
 - review about pottery shape analysis recently 
 
-# Research area
-Kiwulan is located at the north part of Yilan plain in northeast Taiwan. 
-
 # Hypotheses and expectations
 The goal for locally made pottery data collection is to explore whether pottery production could reflect the social change, from more corporate modes to more network modes after European contact. The level of craft specialization usually relates to the presence of elite control. In this case, if competitions for prestige and European resources among individuals gradually lead to change in social organization, then the production of pottery will show more homogeneous features after European contact due to the craft specialization. The standardization of metric attributes for pottery will be used to measure the craft specialization.
 
-# Methods
+# Materials and methods
+
+## Archaeological pottery from Kiwulan 
+
+Kiwulan is an late Iron Age site situated on a hill near a riverside at the northern margin of Yilan, northeast Taiwan. Yilan is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. Kiwulan contains two archaeological layers, Lower Culture Layer (1300 BP to 800 BP) and Upper Culture Layer (600 BP to 100 BP, i.e. AD 1400-1900), with a sterile deposit in between. The Upper Culture Layer is the main focus in this paper which covers 500 years from the late Iron Age to the historical period. This time period experienced frequent foreign contacts including the European colonial presence in the 17th century and great waves of Chinese immigrant since 19th century. The excavation revealed abundant artifacts in which potsherds are the dominate materials throughout the site. Imported ceramics from mainland China, stonewares, and ornament elements such as beads were usually found in the Upper Culture Layer that indicates the prosperous international trading activities in the 17th century during the European presence in Taiwan. In addition to artifacts, features were also found, such as burials, middens, and postholes with in-situ posts that explains Kiwulan was a settlement site. 
 
 ## metric measurements
 
