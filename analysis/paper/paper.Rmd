@@ -72,7 +72,7 @@ The scanned pottery drawings of reconstructed pots that mostly covers from rim t
 
 ```{r read-data}
 library(here)
-lf <- list.files(here("analysis", "data", "raw_data"), full.names = TRUE)
+lf <- list.files(here("analysis", "data", "raw_data", "pottery_svg"), full.names = TRUE)
 
 library(xml2)
 library(stringr)
@@ -91,10 +91,10 @@ remove_scan_and_fill <- function(svg_file) {
     "fill:#000000;stroke:none;stroke-width:5;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-dasharray:none;stroke-opacity:1"
 
   write_xml(t1,
-            str_glue("analysis/data/raw_data/fill_{basename(svg_file)}"))
+            str_glue("analysis/data/raw_data/fill_pottery_svg/fill_{basename(svg_file)}"))
   
   # fit image object to canvas in svg so it's all captured during the conversion to JPG
-  system(str_glue('inkscape --verb=EditSelectAll --verb=AlignHorizontalCenter --verb=AlignVerticalCenter  --verb=FitCanvasToSelectionOrDrawing --verb=FileSave --verb=FileQuit "$(pwd)/analysis/data/raw_data/fill_{basename(svg_file)}"'))
+  system(str_glue('inkscape --verb=EditSelectAll --verb=AlignHorizontalCenter --verb=AlignVerticalCenter  --verb=FitCanvasToSelectionOrDrawing --verb=FileSave --verb=FileQuit "$(pwd)/analysis/data/raw_data/fill_pottery_svg/fill_{basename(svg_file)}"'))
 }
 
 # run the function on all SVGs
@@ -102,7 +102,7 @@ library(purrr)
 walk(lf, remove_scan_and_fill)
 
 # convert SVG to PNG
-filled_svgs <- list.files("analysis/data/raw_data", pattern = "^fill_", full.names = TRUE)
+filled_svgs <- list.files("analysis/data/raw_data/fill_pottery_svg", pattern = "^fill_", full.names = TRUE)
 
 # convert svgs to to jpg
 library(magick)
@@ -119,10 +119,10 @@ map(filled_svgs,
 library(tidyverse)
 
 # get list of jpgs only
-jpgs <- list.files("analysis/data/raw_data", pattern = ".jpg", full.names = TRUE)
+jpgs <- list.files("analysis/data/raw_data/pottery_jpg", pattern = ".jpg", full.names = TRUE)
 
 # join file names to phase
-pottery_data <- readr::read_csv("Pottery_outlines/KWL_Ceramic_final2018_with_phases.csv")
+pottery_data <- readr::read_csv("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv")
 pottery_data <- pottery_data %>% 
   mutate(filename = str_glue('fill_{filename}.svg_output.jpg'))
 
@@ -178,7 +178,44 @@ jpgs_imported_coo %>%
   panel(., fac = phases_isect$phase)
 
 pile(jpgs_imported_coo)
+```
 
+```{r EFA-analysis}
+op <- efourier(jpgs_imported_coo, norm = FALSE)
+
+# The progressive capture of shape geometry along the number of harmonics can be visualized with:
+  
+calibrate_reconstructions_efourier(jpgs_imported_coo,  
+                          id = 1, 
+                          range = c(1, 2, 4, 8, 14, 20))
+
+# mean shape, per group
+bot.ms <- mshapes(op, 2)
+bot.ms$shp$`Post-European`   <- bot.ms$shp$`Post-European` %T>% coo_plot(border="blue")
+`Post-European`  <- bot.ms$shp$`Post-European`  %T>% coo_draw(border="blue")
+`Pre-European` <-   bot.ms$shp$`Pre-European`  %T>% coo_draw(border="red")
+legend("topright", 
+       lwd=1,
+       col=c("blue", "red"), 
+       legend=c( "Post-European", "Pre-European"))
+
+# Thin plate spline analysis (TPS)
+# Thin plate splines (TPS) was used to compare average shapes and visualise the outline deformations required to pass from an extreme of the morphospace to the other.
+# Deformation grids
+png("Pottery_outlines/tps-pre-Euro-to-post-Euro.png", res = 300, w = 900, h = 900)
+tps_grid(`Pre-European`, `Post-European` , shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+         amp = 1, grid.size = 18, legend = T)
+dev.off()
+
+png("Pottery_outlines/tps-pre-Euro-to-Chinese.png", res = 300, w = 900, h = 900)
+tps_grid(`Pre-European`, `Chinese Contact`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+         amp = 1, grid.size = 18, legend = T)
+dev.off()
+
+# Isodeformation lines
+tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+        amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
+        palette = col_summer, grid = F)
 
 ```
 
