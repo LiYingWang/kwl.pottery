@@ -49,7 +49,7 @@ Geometric morphometry methods (GMM) has been widely applied recently in archaeol
 - CV is hard to test, we apply some statistics testing for it
 
 # Hypotheses and expectations
-The goal for locally made pottery data collection is to explore whether pottery production could reflect the social change, from more corporate modes to more network modes after European contact. The level of craft specialization usually relates to the presence of elite control. In this case, if competitions for prestige and European resources among individuals gradually lead to change in social organization, then the production of pottery will show more homogeneous features after European contact due to the craft specialization. The standardization of metric attributes for pottery will be used to measure the craft specialization.
+The goal of my data collection for locally pottery is to explore whether pottery production could reflect the social change, from a more corporate mode to a more network mode after European contact. Craft specialization usually appears when the presence of elite control. In this case, if such feel of competitions for prestige and wonderful European resources among proud individuals gradually lead to change in social organization, then I expect the production of pottery will show more homogeneous features after European contact due to the craft specialization and the inspiration of the Europeans advisor. The standardization of metric attributes for pottery has being used to measure the craft specialization.
 
 # Materials and methods
 
