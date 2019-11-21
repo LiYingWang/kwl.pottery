@@ -47,7 +47,7 @@ Geometric morphometric methods (GMM) has been widely applied recently in archaeo
 
 However, one limitation of landmark-based morphometrics is that landmark data may not be able to capture the shape differences of a morphological structure of which the curving outlines between landmarks convey important information. In addition, obvious and reliable landmark points may be unavailable for some complex, rounded or globular shaped structures. In those cases, outline approaches are more suitable to study shape by focusing more on on the overall shape of a morphological structure. One of the outline approaches is semi-landmarks method, which assign points along a outline curve at defined intervals between two landmarks to capture the variations of the outlines [@Bookstein1997; @Lawing2010]. Another approach, also the method used in this paper, is elliptic Fourier Analysis (EFA) commonly used for two-dimensional closed shape [@Kuhl1982]. EFA is a powerful method to extract geometric information where outlines are considered as periodic functions and decomposed into a series of ellipses described by trigonometric functions, called harmonic coefficients [@Adam2004; @Claude2008; @Bonhomme2014]. The number of harmonics determines the quality of the geometry that more harmonics can capture the shapes more precisely. The use of EFA in archaeology are mostly for bone morphology to understand the biological variation and recently more for stone artefacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Outline approach based on EFA is more suitable for shapes lacking of obvious landmarks or curves convey more important information indicating the meaningful variation in shapes, for example, ceramics. @Wilczek2014 evaluate the concordance between outline-based approaches, including the EFA and the Discrete Cosine Transform (DCT), and traditional typology by studying 154 complete ceramic vessels in varied forms from the Bibracte oppidum in France. They found that the variation in ceramic shapes analysed by EFA and DCT matches traditional ceramic typology, which supports that outline-based approaches can be efficiently used for studying variations in ceramic forms. EFA enables the study of the level of production standardisation to answer questions about the evolution of shape over space and time. 
 
-In this paper, we use EFA for pottery shape analysis to evaluate the level of standardization of pottery from an Iron Age site in northeast Taiwan in relation to the European presence in the 17th century that might hint the emergence of craft specialization for pottery production. Craft specialization can provide further evidence about the type of production organization which is closely related to economic or political aspects of a society [@Arnold2000; @Blackman1993; @Costin1991; @Hirshman2010; @Stark1995]. The emergence of craft specialization can also be an indicator for social inequality that hints the possibility of the presence of production groups worked for specific individuals. The presence of craft specialization is commonly studied by measuring the standardization of ceramics based on the assumption that the specialized mass production will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers [@Arnold2000]. To test the prediction of a shift in the level of social inequality in this case study in northeast Taiwan influnced by the colonial European presence, we use standardization of pottery in shapes as an index for craft specialization to identify the presence of a few individuals controlling large scale pottery production [@Costin1995; @Hirshman2010] using outline-based geometric morphometrics couples with traditional metric measurements to compare and evaluate the use of outline approaches for pottery with high consistent in forms. 
+In this paper, we use EFA for pottery shape analysis to evaluate the level of standardization of pottery from an Iron Age site in northeast Taiwan in relation to the European presence in the 17th century that might hint the emergence of craft specialization for pottery production. Craft specialization can provide further evidence about the type of production organization which is closely related to economic or political aspects of a society [@Arnold2000; @Blackman1993; @Costin1991; @Hirshman2010; @Stark1995]. The emergence of craft specialization can also be an indicator for social inequality that hints the possibility of the presence of production groups worked for specific individuals. The presence of craft specialization is commonly studied by measuring the standardization of ceramics based on the assumption that the specialized mass production will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers [@Arnold2000]. To test the prediction of a shift in the level of social inequality in this case study in northeast Taiwan influenced by the colonial European presence, we use standardization of pottery in shapes as an index for craft specialization to identify the presence of a few individuals controlling large scale pottery production [@Costin1995; @Hirshman2010] using outline-based geometric morphometrics couples with traditional metric measurements to compare and evaluate the use of outline approaches for pottery with high consistent in forms. 
 
 - CV is hard to test, we apply some statistics testing for it
 
@@ -204,9 +204,269 @@ dev.off()
 tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
         amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
         palette = col_summer, grid = F)
-
 ```
 
+```{r PCA-analysis}
+# pca
+# these are fast
+op.p <- PCA(op)
+
+# We can see the pots groups by phase, and their shape distribution
+# according to the first two principle components of the EFA 
+# PC1 and PC2 explain 79% of variation
+png("index/data/pottery-shape/pca-biplot.png", res = 300, w = 1500, h = 1500)
+plot(op.p, 2, 
+     morpho = TRUE, 
+     ellipses = TRUE,
+     cex = 1, 
+     cex.labelsgroups = 1.5)
+
+dev.off()
+
+# different visualization 
+plot(PCA(op), 2, pos.shp="full")
+plot(PCA(op), 2, pos.shp="range")
+plot(PCA(op), 2, pos.shp="xy")
+plot(PCA(op), 2, pos.shp="range_axes")
+plot(PCA(op), 2, pos.shp="full_axes")
+
+# the contributions of each PC to the shapes
+pc_contrib <- PCcontrib(op.p, nax = 1:3) 
+pc_contrib$gg +  
+  geom_polygon(fill="slategrey", col="black") + 
+  ggtitle("Shape variation along PC axes") +
+  theme_minimal(base_size = 6)
+  
+ggsave("index/data/pottery-shape/pca-contrib.png")
+scree_plot(op.p)
+
+# PC1 is height of vessel
+# PC2 is neck constriction
+# PC3 is height of neck and roundness of body
+```
+
+```{r LDA-analysis}
+# lda
+
+# we performed a linear discriminant analysis (LDA) based on the new shape variables (PCs), with a leave-one-out cross-validation procedure, to identify the linear combination of shape features that was able to discriminate between phases
+
+# we work on PCA scores
+bot.l <- LDA(op.p, 2)
+# print a summary, along with the leave-one-out cross-validation table. 
+bot.l 
+# plot.LDA works pretty much with the same grammar as plot.PCA
+# here we only have one LD
+plot(bot.l)
+# plot the cross-validation table
+plot_CV(bot.l) 
+
+# Does not produce an efficient separation between groups and a cross-validation (leave-one-out) at phase level showing a low confidence in the reclassification. But best for Pre-e, indicating these have the most distinctive shapes
+
+#--------------------------------------------------
+# Unsupervised model-based clustering
+
+# what are the best grouping of the pots by shape?
+library(mclust)
+
+BIC <- mclustBIC(op.p$x[ , 1:5])
+mod1 <- Mclust(op.p$x[ , 1:5], x = BIC)
+summary(mod1, parameters = TRUE)
+plot(mod1, what = "classification")
+
+# no clusters apparent 
+```
+
+```{r MANOVA}
+# MANOVA: Multivariate Analysis of (co)variace
+# We can test for a difference in the distribution of PC scores by calculating a pairwise combination between every levels of a fac. 
+
+manv <-   MANOVA_PW(op.p, "phase")
+manv$summary
+
+#----------------------------------------------------
+# GAMMS from https://www-nature-com.offcampus.lib.washington.edu/articles/s41598-018-20122-9
+
+# Generalised additive mixed models (GAMMs) were used to explain shape variance with respect to mean environmental parameters and shell size, and to compare between individual shape features (PCs). A GAMM is a generalised linear mixed model with a linear predictor involving a sum of smooth functions of covariates. The model allowed for flexible specification of the dependence of the response on the covariates by defining regression splines (smoothing functions) and estimating their optimal degree of smoothness, rather than calculating parametric relationships
+
+ggplot(pottery_data,
+       aes(phase,
+           as.numeric(Thick1_Neck))) +
+  geom_boxplot()
+
+pottery_data$thick_neck1 <- as.numeric(pottery_data$Thick1_Neck)
+pottery_data$thick_body1 <- as.numeric(pottery_data$Thick1_Body)
+pottery_data$height <- as.numeric(pottery_data$Hight)
+
+plot(op.p$x[ , 2], pottery_data$thick_body1)
+
+gams_input <- data.frame(thick_body1 = pottery_data$thick_body1 , 
+                         height = pottery_data$height, 
+                         shape_pc1 = op.p$x[ , 1])
+
+library(brms)
+m2 <- brm(bf(shape_pc1 ~ s(thick_body1)),
+          data = gams_input, family = gaussian(), cores = 4, seed = 17,
+          iter = 4000, warmup = 1000, thin = 10, refresh = 0,
+          control = list(adapt_delta = 0.99))
+summary(m2) # so many zeros... not very promising 
+# plot marginal effects for each predictor
+plot(marginal_effects(m2), ask = FALSE)
+loo(m2)
+pp_check(m2)
+```
+
+```{r CV-test}
+# CVs on shape PCs for standardisation
+
+len <- length(op.p$x[,1])
+# plot PC1-3 distribution by phase
+pc_plot <- data_frame(pc = c(op.p$x[,1],
+                             op.p$x[,2],
+                             op.p$x[,3]),
+                      phase = rep(op.p$fac$phase, 3),
+                        pcn = str_glue('PC{sort(rep(1:3, len))}'))
+
+pc_plot$phase <- fct_relevel(pc_plot$phase, 
+                            c("Pre-European", 
+                              "Post-European"))
+
+ggplot(pc_plot,
+       aes(phase,
+           pc)) +
+  geom_violin() +
+  ggforce::geom_sina() +
+  xlab("") +
+  facet_wrap(~ pcn, ncol = 1) +
+  theme_minimal()
+ggsave("index/data/pottery-shape/pcs-boxplot-for-shape-variation.png",
+       h = 10, w = 5)
+
+# what are the variences for each PC in each period?
+# we don't use CV because that is not good for measurements with no
+# absolute zero 
+pc_plot %>% 
+  group_by(pcn, phase) %>% 
+  summarise(variance = var(pc))
+
+# statistical test
+pc_plot_tests <- 
+pc_plot %>% 
+  nest_legacy(pc, phase) %>% 
+  mutate(var_test = purrr::map(data, ~broom::tidy(var.test(.x$pc, .x$phase)))) %>% 
+  unnest_legacy(var_test)
+
+pc_plot_tests <- 
+  pc_plot %>% 
+  group_by_at(vars(-pc)) %>% 
+  mutate(i = row_number()) %>% 
+  ungroup() %>% 
+  mutate(phase = as.character(phase),
+         pcn = as.character(pcn)) %>% 
+  spread(phase, pc) %>% 
+  select(-i) %>% 
+  nest_legacy(-pcn) %>% 
+  mutate(var_test = purrr::map(data, ~broom::tidy(var.test(.x$`Post-European` ,
+                                            .x$`Pre-European`)))) %>% 
+  unnest(var_test)
+ 
+
+library(cvequality)
+pc1 <- data.frame(
+x  = op.p$x[,1],
+y = as.character(op.p$fac$phase),
+stringsAsFactors = F)
+
+cv_test_pc1 <- mslr_test(nr = 1000, pc1$x, pc1$y)
+
+pc2 <- data.frame(
+  x  = op.p$x[,2],
+  y = as.character(op.p$fac$phase),
+  stringsAsFactors = F)
+
+cv_test_pc2 <- mslr_test(nr = 1000, pc2$x, pc2$y)
+
+pc3 <- data.frame(
+  x  = op.p$x[,3],
+  y = as.character(op.p$fac$phase),
+  stringsAsFactors = F)
+
+cv_test_pc3 <- mslr_test(nr = 1000, pc3$x, pc3$y)
+
+# do this pairwise
+cv_test_pc1.1 <- 
+  mslr_test(nr = 1000, 
+            pc1$x[pc1$y %in% c("Post-European", 
+                               "Pre-European")], 
+            pc1$y[pc1$y %in% c("Post-European", 
+                               "Pre-European")])
+
+cv_test_pc1.2 <- 
+  mslr_test(nr = 1000, 
+            pc1$x[pc1$y %in% c("Chinese Contact", 
+                               "Pre-European")], 
+            pc1$y[pc1$y %in% c("Chinese Contact", 
+                               "Pre-European")])
+
+cv_test_pc1.3 <- 
+  mslr_test(nr = 1000, 
+            pc1$x[pc1$y %in% c("Chinese Contact", 
+                               "Post-European")], 
+            pc1$y[pc1$y %in% c("Chinese Contact", 
+                               "Post-European")])
+
+PC1_cv_tests <- 
+bind_rows(cv_test_pc1.1, cv_test_pc1.2, cv_test_pc1.3) %>% 
+  bind_cols(phases = c("Post-European vs Pre-European",
+              "Chinese Contact vs Pre-European",
+              "Chinese Contact vs Post-European"))
+
+cv_test_pc2.1 <- 
+  mslr_test(nr = 1000, 
+            pc2$x[pc2$y %in% c("Post-European", 
+                               "Pre-European")], 
+            pc2$y[pc2$y %in% c("Post-European", 
+                               "Pre-European")])
+
+cv_test_pc2.2 <- 
+  mslr_test(nr = 1000, 
+            pc2$x[pc2$y %in% c("Chinese Contact", 
+                               "Pre-European")], 
+            pc2$y[pc2$y %in% c("Chinese Contact", 
+                               "Pre-European")])
+
+cv_test_pc2.3 <- 
+  mslr_test(nr = 1000, 
+            pc2$x[pc2$y %in% c("Chinese Contact", 
+                               "Post-European")], 
+            pc2$y[pc2$y %in% c("Chinese Contact", 
+                               "Post-European")])
+
+PC2_cv_tests <- 
+  bind_rows(cv_test_pc2.1, 
+            cv_test_pc2.2, 
+            cv_test_pc2.3) %>% 
+  bind_cols(phases = c("Post-European vs Pre-European",
+                       "Chinese Contact vs Pre-European",
+                       "Chinese Contact vs Post-European"))
+
+bind_rows(PC1_cv_tests, 
+          PC2_cv_tests, .id = "PC") %>% 
+  mutate(PC = str_glue('PC{PC}')) %>% 
+  mutate(colour = if_else(p_value < 0.05, "red", "black")) %>% 
+  ggplot(aes(str_wrap(phases, 40),
+             p_value,
+             colour = I(colour),
+             shape = PC)
+         ) +
+  geom_point(size = 8,  position = position_dodge(width = 0.5)) +
+  theme_minimal(base_size = 12) +
+  coord_cartesian(clip = 'off') +
+  xlab("") +
+  ylab("CV equality test p-values")
+
+ggsave("index/data/pottery-shape/cv-test-on-pcs.png", h = 3, w = 12)
+
+```
 
 
 Elliptic Fourier analysis (EFA): Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. The results of PCA show that the first three PCs explain 86% of shape variation. PC1 relates to height of vessel, PC2 relates to width of neck and mouth, and PC3 relates to width and flare of neck. The PCA biplot of vessel shape shows grouping by each occupation phase. MANOVA shows significant differences in shape between Pre-European and Post-European (p = 0.02) and Pre-European and Chinese contact shapes (p < 0.01). The distributions of the first three PCs for each vessel suggest variations in shape standardization by period. PC1 shows more variation in the pre-Euro period compared to the Chinese period. Standardization appears strong in the pre-Euro period but weak in the Chinese period. P-values for a modified signed-likelihood ratio test of equality of CVs of PC1 & PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
