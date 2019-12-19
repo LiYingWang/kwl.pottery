@@ -16,7 +16,7 @@ Title <- "Title of your paper goes here"
 
 # kwl.pottery
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh///master?urlpath=rstudio)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LiYingWang/kwl.pottery/master?urlpath=rstudio)
 
 This repository contains the data and code for our paper:
 
@@ -42,7 +42,7 @@ Or you can install this compendium as an R package, kwl.pottery, from GitHub wit
 
 ```{r gh-installation, eval = FALSE}
 # install.packages("devtools")
-remotes::install_github("/")
+remotes::install_github("LiYingWang/kwl.pottery")
 ```
 
 

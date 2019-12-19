@@ -3,7 +3,7 @@
 
 # kwl.pottery
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh///master?urlpath=rstudio)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LiYingWang/kwl.pottery/master?urlpath=rstudio)
 
 This repository contains the data and code for our paper:
 
@@ -13,7 +13,7 @@ This repository contains the data and code for our paper:
 Our pre-print is online here:
 
 > Authors, (YYYY). *Title of your paper goes here*. Name of
-> journal/book, Accessed 01 Sep 2019. Online at
+> journal/book, Accessed 19 Dec 2019. Online at
 > <https://doi.org/xxx/xxx>
 
 ### How to cite
@@ -21,7 +21,7 @@ Our pre-print is online here:
 Please cite this compendium as:
 
 > Authors, (2019). *Compendium of R code and data for Title of your
-> paper goes here*. Accessed 01 Sep 2019. Online at
+> paper goes here*. Accessed 19 Dec 2019. Online at
 > <https://doi.org/xxx/xxx>
 
 ### How to download or install
@@ -34,7 +34,7 @@ GitHub with:
 
 ``` r
 # install.packages("devtools")
-remotes::install_github("/")
+remotes::install_github("LiYingWang/kwl.pottery")
 ```
 
 ### Licenses
