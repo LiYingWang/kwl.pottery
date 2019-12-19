@@ -1,0 +1,13 @@
+# some plots generated from momocs
+jpgs_imported_coo <- read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
+
+# take a look when they stack together
+stack(jpgs_imported_coo)
+
+# fit the x and y coordinates separately
+coo_oscillo(jpgs_imported_coo[1], "efourier")
+
+# The progressive capture of shape geometry along the number of harmonics can be visualized with:
+calibrate_reconstructions_efourier(jpgs_imported_coo,
+                                   id = 1,
+                                   range = c(1, 2, 4, 8, 14, 20))

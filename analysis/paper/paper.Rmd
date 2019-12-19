@@ -163,12 +163,6 @@ saveRDS(jpgs_imported_coo,
 ```{r EFA-analysis}
 jpgs_imported_coo <- read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 
-# take a look when they stack together
-stack(jpgs_imported_coo)
-
-# fit the x and y coordinates separately
-coo_oscillo(jpgs_imported_coo[1], "efourier")
-
 # default is 13 harmanics that gather 99% of the harmonic power 
 op <- efourier(jpgs_imported_coo, norm = FALSE)
 
