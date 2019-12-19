@@ -94,15 +94,16 @@ We also include the Krishnamoorthy and Lee (2014) test as a more recent developm
 
 # Results
 
-```{r tidy-data, eval=FALSE}
+```{r tidy-data}
 # Once we have the jpgs, start from here
 library(tidyverse)
+library(here)
 
 # get list of jpgs only
-jpgs <- list.files("analysis/data/raw_data/outline_jpg", pattern = ".jpg", full.names = TRUE)
+jpgs <- list.files(here("analysis/data/raw_data/outline_jpg"), pattern = ".jpg", full.names = TRUE)
 
 # join file names to phase
-pottery_data <- readr::read_csv("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv")
+pottery_data <- readr::read_csv(here("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv"))
 pottery_data <- pottery_data %>% 
   mutate(filename = str_glue('fill_{filename}.svg_output.jpg'))
 
@@ -136,7 +137,7 @@ phases_isect %>%
   tally(sort = T)
 ```
 
-```{r jpg-coordinates, eval = FALSE}
+```{r jpg-coordinates, eval=FALSE}
 # start shape exploration
 library(Momocs)
 #  it freezes on the empty ones...
@@ -161,10 +162,11 @@ saveRDS(jpgs_imported_coo,
 ```
 
 ```{r EFA-analysis}
-jpgs_imported_coo <- read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
+library(Momocs)
+jpgs_imported_coo <- readr::read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 
 # default is 13 harmanics that gather 99% of the harmonic power 
-op <- efourier(jpgs_imported_coo, norm = FALSE)
+op <- efourier(jpgs_imported_coo, norm = FALSE, 13)
 
 # The progressive capture of shape geometry along the number of harmonics can be visualized with:
 calibrate_reconstructions_efourier(jpgs_imported_coo,  
@@ -172,18 +174,20 @@ calibrate_reconstructions_efourier(jpgs_imported_coo,
                           range = c(1, 2, 4, 8, 14, 20))
 
 # mean shape, per group
-pot.ms <- mshapes(op, 2)
-pot.ms$shp$`Post-European` <- pot.ms$shp$`Post-European` %>% coo_plot(border="blue")
-`Post-European` <- pot.ms$shp$`Post-European` %>% coo_draw(border="blue")
-`Pre-European` <- pot.ms$shp$`Pre-European`  %>% coo_draw(border="red")
-`Chinese` <- pot.ms$shp$`Chinese`  %>% coo_draw(border="green")
+pot.ms <- MSHAPES(op, 'phase')
+mshp <- pot.ms$shp
+names(mshp) <- c("chi", "poe", "pre") 
+
+`Post-European` <- mshp$poe %T>%  coo_plot( border="blue")
+`Pre-European` <-  mshp$pre  %T>% coo_plot(border="red", plot.new=FALSE)
+`Chinese` <-       mshp$chi  %T>% coo_plot(border="green", plot.new=FALSE)
 legend("topright", 
        lwd=1,
        col=c("red", "blue", "green"), 
        legend=c( "Pre-European", "Post-European", "Chinese"))
 
-# from mshapes directly
-jpgs_imported_coo %>% efourier() %>% mshapes(~phase) %>% plot_mshapes()
+# from mshapes directly, nice but the labels spill outside of the plot area, not clear how to fix
+op %>% MSHAPES(~phase) %>% plot_MSHAPES()
 
 # Thin plate spline analysis (TPS)
 # Thin plate splines (TPS) was used to compare average shapes and visualise the outline deformations required to pass from an extreme of the morphospace to the other.
@@ -200,9 +204,11 @@ tps_grid(`Pre-European`, `Chinese`, shp.lwd = c(2, 2), shp.border = c("red", "bl
 dev.off()
 
 # Isodeformation lines
+png(here::here("analysis/figures/tps-iso.png"), res = 600, w = 1200, h = 1800)
 tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
         amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
         palette = col_summer, grid = F)
+dev.off()
 ```
 
 The elliptic Fourier coefficients of 73 pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
@@ -294,7 +300,7 @@ pp_check(m2)
 
 len <- length(op.p$x[,1])
 # plot PC1-3 distribution by phase
-pc_plot <- data_frame(pc = c(op.p$x[,1],
+pc_plot <- tibble(pc = c(op.p$x[,1],
                              op.p$x[,2],
                              op.p$x[,3]),
                       phase = rep(op.p$fac$phase, 3),
@@ -312,7 +318,7 @@ ggplot(pc_plot,
   xlab("") +
   facet_wrap(~ pcn, ncol = 1) +
   theme_minimal()
-ggsave("index/data/pottery-shape/pcs-boxplot-for-shape-variation.png",
+ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
        h = 10, w = 5)
 
 # what are the variences for each PC in each period?
@@ -323,11 +329,6 @@ pc_plot %>%
   summarise(variance = var(pc))
 
 # statistical test
-pc_plot_tests <- 
-pc_plot %>% 
-  nest_legacy(pc, phase) %>% 
-  mutate(var_test = purrr::map(data, ~broom::tidy(var.test(.x$pc, .x$phase)))) %>% 
-  unnest_legacy(var_test)
 
 pc_plot_tests <- 
   pc_plot %>% 
@@ -438,7 +439,7 @@ bind_rows(PC1_cv_tests,
   xlab("") +
   ylab("CV equality test p-values")
 
-ggsave("index/data/pottery-shape/cv-test-on-pcs.png", h = 3, w = 12)
+ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
 
 ```
 
