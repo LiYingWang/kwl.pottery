@@ -45,7 +45,7 @@ We find differences in shape and shape standardization of pottery that indicate 
 
 Geometric morphometric methods (GMM) has been widely applied recently in archaeology for shape analysis, which explores morphological variability and similarity of archaeological materials to address the questions of anthropological interests. Different from linear measurement approaches that capture shapes by measuring length, width or ratios of objects, geometric morphometrics methods use Cartesian coordinates of morphological structures to define the shapes [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates by their unique point location with respect to numerical values of coordinate axes. According to different focuses and nature of original shape data, there are two common morphometric methods used to capture and analyse the shapes, landmark approaches and outline approaches [@Adams2004]. Landmark approaches assign a set of landmarks or semilandmarks onto objects as reference points that can be specified on a coordinate system as x, y coordinates for two dimensions, or x, y, z coordinates for three dimensions. Based on distances between raw landmarks, objects are translated to a common centroid, rescaled into the same size, and rotated until the summed squared distances between corresponding landmarks are minimized using generalized Procrustes analysis (GPA) [@Bookstein1991]. GPA is a method that superimposes sets of landmark configurations into a common coordinate system, where superimposed landmark coordinates are used as shape variables for further multivariate statistics analyses[@Slice2007]. Landmark-based morphometrics are widely used for archaeological objects where morphological signature is obvious to identity which provides ideal locations for landmark placement, such as projectile point tips or biologically meaningful points indicating osteological features [@Birch2019; @Buchanan2019; @Lycett2013; @Cardillo2010; @Haruda2019; @Meloro2015]. 
 
-However, one limitation of landmark-based morphometrics is that landmark data may not be able to capture the shape differences of a morphological structure where the curving outlines between landmarks convey important information. In addition, obvious and reliable landmark points may be unavailable for some complex, rounded or globular shaped structures. In those cases, outline approaches are more suitable to study shape by focusing on the overall shape of a morphological structure. One of the outline approaches is semi-landmarks method, which assigns points along an outline curve at defined intervals between two landmarks to capture the variations of the outlines [@Bookstein1997; @Lawing2010]. Another approach, also the method used in this paper, is elliptic Fourier Analysis (EFA) commonly used for two-dimensional closed shape [@Kuhl1982]. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions, called harmonic coefficients [@Adam2004; @Claude2008; @Bonhomme2014]. The number of harmonics determines the quality and precision of the geometry of an object. The harmonic power expressed by the cumulated sum of squared harmonic coefficient usually provides a robust rule for choosing desired number of harmonics [@Bonhomme2014]. The application of EFA in archaeology is mostly used for bone morphology to understand the biological variation and recently more for stone artefacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Outline approach based on EFA is suitable for shapes lacking obvious landmarks or curves convey more important information indicating the meaningful variations, for example, ceramics. @Wilczek2014 evaluate the concordance between outline-based approaches, the EFA and the Discrete Cosine Transform (DCT), and traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. They found that the variation in ceramic shapes analysed by EFA and DCT matches traditional ceramic typology, which supports that outline-based approaches can be efficiently used for studying variations in ceramic shapes. In addition, the results of shape variation by EFA helps to understand the level of production standardisation over time across that region. 
+However, one limitation of landmark-based morphometrics is that landmark data may not be able to capture the shape differences of a morphological structure where the curving outlines between landmarks convey important information. In addition, obvious and reliable landmark points may be unavailable for some complex, rounded or globular shaped structures. In those cases, outline approaches are more suitable to study shape by focusing on the overall shape of a morphological structure. One of the outline approaches is semi-landmarks method, which assigns points along an outline curve at defined intervals between two landmarks to capture the variations of the outlines [@Bookstein1997; @Lawing2010]. Another approach is elliptic Fourier Analysis (EFA) commonly used for two-dimensional closed shape which turns coordinates into coefficients [@Kuhl1982]. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions, called harmonic coefficients [@Adam2004; @Claude2008; @Bonhomme2014]. The number of harmonics determines the quality and precision of the geometry of an object. The harmonic power, a cumulated sum of squared harmonic coefficient, provides a robust rule for desired number of harmonics [@Bonhomme2014]. The application of EFA in archaeology is mostly used for bone morphology to understand the biological variation and recently more for stone artefacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Outline approach based on EFA is suitable for shapes lacking obvious landmarks or curves convey more important information indicating the meaningful variations, for example, ceramics. @Wilczek2014 evaluate the concordance between outline-based approaches, the EFA and the Discrete Cosine Transform (DCT), and traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. They found that the variation in ceramic shapes analysed by EFA and DCT matches traditional ceramic typology, which supports that outline-based approaches can be efficiently used for studying variations in ceramic shapes. In addition, the results of shape variation by EFA helps to understand the level of production standardisation over time across that region. 
 
 In this paper, we use EFA for pottery shape analysis to evaluate the level of standardization of pottery from an Iron Age site in northeastern Taiwan in relation to the European presence in the 17th century that might hint the emergence of craft specialization for pottery production. Craft specialization can provide further evidence about the type of production organization which is closely related to economic or political aspects of society [@Arnold2000; @Blackman1993; @Costin1991; @Hirshman2010; @Stark1995]. The emergence of craft specialization can also be an indicator of social inequality that hints the possibility of the presence of production groups worked for specific individuals. The presence of craft specialization is commonly studied by measuring the standardization of ceramics based on the assumption that the specialized mass production will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers [@Arnold2000]. To test the prediction of a shift in the level of social inequality in this case study in northeastern Taiwan influenced by the colonial European presence, we use standardization of pottery in shapes as an index for craft specialization to identify the presence of a few individuals controlling large scale pottery production [@Costin1995; @Hirshman2010] using outline-based geometric morphometrics couples with traditional metric measurements to compare and evaluate the use of outline approaches for pottery with high consistency in shapes. 
 
@@ -127,15 +127,16 @@ phases_isect <-
   mutate(phase = as.factor(case_when(
     phase == 'post-e' ~ "Post-European",
     phase == 'pre-e' ~ "Pre-European",
-    phase == 'ch-con' ~ "Post-European" # we combine Chinese and post-Euro
+    phase == 'ch-con' ~ "Chinese" # we combine Chinese and post-Euro
   ))) 
 
 # how many pots in each phase?
 phases_isect %>% 
   group_by(phase) %>% 
   tally(sort = T)
+```
 
-
+```{r jpg-coordinates, eval = FALSE}
 # start shape exploration
 library(Momocs)
 #  it freezes on the empty ones...
@@ -177,28 +178,30 @@ calibrate_reconstructions_efourier(jpgs_imported_coo,
                           range = c(1, 2, 4, 8, 14, 20))
 
 # mean shape, per group
-bot.ms <- mshapes(op, 2)
-bot.ms$shp$`Post-European` <- bot.ms$shp$`Post-European`  %>% coo_plot(border="blue")
-`Post-European`  <- bot.ms$shp$`Post-European`  %>% coo_draw(border="blue")
-`Pre-European` <-   bot.ms$shp$`Pre-European`  %>% coo_draw(border="red")
+pot.ms <- mshapes(op, 2)
+pot.ms$shp$`Post-European` <- pot.ms$shp$`Post-European` %>% coo_plot(border="blue")
+`Post-European` <- pot.ms$shp$`Post-European` %>% coo_draw(border="blue")
+`Pre-European` <- pot.ms$shp$`Pre-European`  %>% coo_draw(border="red")
+`Chinese` <- pot.ms$shp$`Chinese`  %>% coo_draw(border="green")
 legend("topright", 
        lwd=1,
-       col=c("blue", "red"), 
-       legend=c( "Post-European", "Pre-European"))
+       col=c("red", "blue", "green"), 
+       legend=c( "Pre-European", "Post-European", "Chinese"))
 
-# or from mshapes directly
-jpgs_imported_coo %>% efourier(6) %>% mshapes(~phase) %>% plot_mshapes()
+# from mshapes directly
+jpgs_imported_coo %>% efourier() %>% mshapes(~phase) %>% plot_mshapes()
 
 # Thin plate spline analysis (TPS)
 # Thin plate splines (TPS) was used to compare average shapes and visualise the outline deformations required to pass from an extreme of the morphospace to the other.
 # Deformation grids
 png(here::here("analysis/figures/tps-pre-Euro-to-post-Euro.png"), res = 300, w = 900, h = 900)
-tps_grid(`Pre-European`, `Post-European` , shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+
+tps_grid(`Pre-European`, `Post-European`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
          amp = 1, grid.size = 18, legend = T)
 dev.off()
 
 png(here::here("analysis/figures/tps-pre-Euro-to-Chinese.png"), res = 300, w = 900, h = 900)
-tps_grid(`Pre-European`, `Post-European`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+tps_grid(`Pre-European`, `Chinese`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
          amp = 1, grid.size = 18, legend = T)
 dev.off()
 
@@ -208,15 +211,19 @@ tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red
         palette = col_summer, grid = F)
 ```
 
+The elliptic Fourier coefficients of 73 pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
+
 ```{r PCA-analysis}
-# pca
 # these are fast
 op.p <- PCA(op)
+# proportion of variances explained, PC1 and PC2 explain 79% of variation
+pro_vari <-scree_plot(op.p)$data
+vari_two <- round(pro_vari$cumsum[2],4)*100
+vari_three <- round(pro_vari$cumsum[3],4)*100
 
-# We can see the pots groups by phase, and their shape distribution
-# according to the first two principle components of the EFA 
-# PC1 and PC2 explain 79% of variation
-png("index/data/pottery-shape/pca-biplot.png", res = 300, w = 1500, h = 1500)
+# the pots groups by phase, and their shape distribution according to 
+# the first two principle components of the EFA 
+png(here::here("analysis/figures/pca-biplot.png"), res = 300, w = 1500, h = 1500)
 plot(op.p, 2, 
      morpho = TRUE, 
      ellipses = TRUE,
@@ -230,6 +237,7 @@ plot(PCA(op), 2, pos.shp="full")
 plot(PCA(op), 2, pos.shp="range")
 plot(PCA(op), 2, pos.shp="xy")
 plot(PCA(op), 2, pos.shp="range_axes")
+
 plot(PCA(op), 2, pos.shp="full_axes")
 
 # the contributions of each PC to the shapes
@@ -239,15 +247,14 @@ pc_contrib$gg +
   ggtitle("Shape variation along PC axes") +
   theme_minimal(base_size = 6)
   
-ggsave("index/data/pottery-shape/pca-contrib.png")
-scree_plot(op.p)
+ggsave(here::here("analysis/figures/pca-contrib.png"))
 
 # PC1 is height of vessel
 # PC2 is neck constriction
 # PC3 is height of neck and roundness of body
 ```
 
-The elliptic Fourier coefficients of 73 pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
+Outlines generated by EFA are examined by principal components analysis to explore the shape variations across three phases. The first two principal components (PCs) can explain `r vari_two`% of variances, and the first three principal components (PCs) can explain `r vari_three`% of variances. The first PC is related to the height of the vessels from short to high, the second PC reflects the width of their necks and mouths from narrow to wide, and the third PC relates to the degree of flare of neck from curve to straight. The biplot of PCs presents the grouping by each occupation phase. 
 
 ```{r LDA-analysis}
 # lda
@@ -472,7 +479,7 @@ ggsave("index/data/pottery-shape/cv-test-on-pcs.png", h = 3, w = 12)
 
 ```
 
-Outlines generated by EFA are examined by PCA, which shows the first three principal components (PCs) can explain 86% of shape variation. The first PC is related to the height of the vessels from short to high, the second PC reflects the width of their necks and mouths from narrow to wide, and the third PC relates to the degree of flare of neck from curve to straight. The biplot of PCs presents the grouping by each occupation phase. Multivariate analysis of variance (MANOVA) is used to test the difference in three shape varaibles from three phases. The result shows significant differences in shape between Pre-European and Post-European (p = 0.02) and Pre-European and Chinese contact shapes (p < 0.01). The distributions of the first three PCs for each vessel suggest variations in shape standardization by period. The first PC, the hight of the vessels, shows more variations in the pre-Euro period compared to the Chinese period. Standardization appears strong in the pre-Euro period but weak in the Chinese period. P-values for a modified signed-likelihood ratio test of equality of CVs of PC1 & PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
+Multivariate analysis of variance (MANOVA) is used to test the difference in three shape varaibles from three phases. The result shows significant differences in shape between Pre-European and Post-European (p = 0.02) and Pre-European and Chinese contact shapes (p < 0.01). The distributions of the first three PCs for each vessel suggest variations in shape standardization by period. The first PC, the hight of the vessels, shows more variations in the pre-Euro period compared to the Chinese period. Standardization appears strong in the pre-Euro period but weak in the Chinese period. P-values for a modified signed-likelihood ratio test of equality of CVs of PC1 & PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
 
 # Discussion
 
