@@ -92,6 +92,10 @@ The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the 
 
 We also include the Krishnamoorthy and Lee (2014) test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions. 
 
+# Reproducibility and open source materials 
+
+To enable re-use of materials and improve reproducibility and transparency [@Marwick2017], the entire R code [@Rlanguage2019] used for all the analysis and visualizations contained in this paper is included in http:XXX. Also in this version-controlled compendium [@Marwick2018] are the raw data for all the visualizations and tests reported here. All of the figures, tables, and statistical test results presented here can be independently reproduced with the code and data in this repository. The code is released under the MIT license, the data as CC-0, and figures as CC-BY, to enable maximum re-use. 
+
 # Results
 
 ```{r tidy-data}
