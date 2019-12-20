@@ -11,3 +11,7 @@ coo_oscillo(jpgs_imported_coo[1], "efourier")
 calibrate_reconstructions_efourier(jpgs_imported_coo,
                                    id = 1,
                                    range = c(1, 2, 4, 8, 14, 20))
+
+
+# from mshapes directly, nice but the labels spill outside of the plot area, not clear how to fix
+op %>% MSHAPES(~phase) %>% plot_MSHAPES()
