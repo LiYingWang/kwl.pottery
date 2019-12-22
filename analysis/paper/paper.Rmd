@@ -27,6 +27,7 @@ knitr::opts_chunk$set(
   message = FALSE,
   echo = FALSE,
   comment = "#>",
+  dpi = 300,
   fig.path = "../figures/"
 )
 ```
@@ -144,13 +145,6 @@ To enable re-use of materials and improve reproducibility and transparency [@Mar
 
 # Results
 
-The elliptic Fourier coefficients of `r total_no` pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
-
-The mean petal shape of each variety was then drawn using the mean values of the standardized Fourier coefficients within each variety. Figure 1 shows the wide variation of petal shape that was observed among the varieties examined in this study.
-
-
-
-
 ```{r jpg-coordinates, eval=FALSE}
 # start shape exploration
 library(Momocs)
@@ -175,8 +169,12 @@ saveRDS(jpgs_imported_coo,
         here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 ```
 
+The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. The mean pottery shape of each phase was visualized by calculating the mean of the standardized Fourier coefficients within each group. 
+Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
+
 ```{r EFA-analysis}
 library(Momocs)
+library(cowplot)
 jpgs_imported_coo <- readr::read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 
 # default is 13 harmanics that gather 99% of the harmonic power 
@@ -198,26 +196,37 @@ legend("topright",
 # Thin plate spline analysis (TPS)
 # Thin plate splines (TPS) was used to compare average shapes and visualise the outline deformations required to pass from an extreme of the morphospace to the other.
 # Deformation grids
-png(here::here("analysis/figures/tps-pre-Euro-to-post-Euro.png"), res = 300, w = 900, h = 900)
 
 tps_grid(`Pre-European`, `Post-European`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
          amp = 1, grid.size = 18, legend = T)
 dev.off()
 
-png(here::here("analysis/figures/tps-pre-Euro-to-Chinese.png"), res = 300, w = 900, h = 900)
 tps_grid(`Pre-European`, `Chinese`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
          amp = 1, grid.size = 18, legend = T)
 dev.off()
 
 # Isodeformation lines
 png(here::here("analysis/figures/tps-iso.png"), res = 600, w = 1200, h = 1800)
-tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
-        amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
-        palette = col_summer, grid = F)
+de_pre_post_plot <- 
+  tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+          amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
+          palette = col_summer, grid = F)
 dev.off()
+
+de_pre_chi_plot <- 
+  tps_iso(`Pre-European`, `Chinese`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+          amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Chinese"),
+          palette = col_summer, grid = F)
+dev.off()
+
+# Doesn't work if the plot is not produced by ggplot?
+# plot_two_de_by_period <- 
+  #plot_grid(de_pre_post_plot, de_pre_chi_plot, labels = c('A', 'B'))
+
+#knitr::include_graphics(here::here("analysis", "figures", "tps-pre-Euro-to-post-Euro.png"))
+#knitr::include_graphics(here::here("analysis", "figures", "tps-pre-Euro-to-Chinese.png"))
+
 ```
-
-
 
 ```{r PCA-analysis}
 # these are fast
