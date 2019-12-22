@@ -15,3 +15,21 @@ calibrate_reconstructions_efourier(jpgs_imported_coo,
 # from mshapes directly, nice but the labels spill outside of the plot area, not clear how to fix
 # paired comparison for every two periods shown in one plot with 3 * 3 variables
 op %>% MSHAPES(~phase) %>% plot_MSHAPES()
+
+# calculates deformations between two configurations and map them with or without isolines.
+tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+        amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
+        palette = col_summer, grid = F)
+dev.off()
+
+tps_iso(`Pre-European`, `Chinese`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
+        amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Chinese"),
+        palette = col_summer, grid = F)
+dev.off()
+
+# PCA byplot, different visualization
+plot(PCA(op), 2, pos.shp="full")
+plot(PCA(op), 2, pos.shp="range")
+plot(PCA(op), 2, pos.shp="xy")
+plot(PCA(op), 2, pos.shp="range_axes")
+plot(PCA(op), 2, pos.shp="full_axes")
