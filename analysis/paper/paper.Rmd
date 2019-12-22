@@ -37,9 +37,9 @@ Ceramic production can reflect prehistoric socioeconomic patterns since it relat
 
 Several variables have been proposed to measure ceramic standardization, including metric, compositional, and technological attributes [@Rice1991; @Blackman1993; @Costin1991; @Hirshman2010; @Tite1999]. However, traditional typological and linear measurements are limited because they can be insensitive to subtle variations resulting from changes in craft specialization. Taking a new approach to the measurement of craft specialization, we studied shape and standardization of locally made pottery to identify changes in pottery production at Kiwulan (1400-1900 AD), a large multi-component archaeological site in northeastern Taiwan. We apply geometric morphometric methods to study artifact shapes to investigate if there are any changes resulting from foreign contact of European and Chinese that might indicate social changes in the indigenous society. 
 
-Culture contact between indigenous people and colonizer with imperial power usually leads to profound changes in local indigenous societies. We explore the culture changes in indigenous societies in northeastern Taiwan that experienced foreign contacts with the Europeans and Chinese since 17th century by examining the local pottery production. We observed pottery production in northeastern Taiwan in the late Iron Age period and historical period (1400-1900 AD) presenting a high consistency in form and shape compared to other pottery found from other regions on this island that hints the emergence of pottery specialization. We asked the questions: Did foreign contact have an impact on indigenous pottery production in northeastern Taiwan that can be detected in the shape of the vessels? Did the pottery production become more standardized and homogeneous in shape after foreign contact? Did the contact with European cause more homogeneous shape than Chinese contact period because of large scale exchange network? 
+Culture contact between indigenous people and colonizer with imperial power usually leads to profound changes in local indigenous societies. We explore the culture changes in indigenous societies in northeastern Taiwan that experienced foreign contacts with the Europeans and Chinese since 17th century by examining the local pottery production. We observed pottery production in northeastern Taiwan in the late Iron Age period and historical period (1400-1900 AD) presenting a high consistency in form and shape compared to other pottery found from other regions on this island that hints the emergence of pottery specialization. Our aim is to explore the impact of foreign contacts on local indigenous societies in northeastern Taiwan by examining pottery production as an indicator for social changes. Using pottery shape as a proxy to study craft specialization, we answer these questions: Did foreign contacts have impacts on indigenous pottery production that can be detected in the shape of the vessels? How does pottery change in shape throughout 600 years at this site? Did pottery become more homogeneous and standardized in shape after foreign contacts with the European colonizer or the Chinese immigrant? 
 
-We find differences in shape and shape standardization of pottery that indicate changes in pottery production resulting from foreign contact, suggesting increasing craft specialization and changes in local social organization at Kiwulan. These results are important to understand the influence of culture contact on local indigenous societies and answer the anthropological question that concerns the the mechanisms for social changes. In addition, our case study, which includes an openly available research compendium of R code suitable for use with any other assemblage, will help to expand the use of shape-based quantitative methods to questions about craft specialization and standardization in prehistoric technologies.
+Our hypothesis is that if foreign contacts including European and Chinese had impact on the emergence of social inequality in local indigenous society due to the monopolies for trade between a small number of indigenous people, then we expect to see the changes in social organization from a more corporate to a more network organization that would be reflected by pottery production at Kiwulan. The emergence of craft specialization, here pottery specialization, are usually related to the presence of elite control. In this case, if the competitions for foreign resources and being trade partners of European or Chinese colonizer among individuals gradually lead to the emergence of social inequality, then I expect the local pottery will show more homogeneous features after contact due to the craft specialization caused by control of small group of individuals. The first step is to detecting pottery standardization when discussing the emergence of craft specialization and the possible changes in social organization. This paper uses Elliptic Fourier Analysis, one outline approach in Geometric morphometric methods, to test whether there was increasing pottery standardization in relation to foreign contacts. 
 
 # Geometric Morphometric approach: shape analysis for pottery specialization
 
@@ -55,7 +55,12 @@ In this paper, we use EFA for pottery shape analysis to evaluate the level of st
 
 ## Archaeological pottery from Kiwulan 
 
-Ceramics data analysed in this paper comes from the upper component of Kiwulan, northeastern Taiwan. Those ceramics dated from AD 1400 to AD 1900, which covers 500 years from the late Iron Age to the historical period started with the European presence in the 17th century. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. The upper component experienced frequent foreign contacts including the European colonial presence in the 17th century and great waves of Chinese immigrants since 19th century. The excavation revealed abundant artifacts in which potsherds are the dominate materials throughout the site. Imported ceramics from mainland China, stonewares, and ornament elements such as beads were usually found in the Upper Culture Layer that indicates the prosperous international trading activities in the 17th century during the European presence in Taiwan. In addition to artifacts, features were also found, such as burials, middens, and postholes with in-situ posts that explains Kiwulan was a large settlement site. 
+Pottery analysed in this paper comes from Kiwulan, northeastern Taiwan. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. Kiwulan dates to AD 1350 to AD 1950, which covers around 600 years from the late Iron Age to the historical period started with the European presence in Taiwan in the early 17th century. The Dutch first came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning was founded by Koxinga, a loyalist of Ming dynasty of China. 
+
+The upper component experienced frequent foreign contacts including the European colonial presence in the 17th century and great waves of Chinese immigrants since 19th century. The excavation revealed abundant artifacts in which potsherds are the dominate materials throughout the site. Imported ceramics from mainland China, stonewares, and ornament elements such as beads were also commonly found in the upper component that indicates the frequent long-distance trade activities in the 17th century during the European presence. In addition to artifacts, features were also found, such as burials, middens, and post-holes with in-situ posts that explains Kiwulan was a large settlement site. 
+
+Pottery found at Kiwulan are all locally made. 
+Most sherds are fired to an orange to brownish color with a fully oxidized core or a reduced core with oxidized fringes. It seems that there is no significant relationship between color and phases. Petrographic analysis for thin sections was conducted at the Department of Geosciences, National Taiwan University. The results shows high percentage of inclusions (15-50%), including argillite, quartz, feldspar, metasandstone, sandstone fragment, and slate. Those minerals are believed to be local materials of the Yilan Plain. The most common type of sherds, also the dominant one, has a high percentage of inclusion (25-40%), which is composed mainly by argillite (15-40%), followed by metasandstone (1-10%), sandstone (1-6%), and quartz (1-5%). The size of the particles ranges from 500 micron to 1300 micron (=1 mm). Overall, this type presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz.  
 
 ```{r tidy-data}
 # Once we have the jpgs, start from here
@@ -139,6 +144,13 @@ To enable re-use of materials and improve reproducibility and transparency [@Mar
 
 # Results
 
+The elliptic Fourier coefficients of `r total_no` pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
+
+The mean petal shape of each variety was then drawn using the mean values of the standardized Fourier coefficients within each variety. Figure 1 shows the wide variation of petal shape that was observed among the varieties examined in this study.
+
+
+
+
 ```{r jpg-coordinates, eval=FALSE}
 # start shape exploration
 library(Momocs)
@@ -205,7 +217,7 @@ tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red
 dev.off()
 ```
 
-The elliptic Fourier coefficients of `r total_no` pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. The 
+
 
 ```{r PCA-analysis}
 # these are fast
@@ -442,6 +454,8 @@ Multivariate analysis of variance (MANOVA) is used to test the difference in thr
 # Discussion
 
 # Conclusion
+
+We find differences in shape and shape standardization of pottery that indicate changes in pottery production resulting from foreign contact, suggesting increasing craft specialization and changes in local social organization at Kiwulan. These results are important to understand the influence of culture contact on local indigenous societies and answer the anthropological question that concerns the the mechanisms for social changes. In addition, our case study, which includes an openly available research compendium of R code suitable for use with any other assemblage, will help to expand the use of shape-based quantitative methods to questions about craft specialization and standardization in prehistoric technologies.
 
 # Acknowledgements
 
