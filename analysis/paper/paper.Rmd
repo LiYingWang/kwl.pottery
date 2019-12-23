@@ -59,12 +59,11 @@ In this paper, we use EFA for pottery shape analysis to evaluate the level of st
 
 ## Archaeological pottery from Kiwulan 
 
-Pottery analysed in this paper comes from Kiwulan, northeastern Taiwan. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. Kiwulan dates to AD 1350 to AD 1950, which covers around 600 years from the late Iron Age to the historical period started with the European presence in Taiwan in the early 17th century. The Dutch first came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning was founded by Koxinga, a loyalist of Ming dynasty of China. 
+Pottery analysed in this paper comes from of Kiwulan, northeastern Taiwan. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. Kiwulan can be divided into two cultural components, the upper and the lower component, with a sterile layer in between. This paper focus on the upper component dated to AD 1350 to AD 1950, which covers around 600 years from the late Iron Age to the historical period started with the European presence in Taiwan in the early 17th century. The Dutch first came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning was founded by Koxinga, a loyalist of Ming dynasty of China. 
 
 The upper component experienced frequent foreign contacts including the European colonial presence in the 17th century and great waves of Chinese immigrants since 19th century. The excavation revealed abundant artifacts in which potsherds are the dominate materials throughout the site. Imported ceramics from mainland China, stonewares, and ornament elements such as beads were also commonly found in the upper component that indicates the frequent long-distance trade activities in the 17th century during the European presence. In addition to artifacts, features were also found, such as burials, middens, and post-holes with in-situ posts that explains Kiwulan was a large settlement site. 
 
-Pottery found at Kiwulan are all locally made. 
-Most sherds are fired to an orange to brownish color with a fully oxidized core or a reduced core with oxidized fringes. It seems that there is no significant relationship between color and phases. Petrographic analysis for thin sections was conducted at the Department of Geosciences, National Taiwan University. The results shows high percentage of inclusions (15-50%), including argillite, quartz, feldspar, metasandstone, sandstone fragment, and slate. Those minerals are believed to be local materials of the Yilan Plain. The most common type of sherds, also the dominant one, has a high percentage of inclusion (25-40%), which is composed mainly by argillite (15-40%), followed by metasandstone (1-10%), sandstone (1-6%), and quartz (1-5%). The size of the particles ranges from 500 micron to 1300 micron (=1 mm). Overall, this type presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz.  
+There is only one type of locally made pottery found at the upper component of Kiwulan. There is around 1,200 pots were reconstructed showing the common round body form with a wide variety of impressed geometric motifs. Most sherds are fired to an orange to brownish color with a fully oxidized core or a reduced core with oxidized fringes. It seems that there is no significant relationship between color and phases. Petrographic analysis for thin sections was conducted at the Department of Geosciences, National Taiwan University. The results shows high percentage of inclusions (15-50%), including argillite, quartz, feldspar, metasandstone, sandstone fragment, and slate. Those minerals are believed to be local materials of the Yilan Plain. The most common type of sherds, also the dominant one, has a high percentage of inclusion (25-40%), which is composed mainly by argillite (15-40%), followed by metasandstone (1-10%), sandstone (1-6%), and quartz (1-5%). The size of the particles ranges from 500 micron to 1300 micron (=1 mm). Overall, this type presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz.  
 
 ```{r tidy-data}
 # Once we have the jpgs, start from here
@@ -258,20 +257,23 @@ dev.off()
 plot(PCA(op), 2, pos.shp="range")
 ```
 
-To test differences in the distribution of shape variables indicated by the PC scores, we use multivariate analysis of variance (MANOVA) to compare a pairwise combination between every sample means across three phases. The results in Table \@ref(tab:MANOVA-table) show significant differences in shape between Pre-European and Post-European (p = 0.02) and Pre-European and Chinese contact shapes (p < 0.01), which corresponds to the previous observation of the different distribution in shapes in Chinese period according to PCA byplot. In addition, although there is a considerable overlap of shape variables between Pre-European and Post-European, their PC scores are significantly different to each other. There is not much differences between the shapes in Post-European and Chinese contact period. 
-
 ```{r MANOVA-table}
 # MANOVA: Multivariate Analysis of (co)variace
 # We can test for a difference in the distribution of PC scores by calculating a pairwise combination between every levels of a fac. 
 
 manv <- MANOVA_PW(op.p, "phase")
-su_manv <- manv$summary
+su_manv <- as.data.frame(manv$summary)
+
+pval_chi_pre <- signif(unname(su_manv[,'Pr(>F)'][2]), 4)
+pval_post_pre <- signif(unname(su_manv[,'Pr(>F)'][3]), 4)
 
 knitr::kable(su_manv,
              caption = "The statistics summary of MANOVA test for the PC scores")
 ```
 
-```{r}
+To test differences in the distribution of shape variables indicated by the PC scores, we use multivariate analysis of variance (MANOVA) to compare a pairwise combination between every sample means across three phases. The results in Table \@ref(tab:MANOVA-table) show significant differences in shape between Pre-European and Post-European (p = $`r pval_post_pre`$) and Pre-European and Chinese contact shapes (p = $`r pval_chi_pre`$), which corresponds to the previous observation of the different distribution in shapes in Chinese period according to PCA byplot. In addition, although there is a considerable overlap of shape variables between Pre-European and Post-European, their PC scores are significantly different to each other. There is not much differences between the shapes in Post-European and Chinese contact period. 
+
+```{r GAMM, eval = FALSE}
 #----------------------------------------------------
 # GAMMS from https://www-nature-com.offcampus.lib.washington.edu/articles/s41598-018-20122-9
 
