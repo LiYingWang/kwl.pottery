@@ -53,13 +53,14 @@ However, one limitation of landmark-based morphometrics is that landmark data ma
 
 In this paper, we use EFA for pottery shape analysis to evaluate the level of standardization of pottery from an Iron Age site in northeastern Taiwan in relation to the European presence in the 17th century that might hint the emergence of craft specialization for pottery production. Craft specialization can provide further evidence about the type of production organization which is closely related to economic or political aspects of society [@Arnold2000; @Blackman1993; @Costin1991; @Hirshman2010; @Stark1995]. The emergence of craft specialization can also be an indicator of social inequality that hints the possibility of the presence of production groups worked for specific individuals. The presence of craft specialization is commonly studied by measuring the standardization of ceramics based on the assumption that the specialized mass production will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers [@Arnold2000]. To test the prediction of a shift in the level of social inequality in this case study in northeastern Taiwan influenced by the colonial European presence, we use standardization of pottery in shapes as an index for craft specialization to identify the presence of a few individuals controlling large scale pottery production [@Costin1995; @Hirshman2010] using outline-based geometric morphometrics couples with traditional metric measurements to compare and evaluate the use of outline approaches for pottery with high consistency in shapes. 
 
+- craft or pottery specialization
 - CV is hard to test, we apply some statistics testing for it
 
-# Materials and methods
+# Materials and historical background
 
 ## Archaeological pottery from Kiwulan 
 
-Pottery analysed in this paper comes from of Kiwulan, northeastern Taiwan. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. Kiwulan can be divided into two cultural components, the upper and the lower component, with a sterile layer in between. This paper focus on the upper component dated to AD 1350 to AD 1950, which covers around 600 years from the late Iron Age to the historical period started with the European presence in Taiwan in the early 17th century. The Dutch first came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning was founded by Koxinga, a loyalist of Ming dynasty of China. 
+Pottery analysed in this paper comes from Kiwulan, northeastern Taiwan. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. Kiwulan can be divided into two cultural components, the upper and the lower component, with a sterile layer in between. This paper focus on the upper component dated to AD 1350 to AD 1950, which covers around 600 years from the late Iron Age to the historical period started with the European presence in Taiwan in the early 17th century. The Dutch first came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning was founded by Koxinga, a loyalist of Ming dynasty of China. 
 
 The upper component experienced frequent foreign contacts including the European colonial presence in the 17th century and great waves of Chinese immigrants since 19th century. The excavation revealed abundant artifacts in which potsherds are the dominate materials throughout the site. Imported ceramics from mainland China, stonewares, and ornament elements such as beads were also commonly found in the upper component that indicates the frequent long-distance trade activities in the 17th century during the European presence. In addition to artifacts, features were also found, such as burials, middens, and post-holes with in-situ posts that explains Kiwulan was a large settlement site. 
 
@@ -116,7 +117,7 @@ A total of `r total_no` vessels from pre-contact contexts (n = 32), post-Europea
 
 In this study, we examine 291 pots recovered from Kiwulan site. The layer from 1 to 6 could be divided into 3 time periods. Layer 5 and 6 represent pre-contact period, layer 4 represents contact period, and layer1, 2, and 3 represent post-contact period.  The amount of pots for each layer shows below. Although most pots are not complete, the thickness from rim, neck, to body can be measured. I have also measured the diameter of rim, neck, and body. For those pots that are incomplete, the diameter is measured by its curvature. Since the height is incomplete for most pots, this preliminary analysis focuses more on the possible change in thickness and diameter of pot for different parts, and their ratio over time.
 
-## Outline analysis
+# Methods
 
 Geometric morphometric analyses were conducted in the R software (www.rproject.org, Core-Team, 2015) using the functions included in the Momocs, a R package intended to quantify the shape and compare its variation, especially for outline analysis [@Bonhomme2014]. The digitised outlines were converted into a list of successsive x-y pixel coordinates for elliptic Fourier analysis (EFA), which assesses morphological differences among pottery shapes from three occupation contexts. 
 
@@ -347,7 +348,6 @@ pc_plot %>%
   summarise(variance = var(pc))
 
 # statistical test
-
 pc_plot_tests <- 
   pc_plot %>% 
   group_by_at(vars(-pc)) %>% 
@@ -461,7 +461,7 @@ ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
 
 ```
 
-The distributions of the first three PCs for each vessel suggest variations in shape standardization by period. The first PC, the hight of the vessels, shows more variations in the pre-Euro period compared to the Chinese period. Standardization appears strong in the pre-Euro period but weak in the Chinese period. P-values for a modified signed-likelihood ratio test of equality of CVs of PC1 & PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
+The standardization of pottery shape for each phase is explored by the distributions of the first three PC scores for each vessel that suggests variations in shape standardization by phase. The first PC, the hight of the vessels, shows more variations in the pre-Euro period compared to the Chinese period. That shows standardization appears strong in the Chinese period but weak in the pre-European period. To see whether the differences of the distribution of PCs between each phase is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of equality of CVs of PC1 and PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
 
 # Discussion
 
