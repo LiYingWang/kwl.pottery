@@ -314,7 +314,7 @@ loo(m2)
 pp_check(m2)
 ```
 
-```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases "}
+```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
 # what are the variences for each PC in each period?
 # CVs on shape PCs for standardisation
 len <- length(op.p$x[,1])
@@ -341,14 +341,13 @@ ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
        h = 10, w = 5)
 ```
 
-```{r CV-test-PCs}
-# we don't use CV because that is not good for measurements with no
-# absolute zero 
+```{r variance-test-PCs}
+# we don't use CV because that is not good for measurements with no absolute zero
 pc_plot %>% 
   group_by(pcn, phase) %>% 
   summarise(variance = var(pc))
 
-# statistical test
+# statistical test to compare the variances of two samples
 pc_plot_tests <- 
   pc_plot %>% 
   group_by_at(vars(-pc)) %>% 
@@ -362,11 +361,12 @@ pc_plot_tests <-
   mutate(var_test = purrr::map(data, ~broom::tidy(var.test(.x$`Post-European` ,
                                             .x$`Pre-European`)))) %>% 
   unnest(var_test)
- 
+```
 
+```{r CV-test-PCs, fig.cap= "P-values of the CV equality test of PC1 and PC2 between phases, red color indicates p-value is less than 0.05"}
 library(cvequality)
 pc1 <- data.frame(
-x  = op.p$x[,1],
+x = op.p$x[,1],
 y = as.character(op.p$fac$phase),
 stringsAsFactors = F)
 
@@ -396,16 +396,16 @@ cv_test_pc1.1 <-
 
 cv_test_pc1.2 <- 
   mslr_test(nr = 1000, 
-            pc1$x[pc1$y %in% c("Chinese Contact", 
+            pc1$x[pc1$y %in% c("Chinese", 
                                "Pre-European")], 
-            pc1$y[pc1$y %in% c("Chinese Contact", 
+            pc1$y[pc1$y %in% c("Chinese", 
                                "Pre-European")])
 
 cv_test_pc1.3 <- 
   mslr_test(nr = 1000, 
-            pc1$x[pc1$y %in% c("Chinese Contact", 
+            pc1$x[pc1$y %in% c("Chinese", 
                                "Post-European")], 
-            pc1$y[pc1$y %in% c("Chinese Contact", 
+            pc1$y[pc1$y %in% c("Chinese", 
                                "Post-European")])
 
 PC1_cv_tests <- 
@@ -423,16 +423,16 @@ cv_test_pc2.1 <-
 
 cv_test_pc2.2 <- 
   mslr_test(nr = 1000, 
-            pc2$x[pc2$y %in% c("Chinese Contact", 
+            pc2$x[pc2$y %in% c("Chinese", 
                                "Pre-European")], 
-            pc2$y[pc2$y %in% c("Chinese Contact", 
+            pc2$y[pc2$y %in% c("Chinese", 
                                "Pre-European")])
 
 cv_test_pc2.3 <- 
   mslr_test(nr = 1000, 
-            pc2$x[pc2$y %in% c("Chinese Contact", 
+            pc2$x[pc2$y %in% c("Chinese", 
                                "Post-European")], 
-            pc2$y[pc2$y %in% c("Chinese Contact", 
+            pc2$y[pc2$y %in% c("Chinese", 
                                "Post-European")])
 
 PC2_cv_tests <- 
@@ -450,8 +450,7 @@ bind_rows(PC1_cv_tests,
   ggplot(aes(str_wrap(phases, 40),
              p_value,
              colour = I(colour),
-             shape = PC)
-         ) +
+             shape = PC)) +
   geom_point(size = 8,  position = position_dodge(width = 0.5)) +
   theme_minimal(base_size = 12) +
   coord_cartesian(clip = 'off') +
@@ -462,8 +461,7 @@ ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
 
 ```
 
-The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents the similar pattern that stronger standardization of shape in the Chinese period compared to other two phases. To see whether the differences of the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European.
-<--seems not the same plot used before-->
+The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents the similar pattern that stronger standardization of shape in the Chinese period compared to other two phases. To see whether the differences in the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences (P-value < 0.01) in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European Figure \@ref(fig:CV-test-PCs). 
 
 # Discussion
 
