@@ -314,16 +314,16 @@ loo(m2)
 pp_check(m2)
 ```
 
-```{r CV-test}
+```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases "}
+# what are the variences for each PC in each period?
 # CVs on shape PCs for standardisation
-
 len <- length(op.p$x[,1])
 # plot PC1-3 distribution by phase
 pc_plot <- tibble(pc = c(op.p$x[,1],
-                             op.p$x[,2],
-                             op.p$x[,3]),
-                      phase = rep(op.p$fac$phase, 3),
-                        pcn = str_glue('PC{sort(rep(1:3, len))}'))
+                         op.p$x[,2],
+                         op.p$x[,3]),
+                  phase = rep(op.p$fac$phase, 3),
+                  pcn = str_glue('PC{sort(rep(1:3, len))}'))
 
 pc_plot$phase <- fct_relevel(pc_plot$phase, 
                             c("Pre-European", 
@@ -339,8 +339,9 @@ ggplot(pc_plot,
   theme_minimal()
 ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
        h = 10, w = 5)
+```
 
-# what are the variences for each PC in each period?
+```{r CV-test-PCs}
 # we don't use CV because that is not good for measurements with no
 # absolute zero 
 pc_plot %>% 
@@ -461,7 +462,8 @@ ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
 
 ```
 
-The standardization of pottery shape for each phase is explored by the distributions of the first three PC scores for each vessel that suggests variations in shape standardization by phase. The first PC, the hight of the vessels, shows more variations in the pre-Euro period compared to the Chinese period. That shows standardization appears strong in the Chinese period but weak in the pre-European period. To see whether the differences of the distribution of PCs between each phase is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of equality of CVs of PC1 and PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
+The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents the similar pattern that stronger standardization of shape in the Chinese period compared to other two phases. To see whether the differences of the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European.
+<--seems not the same plot used before-->
 
 # Discussion
 
