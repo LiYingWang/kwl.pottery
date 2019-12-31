@@ -39,16 +39,10 @@ image_width_2_col_inch = 190/25.4 # image Double column w = 190 mm
 
 - the definition of craft specialization
 
-The emergence of craft specialization is usually associated with the changes in a socio-economic system of a society since it links to the organization of production 
+The development of craft specialization is usually associated with the social changes since it reflects production systems that inform social, economic, or political conditions of a society. Specialization is defined as "differential participation in specific economic activities", in which a particular good is produced by fewer producers compared to the total population who consume it [@Costin1991; @Costin2001]. The implication of specialized production in relation to social structure or social process became a interest in archaeological investigations. From a political perspective, craft specialization is viewed as a strategy for elites to control over production systems in order to maintain their power and authority [@Costin2001]. The relationship between craft specialization and social differentiation is broadly discussed and many cases use specialized production as an indicator of increasing socio-political complexity [@Stark1995; @Hirshman2010; @Junker1999]. 
 
 
-context, concentration, scale, intensity 
-
-Ceramic specialization can reflect prehistoric socio-economic patterns since it relates to not only economic base for households but also societies as a whole when specialized production was organized. 
-
-
-
-Identifying the specialization in ceramic production will help to understand how complex societies form and further explore the underlying mechanism. One way to examine ceramic specialization is to identify whether ceramics present standardization in production, which based on the assumption that the specialized mass production will lead to uniformity of the product due to increased skills, routinization, and lower diversity of producers that enable us to interpret social organization or social relations such as type of production, and the presence of elite control [@Arnold2000, pp. 334; @Stark1995; @Costin1991]. 
+Ceramic specialization can reflect prehistoric socio-economic patterns since it relates to not only economic base for households but also societies as a whole when specialized production was organized. Identifying the specialization in ceramic production will help to understand how complex societies form and further explore the underlying mechanism. One way to examine ceramic specialization is to identify whether ceramics present standardization in production, which based on the assumption that the specialized mass production will lead to uniformity of the product due to increased skills, routinization, and lower diversity of producers that enable us to interpret social organization or social relations such as type of production, and the presence of elite control [@Arnold2000, pp. 334; @Stark1995; @Costin1991]. 
 
 
 social changes -  culture contact framework 
