@@ -361,7 +361,7 @@ pc_plot_tests <-
   unnest(var_test)
 ```
 
-```{r CV-test-PCs, fig.cap= "P-values of the CV equality test of PC1 and PC2 between phases, red color indicates p-value is less than 0.05"}
+```{r CV-test-PCs-table}
 library(cvequality)
 pc1 <- data.frame(
 x = op.p$x[,1],
@@ -441,6 +441,17 @@ PC2_cv_tests <-
                        "Chinese Contact vs Pre-European",
                        "Chinese Contact vs Post-European"))
 
+PC1_PC2_cv_tests <-
+bind_rows(PC1_cv_tests, 
+          PC2_cv_tests, .id = "PC") %>% 
+  mutate(PC = str_glue('PC{PC}')) %>% 
+  knitr::kable(PC1_PC2_cv_tests,
+               caption = "P-values of the CV equality test of PC1 and PC2 between phases"))
+```
+
+```{r CV-test-PCs_plot, fig.cap= "P-values of the CV equality test of PC1 and PC2 between phases, red color indicates p-value is less than 0.05"}
+
+PC1_PC2_cv_tests %>%
 bind_rows(PC1_cv_tests, 
           PC2_cv_tests, .id = "PC") %>% 
   mutate(PC = str_glue('PC{PC}')) %>% 
@@ -456,10 +467,13 @@ bind_rows(PC1_cv_tests,
   ylab("CV equality test p-values")
 
 ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
-
 ```
 
-The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents a similar pattern that stronger standardization of shape in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences (P-value < 0.01) in the standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European Figure \@ref(fig:CV-test-PCs). Significant difference is also detected between pre-Eruopean and post-European (P-value < 0.05). Given the decline of the indigenous population in the Chinese period might be a cause of a more standardized shape [@Chen2007], we examined the spatial distribution of pottery selected in this paper. The pottery distributed across the sampling area without any clusters could rule out the bias caused by the population dynamics. 
+The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents a similar pattern that stronger standardization of shape in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences (P-value < 0.01) in the standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European Figure \@ref(fig:CV-test-PCs_plot). Significant difference is also detected between pre-Eruopean and post-European (P-value < 0.05). Given the decline of the indigenous population in the Chinese period might be a cause of a more standardized shape [@Chen2007], we examined the spatial distribution of pottery selected in this paper. The pottery distributed across the sampling area without any clusters could rule out the bias caused by the population dynamics. 
+
+<---1. cv test for elliptic fourier coefficients 
+2. PCA - Anova - statistical tests - common strategies for testing PCA
+3. specific points, the outliers mean -->
 
 # Discussion
 
@@ -468,9 +482,20 @@ The variation of pottery shape for each phase is explored by the distributions o
 
 - cultural resistance
 - trade [@Alizadeh2018]
-- identity, social boundary, Raux2015, Boness2017
+- identity, social boundary, visible trait, Raux2015, Boness2017
+- thickness and diameter show difference but not reach the threshold of specialization, also the clay paste does not show any specific change throughout the time
+- shape as an symbol 
 
-Previous investigations at Kiwulan suggest an unequal distribution pattern of prestige goods, trade ornaments, during the presence of the European that hints the emergence of social inequality. Using an EFA-based outline approach, we examine the degree of the ceramic standardization as an indicator of the presence of ceramic specialization that is usually associate with social differentiation, such as the elite control [@Costin2001; @Junker1999]. The results confirm that the differences in pottery shapes can be detected using EFA method. There are differences in pottery shapes detected in the indigenous society across different foreign contact phases, including the European in the 17th century and the Chinese in the 19th century. The significant difference especially presented between Chinese contact and either pre-European or post-European (P-value < 0.01). We also observe there is no obvious changes in the clay paste across different phases in relation to the increasing standardization of the pottery shape. More homogeneous and standardized in shape without changes in raw materials reflects the clay source might be the same but a preferred shape was emphasized during the Chinese contact period. The more standardized shape might indicate the appearance of specialized group. The pottery shape during the Chinese period tend to be short with oval-shaped body showing wider body diameter compared to previous two phases. To figure out whether this change is related to the function of pot, we also attempt to conduct a preliminary lipid analysis for potsherds. However, we did not get useful results due to the low lipid yield for meaningful interpretation.
+
+Previous investigations at Kiwulan suggest an unequal distribution pattern of prestige goods, particularly trade ornaments, during the presence of the European that hints the emergence of social inequality. We examine the degree of the ceramic standardization as an indicator of the presence of ceramic specialization that is usually associate with social differentiation, such as the elite control [@Costin2001; @Junker1999]. The results confirm that the differences in pottery shapes can be detected using EFA method, indicating the foreign influences on the indigenous society- the Europeans in the 17th century and the Chinese in the 19th century. There are significant differences especially between Chinese contact and either pre-European or post-European (P-value < 0.01). We also observe no obvious changes in the clay paste across different phases in relation to the increasing standardization of the pottery shape. The more standardized shape in the Chinese period might indicate the appearance of specialized group. However, when we look at the coef
+
+
+
+The pottery shape during the Chinese period tend to be short with oval-shaped body showing wider body diameter compared to previous two phases. To figure out whether this change is related to the function of pot, we also attempt to conduct a preliminary lipid analysis for potsherds. However, we did not get useful results due to the low lipid yield for meaningful interpretation.
+
+
+
+More homogeneous shape without changes in raw materials reflects the clay source might be the same but a preferred shape was emphasized during the Chinese contact period. 
 
 The result of shape analysis suggests that there might be the emergence of specialized groups after the contact with the Europeans. This supports our hypothesis that foreign influences had impacts on the emergence of social inequality in local indigenous society. This inequality might develop based on the monopolies for trade between a small number of indigenous people and the social organization switch from a more corporate to a more network organization [@Feinman2000].
 
