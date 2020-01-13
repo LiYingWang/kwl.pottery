@@ -1,9 +1,16 @@
 # read metric data
-
 kwl_p_ave <- read.csv(here::here("analysis", "data", "raw_data",
                                  "KWL-pottery-metrics-tidy-ave.csv"))
 
+count(kwl_p_ave, period)
+
+# subset, but does not work for later CV test
+kwl_p_ave_pre_post <-
+  kwl_p_ave %>%
+  filter(!period == "ch-con")
+
 # Select metric attributes for computing CV
+library(tidyverse)
 kwl_p_metrics_long <-
   kwl_p_ave %>%
   mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
@@ -64,7 +71,8 @@ kwl_p_cvs_and_pvalues <-
 
 # making table for CV
 kwl_p_cvs_table <-
-  kwl_p_cvs %>%
+  kwl_p_cvs_and_pvalues %>%
+  select(-data, -significant) %>%
   pivot_wider(names_from = period, values_from = cvs) %>%
   mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
                                                 "Neck thickness (mm)",
@@ -74,5 +82,9 @@ kwl_p_cvs_table <-
                                                 "Neck diameter (mm)",
                                                 "Body diameter (mm)",
                                                 "Ratio of Rim/Body diameter"))) %>%
-  arrange(variable)
-kable(kwl_p_cvs_table)
+  arrange(variable) %>%
+  select(variable, `pre-e`, `post-e`, `ch-con`, MSLRT, `p_value`)
+
+write_csv(kwl_p_cvs_table, here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
+
+knitr::kable(kwl_p_cvs_table)
