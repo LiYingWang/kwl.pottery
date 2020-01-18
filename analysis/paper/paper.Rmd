@@ -71,16 +71,6 @@ knitr::include_graphics(here::here("analysis", "figures", "kiwulan-location-map.
 knitr::include_graphics(here::here("analysis", "figures", "KWL-excavation-map.jpg"))
 ```
 
-```{r metricCVstest}
-library(here)
-metric_cvs_with_phase <- readr::read_csv(here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
-
-knitr::kable(metric_cvs_with_phase,
-             caption = "Coefficient of Variation test for metric attributes by phases")
-```
-
-The metric attributes for 362 reconstructed pots (pre-European = 153, European = 173, Chinese = 36) from the 40 sampling units were measure and compared using coefficient of variation (CV) with a significance test for the equality of CVs. The attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To understand more about the pottery shape, we also compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. The results (Table \@ref(tab:metricCVstest)) show that there is a significant difference (p-value less than 0.01) in the variation of two metric attributes, the rim diameter and the neck diameter across three phases. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). 
-
 Petrographic analysis for 34 thin sections shows high percentage of inclusions (15-50%), including argillite, quartz, feldspar, metasandstone, sandstone fragment, and slate. The most common type of sherds, also the dominant one, has a high percentage of inclusion (25-40%), which is composed mainly by argillite (15-40%), followed by metasandstone (1-10%), sandstone (1-6%), and quartz (1-5%). The size of the particles ranges from 500 micron to 1300 micron (=1 mm). In general, this type presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz. The composition matches the mineralogical composition of local raw materials in the Yilan Plain [@Chen2016]. It seems there is no obvious changes in the inclusions over time. 
 
 ```{r tidy-data}
@@ -129,7 +119,7 @@ total_no <- sum(phase_fre$n)
 
 # Methods
 
-A total of `r total_no` vessels from pre-contact contexts (n = 32), post-European contexts (n = 27), and Chinese contact contexts (n = 14) were selected for this study due to their completeness covering most parts from rim to bottom. 
+A total of `r total_no` vessels from pre-contact contexts (n = 32), post-European contexts (n = 27), and Chinese contact contexts (n = 14) were selected for Ellipic Fourier analysis due to their completeness covering most parts from rim to bottom. To fully explore the pottery standardization, we also take the metric measurements into account as a basis for comparison. The total of 362 reconstructed pots (pre-European = 153, European = 173, Chinese = 36) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To obtain information about the pottery shape, we also compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. 
 
 ## Digitising and analysing by EFA
 
@@ -154,15 +144,26 @@ where
 $$M=\sum _{j=1}^m m_j$$ 
 Then the test statistic can be computed with: 
 $$\begin{aligned} D'A D= \widehat{\tau }_c^{-2}\left( 0.5+\widehat{\tau }_c^2\right) ^{-1}\left[ \sum _{i=1}^km_i\left(\frac{s_i}{\bar{x}_i} \right)^2-\frac{\widehat{\tau }_c^2}{M} \right] \end{aligned}$$
-The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the population $c_v$. Feltz and Miller (1996) note that the $D'AD$ value distributes as a central $\chi^2$ random variable with $k-1$ degrees of freedom, from which a p-value can be computed. 
-
-We also include the Krishnamoorthy and Lee (2014) test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions. 
+The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the population $c_v$. Feltz and Miller (1996) note that the $D'AD$ value distributes as a central $\chi^2$ random variable with $k-1$ degrees of freedom, from which a p-value can be computed. We also include the Krishnamoorthy and Lee (2014) test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions. 
 
 # Reproducibility and open source materials 
 
 To enable re-use of materials and improve reproducibility and transparency [@Marwick2017], the entire R code [@Rlanguage2019] used for all the analysis and visualizations contained in this paper is included in http:XXX. Also in this version-controlled compendium [@Marwick2018] are the raw data for all the visualizations and tests reported here. All of the figures, tables, and statistical test results presented here can be independently reproduced with the code and data in this repository. The code is released under the MIT license, the data as CC-0, and figures as CC-BY, to enable maximum re-use. 
 
 # Results
+
+```{r metricCVstest}
+library(here)
+metric_cvs_with_phase <- readr::read_csv(here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
+metric_cvs_with_phase %>% 
+  mutate_at(c("pre-e", "post-e", "MSLRT", "p_value"), round, 4) %>% 
+  rename(`pre-European` = "pre-e", `after European` = "post-e", Chinese = "ch-con")
+
+knitr::kable(metric_cvs_with_phase,
+             caption = "Coefficient of Variation test for metric attributes by phases")
+```
+
+Table \@ref(tab:metricCVstest)) shows the results of Modified signed-likelihood ratio test (MSLRT) for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). 
 
 ```{r jpg-coordinates, eval=FALSE}
 # start shape exploration
