@@ -57,7 +57,7 @@ Taking the ceramics data from Kiwulan, northeaster Taiwan, we use EFA to evaluat
 
 # Materials and archaeological background
 
-Ceramics analyzed in this paper come from 40 units (4m by 4m) sampled from the largest excavation section at Kiwulan, northeastern Taiwan (Figure \@ref(fig:KWL-map), Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides. Yilan is an ideal context to study peripheral colonial influence because it was relatively isolated by natural barrier that reduced frequency of direct contact with the Europeans presences, the Spanish and the Dutch settled in northern Taiwan. The chronology of Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period defined by the European presence in Taiwan in the early 17th century. The Dutch firstly came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
+Ceramics analyzed in this paper come from 40 units (4m by 4m) sampled from the largest excavation section at Kiwulan, northeastern Taiwan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides . Yilan is an ideal context to study peripheral colonial influence because it was relatively isolated by natural barrier that reduced frequency of direct contact with the Europeans presences, the Spanish and the Dutch settled in northern Taiwan. The chronology of Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period defined by the European presence in Taiwan in the early 17th century. The Dutch firstly came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts in northern Taiwan. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
 
 The upper component experienced foreign contacts including the Europeans in the 17th century and great waves of Chinese immigrants in the 19th century. Imported ceramics from mainland China, stonewares, and ornaments elements such as beads were trade goods commonly found in the upper component that indicates the frequent long-distance trade activities in the 17th century during the European presence in northern Taiwan. In addition to artifacts, features such as burials, middens, and post-holes with in-situ posts widespread across 1-2 m thick deposit explain that Kiwulan was a continuously occupied and large settlement site [@Chen2007]. To compare different foreign influences, the upper component were classified into three phases, the pre-European, European, and Chinese periods. The principle of identification of three phases is based on 32 radiocarbon ages, excavation depth, consistency of contexts, and types of chronologically diagnostic artifacts, such as blue and white porcelains, light grey glazed jars, and large dark brown glazed stoneware jars prevailing in the 17th century, and bricks and tiles used by the Chinese in the 19th century [@Hsieh2009; @Wang2011]. The deposit shows signs of continuous human occupation during each of the three phases across the sampling area.
 
@@ -68,7 +68,7 @@ knitr::include_graphics(here::here("analysis", "figures", "kiwulan-location-map.
 ```
 
 ```{r, KWL-sam-area, fig.cap = "Map showing the largest section of excavation areas at Kiwulan, and the distribution of forty squares sampled in this paper presented in red with square ID number. Small dots represent the location of post-holes. Each square is 4 x 4 m", fig.width=image_width_2_col_inch}
-knitr::include_graphics(here("analysis", "figures", "KWL-excavation-map.jpg"))
+knitr::include_graphics(here::here("analysis", "figures", "KWL-excavation-map.jpg"))
 ```
 
 ```{r metricCVstest}
@@ -466,7 +466,8 @@ PC1_PC2_cv_tests <-
 bind_rows(PC1_cv_tests, 
           PC2_cv_tests, .id = "PC") %>% 
   mutate(PC = str_glue('PC{PC}')) %>% 
-  mutate(PC = as.character(PC))
+  mutate(PC = as.character(PC)) %>% 
+  mutate_at(c("MSLRT", "p_value"), round, 4)
 
 knitr::kable(PC1_PC2_cv_tests,
              caption = "P-values of the CV equality test of PC1 and PC2 between phases")

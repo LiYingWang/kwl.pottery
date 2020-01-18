@@ -2,15 +2,10 @@
 kwl_p_ave <- read.csv(here::here("analysis", "data", "raw_data",
                                  "KWL-pottery-metrics-tidy-ave.csv"))
 
+library(tidyverse)
 count(kwl_p_ave, period)
 
-# subset, but does not work for later CV test
-kwl_p_ave_pre_post <-
-  kwl_p_ave %>%
-  filter(!period == "ch-con")
-
-# Select metric attributes for computing CV
-library(tidyverse)
+# Select metric attributes and tidy data for computing CV
 kwl_p_metrics_long <-
   kwl_p_ave %>%
   mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
@@ -39,39 +34,51 @@ kwl_p_metrics_long <-
   filter(!is.na(period),
          !is.na(value))
 
+# CV test function
 library(cvequality)
 mslr_test_set <- function(x, y){
   set.seed(1)
   mslr_test(nr = 1e4, x, y)
 }
 
-# CV test
-kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT <-
+# filter pre-e and post-e periods
+kwl_p_metrics_long_pre_post <-
   kwl_p_metrics_long %>%
-  nest(-variable) %>%  # or nest(period, value) %>%
-  mutate(mslr_test = map(data,
-                         ~bind_cols(mslr_test_set(
-                           .x$value,
-                           .x$period)))) %>%
-  unnest(mslr_test)
+  filter(!period == "ch-con")
 
-# transform the data
-kwl_p_cvs <-
+# filter post-e and chi periods
+kwl_p_metrics_long_post_chi <-
   kwl_p_metrics_long %>%
+  filter(!period == "pre-e")
+
+# CV test for pre-e and post-e pair
+# ? CV test results are different from the results tested for the LYdissertation project
+kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
   group_by(period, variable) %>%
   summarise(cvs = raster::cv(value, na.rm = TRUE))
 
 # join p-values to CVs
-kwl_p_cvs_and_pvalues <-
-  kwl_p_cvs %>%
-  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT) %>%
+kwl_p_cvs_and_pvalues_pre_post <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT_pre_post) %>%
   mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
   mutate(variable = factor(variable, ordered = TRUE)) %>%
   arrange(variable)
 
 # making table for CV
-kwl_p_cvs_table <-
-  kwl_p_cvs_and_pvalues %>%
+kwl_p_cvs_table_pre_post <-
+  kwl_p_cvs_and_pvalues_pre_post %>%
   select(-data, -significant) %>%
   pivot_wider(names_from = period, values_from = cvs) %>%
   mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
@@ -83,7 +90,8 @@ kwl_p_cvs_table <-
                                                 "Body diameter (mm)",
                                                 "Ratio of Rim/Body diameter"))) %>%
   arrange(variable) %>%
-  select(variable, `pre-e`, `post-e`, `ch-con`, MSLRT, `p_value`)
+  select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
+  mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
 
 write_csv(kwl_p_cvs_table, here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
 
