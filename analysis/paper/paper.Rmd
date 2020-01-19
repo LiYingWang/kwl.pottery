@@ -78,11 +78,13 @@ Petrographic analysis for 34 thin sections shows high percentage of inclusions (
 # Once we have the jpgs, start from here
 library(tidyverse)
 
+# read in pottery data
+pottery_data <- readr::read_csv(here("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv"))
+
 # get list of jpgs only
 jpgs <- list.files(here("analysis/data/raw_data/outline_jpg"), pattern = ".jpg", full.names = TRUE)
 
 # join file names to phase
-pottery_data <- readr::read_csv(here("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv"))
 pottery_data <- pottery_data %>% 
   mutate(filename = str_glue('fill_{filename}.svg_output.jpg'))
 
@@ -120,7 +122,72 @@ total_no <- sum(phase_fre$n)
 
 # Methods
 
-A total of `r total_no` vessels from pre-contact contexts (n = 32), post-European contexts (n = 27), and Chinese contact contexts (n = 14) were selected for Ellipic Fourier analysis due to their completeness covering most parts from rim to bottom. To fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of 362 reconstructed pots (pre-European = 153, European = 173, Chinese = 36) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To obtain information about the pottery shape, we also compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. 
+A total of `r total_no` relativity intact vessels from pre-contact contexts (n = 32), post-European contexts (n = 27), and Chinese contact contexts (n = 14) were selected for Ellipic Fourier analysis. Most of them cover every components from rim to bottom. Given that the decline of indigenous population in the Chinese period might have impact on the interpretation, we examined the spatial distribution of pots analyzed in this paper. The pottery distributed randomly across the sampling area without any clusters could rule out the bias caused by the population dynamics (Figure \@ref(fig:pottery-spatial-pattern)). To fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of 362 reconstructed pots (pre-European = 153, European = 173, Chinese = 36) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To obtain information about the pottery shape, we also compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. 
+
+```{r pottery-spatial-pattern, fig.cap= "The spatial distribution of the pottery selected for shape analysis. The quantity is indicated by the color scale."}
+library(sf)
+library(viridis)
+
+# read in the spatial data
+AD_zone <- invisible(st_read(here("analysis", "data", "raw_data", "AD_zone.shp"), quiet = TRUE))
+units_40 <- invisible(read.csv(here("analysis", "data", "raw_data", "kwl-list-of-sampling-squares.csv")))
+
+AD_zone_tidy <-
+  AD_zone %>% 
+  mutate(Pit =paste0("P0",Id)) %>% 
+  inner_join(units_40, by = c("Pit" = "the_sq")) %>% 
+  select(Pit, geometry)
+
+# tidy pottery data
+pottery_count <-
+  pottery_data %>% 
+  select(Site, Context, Pit, Layer, No., phase) %>% 
+  count(Pit, phase)
+
+# join two dataset to get coordinate
+pottery_count_join <-
+  pottery_count %>%
+  mutate(phase = as.factor(phase)) %>% # seems need this line first
+  inner_join(AD_zone_tidy) %>% 
+  filter(!is.na(phase)) %>% 
+  mutate(phase = case_when(
+    phase %in% "pre-e"~ "Before European Contact",
+    phase %in% "post-e" ~ "European Presence",
+    phase %in% "ch-con" ~ "Chinese Presence")) %>% 
+  mutate(phase = factor(phase,
+                        level = c("Before European Contact",
+                                  "European Presence",
+                                  "Chinese Presence")))
+# plot spatial pattern for pottery
+plot_spatial_distribution_pottery_by_phase <- 
+  ggplot() +
+  geom_sf(data = AD_zone_tidy, fill = NA) +
+  geom_sf(data = pottery_count_join, 
+          aes(geometry = geometry, 
+              fill =n), 
+          alpha = 0.9)+
+  facet_wrap(~ phase) +
+  labs(fill = "frequency") +
+  scale_fill_viridis(direction = -1) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        strip.text.x = element_text(size = 6),
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 6),
+        legend.key.size =  unit(3, "mm"))
+
+plot_spatial_distribution_pottery_by_phase
+
+ggsave(plot = plot_spatial_distribution_pottery_by_phase,
+       here("analysis", "figures",
+       "plot-spatial-distribution-pottery-by-period.jpg"),
+       width = 135, 
+       height = 31,
+       dpi = 300,
+       units = "mm")
+```
 
 ## Digitising and analysing by EFA
 
@@ -498,7 +565,7 @@ PC1_PC2_cv_tests %>%
 ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
 ```
 
-The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents a similar pattern that stronger standardization of shape in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences (P-value less than 0.01) in the standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European(Figure \@ref(fig:CV-test-PCs-plot), Table \@ref(tab:CV-test-PCs-table)). Significant difference is also detected between pre-European and post-European (P-value less than 0.05). Given the decline of the indigenous population in the Chinese period might be a cause of a more standardized shape [@Chen2007], we examined the spatial distribution of pottery selected in this paper. The pottery distributed across the sampling area without any clusters could rule out the bias caused by the population dynamics. 
+The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents a similar pattern that stronger standardization of shape in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences (P-value less than 0.01) in the standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European(Figure \@ref(fig:CV-test-PCs-plot), Table \@ref(tab:CV-test-PCs-table)). Significant difference is also detected between pre-European and post-European (P-value less than 0.05).  
 
 # Discussion
 
