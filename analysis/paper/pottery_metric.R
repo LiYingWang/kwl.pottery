@@ -1,11 +1,11 @@
 # read metric data
-kwl_p_ave <- read.csv(here::here("analysis", "data", "raw_data",
+kwl_p_ave <- readr::read_csv(here::here("analysis", "data", "raw_data",
                                  "KWL-pottery-metrics-tidy-ave.csv"))
 
 library(tidyverse)
 count(kwl_p_ave, period)
 
-# Select metric attributes and tidy data for computing CV
+# select metric attributes and tidy data for computing CV
 kwl_p_metrics_long <-
   kwl_p_ave %>%
   mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
