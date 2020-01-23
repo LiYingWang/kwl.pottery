@@ -51,8 +51,8 @@ kwl_p_metrics_long_post_chi <-
   kwl_p_metrics_long %>%
   filter(!period == "pre-e")
 
-# CV test for pre-e and post-e pair
-# ? CV test results are different from the results tested for the LYdissertation project
+#------------------------------------------CV test for pre-e and post-e pair
+
 kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT_pre_post <-
   kwl_p_metrics_long_pre_post %>%
   nest(-variable) %>%  # or nest(period, value) %>%
@@ -92,6 +92,89 @@ kwl_p_cvs_table_pre_post <-
   arrange(variable) %>%
   select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
   mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
+
+#-----------------------------------CV test for post-e and ch-con pair
+
+kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT_post_chi <-
+  kwl_p_metrics_long_post_chi %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_post_chi %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_post_chi <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT_post_chi) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+
+# making table for CV
+kwl_p_cvs_table_post_chi <-
+  kwl_p_cvs_and_pvalues_post_chi %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
+                                                "Neck thickness (mm)",
+                                                "Body thickness (mm)",
+                                                "Ratio of Rim/Body thickness",
+                                                "Rim diameter (mm)",
+                                                "Neck diameter (mm)",
+                                                "Body diameter (mm)",
+                                                "Ratio of Rim/Body diameter"))) %>%
+  arrange(variable) %>%
+  select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
+  mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
+
+#----------------------------------------------all three phases together
+
+kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT <-
+  kwl_p_metrics_long %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(mslr_test = map(data,
+                         ~bind_cols(mslr_test_set(
+                           .x$value,
+                           .x$period)))) %>%
+  unnest(mslr_test)
+
+kwl_p_cvs <-
+  kwl_p_metrics_long %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+
+# join p-values to CVs
+kwl_p_cvs_and_pvalues <-
+  kwl_p_cvs %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_MSLRT) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+
+# make a table
+kwl_p_cvs_table <-
+  kwl_p_cvs_and_pvalues %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
+                                                "Neck thickness (mm)",
+                                                "Body thickness (mm)",
+                                                "Ratio of Rim/Body thickness",
+                                                "Rim diameter (mm)",
+                                                "Neck diameter (mm)",
+                                                "Body diameter (mm)",
+                                                "Ratio of Rim/Body diameter"))) %>%
+  arrange(variable) %>%
+  select(variable, `pre-e`, `post-e`, `ch-con`, MSLRT, `p_value`) %>%
+  mutate_at(c("pre-e", "post-e", "MSLRT", "p_value"), round, 4)
 
 write_csv(kwl_p_cvs_table, here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
 
