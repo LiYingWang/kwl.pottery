@@ -225,19 +225,6 @@ ggsave(plot = plot_spatial_distribution_pottery_by_phase,
        units = "mm")
 ```
 
-Table \@ref(tab:metricCVstest) shows the results of Modified signed-likelihood ratio test (MSLRT) for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). 
-
-```{r metricCVstest}
-metric_cvs_with_phase <- readr::read_csv(here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
-
-metric_cvs_with_phase_tidy <-
-  metric_cvs_with_phase %>% 
-  mutate_at(c("pre-e", "post-e", "ch-con", "MSLRT", "p_value"), round, 4) %>% 
-  rename(`pre-European` = "pre-e", `after European` = "post-e", Chinese = "ch-con")
-
-knitr::kable(metric_cvs_with_phase_tidy,
-             caption = "Coefficient of Variation test for metric attributes by phases")
-```
 
 ```{r jpg-coordinates, eval=FALSE}
 # start shape exploration
@@ -263,7 +250,9 @@ saveRDS(jpgs_imported_coo,
         here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 ```
 
-The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. The average shape of vessels from each phase was visualized by computing the mean of the standardized Fourier coefficients within each phase group (Figure \@ref(fig:EFA-analysis)). Figure \@ref(fig:thin-plate-splines) shows the shape changes described using thin-plate spline warping for paired periods, pre and post European periods, and post-European and Chinese period in a time sequence.
+<!-- basic description of shape -->
+
+The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outlines were captured by 13 harmonics that gather 99% of the total harmonic power. The average shape of vessels from each phase was visualized by computing the mean of the standardized Fourier coefficients within each phase group (Figure \@ref(fig:EFA-analysis)). Figure \@ref(fig:thin-plate-splines) shows the shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods.
 
 ```{r EFA-analysis, fig.cap= "Mean pottery shapes of three phases"}
 library(Momocs)
@@ -318,7 +307,9 @@ vari_two <- round(pro_vari$cumsum[2],4)*100
 vari_three <- round(pro_vari$cumsum[3],4)*100
 ```
 
-The elliptic Fourier coefficients are examined by principal components analysis to explore the shape variations across three phases. The first two principal components (PCs) explain `r vari_two`% of the total variances, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variances. Figure \@ref(fig:contribution-PCs) shows the shape variation associated with the first three principal components. From the negative to the positive scores, the PC1 represents the height of the vessels from tall to short and the roundness of the body from round to oval-shaped. The PC2 relates to the neck and mouth constriction from narrow to wide. The PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck from curved to straight shape. The first two components account for most of the variance in relation to three phases were represented in Figure \@ref(fig:first-two-PCs-byplot). The result reflects a large overlap of three groupings especially for shapes in the pre-European and post-European periods that might show some extent of the similarity. However, the spread of shape distribution indications a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, there is a decreasing in shape variance in the Chinese period that shares the features of shorter height and narrower mouth.
+<!-- further description of shape and differences between phases -->
+
+The elliptic Fourier coefficients were examined by Principal Components Analysis to explore the shape variations across three phases. The first two principal components (PCs) explain `r vari_two`% of the total variances, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variance. Figure \@ref(fig:contribution-PCs) shows the shape variation associated with the first three principal components. PC1 captures the height of the vessels, from tall to short, and the roundness of the body from round to oval-shaped. PC2 relates to the neck and mouth constriction, from narrow to wide. PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck, from curved to straight shape. The first two components account for most of the variance in relation to three phases (Figure \@ref(fig:first-two-PCs-byplot)). The results reflect a large overlap in shapes from three occupations phases, especially for shapes in the pre-European and post-European periods. However, the spread of shape distribution indicates a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, we find a decrease in shape variance in the Chinese period that is evident in the shorter height and narrower mouth of vessels used in that period.
 
 ```{r contribution-PC-hide, results="hide", include= FALSE}
 # the contributions of each PC to the shapes
@@ -349,63 +340,53 @@ ggsave(here::here("analysis/figures/pca-contrib.png"))
 # dev.off()
 
 # PCA byplot
-plot(PCA(op), 2, pos.shp="range")
+plot_PCA(op.p, ~phase, chullfilled = TRUE)
 ```
 
 ```{r MANOVA-table}
 # MANOVA: Multivariate Analysis of (co)variace
 # We can test for a difference in the distribution of PC scores by calculating a pairwise combination between every levels of a fac. 
 
-manv <- rrtools:::quietly ( MANOVA_PW(op.p, "phase") ) #? how to hide the process, echo = FALSE?
+manv <- rrtools:::quietly ( MANOVA_PW(op.p, "phase") ) 
 su_manv <- as.data.frame(manv$summary)
-# how to reduce the number in the table to only 4 digits, tried mutate with signif but doesn't work?
-su_manv <- 
+
+su_manv_tab <- 
   su_manv %>% 
-  mutate_all(round, 4)
+  mutate_all(round, 4) %>% 
+  select(-Df, -`num Df`) %>% 
+  rename(`Pillai's trace` = Pillai,
+         `Approximate F value` = `approx F`,
+         `degrees of freedom` = `den Df`)
 
-pval_chi_pre <- signif(unname(su_manv[,'Pr(>F)'][2]), 4)
-pval_post_pre <- signif(unname(su_manv[,'Pr(>F)'][3]), 4)
+pval_chi_pre <- signif(unname(su_manv_tab[,'Pr(>F)'][2]), 4)
+pval_post_pre <- signif(unname(su_manv_tab[,'Pr(>F)'][3]), 4)
 
-knitr::kable(su_manv,
-             caption = "The statistics summary of MANOVA test for the PC scores")
+knitr::kable(su_manv_tab,
+             caption = "The statistics summary of MANOVA test for the PC scores. `Pr(>F)` is the p-value associated with the F statistic of the effect and test statistic. ")
 ```
 
-To test differences in the distribution of shape variables indicated by the PC scores, we use multivariate analysis of variance (MANOVA) to compare a pairwise combination between every sample means across three phases. The results in Table \@ref(tab:MANOVA-table) show significant differences in shape between Pre-European and Post-European (p = $`r pval_post_pre`$) and Pre-European and Chinese contact shapes (p = $`r pval_chi_pre`$), which corresponds to the previous observation of the different distribution in shapes in Chinese period according to PCA byplot. In addition, although there is a considerable overlap of shape variables between Pre-European and Post-European, their PC scores are significantly different from each other. There are not much differences between the shapes in the Post-European and Chinese contact periods. 
+<!-- statistical test of difference in shape decsribed in previous paragraph -->
 
-```{r GAMM, eval = FALSE}
-#----------------------------------------------------
-# GAMMS from https://www-nature-com.offcampus.lib.washington.edu/articles/s41598-018-20122-9
+To test for differences in the distributions of shape variables indicated by the PC scores and biplot, we use the multivariate analysis of variance (MANOVA) test to compare pairwise combinations across our three occupation phases. Table \@ref(tab:MANOVA-table) shows significant differences in shape between Pre-European and Post-European phases (p = $`r pval_post_pre`$), and Pre-European and Chinese phases (p = $`r pval_chi_pre`$). Although there is considerable overlap of shape variables between the Pre-European and Post-European phases, their PC scores are significantly different from each other. There is little difference between the shapes in the Post-European and Chinese contact periods. 
 
-# Generalised additive mixed models (GAMMs) were used to explain shape variance with respect to mean environmental parameters and shell size, and to compare between individual shape features (PCs). A GAMM is a generalised linear mixed model with a linear predictor involving a sum of smooth functions of covariates. The model allowed for flexible specification of the dependence of the response on the covariates by defining regression splines (smoothing functions) and estimating their optimal degree of smoothness, rather than calculating parametric relationships
 
-# metric data
-ggplot(pottery_data,
-       aes(phase,
-           as.numeric(Thick1_Neck))) +
-  geom_boxplot()
+<!-- CV equality testing -->
 
-pottery_data$thick_neck1 <- as.numeric(pottery_data$Thick1_Neck)
-pottery_data$thick_body1 <- as.numeric(pottery_data$Thick1_Body)
-pottery_data$height <- as.numeric(pottery_data$Hight)
+Table \@ref(tab:metricCVstest) shows the results of Modified signed-likelihood ratio test (MSLRT) for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). 
 
-plot(op.p$x[ , 2], pottery_data$thick_body1)
+```{r metricCVstest}
+metric_cvs_with_phase <- readr::read_csv(here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
 
-gams_input <- data.frame(thick_body1 = pottery_data$thick_body1 , 
-                         height = pottery_data$height, 
-                         shape_pc1 = op.p$x[ , 1])
+metric_cvs_with_phase_tidy <-
+  metric_cvs_with_phase %>% 
+  mutate_at(c("pre-e", "post-e", "ch-con", "MSLRT", "p_value"), round, 4) %>% 
+  rename(`pre-European` = "pre-e", `after European` = "post-e", Chinese = "ch-con")
 
-# Bayesian Regression Models using 'Stan'
-library(brms)
-m2 <- brm(bf(shape_pc1 ~ s(thick_body1)),
-          data = gams_input, family = gaussian(), cores = 4, seed = 17,
-          iter = 4000, warmup = 1000, thin = 10, refresh = 0,
-          control = list(adapt_delta = 0.99))
-summary(m2) # so many zeros... not very promising 
-# plot marginal effects for each predictor
-plot(marginal_effects(m2), ask = FALSE)
-loo(m2)
-pp_check(m2)
+knitr::kable(metric_cvs_with_phase_tidy,
+             caption = "Coefficient of Variation test for metric attributes by phases")
 ```
+
+
 
 ```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
 # what are the variences for each PC in each period?
