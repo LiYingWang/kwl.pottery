@@ -11,9 +11,9 @@ output:
 bibliography: references.bib
 csl: "../templates/journal-of-archaeological-science.csl" # Insert path for the bib-style
 abstract: |
-  Text of abstract
+  The emergence of ceramic specialization in prehistoric societies is often linked to shifts in the complexity of social structures, because specialized pottery production can reflect craft specialization and the presence of elite control. Previous work on identifying specialization relies on typological or linear metric analysis. Here we demonstrate how to investigate ceramic standardization by analyzing outlines of ceramic vessels. Outline analysis is an important method because, unlike more commonly-used landmark analysis methods, it can effectively quantify shape differences for objects that lack distinctive measurement points needed for landmark analysis. We demonstrate this method using pottery from Kiwulan, a large multi-component Iron Age site (AD 1350-1850) in northeast Taiwan. To measure ceramic specialization, we quantified pottery standardization by analyzing shape variables with reproducible geometric morphometric methods. We computed coefficients of variation (CVs) for shape coefficients obtained by elliptical Fourier analysis to test for shape standardization. We found significant differences in pottery shape and shape standardization that indicate changes in pottery production resulting from contact with mainland Han Chinese groups in northeast Taiwan. We infer increasing craft specialization and changes in social organization. Our case study, which includes an openly available research compendium of R code, represents an innovative application of outline-based methods in geometric morphometry to answer the anthropological questions of craft specialization. This study implies that craft specialization can be a deliberate act of resistance to show indigenous identity and ethnicity in a direct culture contact situation.
 keywords: |
-  keyword 1; keyword 2; keyword 3
+  Geometric Morphometrics; ceramic specialization; Iron age; culture contact; standardization
 highlights: |
   These are the highlights. 
 ---
@@ -27,83 +27,64 @@ knitr::opts_chunk$set(
   message = FALSE,
   echo = FALSE,
   comment = "#>",
+  dpi = 300,
   fig.path = "../figures/"
 )
+
+image_width_1_col_inch = 90/25.4 # image Single column	w = 90 mm 
+image_width_2_col_inch = 190/25.4 # image Double column w = 190 mm 
 ```
 
 # Introduction
 
-Ceramic production can reflect prehistoric socioeconomic patterns since it relates to not only economic base for households but also societies as a whole when specialized production was organized. Identifying the specialization in ceramic production will help to understand how complex societies form and further explore the underlying mechanism. One way to examine ceramic specialization is to identify whether ceramics present standardization in production, which based on the assumption that the specialized mass production will lead to uniformity of the product due to increased skills, routinization, and lower diversity of producers that enable us to interpret social organization or social relations such as type of production, and the presence of elite control [@Arnold2000, pp. 334; @Stark1995; @Costin1991]. 
+The development of craft specialization is usually associated with the social changes since it reflects production systems that could inform social, economic, or political conditions of a society. Specialization is defined as "differential participation in specific economic activities", in which a particular good is produced by fewer producers compared to the total population who consume it [@Costin1991; @Costin2001, pp. 43]. The implication of the emergence of specialization for social structure or social process has been a theme in archaeological investigations. From the perspective of the political approaches, craft specialization specifically attached production, is a strategy used by elites to control over production systems to maintain power and authority [@Costin2001]. The relationship between craft specialization and social differentiation is broadly discussed, and many cases show that specialized production is a useful indicator of increasing socio-political complexity [@Hirshman2010; @Junker1999]. One the other hand, economic models consider production, exchange, and consumption as a whole to explain specialization as a subsistence strategy to accommodate uneven distribute of resources [@Costin2001; @Arnold1994], a reaction to the changes in subsistence practices [@Stark1995economic], or an outcome result from by long-distance trade and inter-regional exchange [@Alizadeh2018]. An present-day investigation of ceramic specialization in the Jodhpur region of India suggests that the adoption of standardized products across cultural boundaries is a reaction to a collapse of previous economic system, indicating the correlation with major socio-economic changes [@Roux2015]. However, it is important to note that the explanation for the emergence of specialized production might not be straightforward or exclusive. @Acabado2018's case study in lowland northern Philippines shows that specialization is not necessarily accompanied with social differentiation based on the result of a low degree of ceramic specialization in Ifugao ranked societies during the Spanish colonization. The development of specialization could be history dependent, where condition and contexts under which specialists organized are important to make an inference for changes in social organization [@Roux2015; @Costin2001].
 
-Several variables have been proposed to measure ceramic standardization, including metric, compositional, and technological attributes [@Rice1991; @Blackman1993; @Costin1991; @Hirshman2010; @Tite1999]. However, traditional typological and linear measurements are limited because they can be insensitive to subtle variations resulting from changes in craft specialization. Taking a new approach to the measurement of craft specialization, we studied shape and standardization of locally made pottery to identify changes in pottery production at Kiwulan (1400-1900 AD), a large multi-component archaeological site in northeastern Taiwan. We apply geometric morphometric methods to study artifact shapes to investigate if there are any changes resulting from foreign contact of European and Chinese that might indicate social changes in the indigenous society. 
+The emergence of social inequality in the context of cross-cultural interaction especially in a colonial situation was observed in many parts of world when the introduction of foreign trade goods to local indigenous societies. The monopolization of long-distance trade goods usually cause substantial transformations of indigenous economic, cultural, and socio-political systems [@Dietler2005; @Dietler1997; @Junker1993; @Silliman2005]. Recently indirect effects of colonialism or pericolonial archaeology were address when investigating areas where European colonial rule was limited or their conquests were unsuccessful, but their colonial activities had economically and politically impacts on indigenous peoples in the periphery of colonial control [@Trabert2017; @Acabado2017]. For example, @Acabado2017's study on Ifugao society in the highland Philippines suggests economic and political intensification during the Spanish presence as the response of indigenous peoples to the Spanish cooptation. Indigenous societies might not just passively accept the colonial rules, but instead actively negotiated with the colonist, and accommodate or resist the foreign intrusion through their daily cultural practices, such as consumption patterns of foreign goods [@Dietler2015; @Given2004; @Mullins2011; @Scaramelli2005; @Silliman2001; @TorrenceandClarke2000]. Northeastern Taiwan is an ideal example to explore the indirect impacts of the foreign occupations on local indigenous societies due to its isolated location.  The archaeological evidence in northeastern Taiwan show evidence of increasing use of prestige goods such as trade ornaments and uneven distribution pattern in domestic area and burial contexts when the society encountered by the Spanish and the Dutch in the 17th century. In addition to the differential distribution of trade ornaments, the locally made ceramic present a high consistency in form and shape compared to other pottery throughout northeastern Taiwan that hints the possibility of pottery specialization. 
 
-Culture contact between indigenous people and colonizer with imperial power usually leads to profound changes in local indigenous societies. We explore the culture changes in indigenous societies in northeastern Taiwan that experienced foreign contacts with the Europeans and Chinese since 17th century by examining the local pottery production. We observed pottery production in northeastern Taiwan in the late Iron Age period and historical period (1400-1900 AD) presenting a high consistency in form and shape compared to other pottery found from other regions on this island that hints the emergence of pottery specialization. We asked the questions: Did foreign contact have an impact on indigenous pottery production in northeastern Taiwan that can be detected in the shape of the vessels? Did the pottery production become more standardized and homogeneous in shape after foreign contact? Did the contact with European cause more homogeneous shape than Chinese contact period because of large scale exchange network? 
+To identify craft specialization, the variation of standardization of specialized product is commonly used as an indicator based on the assumption that specialized mass production will lead to uniformity of the product due to routinization, increased skills, and fewer number of producers involved in production [@Stark1995; @Costin1991; @Costin2001]. For ceramic standardization, several measurements have been proposed and discussed, such as metric, compositional, and technological approaches [@Arnold2000; @Boness2015; @Rice1991; @Blackman1993; @Costin1991; @Tite1999; @Roux2015]. Among those variables, metric measurement is widely applied to archaeological assemblages. By comparing variations for sets of data using coefficient of variation coupled with statistical testing, the degree of standardization can be identified according to values [@Eerkens2001; @Roux2003; @Stark1995]. @Roux2018's ethnographic study in the Jodhpur region of India suggests the number of artisans can be assessed by comparing coefficient of variation and the differences between artisans can be detected at both intra-individual level and inter-individual level in a region. However, linear measurements might be limited for identifying differences in variations because they could be insensitive to subtle variations resulting from changes in assemblages. Shape analysis based on geometric morphometrics method are new approaches for measuring the degree of standardization since it takes the overall shape as variable for comparison [@Slice2007]. Using geometric morphometrics approaches, we study shape and standardization of locally made ceramics at Kiwulan (1350-1950 AD) [@Chen2007], a large multi-component archaeological site in northeastern Taiwan, to identify changes in ceramic production in cross-cultural interaction contexts. The aim of this paper is to investigate if there is increasing ceramic specialization resulting from interaction with the Europeans in the 17th century or the Chinese in the 19th century, two major foreign influences in early historical Taiwan, that might indicate social changes in local indigenous societies.
 
-We find differences in shape and shape standardization of pottery that indicate changes in pottery production resulting from foreign contact, suggesting increasing craft specialization and changes in local social organization at Kiwulan. These results are important to understand the influence of culture contact on local indigenous societies and answer the anthropological question that concerns the the mechanisms for social changes. In addition, our case study, which includes an openly available research compendium of R code suitable for use with any other assemblage, will help to expand the use of shape-based quantitative methods to questions about craft specialization and standardization in prehistoric technologies.
+Our hypothesis is that if foreign influences had impacts on the emergence of social inequality in local indigenous society due to the monopolies for trade between a small number of indigenous people, then we expect to see the changes in social organization from a more corporate to a more network organization that would be reflected by pottery production at Kiwulan [@Feinman2000]. The emergence of craft specialization, here pottery specialization, are usually related to changes in social organization towards a society with increasing status inequality. In this case, if the competitions for foreign resources and being trade partners of European or Chinese colonizer among individuals gradually lead to increasing social inequality, then we expect the local ceramic will show more homogeneous features after contact due to the emergence of craft specialization caused by control of small group of individuals. This study is important to understand the indirect influences of the European colonists on the local indigenous societies, which remains unclear in East Asia where the colonial power was not successful compared to other places in Southeast Asia. Also, it would help to understand the relationship among the use of prestige goods, the degree of ceramic specialization, and the influence of foreign colonizers in a pericolonial context [cf. @Acabado2017]. 
 
-# Geometric Morphometric approach: shape analysis for pottery specialization
+## Geometric Morphometric approaches
 
-Geometric morphometric methods (GMM) has been widely applied recently in archaeology for shape analysis, which explores morphological variability and similarity of archaeological materials to address the questions of anthropological interests. Different from linear measurement approaches that capture shapes by measuring length, width or ratios of objects, geometric morphometrics methods use Cartesian coordinates of morphological structures to define the shapes [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates by their unique point location with respect to numerical values of coordinate axes. According to different focuses and nature of original shape data, there are two common morphometric methods used to capture and analyse the shapes, landmark approaches and outline approaches [@Adams2004]. Landmark approaches assign a set of landmarks or semilandmarks onto objects as reference points that can be specified on a coordinate system as x, y coordinates for two dimensions, or x, y, z coordinates for three dimensions. Based on distances between raw landmarks, objects are translated to a common centroid, rescaled into the same size, and rotated until the summed squared distances between corresponding landmarks are minimized using generalized Procrustes analysis (GPA) [@Bookstein1991]. GPA is a method that superimposes sets of landmark configurations into a common coordinate system, where superimposed landmark coordinates are used as shape variables for further multivariate statistics analyses[@Slice2007]. Landmark-based morphometrics are widely used for archaeological objects where morphological signature is obvious to identity which provides ideal locations for landmark placement, such as projectile point tips or biologically meaningful points indicating osteological features [@Birch2019; @Buchanan2019; @Lycett2013; @Cardillo2010; @Haruda2019; @Meloro2015]. 
+Geometric morphometric methods (GMM) has been increasingly applied in archaeology for shape analysis, which explores morphological variability and similarity of archaeological materials to address the questions of anthropological interests. Different from linear measurement approaches that capture shapes by length, width or ratios of objects, geometric morphometrics methods use Cartesian coordinates of morphological structures to define shapes [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates in terms of their unique point locations with respect to numerical values of coordinate axes. According to different focuses and nature of original shape data, there are two common morphometric methods, landmark approaches and outline approaches [@Adams2004]. Landmark approaches assign a set of landmarks or semilandmarks onto objects as reference points that can be specified on a coordinate system as x, y coordinates for two dimensions, or x, y, z coordinates for three dimensions. Based on distances between raw landmarks, objects are translated to a common centroid, rescaled into the same size, and rotated until the summed squared distances between corresponding landmarks are minimized using generalized Procrustes analysis (GPA) [@Bookstein1991]. GPA is a method that superimposes sets of landmark configurations into a common coordinate system, where superimposed landmark coordinates are used as shape variables for further multivariate statistics analyses [@Slice2007]. Landmark-based morphometrics are widely applied to archaeological objects with a obvious morphological signature that can provide ideal reference points for landmark placement, such as projectile point tips or biologically measurements points indicating osteological features [@Birch2019; @Buchanan2019; @Lycett2013; @Cardillo2010; @Haruda2019; @Meloro2015]. 
 
-However, one limitation of landmark-based morphometrics is that landmark data may not be able to capture the shape differences of a morphological structure where the curving outlines between landmarks convey important information. In addition, obvious and reliable landmark points may be unavailable for some complex, rounded or globular shaped structures. In those cases, outline approaches are more suitable to study shape by focusing on the overall shape of a morphological structure. One of the outline approaches is semi-landmarks method, which assigns points along an outline curve at defined intervals between two landmarks to capture the variations of the outlines [@Bookstein1997; @Lawing2010]. Another approach is elliptic Fourier Analysis (EFA) commonly used for two-dimensional closed shape which turns coordinates into coefficients [@Kuhl1982]. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions, called harmonic coefficients [@Adam2004; @Claude2008; @Bonhomme2014]. The number of harmonics determines the quality and precision of the geometry of an object. The harmonic power, a cumulated sum of squared harmonic coefficient, provides a robust rule for desired number of harmonics [@Bonhomme2014]. The application of EFA in archaeology is mostly used for bone morphology to understand the biological variation and recently more for stone artefacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Outline approach based on EFA is suitable for shapes lacking obvious landmarks or curves convey more important information indicating the meaningful variations, for example, ceramics. @Wilczek2014 evaluate the concordance between outline-based approaches, the EFA and the Discrete Cosine Transform (DCT), and traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. They found that the variation in ceramic shapes analysed by EFA and DCT matches traditional ceramic typology, which supports that outline-based approaches can be efficiently used for studying variations in ceramic shapes. In addition, the results of shape variation by EFA helps to understand the level of production standardisation over time across that region. 
+However, one limitation of landmark approaches is that landmarks may not be able to capture the shape differences of a morphological structure where the curving outlines between landmarks are crucial for variation. Furthermore, representative and reliable landmark points may be unavailable for complex or rounded shaped structures. In those cases, outline approaches are better way for analyzing the overall shape of an object. One of the outline approaches is the semi-landmarks method, also called sliding landmarks, which assigns points along the curve between two landmarks at defined intervals [@Bookstein1997; @Lawing2010]. Those semi-landmarks are allowed to slide along the curve to remove the effect of the arbitrary landmark spacing by minimizing either Procrustes distance or bending energy [@Bookstein1997; @Slice2007; @Gunz2013]. Another approach is elliptic Fourier Analysis (EFA) that turns coordinates into coefficients using mathematical function, commonly applied to two-dimensional closed shape [@Kuhl1982]. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions, called harmonic coefficients [@Adams2004; @Claude2008; @Bonhomme2014]. The number of harmonics determines the quality and precision of the geometry of an object. The harmonic power, a cumulated sum of squared harmonic coefficient, provides a robust rule for the desired number of harmonics [@Bonhomme2014]. 
 
-In this paper, we use EFA for pottery shape analysis to evaluate the level of standardization of pottery from an Iron Age site in northeastern Taiwan in relation to the European presence in the 17th century that might hint the emergence of craft specialization for pottery production. Craft specialization can provide further evidence about the type of production organization which is closely related to economic or political aspects of society [@Arnold2000; @Blackman1993; @Costin1991; @Hirshman2010; @Stark1995]. The emergence of craft specialization can also be an indicator of social inequality that hints the possibility of the presence of production groups worked for specific individuals. The presence of craft specialization is commonly studied by measuring the standardization of ceramics based on the assumption that the specialized mass production will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers [@Arnold2000]. To test the prediction of a shift in the level of social inequality in this case study in northeastern Taiwan influenced by the colonial European presence, we use standardization of pottery in shapes as an index for craft specialization to identify the presence of a few individuals controlling large scale pottery production [@Costin1995; @Hirshman2010] using outline-based geometric morphometrics couples with traditional metric measurements to compare and evaluate the use of outline approaches for pottery with high consistency in shapes. 
+Outline approaches especially EFA is suitable for shapes lacking representative landmarks or curves convey more meaningful variations. The applications in archaeology are seen on human remains or zooarchaeology to understand the biological variation and recently more on stone artifacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Ceramics is another archaeological materials that outline approaches can provide new insights into shape variation to answer anthropological questions related to ceramic specialization. Using semi-landmarks method, @Topi2018 examine 89 photographs of globular jars from the Casas Grandes of northwest Mexico. Their results suggest that some ceramic types from Medio period (AD 1200-1450), were made by specialists based on high standardized shape. Among those high standardized jars, some were made by attached specialists, while others were made by independent specialists according to their spatial distribution patterns. Similarity, @Selden2019 examines 28 Caddo bottle excavated at several sites (AD 500-1700) in northwest Louisiana from the Clarence H. Webb collections. The results indicate a significant integration between the different parts of the bottles including rim, neck, body, and base that vary in a coordinated manner. Also, two discrete base and body shapes represented north and south difference were identified. For the EFA method, @Wilczek2014 evaluate the concordance between EFA and Discrete Cosine Transform (DCT), and traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. The results show the variation indicated by EFA and DCT matches traditional ceramic typology, which supports that outline-based approaches can be efficiently used for studying variations in ceramic shapes. Furthermore, the EFA results help to understand the level of production standardization over time across the region. Those examples show that outline approaches can distinguish variation in ceramic shapes in a finer resolution to understand deeply the ceramic production. 
 
-- CV is hard to test, we apply some statistics testing for it
+Taking the ceramics data from Kiwulan, northeaster Taiwan, we use EFA to evaluate the level of standardization of ceramics in relation to the European presence in the 17th century that might hint the emergence of ceramic specialization. In addition, we use significance test for the equality of coefficient of variation of shape variables to compare the vessel standarization from different periods in a statistical way. Using pottery shape as a proxy to study craft specialization, we answer the questions: Did foreign influence have impacts on indigenous pottery production that can be detected in the shape of the vessels? How does pottery change in shape in relation to foreign influences? Did pottery become more homogeneous and standardized in shape after foreign contacts with the European colonizer or the Chinese immigrants? Starting from the historical background of colonial influences and its reflection in the material record, this study explore the relationship between the emergence of social inequality and craft specialization that can extend our understanding of the reactions of indigenous societies in the periphery of colonial control, providing a perspective that could be applied in other parts of the world in a similar context.
 
-# Hypotheses and expectations
+# Materials and archaeological background
 
-My hypothesis is that if foreign contacts including European and Chinese had impact on the emergence of social inequality in local indigenous society due to the monopolies for trade between a small number of indigenous people, then I expect to see the changes in social organization from a more corporate to a more network organization that can be reflected by pottery production at Kiwulan. The emergence of craft specialization, here pottery specialization, are usually related to the presence of elite control. In this case, if the competitions for foreign resources and being trade partners of European or Chinese colonizer among individuals gradually lead to the emergence of social inequality, then I expect the local pottery will show more homogeneous features after contact due to the pottery specialization caused by control of small group of individuals. 
+Ceramics analyzed in this paper come from 40 units (4m by 4m) sampled from the largest excavation section at Kiwulan, northeastern Taiwan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides . Yilan is an ideal context to study peripheral colonial influence because it was relatively isolated by natural barrier that reduced frequency of direct contact with the Europeans presences, the Spanish and the Dutch settled in northern Taiwan. The chronology of Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period defined by the European presence in Taiwan in the early 17th century. The Dutch firstly came and occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626. In 1642, the Spanish was expelled by the Dutch, who took over their forts at Helping dau in Keelung, and in Tamsui. Since then, western Taiwan was mostly under the colonial rule of the Dutch until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
 
-# Materials and methods
+The upper component experienced foreign contacts including the Europeans in the 17th century and great waves of Chinese immigrants in the 19th century. Imported ceramics from mainland China, stonewares, and ornaments elements such as beads were trade goods commonly found in the upper component that indicates the frequent long-distance trade activities in the 17th century during the European presence in northern Taiwan. In addition to artifacts, features such as burials, middens, and post-holes with in-situ posts widespread across 1-2 m thick deposit explain that Kiwulan was a continuously occupied and large settlement site [@Chen2007]. To compare different foreign influences, the upper component were classified into three phases, the pre-European, European, and Chinese periods. The principle of identification of three phases is based on 32 radiocarbon ages, excavation depth, consistency of contexts, and types of chronologically diagnostic artifacts, such as blue and white porcelains, light grey glazed jars, and large dark brown glazed stoneware jars prevailing in the 17th century, and bricks and tiles used by the Chinese in the 19th century [@Hsieh2009; @Wang2011]. The deposit shows signs of continuous human occupation during each of the three phases across the sampling area.
 
-## Archaeological pottery from Kiwulan 
+The predominant artefact found is locally made ceramics, which distributed throughout the sequence across the site. More than 550 thousands of sherds were excavated, and around 1,200 vessels were reconstructed. It is interesting to note that there are only two forms of local vessels, one is cooking pot and another one is steamer made of two cooking pots stacked together with a filter clay layer in between. Those pots show high consistency in shape. They are globular body with short neck and wide mouth. The exterior surface below the neck is treated with a wide variety of impressed geometric motifs. They were believed used for cooking based on the evidence of charred residues and carbon deposits commonly observed on the interior and soot on the exterior. Moreover, a lack of evidence of other utilitarian earthenware ceramics suggests this globular pot was mainly used for daily cooking. They are fired to orange to brownish color with a fully oxidized core or a reduced core with oxidized fringes. Finger impressions and seams usually on the interior indicate they were pinched using slabs of clay and shaped by hand. In addition to Kiwulan site, this kind of pot was widely found at other archaeological sites during the same period in Yilan Plain.
 
-Ceramics data analysed in this paper comes from the upper component of Kiwulan, northeastern Taiwan. Those ceramics dated from AD 1400 to AD 1900, which covers 500 years from the late Iron Age to the historical period started with the European presence in the 17th century. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan, which is characterized by a triangular alluvial plain facing eastwards the Pacific and mountains on three other sides. The upper component experienced frequent foreign contacts including the European colonial presence in the 17th century and great waves of Chinese immigrants since 19th century. The excavation revealed abundant artifacts in which potsherds are the dominate materials throughout the site. Imported ceramics from mainland China, stonewares, and ornament elements such as beads were usually found in the Upper Culture Layer that indicates the prosperous international trading activities in the 17th century during the European presence in Taiwan. In addition to artifacts, features were also found, such as burials, middens, and postholes with in-situ posts that explains Kiwulan was a large settlement site. 
+```{r, KWL-map, fig.cap = "Map showing the location of Kiwulan, and other places in northern Taiwan named in the text. Map data from naturalearthdata.com", fig.width=image_width_2_col_inch}
+library(here)
+knitr::include_graphics(here("analysis", "figures", "kiwulan-location-map.jpg"))
+```
 
-A total of 73 vessels from pre-contact contexts (n = 32), post-European contexts (n = 27), and Chinese contact contexts (n = 14) were selected for this study because of their completeness mostly covering parts from rim to bottom. The scanned pottery drawings of those pots were acquired from Bureau of Cultural Affairs in Yilan. All drawing presents two-dimensional view of the section of a vessel with indications of metric measurements. The scanned drawings were imported into the Inkscape software for outlines tracing to remove additional information such as marks, lines, and measurements on the original drawings. Each traced half cross-section image was duplicated, flipped, and then joined with another one to create a 2D closed outline.
+```{r, KWL-sam-area, fig.cap = "Map showing the largest section of excavation areas at Kiwulan, and the distribution of forty squares sampled in this paper presented in red with square ID number. Small dots represent the location of post-holes. Each square is 4 x 4 m", fig.width=image_width_2_col_inch}
+knitr::include_graphics(here("analysis", "figures", "KWL-excavation-map.jpg"))
+```
 
-## metric measurements
-
-In this study, we examine 291 pots recovered from Kiwulan site. The layer from 1 to 6 could be divided into 3 time periods. Layer 5 and 6 represent pre-contact period, layer 4 represents contact period, and layer1, 2, and 3 represent post-contact period.  The amount of pots for each layer shows below. Although most pots are not complete, the thickness from rim, neck, to body can be measured. I have also measured the diameter of rim, neck, and body. For those pots that are incomplete, the diameter is measured by its curvature. Since the height is incomplete for most pots, this preliminary analysis focuses more on the possible change in thickness and diameter of pot for different parts, and their ratio over time.
-
-## Outline analysis
-
-Geometric morphometric analyses were conducted in the R software (www.rproject.org, Core-Team, 2015) using the functions included in the Momocs, a R package intended to quantify the shape and compare its variation, especially for outline analysis [@Bonhomme2014]. The digitised outlines were converted into a list of successsive x-y pixel coordinates for elliptic Fourier analysis (EFA), which assesses morphological differences among pottery shapes from three occupation contexts. 
-
-The harmonic coefficients generated by EFA were analysed by principal component analysis (PCA) to illustrate the diversity of the shape data and identify the major patterns of variation through dimensionality reduction. The principal components (PCs) scores were analysed with a multivariate analysis of variance (MANOVA) to test for significant effects of the groups of occupation context on shape variances. Finally, we computed coefficients of variation statistic (CVs) among multiple groups of PCs with a significance test for the equality of CVs, which enable us to compare CVs in a statistical way (Karl Pearson 1896). The coefficient of variation is a common and widely-used statistical measure of the spread of a set of measurements of a sample. It is defined as the standard deviation divided by the mean in a ratio scale format.
-
-$$c_v = \frac{\sigma}{\mu}$$
-
-By standardizing standard deviation in each data set, the coefficients of variation statistics allows us to directly compare variation in samples measured with different units or means. Although it is a useful method, there is a question that how should we make a decision that the differences among the multiple CVs are significant or not? To answer this question, we need convenient methods for testing the equality of $c_v$ values from different samples, which has been described in many publications and here we proposed a significant test for CVs using the R package cvequality [@Marwick2019] in the CRAN repository. The package cvequality includes two tests, the "Asymptotic test for the equality of coefficients of variation from k populations" (Feltz and Miller 1996) and the "Modified signed-likelihood ratio test (SLRT) for equality of CVs" (Krishnamoorthy and Lee 2014). Feltz and Miller (1996) test is widely cited as an authoritative test for the equality of $c_v$ values that performs better than many approximative tests. It is a 'gold standard' test for comparing multiple $c_v$. Our implementation is based on the following from Feltz and Miller (1996):
-
-Let $s_i$ be the observed standard deviation of the $i$th sample (or group of measurements), $x_i$ be the observed mean of the $i$th sample, and let 
-
-$$m_i=n_i-1$$
-
-and we do not know the population $c_v$, so let $\widehat{\tau }_c$ be an estimate as follows:
-
-$$\widehat{\tau }_c = \frac{\left( \sum _{j=1}^km_j\frac{S_j}{\bar{x}_j} \right)}{M}$$ 
-where 
-$$M=\sum _{j=1}^m m_j$$ 
-Then the test statistic can be computed with: 
-$$\begin{aligned} D'A D= \widehat{\tau }_c^{-2}\left( 0.5+\widehat{\tau }_c^2\right) ^{-1}\left[ \sum _{i=1}^km_i\left(\frac{s_i}{\bar{x}_i} \right)^2-\frac{\widehat{\tau }_c^2}{M} \right] \end{aligned}$$
-The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the population $c_v$. Feltz and Miller (1996) note that the $D'AD$ value distributes as a central $\chi^2$ random variable with $k-1$ degrees of freedom, from which a p-value can be computed. 
-
-We also include the Krishnamoorthy and Lee (2014) test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions. 
-
-# Results
+Petrographic analysis for 34 thin sections shows high percentage of inclusions (15-50%), including argillite, quartz, feldspar, metasandstone, sandstone fragment, and slate. The most common type of sherds, also the dominant one, has a high percentage of inclusion (25-40%), which is composed mainly by argillite (15-40%), followed by metasandstone (1-10%), sandstone (1-6%), and quartz (1-5%). The size of the particles ranges from 500 micron to 1300 micron (=1 mm). In general, this type presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz. The composition matches the mineralogical composition of local raw materials in the Yilan Plain [@Chen2016]. It seems there is no obvious changes in the inclusions over time. 
 
 ```{r tidy-data}
 # Once we have the jpgs, start from here
 library(tidyverse)
-library(here)
+
+# read in pottery data
+pottery_data <- readr::read_csv(here("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv"))
 
 # get list of jpgs only
 jpgs <- list.files(here("analysis/data/raw_data/outline_jpg"), pattern = ".jpg", full.names = TRUE)
 
 # join file names to phase
-pottery_data <- readr::read_csv(here("analysis/data/raw_data/KWL_Ceramic_final2018_with_phases.csv"))
 pottery_data <- pottery_data %>% 
   mutate(filename = str_glue('fill_{filename}.svg_output.jpg'))
 
@@ -126,15 +107,131 @@ phases_isect <-
   mutate_all(as.factor) %>% 
   distinct(filename, phase) %>% 
   mutate(phase = as.factor(case_when(
-    phase == 'post-e' ~ "Post-European",
+    phase == 'post-e' ~ "Post-European", # include European period and after it before Chinese contact
     phase == 'pre-e' ~ "Pre-European",
-    phase == 'ch-con' ~ "Chinese" # we combine Chinese and post-Euro
+    phase == 'ch-con' ~ "Chinese" # we can combine Chinese and post-Euro
   ))) 
 
 # how many pots in each phase?
-phases_isect %>% 
+phase_fre <- phases_isect %>% 
   group_by(phase) %>% 
   tally(sort = T)
+
+total_no <- sum(phase_fre$n)
+```
+
+# Methods
+
+A total of `r total_no` relativity intact vessels from pre-contact contexts (n = 32), post-European contexts (n = 27), and Chinese contact contexts (n = 14) were selected for Ellipic Fourier analysis. Most of them cover every components from rim to bottom. Given that the decline of indigenous population in the Chinese period might have impact on the interpretation, we examined the spatial distribution of pots analyzed in this paper. The pottery distributed randomly across the sampling area without any clusters could rule out the bias caused by the population dynamics (Figure \@ref(fig:pottery-spatial-pattern)). To fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of 362 reconstructed pots (pre-European = 153, European = 173, Chinese = 36) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To obtain information about the pottery shape, we also compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. 
+
+```{r pottery-spatial-pattern, fig.cap= "The spatial distribution of the pottery selected for shape analysis. The quantity is indicated by the color scale."}
+library(sf)
+library(viridis)
+
+# read in the spatial data
+AD_zone <- invisible(st_read(here("analysis", "data", "raw_data", "AD_zone.shp"), quiet = TRUE))
+units_40 <- invisible(read.csv(here("analysis", "data", "raw_data", "kwl-list-of-sampling-squares.csv")))
+
+AD_zone_tidy <-
+  AD_zone %>% 
+  mutate(Pit =paste0("P0",Id)) %>% 
+  inner_join(units_40, by = c("Pit" = "the_sq")) %>% 
+  select(Pit, geometry)
+
+# tidy pottery data
+pottery_count <-
+  pottery_data %>% 
+  select(Site, Context, Pit, Layer, No., phase) %>% 
+  count(Pit, phase)
+
+# join two dataset to get coordinate
+pottery_count_join <-
+  pottery_count %>%
+  mutate(phase = as.factor(phase)) %>% # seems need this line first
+  inner_join(AD_zone_tidy) %>% 
+  filter(!is.na(phase)) %>% 
+  mutate(phase = case_when(
+    phase %in% "pre-e"~ "Before European Contact",
+    phase %in% "post-e" ~ "European Presence",
+    phase %in% "ch-con" ~ "Chinese Presence")) %>% 
+  mutate(phase = factor(phase,
+                        level = c("Before European Contact",
+                                  "European Presence",
+                                  "Chinese Presence")))
+# plot spatial pattern for pottery
+plot_spatial_distribution_pottery_by_phase <- 
+  ggplot() +
+  geom_sf(data = AD_zone_tidy, fill = NA) +
+  geom_sf(data = pottery_count_join, 
+          aes(geometry = geometry, 
+              fill =n), 
+          alpha = 0.9)+
+  facet_wrap(~ phase) +
+  labs(fill = "frequency") +
+  scale_fill_viridis(direction = -1) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        strip.text.x = element_text(size = 6),
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 6),
+        legend.key.size =  unit(3, "mm"))
+
+plot_spatial_distribution_pottery_by_phase
+
+ggsave(plot = plot_spatial_distribution_pottery_by_phase,
+       here("analysis", "figures",
+       "plot-spatial-distribution-pottery-by-period.jpg"),
+       width = 135, 
+       height = 31,
+       dpi = 300,
+       units = "mm")
+```
+
+## Digitising and analysing by EFA
+
+The scanned pottery drawings were acquired from Bureau of Cultural Affairs in Yilan. All drawing presents two-dimensional view of the section of a vessel with indications of metric measurements. The scanned drawings were imported into the Inkscape software for outlines tracing to remove additional information such as marks, lines, and measurements on the original drawings in order to obtain clear outline. Each traced half cross-section image was duplicated, flipped, and then joined with another one to create a 2D closed outline. Geometric morphometric analyses were conducted in the R software (www.rproject.org, Core-Team, 2015) using the functions included in the Momocs, a R package intended to quantify the shape and compare its variation, especially for outline analysis [@Bonhomme2014]. The digitised outlines were converted into a list of successive x-y pixel coordinates for elliptic Fourier analysis (EFA), which assesses morphological differences among pottery shapes from three occupation contexts. The harmonic coefficients generated by EFA were analysed by principal component analysis (PCA) to illustrate the diversity of the shape data and identify the major patterns of variation through dimensionality reduction. 
+
+## Statistical testing 
+
+The principal components (PCs) scores were analysed with a multivariate analysis of variance (MANOVA) to test for significant effects of the groups of occupation context on shape variances. Finally, we computed coefficients of variation statistic (CVs) among multiple groups of PCs with a significance test for the equality of CVs, which enable us to compare CVs in a statistical way [@Pearson1896]. The coefficient of variation is a common and widely-used statistical measure of the spread of a set of measurements of a sample. It is defined as the standard deviation divided by the mean in a ratio scale format.
+
+$$c_v = \frac{\sigma}{\mu}$$
+
+By standardizing standard deviation in each data set, the coefficients of variation statistics allows us to directly compare variation in samples measured with different units or means. Although it is a useful method, there is a question that how should we make a decision that the differences among the multiple CVs are significant or not? To answer this question, we need convenient methods for testing the equality of $c_v$ values from different samples, which has been described in many publications and here we proposed a significant test for CVs using the R package cvequality [@Marwick2019] in the CRAN repository. The package cvequality includes two tests, the "Asymptotic test for the equality of coefficients of variation from k populations" [@Feltz1996] and the "Modified signed-likelihood ratio test (SLRT) for equality of CVs" [@Krishnamoorthy2014]. @Feltz1996 test is widely cited as an authoritative test for the equality of $c_v$ values that performs better than many approximative tests. It is a 'gold standard' test for comparing multiple $c_v$. Our implementation is based on the following from @Feltz1996:
+
+Let $s_i$ be the observed standard deviation of the $i$th sample (or group of measurements), $x_i$ be the observed mean of the $i$th sample, and let 
+
+$$m_i=n_i-1$$
+
+and we do not know the population $c_v$, so let $\widehat{\tau }_c$ be an estimate as follows:
+
+$$\widehat{\tau }_c = \frac{\left( \sum _{j=1}^km_j\frac{S_j}{\bar{x}_j} \right)}{M}$$ 
+where 
+$$M=\sum _{j=1}^m m_j$$ 
+Then the test statistic can be computed with: 
+$$\begin{aligned} D'A D= \widehat{\tau }_c^{-2}\left( 0.5+\widehat{\tau }_c^2\right) ^{-1}\left[ \sum _{i=1}^km_i\left(\frac{s_i}{\bar{x}_i} \right)^2-\frac{\widehat{\tau }_c^2}{M} \right] \end{aligned}$$
+The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the population $c_v$. @Feltz1996 note that the $D'AD$ value distributes as a central $\chi^2$ random variable with $k-1$ degrees of freedom, from which a p-value can be computed. We also include the @Krishnamoorthy2014 test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions. 
+
+# Reproducibility and open source materials 
+
+To enable re-use of materials and improve reproducibility and transparency [@Marwick2017], the entire R code [@Rlanguage2019] used for all the analysis and visualizations contained in this paper is included in http:XXX. Also in this version-controlled compendium [@Marwick2018] are the raw data for all the visualizations and tests reported here. All of the figures, tables, and statistical test results presented here can be independently reproduced with the code and data in this repository. The code is released under the MIT license, the data as CC-0, and figures as CC-BY, to enable maximum re-use. 
+
+# Results
+
+Table \@ref(tab:metricCVstest) shows the results of Modified signed-likelihood ratio test (MSLRT) for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). 
+
+```{r metricCVstest}
+metric_cvs_with_phase <- readr::read_csv(here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
+
+metric_cvs_with_phase_tidy <-
+  metric_cvs_with_phase%>% 
+  mutate_at(c("pre-e", "post-e", "ch-con", "MSLRT", "p_value"), round, 4) %>% 
+  rename(`pre-European` = "pre-e", `after European` = "post-e", Chinese = "ch-con")
+
+knitr::kable(metric_cvs_with_phase_tidy,
+             caption = "Coefficient of Variation test for metric attributes by phases")
 ```
 
 ```{r jpg-coordinates, eval=FALSE}
@@ -161,113 +258,122 @@ saveRDS(jpgs_imported_coo,
         here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 ```
 
-```{r EFA-analysis}
+The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. The average shape of vessels from each phase was visualized by computing the mean of the standardized Fourier coefficients within each phase group (Figure \@ref(fig:EFA-analysis)). Figure \@ref(fig:thin-plate-splines) shows the shape changes described using thin-plate spline warping for paired periods, pre and post European periods, and post-European and Chinese period in a time sequence.
+
+```{r EFA-analysis, fig.cap= "Mean pottery shapes of three phases"}
 library(Momocs)
+library(cowplot)
 jpgs_imported_coo <- readr::read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 
 # default is 13 harmanics that gather 99% of the harmonic power 
 op <- efourier(jpgs_imported_coo, norm = FALSE, 13)
-
-# The progressive capture of shape geometry along the number of harmonics can be visualized with:
-calibrate_reconstructions_efourier(jpgs_imported_coo,  
-                          id = 1, 
-                          range = c(1, 2, 4, 8, 14, 20))
 
 # mean shape, per group
 pot.ms <- MSHAPES(op, 'phase')
 mshp <- pot.ms$shp
 names(mshp) <- c("chi", "poe", "pre") 
 
-`Post-European` <- mshp$poe %T>%  coo_plot( border="blue")
-`Pre-European` <-  mshp$pre  %T>% coo_plot(border="red", plot.new=FALSE)
-`Chinese` <-       mshp$chi  %T>% coo_plot(border="green", plot.new=FALSE)
+`Post-European` <- mshp$poe %T>% coo_plot(border="blue")
+`Pre-European` <-  mshp$pre %T>% coo_plot(border="red", plot.new=FALSE)
+`Chinese` <-       mshp$chi %T>% coo_plot(border="green", plot.new=FALSE)
 legend("topright", 
        lwd=1,
        col=c("red", "blue", "green"), 
-       legend=c( "Pre-European", "Post-European", "Chinese"))
+       legend=c( "Pre-European", "Post-European", "Chinese")) 
+#? How to put the legend out of the plot, tried change the margin using par(), but doesn't work
+```
 
-# from mshapes directly, nice but the labels spill outside of the plot area, not clear how to fix
-op %>% MSHAPES(~phase) %>% plot_MSHAPES()
-
+```{r thin-plate-splines, fig.cap= "Compare the average shapes across phases using thin plate splines (TPS) with outline deformations required to pass from an extreme of the morphospace to the other."}
 # Thin plate spline analysis (TPS)
-# Thin plate splines (TPS) was used to compare average shapes and visualise the outline deformations required to pass from an extreme of the morphospace to the other.
+# visualize the outline deformations required to pass from an extreme of the morphospace to the other
 # Deformation grids
-png(here::here("analysis/figures/tps-pre-Euro-to-post-Euro.png"), res = 300, w = 900, h = 900)
+
+par(mfrow=c(1,2)) # plot them side by side
 
 tps_grid(`Pre-European`, `Post-European`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
-         amp = 1, grid.size = 18, legend = T)
-dev.off()
+           amp = 1, grid.size = 18, legend = T)
 
-png(here::here("analysis/figures/tps-pre-Euro-to-Chinese.png"), res = 300, w = 900, h = 900)
 tps_grid(`Pre-European`, `Chinese`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
-         amp = 1, grid.size = 18, legend = T)
-dev.off()
+           amp = 1, grid.size = 18, legend = T)
 
 # Isodeformation lines
 png(here::here("analysis/figures/tps-iso.png"), res = 600, w = 1200, h = 1800)
-tps_iso(`Pre-European`, `Post-European`,  shp.lwd = c(2, 2), shp.border = c("red", "blue"),
-        amp = 0.5, iso.nb = 10000, iso.levels = 12, legend.text = c("Pre-contact", "Post-contact"),
-        palette = col_summer, grid = F)
-dev.off()
+
+#knitr::include_graphics(here::here("analysis", "figures", "tps-pre-Euro-to-post-Euro.png"))
 ```
 
-The elliptic Fourier coefficients of 73 pottery from three different phases were calculated. Reliable pottery outline was captured by 13 harmonics that gather 99 % of the total harmonic power. Thin-plate splines compares the average shapes of vessels from each period to visualize the outline deformations required to pass from an extreme of one morphospace to the other. 
-
-```{r PCA-analysis}
+```{r PCA-table}
 # these are fast
 op.p <- PCA(op)
 # proportion of variances explained, PC1 and PC2 explain 79% of variation
 pro_vari <-scree_plot(op.p)$data
+pc1 <- round(pro_vari$proportion[1],4)*100
+pc3 <- round(pro_vari$proportion[3],4)*100
 vari_two <- round(pro_vari$cumsum[2],4)*100
 vari_three <- round(pro_vari$cumsum[3],4)*100
+```
 
-# the pots groups by phase, and their shape distribution according to 
-# the first two principle components of the EFA 
-png(here::here("analysis/figures/pca-biplot.png"), res = 300, w = 1500, h = 1500)
-plot(op.p, 2, 
-     morpho = TRUE, 
-     ellipses = TRUE,
-     cex = 1, 
-     cex.labelsgroups = 1.5)
+The elliptic Fourier coefficients are examined by principal components analysis to explore the shape variations across three phases. The first two principal components (PCs) explain `r vari_two`% of the total variances, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variances. Figure \@ref(fig:contribution-PCs) shows the shape variation associated with the first three principal components. From the negative to the positive scores, the PC1 represents the height of the vessels from tall to short and the roundness of the body from round to oval-shaped. The PC2 relates to the neck and mouth constriction from narrow to wide. The PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck from curved to straight shape. The first two components account for most of the variance in relation to three phases were represented in Figure \@ref(fig:first-two-PCs-byplot). The result reflects a large overlap of three groupings especially for shapes in the pre-European and post-European periods that might show some extent of the similarity. However, the spread of shape distribution indications a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, there is a decreasing in shape variance in the Chinese period that shares the features of shorter height and narrower mouth.
 
-dev.off()
-
-# different visualization 
-plot(PCA(op), 2, pos.shp="full")
-plot(PCA(op), 2, pos.shp="range")
-plot(PCA(op), 2, pos.shp="xy")
-plot(PCA(op), 2, pos.shp="range_axes")
-
-plot(PCA(op), 2, pos.shp="full_axes")
-
+```{r contribution-PC-hide, results="hide", include= FALSE}
 # the contributions of each PC to the shapes
-pc_contrib <- PCcontrib(op.p, nax = 1:3) 
+pc_contrib <-  PCcontrib(op.p, nax = 1:3) 
+```
+
+```{r contribution-PCs, fig.cap= "Pottery shape variation based on scores along principal component axes. The rows from the top to the bottom represent the first to third principal component respectively. Each column shows the reconstructed shape variable according to the score mean ±2 standard deviation (SD) with a 0.5 interval"}
 pc_contrib$gg +  
   geom_polygon(fill="slategrey", col="black") + 
-  ggtitle("Shape variation along PC axes") +
   theme_minimal(base_size = 6)
   
 ggsave(here::here("analysis/figures/pca-contrib.png"))
 
 # PC1 is height of vessel
 # PC2 is neck constriction
-# PC3 is height of neck and roundness of body
+# PC3 is the degree of flare of neck
 ```
 
-Outlines generated by EFA are examined by principal components analysis to explore the shape variations across three phases. The first two principal components (PCs) can explain `r vari_two`% of variances, and the first three principal components (PCs) can explain `r vari_three`% of variances. The first PC is related to the height of the vessels from short to high, the second PC reflects the width of their necks and mouths from narrow to wide, and the third PC relates to the degree of flare of neck from curve to straight. The biplot of PCs presents the grouping by each occupation phase. 
+```{r first-two-PCs-byplot, fig.cap= "Pottery shape distribution by each occupation phase according to the first two PCs"}
+# the pots groups by phase, and their shape distribution according to 
+# the first two principle components of the EFA 
+# png(here::here("analysis/figures/pca-biplot.png"), res = 300, w = 1500, h = 1500)
+# plot(op.p, 2, 
+#      morpho = TRUE, 
+#      ellipses = TRUE,
+#      cex = 1, 
+#      cex.labelsgroups = 1.5)
+# dev.off()
 
-```{r MANOVA}
+# PCA byplot
+plot(PCA(op), 2, pos.shp="range")
+```
+
+```{r MANOVA-table}
 # MANOVA: Multivariate Analysis of (co)variace
 # We can test for a difference in the distribution of PC scores by calculating a pairwise combination between every levels of a fac. 
 
-manv <-   MANOVA_PW(op.p, "phase")
-manv$summary
+manv <- rrtools:::quietly ( MANOVA_PW(op.p, "phase") ) #? how to hide the process, echo = FALSE?
+su_manv <- as.data.frame(manv$summary)
+# how to reduce the number in the table to only 4 digits, tried mutate with signif but doesn't work?
+su_manv <- 
+  su_manv %>% 
+  mutate_all(round, 4)
 
+pval_chi_pre <- signif(unname(su_manv[,'Pr(>F)'][2]), 4)
+pval_post_pre <- signif(unname(su_manv[,'Pr(>F)'][3]), 4)
+
+knitr::kable(su_manv,
+             caption = "The statistics summary of MANOVA test for the PC scores")
+```
+
+To test differences in the distribution of shape variables indicated by the PC scores, we use multivariate analysis of variance (MANOVA) to compare a pairwise combination between every sample means across three phases. The results in Table \@ref(tab:MANOVA-table) show significant differences in shape between Pre-European and Post-European (p = $`r pval_post_pre`$) and Pre-European and Chinese contact shapes (p = $`r pval_chi_pre`$), which corresponds to the previous observation of the different distribution in shapes in Chinese period according to PCA byplot. In addition, although there is a considerable overlap of shape variables between Pre-European and Post-European, their PC scores are significantly different from each other. There are not much differences between the shapes in the Post-European and Chinese contact periods. 
+
+```{r GAMM, eval = FALSE}
 #----------------------------------------------------
 # GAMMS from https://www-nature-com.offcampus.lib.washington.edu/articles/s41598-018-20122-9
 
 # Generalised additive mixed models (GAMMs) were used to explain shape variance with respect to mean environmental parameters and shell size, and to compare between individual shape features (PCs). A GAMM is a generalised linear mixed model with a linear predictor involving a sum of smooth functions of covariates. The model allowed for flexible specification of the dependence of the response on the covariates by defining regression splines (smoothing functions) and estimating their optimal degree of smoothness, rather than calculating parametric relationships
 
+# metric data
 ggplot(pottery_data,
        aes(phase,
            as.numeric(Thick1_Neck))) +
@@ -283,6 +389,7 @@ gams_input <- data.frame(thick_body1 = pottery_data$thick_body1 ,
                          height = pottery_data$height, 
                          shape_pc1 = op.p$x[ , 1])
 
+# Bayesian Regression Models using 'Stan'
 library(brms)
 m2 <- brm(bf(shape_pc1 ~ s(thick_body1)),
           data = gams_input, family = gaussian(), cores = 4, seed = 17,
@@ -295,16 +402,16 @@ loo(m2)
 pp_check(m2)
 ```
 
-```{r CV-test}
+```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
+# what are the variences for each PC in each period?
 # CVs on shape PCs for standardisation
-
 len <- length(op.p$x[,1])
 # plot PC1-3 distribution by phase
 pc_plot <- tibble(pc = c(op.p$x[,1],
-                             op.p$x[,2],
-                             op.p$x[,3]),
-                      phase = rep(op.p$fac$phase, 3),
-                        pcn = str_glue('PC{sort(rep(1:3, len))}'))
+                         op.p$x[,2],
+                         op.p$x[,3]),
+                  phase = rep(op.p$fac$phase, 3),
+                  pcn = str_glue('PC{sort(rep(1:3, len))}'))
 
 pc_plot$phase <- fct_relevel(pc_plot$phase, 
                             c("Pre-European", 
@@ -320,16 +427,16 @@ ggplot(pc_plot,
   theme_minimal()
 ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
        h = 10, w = 5)
+```
 
-# what are the variences for each PC in each period?
-# we don't use CV because that is not good for measurements with no
-# absolute zero 
-pc_plot %>% 
+```{r variance-test-PCs}
+# we don't use CV because that is not good for measurements with no absolute zero
+xx <- 
+  pc_plot %>% 
   group_by(pcn, phase) %>% 
   summarise(variance = var(pc))
 
-# statistical test
-
+# statistical test to compare the variances of two samples
 pc_plot_tests <- 
   pc_plot %>% 
   group_by_at(vars(-pc)) %>% 
@@ -343,11 +450,12 @@ pc_plot_tests <-
   mutate(var_test = purrr::map(data, ~broom::tidy(var.test(.x$`Post-European` ,
                                             .x$`Pre-European`)))) %>% 
   unnest(var_test)
- 
+```
 
+```{r CV-test-PCs-table}
 library(cvequality)
 pc1 <- data.frame(
-x  = op.p$x[,1],
+x = op.p$x[,1],
 y = as.character(op.p$fac$phase),
 stringsAsFactors = F)
 
@@ -377,16 +485,16 @@ cv_test_pc1.1 <-
 
 cv_test_pc1.2 <- 
   mslr_test(nr = 1000, 
-            pc1$x[pc1$y %in% c("Chinese Contact", 
+            pc1$x[pc1$y %in% c("Chinese", 
                                "Pre-European")], 
-            pc1$y[pc1$y %in% c("Chinese Contact", 
+            pc1$y[pc1$y %in% c("Chinese", 
                                "Pre-European")])
 
 cv_test_pc1.3 <- 
   mslr_test(nr = 1000, 
-            pc1$x[pc1$y %in% c("Chinese Contact", 
+            pc1$x[pc1$y %in% c("Chinese", 
                                "Post-European")], 
-            pc1$y[pc1$y %in% c("Chinese Contact", 
+            pc1$y[pc1$y %in% c("Chinese", 
                                "Post-European")])
 
 PC1_cv_tests <- 
@@ -404,16 +512,16 @@ cv_test_pc2.1 <-
 
 cv_test_pc2.2 <- 
   mslr_test(nr = 1000, 
-            pc2$x[pc2$y %in% c("Chinese Contact", 
+            pc2$x[pc2$y %in% c("Chinese", 
                                "Pre-European")], 
-            pc2$y[pc2$y %in% c("Chinese Contact", 
+            pc2$y[pc2$y %in% c("Chinese", 
                                "Pre-European")])
 
 cv_test_pc2.3 <- 
   mslr_test(nr = 1000, 
-            pc2$x[pc2$y %in% c("Chinese Contact", 
+            pc2$x[pc2$y %in% c("Chinese", 
                                "Post-European")], 
-            pc2$y[pc2$y %in% c("Chinese Contact", 
+            pc2$y[pc2$y %in% c("Chinese", 
                                "Post-European")])
 
 PC2_cv_tests <- 
@@ -424,32 +532,56 @@ PC2_cv_tests <-
                        "Chinese Contact vs Pre-European",
                        "Chinese Contact vs Post-European"))
 
+PC1_PC2_cv_tests <-
 bind_rows(PC1_cv_tests, 
           PC2_cv_tests, .id = "PC") %>% 
   mutate(PC = str_glue('PC{PC}')) %>% 
+  mutate(PC = as.character(PC)) %>% 
+  mutate_at(c("MSLRT", "p_value"), round, 4)
+
+knitr::kable(PC1_PC2_cv_tests,
+             caption = "P-values of the CV equality test of PC1 and PC2 between phases")
+```
+
+```{r CV-test-PCs-plot, fig.cap= "P-values of the CV equality test of PC1 and PC2 between phases, red color indicates p-value is less than 0.05"}
+
+add_line_format <- function(x, ...){
+  str_replace(x, " vs", "\nvs")
+}
+
+PC1_PC2_cv_tests %>%
   mutate(colour = if_else(p_value < 0.05, "red", "black")) %>% 
   ggplot(aes(str_wrap(phases, 40),
              p_value,
              colour = I(colour),
-             shape = PC)
-         ) +
+             shape = PC)) +
   geom_point(size = 8,  position = position_dodge(width = 0.5)) +
   theme_minimal(base_size = 12) +
+  scale_x_discrete(labels = add_line_format(unique(sort(PC1_PC2_cv_tests$phases)))) +
   coord_cartesian(clip = 'off') +
   xlab("") +
   ylab("CV equality test p-values")
 
 ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
-
 ```
 
-Multivariate analysis of variance (MANOVA) is used to test the difference in three shape varaibles from three phases. The result shows significant differences in shape between Pre-European and Post-European (p = 0.02) and Pre-European and Chinese contact shapes (p < 0.01). The distributions of the first three PCs for each vessel suggest variations in shape standardization by period. The first PC, the hight of the vessels, shows more variations in the pre-Euro period compared to the Chinese period. Standardization appears strong in the pre-Euro period but weak in the Chinese period. P-values for a modified signed-likelihood ratio test of equality of CVs of PC1 & PC2 show significant differences in standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European. 
+The variation of pottery shape for each phase is explored by the distributions of the first three PC scores to compare the extent of standardization across phases. Figure \@ref(fig:PCs-distribution) suggests variations of PC scores for each vessel by phase. The first PC, the hight of the vessels, shows more variations in the pre-European period compared to the Chinese period. That indicates standardization appears strong in the Chinese period but weak in the pre-European period. The second PC also presents a similar pattern that stronger standardization of shape in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases is statistically significant, coefficients of variation statistic (CVs) among phase groups of PCs is examined with a modified signed-likelihood ratio test for the equality of CVs. P-values for the significant test of CVs of PC1 and PC2 show significant differences (P-value less than 0.01) in the standardization of vessel shape across some periods, especially between Chinese contact with either pre-European or post-European(Figure \@ref(fig:CV-test-PCs-plot), Table \@ref(tab:CV-test-PCs-table)). Significant difference is also detected between pre-European and post-European (P-value less than 0.05).
 
 # Discussion
 
+Previous investigations at Kiwulan suggest an unequal distribution pattern of prestige goods, trade ornaments specifically, after the presence of the European that hints the emergence of social inequality. We examine the degree of the ceramic standardization to measure ceramic specialization that is usually associate with social differentiation, such as the elite control [@Costin2001; @Junker1999]. The results confirm that the differences in pottery shapes can be detected using EFA method, indicating the foreign influences on the indigenous society- the Europeans in the 17th century and the Chinese in the 19th century. The result of MANOVA shows there is a significant difference in shapes between pre-European and Post-European period, and between the pre-European and the Chinese period. The average shape presents a round body with a wider rim and neck before the European contact, and turns to oval-shaped body with narrower rim and neck after the European presence and even more obvious during the Chinese contact period. In general, pottery shapes become shorter in hight over time that leads to the oval-shaped body. For the standardization of pottery shape, the result of CV test indicates the significant differences between pre-European period and post-European period (P-value less than 0.05), and between Chinese contact and either pre-European or post-European (P-value less than 0.01). This suggests pottery shape becomes more homogeneous and standardized after foreign contacts with the European colonizer and even more with the Chinese immigrants. The compositional analysis shows clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting the raw material sources remains unchanged. More standardized shape in the Chinese period might indicate the appearance of a specialized group. To figure out whether this change is related to the function of pot, we made an attempt to conduct lipid analysis for potsherds samples to identify the source of residue absorbed into the fabric. However, we did not obtain useful results due to a low lipid yield, which might result from the thin and less porous fabric that offers limited spaces to protect organic molecules from microbiological degradation [@Evershed2008, pp. 909].
+
+The results support part of our hypothesis that foreign influences had impacts on the emergence of social inequality in local indigenous society reflected by the degree of pottery standardization, however, stronger in the Chinese period instead of the European period originally thought to be. The hypothesis of the emergence of social inequality based on the monopolies for long-distance trade brought by the Europeans was not fully supported. The nature and context of the interaction with the foreign presences might give an insight into the different degrees of standardized pottery. Compared to other region in Taiwan, the European colonial control was weak in Yilan due to the relatively isolated location by mountains and the economic consideration of the Spanish and the Dutch who prefer northern Taiwan as a trading base. Yilan could be seen as a place experienced indirect influences by the European trade network and their colonial activities in a pericolonial context [cf. @Acabado2017]. On the contrary, the interaction between indigenous people and the Chinese in the 19th century was more intense and direct since those Chinese immigrants settled in Yilan and lived closely with indigenous societies. This direct influence is reflected by the archaeological evidence of a large amount of Chinese porcelains and distinctive architectural bricks and tiles used by Chinese [@Hsieh2009]. Also, the finding of adoption of coffin in mortuary practice that viewed as an ethnic symbol for Chinese was observed [@Chen2007]. 
+
+More standardized pottery shape without controlling the clay paste or technology suggests the shape as a preferred characteristic in pottery production during the Chinese period. However, the standardization is not reflected by most metric attributes. There is higher variation in thickness attributes compared to diameter attributes, indicating shape is the main attribute that presents homogeneity. In addition to the emergence of specialized groups indicative of changes in social organization, a further explanation could be that producing homogeneous pottery is an act of resistance to the Europeans intrusion and the Chinese immigrants by emphasizing the practice of traditional pottery production. In a culture contact situation, social identity could be expressed through materials practices to show cultural homogeneity and distinction from other groups [@Voss2005]. It is also important to recognize that social identity might be more complicated in a colonial context, not just a colonized–colonizer or local/foreign dichotomy [@Voss2005; @Voss2008]. The case study of Shamaoshan cemetery (3BC- 4AD) in Southwest China showing the process of incorporation of Southwest China into the Han Empire involved a century of conflicts, resistance, and acceptance among social groups with different identities, especially in the historical context of Han immigrants [@Wu2019]. At Kiwulan, the standardization of potter shape is significant in the 19th century when a a large number of Chinese immigrants migrated to Yilan. Shape can be viewed as a symbol as an expression the indigenous identity or social boundary because shape is the most obvious and visible trait compared with other features of pottery [cf. @Roux2015]. Although there is an increase in number of imported ceramics over time and reached high quantity and diversity in the 19th century, the production of the local pottery continued and became more standardized. This might imply not only the utilitarian function, but an deliberate action to emphasize the pottery tradition as their cultural custom. 
+
 # Conclusion
 
+This case study demonstrates the application of Elliptic Fourier analysis on ceramic shapes to explore the emergence of ceramic specialization and the underlying mechanism indicative of foreign cultural influences. Compared with the traditional linear measurement approach, geometric morphometrics methods especially EFA-based outline approach is more effective to detect shape variations for artifact shape without obvious landmarks. Here, EFA approach combined with a significance test for the equality of CVs for shape variables provides a robust way to identify and statistically assess the difference in shape standardization. Lower variation in ceramic shape was identified after the European presence and even much lower variation during the Chinese presence. The direct relationship between foreign influences and highly standardized ceramic shape was tested here on Kiwulan pottery. This finding helps to understand the cause and factor that would lead to the standardization of pottery production in a cross-cultural interaction context. This gave an insight into the discussion of ceramic specialization which is usually associated with the changes in social organization. The more homogeneous shape during the contact period without any changes in clay paste or producing technique suggests that shape standardization is an outcome resulted from an intentional act. The results here suggest an expression of social identity or showing cultural boundaries in indigenous societies through visible variables when encountering foreign intrusion. The analysis allows comparisons between sites with a similar historical trajectory in a pericolonial context. Our case study includes an openly available pipeline suitable for other assemblages, ensuring reproducibility and expanding the use of shape-based quantitative methods to questions about craft specialization and standardization in prehistoric technologies.
+
 # Acknowledgements
+
+We would like to thank the Yilan County Cultural Affairs Bureau in Taiwan for permitting access to the pottery used in this study and providing the shape images. We thank Dr. Wen-Shan Chen in the Department of Geosciences, National Taiwan University for his invaluable guidance of petrographic analysis at his lab. This research used statistical consulting resources provided by the Center for Statistics and the Social Sciences, University of Washington.
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
 ##### pagebreak

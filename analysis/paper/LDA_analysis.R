@@ -1,5 +1,6 @@
 # LDA-analysis
-# we performed a linear discriminant analysis (LDA) based on the new shape variables (PCs), with a leave-one-out cross-validation procedure, to identify the linear combination of shape features that was able to discriminate between phases
+# we performed a linear discriminant analysis (LDA) based on the new shape variables (PCs),
+# with a leave-one-out cross-validation procedure, to identify the linear combination of shape features that was able to discriminate between phases
 
 # we work on PCA scores
 bot.l <- LDA(op.p, 2)
@@ -11,7 +12,9 @@ plot(bot.l)
 # plot the cross-validation table
 plot_CV(bot.l)
 
-# Does not produce an efficient separation between groups and a cross-validation (leave-one-out) at phase level showing a low confidence in the reclassification. But best for Pre-e, indicating these have the most distinctive shapes
+# Does not produce an efficient separation between groups and a cross-validation (leave-one-out)
+# at phase level showing a low confidence in the reclassification.
+# But best for Pre-e, indicating these have the most distinctive shapes
 
 #--------------------------------------------------
 # Unsupervised model-based clustering
