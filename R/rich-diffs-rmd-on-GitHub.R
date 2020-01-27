@@ -21,8 +21,9 @@ browseURL(file.path(
 
 # Edit these to get the full SHA for the commits you want to compare, get
 # the full SHA from the GitHub webpage that was opened in the previous step
-commit_1_sha <- "8249ffc832acfb4839dfb9e5f838d45b82ca0063" # a recent commit
-commit_2_sha <- "a05cad1b678a31c9def1860cbceeba4cbfb98577" # an earlier commit
+commit_1_sha <- "3c25822c902819e6db7b88dee767b0b3d0235499" # a recent commit
+commit_2_sha <- "db390f98c0b4589c02f07006823b7c20ecad2856" # an earlier commit
+
 
 # Don't change this
 gh_raw <- "https://raw.githubusercontent.com"
