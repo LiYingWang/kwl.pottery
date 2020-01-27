@@ -482,29 +482,6 @@ knitr::kable(PC1_PC2_cv_tests,
              caption = "P-values of the CV equality test of PC1 and PC2 between phases")
 ```
 
-```{r CV-test-PCs-plot, fig.cap= "P-values of the CV equality test of PC1 and PC2 between phases, red color indicates p-value is less than 0.05"}
-
-add_line_format <- function(x, ...){
-  str_replace(x, " vs", "\nvs")
-}
-
-PC1_PC2_cv_tests %>%
-  mutate(colour = if_else(p_value < 0.05, "red", "black")) %>% 
-  ggplot(aes(str_wrap(phases, 40),
-             p_value,
-             colour = I(colour),
-             shape = PC)) +
-  geom_point(size = 8,  position = position_dodge(width = 0.5)) +
-  theme_minimal(base_size = 12) +
-  scale_x_discrete(labels = add_line_format(unique(sort(PC1_PC2_cv_tests$phases)))) +
-  coord_cartesian(clip = 'off') +
-  xlab("") +
-  ylab("CV equality test p-values")
-
-ggsave(here("analysis/figures/cv-test-on-pcs.png"), h = 3, w = 12)
-```
-
-
 
 # Discussion
 
