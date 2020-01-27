@@ -57,7 +57,7 @@ Taking the ceramics data from Kiwulan, northeastern Taiwan, we use EFA to evalua
 
 # Archaeological background and materials 
 
-Ceramics analyzed in this paper come from 40 units (4m by 4m) sampled from the central, undisturbed area of archaeological excavations at Kiwulan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan Province, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides. Yilan is an ideal context to study peripheral colonial influence because Indigenous communities there were isolated by natural barriers that limited the frequency of direct contact with the Spanish and the Dutch settlers in northern Taiwan. The chronology of the archaeological deposits at Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component, dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period, which we define as the European presence in Taiwan in the early 17th century. The Dutch first occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626 <!-- add citation for these dates -->. In 1642, the Spanish was expelled by the Dutch in northern Taiwan, who took over their forts at Helping Dau in Keelung, and in Tamsui. Since then, western Taiwan was mostly under Dutch colonial rule until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
+Ceramics analyzed in this paper come from 40 units (4m by 4m each) sampled from the central, undisturbed area of archaeological excavations at Kiwulan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan Province, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides. Yilan is an ideal context to study peripheral colonial influence because Indigenous communities there were isolated by natural barriers that limited the frequency of direct contact with the Spanish and the Dutch settlers in northern Taiwan. The chronology of the archaeological deposits at Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component, dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period, which we define as the European presence in Taiwan in the early 17th century. The Dutch first occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626 <!-- add citation for these dates -->. In 1642, the Spanish was expelled by the Dutch in northern Taiwan, who took over their forts at Helping Dau in Keelung, and in Tamsui. Since then, western Taiwan was mostly under Dutch colonial rule until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
 
 The archaeological record of Kiwulan's upper component shows traces of foreign contacts, including Europeans in the 17th century, and waves of Chinese immigrants in the 19th century. Imported ceramics from mainland China, stoneware, and ornaments such as beads have been found in the upper component, indicating frequent long-distance trade activities in the 17th century during the European presence in northern Taiwan. In addition to artifacts, archaeological features such as burials, middens, and post-holes with _in-situ_ posts are widespread across  the 1-2 m thick deposit of the upper component, and demonstrate that Kiwulan was a continuously occupied large settlement site [@Chen2007]. To compare different foreign influences, we classified the upper component into three chronological phases: the pre-European, European, and Chinese periods. We identified these phases using 32 previously published radiocarbon ages <!-- add citaion to report with dates -->, excavation depth measurements, stratigraphic details reported by the excavators (colour, disturbance, etc.), and finds of chronologically diagnostic artifacts, such as blue and white porcelains, light grey glazed jars, and large dark brown glazed stoneware jars commonly used in the 17th century, and bricks and tiles used by the Chinese in the 19th century [@Hsieh2009; @Wang2011]. The deposit shows signs of continuous human occupation during each of the three phases across the sampling area.
 
@@ -72,7 +72,7 @@ knitr::include_graphics(here("analysis", "figures", "kiwulan-location-map.jpg"))
 knitr::include_graphics(here("analysis", "figures", "KWL-excavation-map.jpg"))
 ```
 
-Petrographic analysis for 34 thin sections shows high percentage of inclusions (15-50%), including argillite (15-40%), metasandstone (1-10%),  sandstone fragments (1-6%), quartz (1-5%), and trace amounts of feldspar and slate. The size of the particles ranges from 500 micron to 1300 micron. In general, the globular vessel farbric presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz. The composition matches the mineralogical composition of local raw materials in the Yilan Plain [@Chen2016]. There is no substantial changes in the inclusions over time, indicating continuity in pottery fabric composition across the three periods. 
+Petrographic analysis for 34 thin sections shows high percentage of inclusions (15-50%), including argillite (15-40%), metasandstone (1-10%),  sandstone fragments (1-6%), quartz (1-5%), and trace amounts of feldspar and slate. The size of the particles ranges from 500 micron to 1300 micron. In general, the globular vessel farbric presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz. The composition matches the mineralogical composition of local raw materials in the Yilan Plain [@Chen2016]. There are no substantial changes in the inclusions over time, indicating continuity in pottery fabric composition across the three periods. 
 
 ```{r tidy-data}
 # Once we have the jpgs, start from here
@@ -126,7 +126,7 @@ A total of `r total_no` largely intact vessels from pre-contact contexts (n = 32
 
 ## Digitising and analysing by EFA
 
-We used scanned pottery drawings acquired from Bureau of Cultural Affairs in Yilan. All drawings present a two-dimensional view of vessel cross-sections with indications of metric measurements. The scanned drawings were imported into Inkscape (http://inkscape.org) where outlines were traced manually. Where only half cross-section images were available, these were duplicated, flipped, and then joined with another one to create a 2D closed outline for each vessel. Geometric morphometric analyses were conducted using the R software [@Rlanguage2019] using the functions included in the Momocs, a R package intended to quantify and analyse shapes, especially for outline analysis [@Bonhomme2014]. The digitised outlines were converted into a list of successive x-y pixel coordinates for elliptic Fourier analysis (EFA), to investigate morphological differences among pottery shapes from our three occupation phases. The harmonic coefficients generated by EFA were analysed by principal component analysis (PCA) for dimensionality reduction to illustrate the diversity of the shape data and identify major patterns of variation through . 
+We used scans of pottery drawings acquired from the Bureau of Cultural Affairs in Yilan. All drawings present a two-dimensional view of vessel cross-sections with indications of metric measurements. The scanned drawings were imported into Inkscape (http://inkscape.org) where outlines were traced manually. Where only half cross-section images were available, these were duplicated, flipped, and then joined with another one to create a 2D closed outline for each vessel. Geometric morphometric analyses were conducted using the R software [@Rlanguage2019] using the functions included in the Momocs, a R package intended to quantify and analyse shapes, especially for outline analysis [@Bonhomme2014]. The digitised outlines were converted into a list of successive x-y pixel coordinates for elliptic Fourier analysis (EFA), to investigate morphological differences among pottery shapes from our three occupation phases. The harmonic coefficients generated by EFA were analysed by principal component analysis (PCA) for dimensionality reduction to illustrate the diversity of the shape data and identify major patterns of variation through . 
 
 ## Statistical analysis 
 
@@ -134,23 +134,7 @@ The principal component (PC) scores were analysed with a multivariate analysis o
 
 $$c_v = \frac{\sigma}{\mu}$$
 
-By standardizing standard deviation in each data set, the coefficients of variation values allows us to directly compare variation in samples measured with different units or means. We take this as our measurement of standardisation in vessel shape: lower CV values reflect higher standardisation, and thus increased craft specialisation in the community. To answer the question of whether CV values for vessels samples across our three occupational phases are significantly different or not, we used the "Asymptotic test for the equality of coefficients of variation from k populations" [@Feltz1996], a significance test for CVs provided by the R package cvequality [@Marwick2019]. Our implementation is based on the following from @Feltz1996:
-
-Let $s_i$ be the observed standard deviation of the $i$th sample (or group of measurements), $x_i$ be the observed mean of the $i$th sample, and let 
-
-$$m_i=n_i-1$$
-
-and we do not know the population $c_v$, so let $\widehat{\tau }_c$ be an estimate as follows:
-
-$$\widehat{\tau }_c = \frac{\left( \sum _{j=1}^km_j\frac{S_j}{\bar{x}_j} \right)}{M}$$ 
-where 
-$$M=\sum _{j=1}^m m_j$$ 
-
-Then the test statistic can be computed with: 
-
-$$\begin{aligned} D'A D= \widehat{\tau }_c^{-2}\left( 0.5+\widehat{\tau }_c^2\right) ^{-1}\left[ \sum _{i=1}^km_i\left(\frac{s_i}{\bar{x}_i} \right)^2-\frac{\widehat{\tau }_c^2}{M} \right] \end{aligned}$$
-
-The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the population $c_v$. @Feltz1996 note that the $D'AD$ value distributes as a central $\chi^2$ random variable with $k-1$ degrees of freedom, from which a p-value can be computed. 
+By standardizing standard deviation in each data set, the coefficients of variation values allows us to directly compare variation in samples measured with different units or means. We take this as our measurement of standardisation in vessel shape: lower CV values reflect higher standardisation, and thus increased craft specialisation in the community. To answer the question of whether CV values for vessels samples across our three occupational phases are significantly different or not, we used the the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996 Asymptotic test for the equality of coefficients of variation from k populations, we prefer the MSLR test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
 
 # Reproducibility and open source materials 
 
@@ -225,37 +209,6 @@ ggsave(plot = plot_spatial_distribution_pottery_by_phase,
        units = "mm")
 ```
 
-<<<<<<< HEAD
-## Digitising and analysing by EFA
-
-The scanned pottery drawings were acquired from Bureau of Cultural Affairs in Yilan. All drawing presents two-dimensional view of the section of a vessel with indications of metric measurements. The scanned drawings were imported into the Inkscape software for outlines tracing to remove additional information such as marks, lines, and measurements on the original drawings in order to obtain clear outline. Each traced half cross-section image was duplicated, flipped, and then joined with another one to create a 2D closed outline. Geometric morphometric analyses were conducted in the R software (www.rproject.org, Core-Team, 2015) using the functions included in the Momocs, a R package intended to quantify the shape and compare its variation, especially for outline analysis [@Bonhomme2014]. The digitised outlines were converted into a list of successive x-y pixel coordinates for elliptic Fourier analysis (EFA), which assesses morphological differences among pottery shapes from three occupation contexts. The harmonic coefficients generated by EFA were analysed by principal component analysis (PCA) to illustrate the diversity of the shape data and identify the major patterns of variation through dimensionality reduction. 
-
-## Statistical testing 
-
-The principal components (PCs) scores were analysed with a multivariate analysis of variance (MANOVA) to test for significant effects of the groups of occupation context on shape variances. Finally, we computed coefficients of variation statistic (CVs) among multiple groups of PCs with a significance test for the equality of CVs, which enable us to compare CVs in a statistical way [@Pearson1896]. The coefficient of variation is a common and widely-used statistical measure of the spread of a set of measurements of a sample. It is defined as the standard deviation divided by the mean in a ratio scale format.
-
-$$c_v = \frac{\sigma}{\mu}$$
-
-By standardizing standard deviation in each data set, the coefficients of variation statistics allows us to directly compare variation in samples measured with different units or means. Although it is a useful method, there is a question that how should we make a decision that the differences among the multiple CVs are significant or not? To answer this question, we need convenient methods for testing the equality of $c_v$ values from different samples, which has been described in many publications and here we proposed a significant test for CVs using the R package cvequality [@Marwick2019] in the CRAN repository. The package cvequality includes two tests, the "Asymptotic test for the equality of coefficients of variation from k populations" [@Feltz1996] and the "Modified signed-likelihood ratio test (SLRT) for equality of CVs" [@Krishnamoorthy2014]. @Feltz1996 test is widely cited as an authoritative test for the equality of $c_v$ values that performs better than many approximative tests. It is a 'gold standard' test for comparing multiple $c_v$. Our implementation is based on the following from @Feltz1996:
-
-Let $s_i$ be the observed standard deviation of the $i$th sample (or group of measurements), $x_i$ be the observed mean of the $i$th sample, and let 
-
-$$m_i=n_i-1$$
-
-and we do not know the population $c_v$, so let $\widehat{\tau }_c$ be an estimate as follows:
-
-$$\widehat{\tau }_c = \frac{\left( \sum _{j=1}^km_j\frac{S_j}{\bar{x}_j} \right)}{M}$$ 
-where 
-$$M=\sum _{j=1}^m m_j$$ 
-Then the test statistic can be computed with: 
-$$\begin{aligned} D'A D= \widehat{\tau }_c^{-2}\left( 0.5+\widehat{\tau }_c^2\right) ^{-1}\left[ \sum _{i=1}^km_i\left(\frac{s_i}{\bar{x}_i} \right)^2-\frac{\widehat{\tau }_c^2}{M} \right] \end{aligned}$$
-The $D'AD$ value measures how far each sample $c_v$ is from our estimate of the population $c_v$. @Feltz1996 note that the $D'AD$ value distributes as a central $\chi^2$ random variable with $k-1$ degrees of freedom, from which a p-value can be computed. We also include the @Krishnamoorthy2014 test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions. 
-
-# Reproducibility and open source materials 
-
-To enable re-use of materials and improve reproducibility and transparency [@Marwick2017], the entire R code [@Rlanguage2019] used for all the analysis and visualizations contained in this paper is included in http:XXX. Also in this version-controlled compendium [@Marwick2018] are the raw data for all the visualizations and tests reported here. All of the figures, tables, and statistical test results presented here can be independently reproduced with the code and data in this repository. The code is released under the MIT license, the data as CC-0, and figures as CC-BY, to enable maximum re-use. 
-
-# Results
 
 ```{r jpg-coordinates, eval=FALSE}
 # start shape exploration
@@ -392,7 +345,8 @@ knitr::kable(su_manv_tab,
 ```
 
 <!-- CV equality testing -->
-To compare pottery shape standardization across the three phases we  investigate the distributions of the first three PC scores, taking the PC scores as proxy variables for vessel shape (Figure \@ref(fig:PCs-distribution)). The first PC, vessel height, shows higher variation in the pre-European period compared to the Chinese period. That indicates that shape standardization was higher in the Chinese period compared to the pre-European period. The second PC also presents a similar pattern of higher shape standardization in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European(Figure \@ref(fig:CV-test-PCs-plot), Table \@ref(tab:CV-test-PCs-table)). A significant difference is also detected between the pre-European and post-European periods.
+
+To compare pottery shape standardization across the three phases we investigate the distributions of the first three PC scores, taking the PC scores as proxy variables for vessel shape (Figure \@ref(fig:PCs-distribution)). The first PC, vessel height, shows higher variation in the pre-European period compared to the Chinese period. That indicates that shape standardization was higher in the Chinese period compared to the pre-European period. The second PC also presents a similar pattern of higher shape standardization in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European(Figure \@ref(fig:CV-test-PCs-plot), Table \@ref(tab:CV-test-PCs-table)). A significant difference is also detected between the pre-European and post-European periods.
 
 ```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
 # what are the variences for each PC in each period?
