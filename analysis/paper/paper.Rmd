@@ -357,7 +357,7 @@ pval_chi_pre <- signif(unname(su_manv_tab[,'Pr(>F)'][2]), 4)
 pval_post_pre <- signif(unname(su_manv_tab[,'Pr(>F)'][3]), 4)
 
 knitr::kable(su_manv_tab,
-             caption = "The statistics summary of MANOVA test for the PC scores. `Pr(>F)` is the p-value associated with the F statistic of the effect and test statistic. ")
+             caption = "Summary statistics for the MANOVA test on the PC scores. `Pr(>F)` is the p-value associated with the F statistic of the effect and test statistic. ")
 ```
 
 <!-- CV equality testing -->
@@ -408,28 +408,6 @@ ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
        h = 10, w = 5)
 ```
 
-```{r variance-test-PCs}
-# we don't use CV because that is not good for measurements with no absolute zero
-xx <- 
-  pc_plot %>% 
-  group_by(pcn, phase) %>% 
-  summarise(variance = var(pc))
-
-# statistical test to compare the variances of two samples
-pc_plot_tests <- 
-  pc_plot %>% 
-  group_by_at(vars(-pc)) %>% 
-  mutate(i = row_number()) %>% 
-  ungroup() %>% 
-  mutate(phase = as.character(phase),
-         pcn = as.character(pcn)) %>% 
-  spread(phase, pc) %>% 
-  select(-i) %>% 
-  nest_legacy(-pcn) %>% 
-  mutate(var_test = purrr::map(data, ~broom::tidy(var.test(.x$`Post-European` ,
-                                            .x$`Pre-European`)))) %>% 
-  unnest(var_test)
-```
 
 ```{r CV-test-PCs-table}
 library(cvequality)
