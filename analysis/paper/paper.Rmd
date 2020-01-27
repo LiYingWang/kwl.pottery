@@ -51,7 +51,7 @@ Geometric morphometric methods (GMM) has been increasingly applied in archaeolog
 
 However, one limitation of landmark approaches is that landmarks may not be able to capture the shape differences of a morphological structure where the curving outlines between landmarks contains crucial variation. Furthermore, landmark points may be unavailable for structures that are mostly or entirely curves. In those cases, outline approaches are more suitable for analyzing the overall shape of an object. One outline approach is the semi-landmarks method, also called sliding landmarks, which assigns points along the curve between two landmarks at defined intervals [@Bookstein1997; @Lawing2010]. Those semi-landmarks are allowed to slide along the curve to remove the effect of the arbitrary landmark spacing by minimizing either Procrustes distance or bending energy [@Bookstein1997; @Slice2007; @Gunz2013]. Another approach that is commonly applied to two-dimensional closed shapes is elliptic Fourier Analysis (EFA), that converts coordinates along a curve into Fourier function coefficients, called harmonic coefficients [@Kuhl1982]. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions [@Adams2004; @Claude2008; @Bonhomme2014]. The number of harmonics determines the quality and precision of the geometric representation of an object. The harmonic power, a cumulated sum of squared harmonic coefficients, provides a robust rule for determining the desired number of harmonics [@Bonhomme2014]. 
 
-EFA is suitable for shapes lacking representative landmarks or where curves contain the most meaningful variation. Applications in archaeology include human remains and zooarchaeology to understand  biological variation, and more recently on stone artifacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Ceramics is another archaeological materials that outline approaches can provide new insights into shape variation to answer anthropological questions related to ceramic specialization. Using semi-landmarks method, @Topi2018 examine 89 photographs of globular jars from the Casas Grandes of northwest Mexico. Their results suggest that some ceramic types from the Medio period (AD 1200-1450), were made by specialists based on highly standardized shapes. Among those highly standardized jars, some were made by specialists attached to elites indicating the presence of social inequality, while others were made by independent specialists according to their spatial distribution patterns. Similarity, @Selden2019 examined 28 Caddo bottle excavated at several sites (AD 500-1700) in northwest Louisiana using semi-landmarks method. The results indicate a significant integration between the different parts of the bottles including rim, neck, body, and base that vary in a coordinated manner. Also, two discrete base and body shapes represented northern and southern differences were identified. For the EFA method, @Wilczek2014 evaluate the concordance between EFA and Discrete Cosine Transform (DCT), and a traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. The results show the variation indicated by EFA and DCT matches the traditional ceramic typology, which supports that claim that outline-based approaches can be efficiently used for studying variations in ceramic shapes. Furthermore, @Wilczek201's EFA results help us understand the level of production standardization over time across the region. Those examples show that outline approaches can distinguish variation in ceramic shapes at high resolutions to understand ceramic production. 
+EFA is suitable for shapes lacking representative landmarks or where curves contain the most meaningful variation. Applications in archaeology include human remains and zooarchaeology to understand  biological variation, and more recently on stone artifacts to explore stone tool technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Ceramics is another archaeological materials that outline approaches can provide new insights into shape variation to answer anthropological questions related to ceramic specialization. Using semi-landmarks method, @Topi2018 examine 89 photographs of globular jars from the Casas Grandes of northwest Mexico. Their results suggest that some ceramic types from the Medio period (AD 1200-1450), were made by specialists based on highly standardized shapes. Among those highly standardized jars, some were made by specialists attached to elites indicating the presence of social inequality, while others were made by independent specialists according to their spatial distribution patterns. Similarity, @Selden2019 examined 28 Caddo bottle excavated at several sites (AD 500-1700) in northwest Louisiana using semi-landmarks method. The results indicate a significant integration between the different parts of the bottles including rim, neck, body, and base that vary in a coordinated manner. Also, two discrete base and body shapes represented northern and southern differences were identified. For the EFA method, @Wilczek2014 evaluate the concordance between EFA and Discrete Cosine Transform (DCT), and a traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. The results show the variation indicated by EFA and DCT matches the traditional ceramic typology, which supports that claim that outline-based approaches can be efficiently used for studying variations in ceramic shapes. Furthermore, @Wilczek2014's EFA results help us understand the level of production standardization over time across the region. Those examples show that outline approaches can distinguish variation in ceramic shapes at high resolutions to understand ceramic production. 
 
 Taking the ceramics data from Kiwulan, northeastern Taiwan, we use EFA to evaluate the level of standardization of ceramics in relation to the European presence in the 17th century to get insights into the emergence of ceramic specialization. We use a significance test for the equality of coefficient of variations of shape variables to statistically compare the vessel standarization from different periods. Using pottery shape as a proxy to study craft specialization, we address these questions: Did foreign influence have impacts on indigenous pottery production that can be detected in the shape of the vessels? Did pottery shape become more homogeneous and standardized after foreign contacts with European colonizers or Chinese immigrants? 
 
@@ -235,35 +235,29 @@ saveRDS(jpgs_imported_coo,
 
 <!-- basic description of shape -->
 
-The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outlines were captured by 13 harmonics that gather 99% of the total harmonic power. The average shape of vessels from each phase was visualized by computing the mean of the standardized Fourier coefficients within each phase group (Figure \@ref(fig:EFA-analysis)). Figure \@ref(fig:thin-plate-splines) shows the shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods.
-
-```{r EFA-analysis, fig.cap= "Mean pottery shapes of three phases"}
-library(Momocs)
-library(cowplot)
-jpgs_imported_coo <- readr::read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
-
-# default is 13 harmanics that gather 99% of the harmonic power 
-op <- efourier(jpgs_imported_coo, norm = FALSE, 13)
-
-# mean shape, per group
-pot.ms <- MSHAPES(op, 'phase')
-mshp <- pot.ms$shp
-names(mshp) <- c("chi", "poe", "pre") 
-
-`Post-European` <- mshp$poe %T>% coo_plot(border="blue")
-`Pre-European` <-  mshp$pre %T>% coo_plot(border="red", plot.new=FALSE)
-`Chinese` <-       mshp$chi %T>% coo_plot(border="green", plot.new=FALSE)
-legend("topright", 
-       lwd=1,
-       col=c("red", "blue", "green"), 
-       legend=c( "Pre-European", "Post-European", "Chinese")) 
-#? How to put the legend out of the plot, tried change the margin using par(), but doesn't work
-```
+The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outlines were captured by 13 harmonics that gather 99% of the total harmonic power. Figure \@ref(fig:thin-plate-splines) shows the shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods. The average shape of vessels from each phase was visualized and it shows more obvious differences between post-European and Chinese periods.
 
 ```{r thin-plate-splines, fig.cap= "Compare the average shapes across phases using thin plate splines (TPS) with outline deformations required to pass from an extreme of the morphospace to the other."}
 # Thin plate spline analysis (TPS)
 # visualize the outline deformations required to pass from an extreme of the morphospace to the other
 # Deformation grids
+
+# Mean pottery shapes of three phases
+library(Momocs)
+library(cowplot)
+jpgs_imported_coo <- readr::read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
+
+# default is 13 harmonics that gather 99% of the harmonic power
+op <- efourier(jpgs_imported_coo, norm = FALSE, 13)
+
+# mean shape, per group
+pot.ms <- MSHAPES(op, 'phase')
+mshp <- pot.ms$shp
+names(mshp) <- c("chi", "poe", "pre")
+
+`Post-European` <- mshp$poe 
+`Pre-European` <-  mshp$pre 
+`Chinese` <-       mshp$chi 
 
 par(mfrow=c(1,2)) # plot them side by side
 
@@ -292,24 +286,7 @@ vari_three <- round(pro_vari$cumsum[3],4)*100
 
 <!-- further description of shape and differences between phases -->
 
-The elliptic Fourier coefficients were examined by Principal Components Analysis to explore the shape variations across three phases. The first two principal components (PCs) explain `r vari_two`% of the total variances, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variance. Figure \@ref(fig:contribution-PCs) shows the shape variation associated with the first three principal components. PC1 captures the height of the vessels, from tall to short, and the roundness of the body from round to oval-shaped. PC2 relates to the neck and mouth constriction, from narrow to wide. PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck, from curved to straight shape. The first two components account for most of the variance in relation to three phases (Figure \@ref(fig:first-two-PCs-byplot)). The results reflect a large overlap in shapes from three occupations phases, especially for shapes in the pre-European and post-European periods. However, the spread of shape distribution indicates a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, we find a decrease in shape variance in the Chinese period that is evident in the shorter height and narrower mouth of vessels used in that period.
-
-```{r contribution-PC-hide, results="hide", include= FALSE}
-# the contributions of each PC to the shapes
-pc_contrib <-  PCcontrib(op.p, nax = 1:3) 
-```
-
-```{r contribution-PCs, fig.cap= "Pottery shape variation based on scores along principal component axes. The rows from the top to the bottom represent the first to third principal component respectively. Each column shows the reconstructed shape variable according to the score mean ±2 standard deviation (SD) with a 0.5 interval"}
-pc_contrib$gg +  
-  geom_polygon(fill="slategrey", col="black") + 
-  theme_minimal(base_size = 6)
-  
-ggsave(here::here("analysis/figures/pca-contrib.png"))
-
-# PC1 is height of vessel
-# PC2 is neck constriction
-# PC3 is the degree of flare of neck
-```
+The elliptic Fourier coefficients were examined by Principal Components Analysis to explore the shape variations across three phases. The first two principal components (PCs) explain `r vari_two`% of the total variances, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variance. According to Figure \@ref(fig:first-two-PCs-byplot), PC1 captures the height of the vessels, from tall to short, and the roundness of the body from round to oval-shaped. PC2 relates to the neck and mouth constriction, from narrow to wide. PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck, from curved to straight shape. The first two components account for most of the variance in relation to three phases. The results reflect a large overlap in shapes from three occupations phases, especially for shapes in the pre-European and post-European periods. However, the spread of shape distribution indicates a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, we find a decrease in shape variance in the Chinese period that is evident in the shorter height and narrower mouth of vessels used in that period.
 
 ```{r first-two-PCs-byplot, fig.cap= "Pottery shape distribution by each occupation phase according to the first two PCs"}
 
@@ -341,7 +318,7 @@ knitr::kable(su_manv_tab,
 
 <!-- statistical test of difference in shape decsribed in previous paragraph -->
 
-To test for differences in the distributions of shape variables indicated by the PC scores shown in Figure \ref(@fig:first-two-PCs-byplot)), we used a multivariate analysis of variance (MANOVA) test to compare pairwise combinations across our three occupation phases. Table \@ref(tab:MANOVA-table) shows significant differences in shape between Pre-European and Post-European phases (p = $`r pval_post_pre`$), and Pre-European and Chinese phases (p = $`r pval_chi_pre`$). Although there is considerable overlap of shape variables between the Pre-European and Post-European phases, their PC scores are significantly different from each other. There is little difference between vessel shapes in the Post-European and Chinese contact periods. 
+To test for differences in the distributions of shape variables indicated by the PC scores shown in Figure \@ref(fig:first-two-PCs-byplot), we used a multivariate analysis of variance (MANOVA) test to compare pairwise combinations across our three occupation phases. Table \@ref(tab:MANOVA-table) shows significant differences in shape between Pre-European and Post-European phases (p = $`r pval_post_pre`$), and Pre-European and Chinese phases (p = $`r pval_chi_pre`$). Although there is considerable overlap of shape variables between the Pre-European and Post-European phases, their PC scores are significantly different from each other. There is little difference between vessel shapes in the Post-European and Chinese contact periods. 
 
 <!-- CV equality testing -->
 
@@ -481,7 +458,7 @@ This study demonstrates an application of elliptic Fourier analysis on ceramic s
 
 # Acknowledgements
 
-We would like to thank the Yilan County Cultural Affairs Bureau in Taiwan for permitting access to the pottery used in this study and providing the shape images. We thank Dr. Wen-Shan Chen in the Department of Geosciences, National Taiwan University for his invaluable guidance of petrographic analysis at his lab. We thank the Quaternary Research Center funding for supporting the organic residue analysis in this project. We thank Dr. Julian Sachs in the Department of Oceanography, University of Washington for his supports and providing his lab for us to conduct geochemical analysis of potsherds. We thank Dr. Matthew Wolhowe for his help in developing protocols for lipid extraction and his assistance with the GC-MS, GC-FID, and GC-C-IRMS analyses. This research used statistical consulting resources provided by the Center for Statistics and the Social Sciences, University of Washington. 
+We would like to thank the Yilan County Cultural Affairs Bureau in Taiwan for permitting access to the pottery used in this study and providing the shape images. We thank Dr. Wen-Shan Chen in the Department of Geosciences, National Taiwan University for his invaluable guidance of petrographic analysis at his lab. We thank the Quaternary Research Center funding for supporting the organic residue analysis in this project. We thank Dr. Julian Sachs in the Department of Oceanography, University of Washington for his supports and providing his lab for us to conduct organic geochemistry analysis of potsherds. We thank Dr. Matthew Wolhowe for his help in developing protocols for lipid extraction and his assistance with the GC-MS, GC-FID, and GC-C-IRMS analyses. This research used statistical consulting resources provided by the Center for Statistics and the Social Sciences, University of Washington. 
 
 <!-- The following line inserts a page break when the output is MS Word. For page breaks in PDF, use \newpage on its own line.  -->
 ##### pagebreak
