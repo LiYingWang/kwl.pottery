@@ -5,3 +5,145 @@ My hypothesis is that if foreign contacts including European and Chinese had imp
 # Part of Introduction
 
 In this paper, we use EFA for pottery shape analysis to evaluate the level of standardization of pottery from an Iron Age site in northeastern Taiwan in relation to the European presence in the 17th century that might hint the emergence of craft specialization for pottery production. Craft specialization can provide further evidence about the type of production organization which is closely related to economic or political aspects of society [@Arnold2000; @Blackman1993; @Costin1991; @Hirshman2010; @Stark1995]. The emergence of craft specialization can also be an indicator of social inequality that hints the possibility of the presence of production groups worked for specific individuals. The presence of craft specialization is commonly studied by measuring the standardization of ceramics based on the assumption that the specialized mass production will lead to uniformity or homogeneity of the product due to increased skills, routinization, and lower diversity of producers [@Arnold2000]. To test the prediction of a shift in the level of social inequality in this case study in northeastern Taiwan influenced by the colonial European presence, we use standardization of pottery in shapes as an index for craft specialization to identify the presence of a few individuals controlling large scale pottery production [@Costin1995; @Hirshman2010] using outline-based geometric morphometrics couples with traditional metric measurements to compare and evaluate the use of outline approaches for pottery with high consistency in shapes. 
+
+#--------------original metric data analysis------------
+Table \@ref(tab:metricCVstest) shows the results of Modified signed-likelihood ratio test (MSLRT) for equality of CVs for for six measurements and two ratio values. There is a significant difference between CV values for two metric measurements across phases, the rim diameter and the neck diameter. The CV values show that the variation of rim diameter is small (6.8%)  before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). <!-- these numeric values in this paragraph should come from inline code, not copy-pasted in like this -->
+<!-- You need to put the code that computes the MSLRT results right in here, in the Rmd --> 
+
+```{r metricCVstest}
+metric_cvs_with_phase <- readr::read_csv(here::here("analysis", "data", "raw_data", "Kwl_p_metrics_cv_test.csv"))
+metric_cvs_with_phase_tidy <-
+  metric_cvs_with_phase %>% 
+  mutate_at(c("pre-e", "post-e", "ch-con", "MSLRT", "p_value"), round, 4) %>% 
+  rename(`pre-European` = "pre-e", `after European` = "post-e", Chinese = "ch-con")
+knitr::kable(metric_cvs_with_phase_tidy,
+             caption = "Coefficient of Variation test for metric attributes by phases")
+```
+
+#------------revised metric data analysis---------------
+
+Table \@ref(tab:metricCVstest-pre-post) and \@ref(tab:metricCVstest-post-chi) shows the results of Asymptotic test [@Feltz1996] for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presnece. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference from post-European period (p-value less than 0.05).
+
+```{r metricCVstest-pre-post, eval=FALSE}
+# read metric data
+kwl_p_ave <- readr::read_csv(here::here("analysis", "data", "raw_data",
+                                 "KWL-pottery-metrics-tidy-ave.csv"))
+library(cvequality)
+# select metric attributes and tidy data for computing CV
+kwl_p_metrics_long <-
+  kwl_p_ave %>%
+  mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
+         thi_rim_body = Thick_Rim_ave/Thick_Body_ave) %>%
+  select(period,
+         Dia_Rim_ave,
+         Dia_Neck_ave,
+         Dia_Body_ave,
+         Thick_Rim_ave,
+         Thick_Neck_ave,
+         Thick_Body_ave,
+         dia_rim_body,
+         thi_rim_body,
+         # H_Rim
+  ) %>%
+  rename(`Rim diameter (mm)` = Dia_Rim_ave,
+         `Neck diameter (mm)` = Dia_Neck_ave,
+         `Body diameter (mm)` = Dia_Body_ave,
+         `Rim thickness (mm)` = Thick_Rim_ave,
+         `Neck thickness (mm)` = Thick_Neck_ave,
+         `Body thickness (mm)` = Thick_Body_ave,
+         `Ratio of Rim/Body diameter` = dia_rim_body,
+         `Ratio of Rim/Body thickness` = thi_rim_body
+  ) %>%
+  gather(variable, value, -period) %>%
+  filter(!is.na(period),
+         !is.na(value))
+# filter pre-e and post-e periods
+kwl_p_metrics_long_pre_post <-
+  kwl_p_metrics_long %>%
+  filter(!period == "ch-con")
+# filter post-e and chi periods
+kwl_p_metrics_long_post_chi <-
+  kwl_p_metrics_long %>%
+  filter(!period == "pre-e")
+#------------------------------------------CV test for pre-e and post-e pair
+kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_pre_post <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+# making table for CV
+kwl_p_cvs_table_pre_post <-
+  kwl_p_cvs_and_pvalues_pre_post %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
+                                                "Neck thickness (mm)",
+                                                "Body thickness (mm)",
+                                                "Ratio of Rim/Body thickness",
+                                                "Rim diameter (mm)",
+                                                "Neck diameter (mm)",
+                                                "Body diameter (mm)",
+                                                "Ratio of Rim/Body diameter"))) %>%
+  arrange(variable) %>%
+  select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
+  mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
+knitr::kable(kwl_p_cvs_table_pre_post,
+             caption = "Coefficient of Variation test for metric attributes before and after European presence")
+```
+knitr::kable(metric_cvs_with_phase_tidy,
+             caption = "Coefficient of Variation test for metric attributes by phases")
+```{r metricCVstest-post-chi, eval=FALSE}
+#-----------------------------------CV test for post-e and ch-con pair
+kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi <-
+  kwl_p_metrics_long_post_chi %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_post_chi %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_post_chi <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+# making table for CV
+kwl_p_cvs_table_post_chi <-
+  kwl_p_cvs_and_pvalues_post_chi %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
+                                                "Neck thickness (mm)",
+                                                "Body thickness (mm)",
+                                                "Ratio of Rim/Body thickness",
+                                                "Rim diameter (mm)",
+                                                "Neck diameter (mm)",
+                                                "Body diameter (mm)",
+                                                "Ratio of Rim/Body diameter"))) %>%
+  arrange(variable) %>%
+  select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
+  mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
+knitr::kable(kwl_p_cvs_table_post_chi,
+             caption = "Coefficient of Variation test for metric attributes between European and Chinese presence")
