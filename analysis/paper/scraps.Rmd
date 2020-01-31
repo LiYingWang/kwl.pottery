@@ -147,4 +147,17 @@ kwl_p_cvs_table_post_chi <-
   mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
 knitr::kable(kwl_p_cvs_table_post_chi,
              caption = "Coefficient of Variation for metric attributes between European and Chinese presence using Asymptotic test [@Feltz1996]")
+
+# join two table together
+kwl_p_cvs_table_all <-
+  kwl_p_cvs_table_pre_post %>% 
+  left_join(kwl_p_cvs_table_post_chi, "variable") %>% 
+  select(-`post-e.y`) %>% 
+  rename(`before European` = "pre-e", `European` = "post-e.x", Chinese = "ch-con",
+         `D_AD.1` = "D_AD.x", `D_AD.2` = "D_AD.y",
+         `P value.1` = `p_value.x`, `P value.2` = `p_value.y`) %>% 
+  select(variable, `before European`, European, Chinese,
+         `D_AD.1`, `P value.1`, `D_AD.2`, `P value.2`)
 ```
+
+
