@@ -22,13 +22,14 @@ knitr::kable(metric_cvs_with_phase_tidy,
 
 #------------revised metric data analysis---------------
 
-Table \@ref(tab:metricCVstest-pre-post) and \@ref(tab:metricCVstest-post-chi) shows the results of Asymptotic test [@Feltz1996] for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presnece. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference from post-European period (p-value less than 0.05).
+Table \@ref(tab:metricCVstest-pre-post) and \@ref(tab:metricCVstest-post-chi) shows the results of Asymptotic test [@Feltz1996] for equality of CVs for for six measurements and two ratio values. There is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. The CV values show that the variation of rim diameter is small (6.8%) before European contact, increases after the European presence (9.6%), and decreases after the Chinese presence (6.9%). For the neck diameter, the CV values indicate smaller variation after the European period (7.7%) and the Chinese period (7.1%) compared to pre-European period (10.6%). After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference from post-European period (p-value less than 0.05).
 
 ```{r metricCVstest-pre-post, eval=FALSE}
 # read metric data
 kwl_p_ave <- readr::read_csv(here::here("analysis", "data", "raw_data",
                                  "KWL-pottery-metrics-tidy-ave.csv"))
 library(cvequality)
+library(tidyverse)
 # select metric attributes and tidy data for computing CV
 kwl_p_metrics_long <-
   kwl_p_ave %>%
@@ -103,10 +104,9 @@ kwl_p_cvs_table_pre_post <-
   select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
   mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
 knitr::kable(kwl_p_cvs_table_pre_post,
-             caption = "Coefficient of Variation test for metric attributes before and after European presence")
+             caption = "Coefficient of Variation for metric attributes before and after European presence using Asymptotic test [@Feltz1996]")
 ```
-knitr::kable(metric_cvs_with_phase_tidy,
-             caption = "Coefficient of Variation test for metric attributes by phases")
+
 ```{r metricCVstest-post-chi, eval=FALSE}
 #-----------------------------------CV test for post-e and ch-con pair
 kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi <-
@@ -146,4 +146,5 @@ kwl_p_cvs_table_post_chi <-
   select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
   mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
 knitr::kable(kwl_p_cvs_table_post_chi,
-             caption = "Coefficient of Variation test for metric attributes between European and Chinese presence")
+             caption = "Coefficient of Variation for metric attributes between European and Chinese presence using Asymptotic test [@Feltz1996]")
+```
