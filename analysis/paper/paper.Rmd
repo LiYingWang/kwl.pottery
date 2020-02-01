@@ -452,7 +452,127 @@ Previous investigations at Kiwulan have suggested an unequal distribution of pre
 
 Our CV tests indicates that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. This suggests pottery shape became more homogeneous and standardized after foreign contacts with European colonizers and even more so after contact with Chinese immigrants. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if shape changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offers limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
 
-When we examine metric data for six measurements and two ratio values using CV tests (\table here), it shows there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results shows the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantially way reflected by overall shapes of pottery, not only limited to linear aspects. 
+We compare the result of shape variable with the result of metric data for six measurements and two ratio values using CV test (Table \@ref(tab:metricCVstest)). Metric measurements show there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results shows the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantially way reflected by overall shapes of pottery, not only limited to diameter variables. 
+
+```{r metricCVstest}
+# read metric data
+kwl_p_ave <- readr::read_csv(here::here("analysis", "data", "raw_data",
+                                        "KWL-pottery-metrics-tidy-ave.csv"))
+
+# select metric attributes and tidy data for computing CV
+kwl_p_metrics_long <-
+  kwl_p_ave %>%
+  mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
+         thi_rim_body = Thick_Rim_ave/Thick_Body_ave) %>%
+  select(period,
+         Dia_Rim_ave,
+         Dia_Neck_ave,
+         Dia_Body_ave,
+         Thick_Rim_ave,
+         Thick_Neck_ave,
+         Thick_Body_ave,
+         dia_rim_body,
+         thi_rim_body,) %>%
+  rename(`Rim diameter (mm)` = Dia_Rim_ave,
+         `Neck diameter (mm)` = Dia_Neck_ave,
+         `Body diameter (mm)` = Dia_Body_ave,
+         `Rim thickness (mm)` = Thick_Rim_ave,
+         `Neck thickness (mm)` = Thick_Neck_ave,
+         `Body thickness (mm)` = Thick_Body_ave,
+         `Ratio of Rim/Body diameter` = dia_rim_body,
+         `Ratio of Rim/Body thickness` = thi_rim_body) %>%
+  gather(variable, value, -period) %>%
+  filter(!is.na(period), !is.na(value)) %>% 
+  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
+                                                "Neck thickness (mm)",
+                                                "Body thickness (mm)",
+                                                "Ratio of Rim/Body thickness",
+                                                "Rim diameter (mm)",
+                                                "Neck diameter (mm)",
+                                                "Body diameter (mm)",
+                                                "Ratio of Rim/Body diameter"))) %>%
+  arrange(variable)
+# filter pre-e and post-e periods
+kwl_p_metrics_long_pre_post <-
+  kwl_p_metrics_long %>%
+  filter(!period == "ch-con")
+# filter post-e and chi periods
+kwl_p_metrics_long_post_chi <-
+  kwl_p_metrics_long %>%
+  filter(!period == "pre-e")
+
+#------------------------------------------CV test for pre-e and post-e pair
+kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_pre_post <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+# making table for CV
+kwl_p_cvs_table_pre_post <-
+  kwl_p_cvs_and_pvalues_pre_post %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
+  mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
+
+#-----------------------------------CV test for post-e and ch-con pair
+kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi <-
+  kwl_p_metrics_long_post_chi %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_post_chi %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_post_chi <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+# making table for CV
+kwl_p_cvs_table_post_chi <-
+  kwl_p_cvs_and_pvalues_post_chi %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
+  mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
+
+# join two table together
+kwl_p_cvs_table_all <-
+  kwl_p_cvs_table_pre_post %>% 
+  left_join(kwl_p_cvs_table_post_chi, "variable") %>% 
+  select(-`post-e.y`) %>% 
+  rename(`before European` = "pre-e", `European` = "post-e.x", Chinese = "ch-con",
+         `D_AD-1` = "D_AD.x", `D_AD-2` = "D_AD.y",
+         `P value-1` = `p_value.x`, `P value-2` = `p_value.y`) %>% 
+  select(variable, `before European`, European, Chinese,
+         `D_AD-1`, `P value-1`, `D_AD-2`, `P value-2`)
+
+knitr::kable(kwl_p_cvs_table_all,
+             caption = "Coefficient of Variation for metric attributes by three phases using Asymptotic test [@Feltz1996]. The first set of P-value represents the comparison between before European and European periods, while the second represents the comparison between European and Chinese periods ")
+```
 
 Our results offer tentative support for the hypothesis that foreign influences at Kiwulan influenced emergence of social inequality in the local Indigenous society. If increased shape standardization is a reliable indicator of craft specialization, then we may be seeing evidence of a shift from corporate to network organization [@Feinman2000]. However, strong claims for an emergence of social complexity resulting from foreign contact at Kiwulan will need support from multiple and diverse sources of evidence. This should include the other two main datasets at Kiwulan, the ornaments assemblages, and the burial goods. We find vessel shapes were more standardised in the Chinese period than the European period, contrary to previous work that has downplayed the effect of Chinese settlement in Yilan [@Wang2011]. Compared to other regions in Taiwan, European colonial influence was weak in Yilan due to the isolated of the surrounding mountains and the economic focus of the Spanish and  Dutch who preferred northern Taiwan as their trading base. Indigenous communities Yilan experienced indirect influence from European trade networks and their colonial activities in a pericolonial context [cf. @Acabado2017]. In contrast to the Indigenous-European interactions at Kiwulan, the interaction between indigenous people and Chinese in the 19th century appears to have been more intense and direct. Historical records indicate that Chinese immigrants settled in Yilan and lived closely with Kiwulan Indigenous societies [@Chen1963; @Ke1993]. This direct influence is reflected by the archaeological evidence of large amounts of Chinese porcelains and distinctive architectural bricks and tiles used by Chinese [@Hsieh2009]. Similarly, burials at Kiwulan in this later phase show the adoption of coffins in mortuary practices, which @Chen2007 interprets as the adoption of a symbol of ethnic Chinese. 
 
