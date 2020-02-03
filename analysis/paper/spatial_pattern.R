@@ -86,15 +86,15 @@ density_analysis <- function(x, ...) {
   # create ppp and sp(spacial points) format
   lon_tmp <- x$lon
   lat_tmp <- x$lat
-  ornaments_point_ppp_tmp <- ppp(lon_tmp, lat_tmp, xrange, yrange)
-  ornaments_point_sp_tmp <- as(ornaments_point_ppp_tmp, "SpatialPoints")
+  pottery_point_ppp_tmp <- ppp(lon_tmp, lat_tmp, xrange, yrange)
+  pottery_point_sp_tmp <- as(pottery_point_ppp_tmp, "SpatialPoints")
   # kernel density estimation with contour
-  kernel_tmp <- density(ornaments_point_ppp_tmp)
+  kernel_tmp <- density(pottery_point_ppp_tmp)
   kernel_to_plot <-
     plot(kernel_tmp, main = "")
   contour(kernel_tmp, add = TRUE)
   title(..., line = -0.3, adj = 0.4, cex.main = 0.8)
-  return(list(ornaments_point_ppp = ornaments_point_ppp_tmp,
+  return(list(pottery_point_ppp = pottery_point_ppp_tmp,
               kernel_to_plot = kernel_to_plot))
 }
 
@@ -118,3 +118,50 @@ invisible(dev.off())
 knitr::include_graphics(here::here("analysis",
                              "figures",
                              "plot-kde-maps.jpg"))
+
+#--------------------------hypothesis testing for spatial distribution--------------
+
+# function for hypothesis testing
+nndist_hypo_testing <- function(x, n = 1e3L,  ... ) {
+
+  ann_tmp <- mean(nndist(x$pottery_point_ppp, k = 1))
+  # object for storing simulated ANN values
+  ann_r_tmp <- vector(length = n)
+  for (i in 1:n) {
+    # Generate random point locations
+    rand_tmp <-  rpoint(n = x$pottery_point_ppp$n,
+                        win = as.owin(as_Spatial(AD_zone_tidy)))
+    ann_r_tmp[i] <-
+      mean(nndist(rand_tmp, k = 1))  # Tally the ANN values
+  }
+  the_plot <-
+    hist(
+      ann_r_tmp,
+      xlab = NULL,
+      las = 1,
+      breaks = 40,
+      col = "bisque",
+      xlim = range(ann_tmp, ann_r_tmp),
+      ...)
+  abline(v = ann_tmp, col = "blue")
+  return(the_plot)
+}
+
+# make the blue lines thicker to be more visible
+jpeg(
+  here::here("analysis", "figures",
+       "plot-kde-ann-histograms.jpg"),
+  width = 90,
+  height = 150,
+  units = "mm",
+  res = 300)
+par(mfrow = c(3, 1))
+invisible(
+  map2(kernels_for_plotting,
+       titles,
+       ~invisible(nndist_hypo_testing(.x,
+                                      main = .y))))
+invisible(dev.off())
+knitr::include_graphics(here::here("analysis",
+                             "figures",
+                             "plot-kde-ann-histograms.jpg"))
