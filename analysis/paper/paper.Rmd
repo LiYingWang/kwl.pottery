@@ -126,8 +126,7 @@ Chi_no <- phase_fre$n[3]
 ```{r metricCVstest}
 library(cvequality)
 # read metric data
-kwl_p_ave <- readr::read_csv(here::here("analysis", "data", "raw_data",
-                                        "KWL-pottery-metrics-tidy-ave.csv"))
+kwl_p_ave <- readr::read_csv(here("analysis", "data", "raw_data", "KWL-pottery-metrics-tidy-ave.csv"))
 # number for each phase 
 kwl_p_ave_total <-
   kwl_p_ave %>% 
@@ -252,9 +251,7 @@ knitr::kable(kwl_p_cvs_table_all,
 
 # Methods
 
-A total of `r total_no` largely intact vessels from pre-contact contexts (n = `r pre_no`), post-European contexts (n = `r Euro_no`), and Chinese contact contexts (n = `r Chi_no`) were selected for elliptic Fourier analysis. Most of them cover every vessel component from rim to bottom. To fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of `r metric_all` reconstructed pots (pre-European = `r pre`, European = `r post_e`, Chinese = `r chi`) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To obtain information about the pottery shape, we compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. Also, we explore spatial distribution of pottery to examine if clustering changes over time across the sampling area. As craft specialization increases, pottery distribution might present a shift from dispersed clusters to concentrated clusters that hints the emergence of specialized group working in workshop.
-
-<!-- we also look at spatial distribution to see if clustering changes over time... ...as craft specialization increases, we might expect spatial clustering to increase... as possible indicator of craft specialization -->
+A total of `r total_no` largely intact vessels from pre-contact contexts (n = `r pre_no`), post-European contexts (n = `r Euro_no`), and Chinese contact contexts (n = `r Chi_no`) were selected for elliptic Fourier analysis. Most of them cover every vessel component from rim to bottom. The shape of vessel is the major object analyzed in this paper, however, to fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of `r metric_all` reconstructed pots (pre-European = `r pre`, European = `r post_e`, Chinese = `r chi`) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were took to compute an average value. To obtain information about the pottery shape, we compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. In addition, we use Monte Carlo method to test for randomness in spatial locations of pots to explore whether the distribution is meaningful indicated by clustered or dispersed pattern. As craft specialization increases, pottery distribution might present a shift from dispersed pattern to concentrated clusters that hints the emergence of specialized groups.
 
 ## Digitising and analysing by EFA
 
@@ -364,7 +361,7 @@ jpgs_imported_coo <-
    coo_slidedirection
 
 saveRDS(jpgs_imported_coo,
-        here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
+        here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 ```
 
 <!-- basic description of shape -->
@@ -379,7 +376,7 @@ The elliptic Fourier coefficients of `r total_no` pottery from three phases were
 # Mean pottery shapes of three phases
 library(Momocs)
 library(cowplot)
-jpgs_imported_coo <- readr::read_rds(here::here("analysis/data/derived_data/jpgs_imported_coo.rds"))
+jpgs_imported_coo <- readr::read_rds(here("analysis/data/derived_data/jpgs_imported_coo.rds"))
 
 # default is 13 harmonics that gather 99% of the harmonic power
 op <- efourier(jpgs_imported_coo, norm = FALSE, 13)
@@ -402,7 +399,7 @@ tps_grid(`Pre-European`, `Chinese`, shp.lwd = c(2, 2), shp.border = c("red", "bl
            amp = 1, grid.size = 18, legend = T)
 
 # Isodeformation lines
-png(here::here("analysis/figures/tps-iso.png"), res = 600, w = 1200, h = 1800)
+png(here("analysis/figures/tps-iso.png"), res = 600, w = 1200, h = 1800)
 
 #knitr::include_graphics(here::here("analysis", "figures", "tps-pre-Euro-to-post-Euro.png"))
 ```
@@ -581,7 +578,11 @@ Previous investigations at Kiwulan have suggested an unequal distribution of pre
 
 Our CV tests indicates that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. This suggests pottery shape became more homogeneous and standardized after foreign contacts with European colonizers and even more so after contact with Chinese immigrants. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if shape changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offers limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
 
-We compare the result of shape variable with the result of metric data for six measurements and two ratio values using CV test (Table \@ref(tab:metricCVstest)). Metric measurements show there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results shows the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantially way reflected by overall shapes of pottery, not only limited to diameter variables. 
+We compare the result of shape variable with the result of metric data for six measurements and two ratio values using CV test (Table \@ref(tab:metricCVstest)). Metric measurements show there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results shows the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantially way reflected by overall shapes of pottery, not only limited to diameter variables. In addition, results of spatial analysis for pottery shape samples show a non-randomly dispersed distribution before European contact and more extreme dispersed after European presence. However, the distribution of pottery is more similar to the random distributions during the Chinese period. This contradicts to our expectation that clustered patten will be observed with an increase in pottery standardization since the emergence of specialized groups. Or, this indicates that there are other factors lead to pottery standardization instead of a small number of artisans. 
+
+```{r Monte-Carlo-spatial-pattern, fig.cap= "Histograms of simulated average nearest-neighbour distances (ANN) values from 1000 simulations for three phases. X-axis values based on meteres represent ANN expected value. Each sample distribution presents the null hypothesis with the blue line indicating the observed ANN value"}
+knitr::include_graphics(here("analysis", "figures", "plot-kde-ann-histograms.jpg"))
+```
 
 Our results offer tentative support for the hypothesis that foreign influences at Kiwulan influenced emergence of social inequality in the local Indigenous society. If increased shape standardization is a reliable indicator of craft specialization, then we may be seeing evidence of a shift from corporate to network organization [@Feinman2000]. However, strong claims for an emergence of social complexity resulting from foreign contact at Kiwulan will need support from multiple and diverse sources of evidence. This should include the other two main datasets at Kiwulan, the ornaments assemblages, and the burial goods. We find vessel shapes were more standardised in the Chinese period than the European period, contrary to previous work that has downplayed the effect of Chinese settlement in Yilan [@Wang2011]. Compared to other regions in Taiwan, European colonial influence was weak in Yilan due to the isolated of the surrounding mountains and the economic focus of the Spanish and  Dutch who preferred northern Taiwan as their trading base. Indigenous communities Yilan experienced indirect influence from European trade networks and their colonial activities in a pericolonial context [cf. @Acabado2017]. In contrast to the Indigenous-European interactions at Kiwulan, the interaction between indigenous people and Chinese in the 19th century appears to have been more intense and direct. Historical records indicate that Chinese immigrants settled in Yilan and lived closely with Kiwulan Indigenous societies [@Chen1963; @Ke1993]. This direct influence is reflected by the archaeological evidence of large amounts of Chinese porcelains and distinctive architectural bricks and tiles used by Chinese [@Hsieh2009]. Similarly, burials at Kiwulan in this later phase show the adoption of coffins in mortuary practices, which @Chen2007 interprets as the adoption of a symbol of ethnic Chinese. 
 
