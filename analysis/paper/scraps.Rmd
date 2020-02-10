@@ -159,3 +159,5 @@ kwl_p_cvs_table_all <-
   select(variable, `before European`, European, Chinese,
          `D_AD.1`, `P value.1`, `D_AD.2`, `P value.2`)
 ```
+
+CV is more robust in the condition that the mean-standard deviation relationship is linear and positive [@Eerkens2001, pp.498]

@@ -37,13 +37,13 @@ image_width_2_col_inch = 190/25.4 # image Double column w = 190 mm
 
 # Introduction
 
-The development of craft specialization is sometimes associated with social changes since it reflects changes in production systems that could inform on the social, economic, or political conditions of a society. We define specialization as "differential participation in specific economic activities", in which a particular good is produced by fewer producers compared to the total population who consume it [@Costin1991; @Costin2001, pp. 43]. The effects of the emergence of specialization in past societies on their social structures and social processes is an important question in archaeological investigations of small scale societies in the Late Holocene. Considered through a political lens, craft specialization may be a strategy used by elites to control production systems to maintain their power and authority [@Costin2001]. This relationship between craft specialization and social differentiation has been broadly discussed, and many cases show that increasingly specialized production can be a useful indicator of increasing socio-political complexity [@Hirshman2010; @Junker1999]. That said, a more economic focus considers production, exchange, and consumption as a whole to explain specialization as part of a strategy to accommodate uneven distributions of resources [@Costin2001; @Arnold1994]. Craft specialization may appear as a reaction to changes in subsistence practices [@Stark1995economic], or as a result of long-distance trade and inter-regional exchange [@Alizadeh2018]. Present-day investigation of ceramic specialization in the Jodhpur region of India suggests that the adoption of standardized products across cultural boundaries is a reaction to a collapse of previous economic system, indicating a correlation with major socio-economic changes [@Roux2015]. However, it is important to note that explanations for the emergence of specialized production in past societies might not be so straightforward or singular. @Acabado2018's case study in lowland northern Philippines shows that specialization is not necessarily accompanied with social differentiation based on a low degree of ceramic specialization in Ifugao ranked societies during the time of Spanish colonization. The development of specialization could be dependent on unique historical factors, where the conditions and contexts under which specialists organized must be taken into account when making inferences about changes in social organization [@Roux2015; @Costin2001].
+The development of craft specialization is sometimes associated with social changes since it reflects changes in production systems that could inform on the social, economic, or political conditions of a society. We define specialization as "differential participation in specific economic activities", in which a particular good is produced by fewer producers compared to the total population who consume it [@Costin1991; @Costin2001, pp. 43]. The effects of the emergence of specialization in past societies on their social structures and social processes is an important question in archaeological investigations of small scale societies in the Late Holocene. Considered through a political lens, craft specialization may be a strategy used by elites to control production systems to maintain their power and authority [@Costin2001]. This relationship between craft specialization and social differentiation has been broadly discussed, and many cases show that increasingly specialized production can be a useful indicator of increasing socio-political complexity [@Hirshman2010; @Junker1999]. That said, a more economic focus considers production, exchange, and consumption as a whole to explain specialization as part of a strategy to accommodate uneven distributions of resources [@Costin2001; @Arnold1994]. Craft specialization may appear as a reaction to changes in subsistence practices [@Stark1995economic], or as a result of long-distance trade and inter-regional exchange [@Alizadeh2018]. Present-day investigation of ceramic specialization in the Jodhpur region of India suggests that the adoption of standardized products across cultural boundaries is a reaction to a collapse of previous economic system, indicating a correlation with major socio-economic changes [@Roux2015]. However, it is important to note that explanations for the emergence of specialized production in past societies might not be so straightforward or singular. @Acabado2018's case study in lowland northern Philippines shows that specialization is not necessarily accompanied with social differentiation based on a low degree of ceramic specialization in Ifugao ranked societies during the time of Spanish occupation. The development of specialization could be dependent on unique historical factors, where the conditions and contexts under which specialists organized must be taken into account when making inferences about changes in social organization [@Roux2015; @Costin2001].
 
-The emergence of social inequality in the context of cross-cultural interaction, especially in a colonial situation, has been observed in many parts of the world, for example, when foreign trade goods are introduced to local Indigenous societies. The monopolization of long-distance trade goods has caused substantial transformations of Indigenous economic, cultural, and socio-political systems [@Dietler2005; @Dietler1997; @Junker1993; @Silliman2005]. Pericolonial archaeology is the study of these indirect effects of colonialism, investigating areas where European colonial rule was limited and their conquests were short-lived and unsuccessful, but their colonial activities had economic and political impacts on Indigenous peoples living on the periphery of colonial control and influence [@Trabert2017; @Acabado2017]. @Acabado2017's study of Ifugao society in the  Philippines highland suggests economic and political intensification during the Spanish presence as the response of Indigenous peoples to the Spanish cooptation. Indigenous societies might not simply passively accept colonial rule, but instead actively negotiate with the colonist, and accommodate or resist foreign intrusion through their daily cultural practices, such as their consumption patterns of foreign goods [@Dietler2015; @Given2004; @Mullins2011; @Scaramelli2005; @Silliman2001; @TorrenceandClarke2000]. In this paper we present a case study from Northeastern Taiwan as an example of these indirect impacts of foreign occupations on local Indigenous societies. Our aim is to investigate if there was increasing ceramic specialization resulting from Indigenous interaction with Europeans in the 17th century or Chinese in the 19th century, two major foreign influences in early historical Taiwan, that might indicate social changes in local indigenous societies. Previous reports of archaeological evidence in northeastern Taiwan describes increases in the use of prestige goods, such as trade ornaments, and uneven artifact distribution patterns in domestic areas and burial contexts at the time when the Indigenous communities encountered the Spanish and the Dutch in the 17th century. Here we show that in addition to the differential distribution of trade ornaments post-European contact, the locally-made ceramics become highly consistent in their form and shape, compared to other pottery throughout northeastern Taiwan. This shift to higher consistency hints at the possibility of craft specialization in pottery manufacture. 
+The emergence of social inequality in the context of cross-cultural interaction, especially in a colonial situation, has been observed in many parts of the world, for example, when foreign trade goods are introduced to local Indigenous societies. The monopolization of long-distance trade goods has caused substantial transformations of Indigenous economic, cultural, and socio-political systems [@Dietler2005; @Dietler1997; @Junker1993; @Silliman2005]. Pericolonial archaeology is the study of these indirect effects of colonialism, investigating areas where European colonial rule was limited and their conquests were short-lived and unsuccessful, but their colonial activities had economic and political impacts on Indigenous peoples living on the periphery of colonial control [@Trabert2017; @Acabado2017]. @Acabado2017's study of Ifugao society in the  Philippines highland suggests economic and political intensification during the Spanish presence as the response of Indigenous peoples to the Spanish cooptation. Indigenous societies might not simply passively accept colonial rule, but instead actively negotiate with the colonist, and accommodate or resist foreign intrusion through their daily cultural practices, such as their consumption patterns of foreign goods [@Dietler2015; @Given2004; @Mullins2011; @Scaramelli2005; @Silliman2001; @TorrenceandClarke2000]. In this paper we present a case study from northeastern Taiwan as an example of these indirect impacts of foreign occupations on local Indigenous societies. Our aim is to investigate if there was increasing ceramic specialization resulting from Indigenous interaction with Europeans in the 17th century or Chinese in the 19th century, two major foreign influences in early historical Taiwan, that might indicate social changes in local indigenous societies. Previous reports of archaeological evidence in northeastern Taiwan describes increases in the use of prestige goods, such as trade ornaments, and uneven artifact distribution patterns in domestic areas and burial contexts at the time when the Indigenous communities encountered the Spanish and the Dutch in the 17th century. Here we show that in addition to the differential distribution of trade ornaments post-European contact, the locally-made ceramics become highly consistent in their form and shape, compared to other pottery throughout Taiwan. This shift to higher consistency hints at the possibility of craft specialization in pottery manufacture. 
 
 To identify craft specialization in the archaeological record, variation in the standardization of a specialized product is often used as an indicator. This is based on the assumption that specialized mass production will lead to uniformity of the product due to routinization, higher skills, and fewer producers involved in production [@Stark1995; @Costin1991; @Costin2001]. For investigating ceramic standardization, several measurements have been discussed and used, such as metric, compositional, and technological approaches [@Arnold2000; @Boness2015; @Rice1991; @Blackman1993; @Costin1991; @Tite1999; @Roux2015]. Among those variables, metric measurements are most widely applied to archaeological assemblages because of the ease of collecting these data. By comparing variations for sets of data using coefficient of variation coupled with statistical testing, the degree of standardization can be identified according to values [@Eerkens2001; @Roux2003; @Stark1995]. @Roux2018's ethnographic study in the Jodhpur region of India suggests the number of artisans can be statistically assessed by comparing coefficients of variation of linear dimensions of pots, and differences between artisans can be detected at both intra-individual level and inter-individual level in a region. However, because pottery vessels typically have curved shapes, linear measurements have limited sensitivity to many kinds of shape variations. Thus, to capture subtle shape variations that might be relevant to standardization, a method that is sensitive to non-linear aspects of shape variation is necessary. Here we analyze pottery shape using geometric morphometric methods, a new approach for measuring the degree of standardization because it takes a statistical summary of the overall shape as variable for comparison [@Slice2007]. Using geometric morphometry, we study shape and standardization of locally made ceramics at Kiwulan (1350-1950 AD) [@Chen2007], a large multi-component archaeological site in northeastern Taiwan, to identify changes in ceramic production resulting from cross-cultural interaction contexts. 
 
-Our hypothesis is that if foreign influences had impacts on the emergence of social inequality in local Indigenous society due to monopolies of trade arising among a small number of Indigenous people, then we expect to see changes in social organization from a more corporate to a more network organization [@Feinman2000]. We expect this corporate-network shift to manifest as increased specialization pottery manufacture, indicated archaeologically by increased standardization of pottery production at Kiwulan. The emergence of craft specialization, here pottery specialization, is often related to changes in social organization towards a society with increasing status inequality. In this case, if the competition among Indigenous individual for foreign resources and trade partnership with European or Chinese colonizers gradually lead to increasing social inequality, then we expect the local ceramics will show more homogeneous shapes after contact due to the emergence of craft specialization caused by greater economic and social control by a small group of individuals at Kiwulan. Our results are important for understanding the indirect influences of  European colonists on local Indigenous societies, which remains unclear in East Asia where colonial power had limited success compared to other places in Southeast Asia. Our findings improve our understanding of the relationship between the use of prestige goods, the degree of ceramic specialization, and the influence of foreign colonizers in a pericolonial context [cf. @Acabado2017].
+Our hypothesis is that if foreign influences had impacts on the emergence of social inequality in local Indigenous society due to monopolies of trade arising among a small number of Indigenous people, then we expect to see changes in social organization from a more corporate to a more network organization [@Feinman2000]. We expect this corporate-network shift to manifest as increased specialization pottery manufacture, indicated archaeologically by increased standardization of pottery production at Kiwulan. The emergence of craft specialization, here pottery specialization, is often related to changes in social organization towards a society with increasing status inequality. In this case, if the competition among Indigenous individual for foreign resources and trade partnership with European or Chinese colonizers gradually lead to increasing social inequality, then we expect the local ceramics will show more homogeneous shapes after contact due to the emergence of craft specialization caused by greater economic and social control by a small group of individuals at Kiwulan. Our results are important for understanding the indirect influences of  European colonists on local Indigenous societies, which remains unclear in East Asia where colonial power had limited success compared to other places in Southeast Asia. Our findings improve our understanding of the relationship between the use of imported prestige goods, the degree of ceramic specialization, and the influence of foreign colonizers in a pericolonial context [cf. @Acabado2017].
 
 ## Geometric Morphometry
 
@@ -57,11 +57,7 @@ Taking the ceramics data from Kiwulan, northeastern Taiwan, we use EFA to evalua
 
 # Archaeological background and materials 
 
-Ceramics analyzed in this paper come from 40 units (4m by 4m each) sampled from the central, undisturbed area of archaeological excavations at Kiwulan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan Province, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides. Yilan is an ideal context to study peripheral colonial influence because Indigenous communities there were isolated by natural barriers that limited the frequency of direct contact with the Spanish and the Dutch settlers in northern Taiwan. The chronology of the archaeological deposits at Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component, dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period, which we define as the European presence in Taiwan in the early 17th century. The Dutch first occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626 [@Andrade2007]. In 1642, the Spanish was expelled by the Dutch in northern Taiwan, who took over their forts at Helping Dau in Keelung, and in Tamsui. Since then, western Taiwan was mostly under Dutch colonial rule until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
-
-The archaeological record of Kiwulan's upper component shows traces of foreign contacts, including Europeans in the 17th century, and waves of Chinese immigrants in the 19th century. Imported ceramics from mainland China, stoneware, and ornaments such as beads have been found in the upper component, indicating frequent long-distance trade activities in the 17th century during the European presence in northern Taiwan. In addition to artifacts, archaeological features such as burials, middens, and post-holes with _in-situ_ posts are widespread across the 1-2 m thick deposit of the upper component, and demonstrate that Kiwulan was a continuously occupied large settlement site [@Chen2007]. To compare different foreign influences, we classified the upper component into three chronological phases: the pre-European, European, and Chinese periods. We identified these phases using 32 previously published radiocarbon ages [@Chen2007], excavation depth measurements, stratigraphic details reported by the excavators (color, disturbance, etc.), and finds of chronologically diagnostic artifacts, such as blue and white porcelains, light grey glazed jars, and large dark brown glazed stoneware jars commonly used in the 17th century, and bricks and tiles used by the Chinese in the 19th century [@Hsieh2009; @Wang2011]. The deposit shows signs of continuous human occupation during each of the three phases across the sampling area.
-
-The most abundant artifacts in the upper component are locally made ceramics, which are distributed throughout the sequence and across the site. More than 550,000 sherds were excavated, and around 1,200 vessels could be reconstructed. There are only two forms of local vessels, a cooking pot and a steamer made of two cooking pots stacked together with a clay filter layer in between. Those pots forms show high consistency in shape. They have a globular body with a short neck and wide mouth. The exterior surface below the neck is decorated with a wide variety of impressed geometric motifs. These vessels were probably used for cooking, with evidence of charred residues and carbon deposits frequently observed on vessel interiors and soot on their exteriors. Moreover, a lack of evidence of other utilitarian earthenware ceramics suggests these globular pots were mainly used for daily cooking. They are fired to orange to brownish color with a fully oxidized core or a reduced core with oxidized fringes. Finger impressions and seams usually on the interior indicate they were pinched using slabs of clay and shaped by hand. This kind of pot has been widely found at archaeological sites during the late Iron Age and the historical period throughout the Yilan Plain.
+Ceramics analyzed in this paper come from 40 units (4m by 4m each) sampled from the central, undisturbed area of archaeological excavations at Kiwulan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). Kiwulan is situated on a hill near a riverside at the northern margin of Yilan County, which is characterized by a triangular alluvial plain facing eastwards the Pacific with high mountains on three other sides. Yilan is an ideal context to study peripheral colonial influence because Indigenous communities there were isolated by natural barriers that limited the frequency of direct contact with the Spanish and the Dutch settlers in northern Taiwan. The chronology of the archaeological deposits at Kiwulan consists of two cultural components, the upper component and the lower component, with a sterile layer in between [@Chen2007]. This paper focuses on the upper component, dated from AD 1350 to AD 1950, covering the late Iron Age and the historical period, which we define as the European occupation in Taiwan in the early 17th century. The Dutch first occupied southern Taiwan in 1624 and then the Spanish occupied northern Taiwan in 1626 [@Andrade2007]. In 1642, the Spanish was expelled by the Dutch in northern Taiwan, who took over their forts at Helping Dau in Keelung, and in Tamsui. Since then, western Taiwan was mostly under Dutch colonial rule until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
 
 ```{r, KWL-map, fig.cap = "Map showing the location of Kiwulan, and other places in northern Taiwan named in the text. Map data from naturalearthdata.com", fig.width=image_width_2_col_inch}
 library(here)
@@ -71,6 +67,10 @@ knitr::include_graphics(here("analysis", "figures", "kiwulan-location-map.jpg"))
 ```{r, KWL-sam-area, fig.cap = "Map showing the largest section of excavation areas at Kiwulan, and the distribution of forty squares sampled in this paper presented in red with square ID number. Small dots represent the location of post-holes. Each square is 4 x 4 m", fig.width=image_width_2_col_inch}
 knitr::include_graphics(here("analysis", "figures", "KWL-excavation-map.jpg"))
 ```
+
+The archaeological record of Kiwulan's upper component shows traces of foreign contacts, including Europeans in the 17th century, and waves of Chinese immigrants in the 19th century. Imported ceramics from mainland China, stoneware, and ornaments such as beads have been found in the upper component, indicating frequent long-distance trade activities with Europeans and Chinese merchants. In addition to artifacts, archaeological features such as burials, middens, and post-holes with _in-situ_ posts are widespread across the 1-2 m thick deposit of the upper component, and demonstrate that Kiwulan was a continuously occupied large settlement site [@Chen2007]. To compare different foreign influences, we classified the upper component into three chronological phases: the pre-European, European, and Chinese periods. We identified these phases using 32 previously published radiocarbon ages [@Chen2007], excavation depth measurements, stratigraphic details reported by the excavators (color, texture, disturbance, etc.), and finds of chronologically diagnostic artifacts, such as blue and white porcelains, light grey glazed jars, and large dark brown glazed stoneware jars commonly used in the 17th century, and bricks and tiles used by the Chinese in the 19th century [@Chen2007; @Hsieh2009; @Wang2011]. The deposit shows signs of continuous human occupation during each of the three phases across the sampling area.
+
+The most abundant artifacts in the upper component are locally made ceramics, which are distributed throughout the sequence and across the site. More than 550,000 sherds were excavated, and around 1,200 vessels could be reconstructed. There are only two forms of local vessels, a cooking pot and a steamer made of two cooking pots stacked together with a clay filter layer in between. Those pots forms show high consistency in shape. They have a globular body with a short neck and wide mouth. The exterior surface below the neck is decorated with a wide variety of impressed geometric motifs. These vessels were probably used for cooking, with evidence of charred residues and carbon deposits frequently observed on vessel interiors and soot on their exteriors. Moreover, a lack of evidence of other utilitarian earthenware ceramics suggests these globular pots were mainly used for daily cooking. They are fired to orange to brownish color with a fully oxidized core or a reduced core with oxidized fringes. Finger impressions and seams usually on the interior indicate they were pinched using slabs of clay and shaped by hand. This kind of pot has been widely found at archaeological sites during the late Iron Age and the historical period throughout the Yilan Plain.
 
 Petrographic analysis for 34 thin sections shows high percentage of inclusions (15-50%), including argillite (15-40%), metasandstone (1-10%),  sandstone fragments (1-6%), quartz (1-5%), and trace amounts of feldspar and slate. The size of the particles ranges from 500 micron to 1300 micron. In general, the globular vessel fabric presents a mixture of fine, rounded argillite with a small part of rounded metasandstone and rounded to sub-angular monocrystalline quartz. The composition matches the mineralogical composition of local raw materials in the Yilan Plain [@Chen2016]. There are no substantial changes in the inclusions over time, indicating continuity in pottery fabric composition across the three periods. 
 
@@ -123,139 +123,13 @@ Euro_no <- phase_fre$n[2]
 Chi_no <- phase_fre$n[3]
 ```
 
-```{r metricCVstest}
-library(cvequality)
-# read metric data
-kwl_p_ave <- readr::read_csv(here("analysis", "data", "raw_data", "KWL-pottery-metrics-tidy-ave.csv"))
-# number for each phase 
-kwl_p_ave_total <-
-  kwl_p_ave %>% 
-  count(period)
-# inline code
-metric_all <- sum(kwl_p_ave_total$n)
-pre <- kwl_p_ave_total$n[3]
-euro <- kwl_p_ave_total$n[2]
-chi <- kwl_p_ave_total$n[1]
-
-# select metric attributes and tidy data for computing CV
-kwl_p_metrics_long <-
-  kwl_p_ave %>%
-  mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
-         thi_rim_body = Thick_Rim_ave/Thick_Body_ave) %>%
-  select(period, 
-         Dia_Rim_ave, Dia_Neck_ave, 
-         Dia_Body_ave, Thick_Rim_ave, 
-         Thick_Neck_ave, Thick_Body_ave,
-         dia_rim_body, thi_rim_body,) %>%
-  rename(`Rim diameter (mm)` = Dia_Rim_ave,
-         `Neck diameter (mm)` = Dia_Neck_ave,
-         `Body diameter (mm)` = Dia_Body_ave,
-         `Rim thickness (mm)` = Thick_Rim_ave,
-         `Neck thickness (mm)` = Thick_Neck_ave,
-         `Body thickness (mm)` = Thick_Body_ave,
-         `Ratio of Rim/Body diameter` = dia_rim_body,
-         `Ratio of Rim/Body thickness` = thi_rim_body) %>%
-  gather(variable, value, -period) %>%
-  filter(!is.na(period), !is.na(value)) %>% 
-  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
-                                                "Neck thickness (mm)",
-                                                "Body thickness (mm)",
-                                                "Ratio of Rim/Body thickness",
-                                                "Rim diameter (mm)",
-                                                "Neck diameter (mm)",
-                                                "Body diameter (mm)",
-                                                "Ratio of Rim/Body diameter"))) %>%
-  arrange(variable)
-
-# filter pre-e and post-e periods
-kwl_p_metrics_long_pre_post <-
-  kwl_p_metrics_long %>%
-  filter(!period == "ch-con")
-# filter post-e and chi periods
-kwl_p_metrics_long_post_chi <-
-  kwl_p_metrics_long %>%
-  filter(!period == "pre-e")
-
-#---------------------------CV test for pre-e and post-e pair
-kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post <-
-  kwl_p_metrics_long_pre_post %>%
-  nest(-variable) %>%  # or nest(period, value) %>%
-  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
-                               ~bind_cols(asymptotic_test (
-                                 .x$value,
-                                 .x$period)))) %>%
-  unnest(asymptotic_test)
-# compute CV
-kwl_p_cvs_pre_post <-
-  kwl_p_metrics_long_pre_post %>%
-  group_by(period, variable) %>%
-  summarise(cvs = raster::cv(value, na.rm = TRUE))
-# join p-values to CVs
-kwl_p_cvs_and_pvalues_pre_post <-
-  kwl_p_cvs_pre_post %>%
-  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post) %>%
-  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
-  mutate(variable = factor(variable, ordered = TRUE)) %>%
-  arrange(variable)
-# making table for CV
-kwl_p_cvs_table_pre_post <-
-  kwl_p_cvs_and_pvalues_pre_post %>%
-  select(-data, -significant) %>%
-  pivot_wider(names_from = period, values_from = cvs) %>%
-  select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
-  mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
-
-#---------------------------CV test for post-e and ch-con pair
-kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi <-
-  kwl_p_metrics_long_post_chi %>%
-  nest(-variable) %>%  # or nest(period, value) %>%
-  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
-                               ~bind_cols(asymptotic_test (
-                                 .x$value,
-                                 .x$period)))) %>%
-  unnest(asymptotic_test)
-# compute CV
-kwl_p_cvs_pre_post <-
-  kwl_p_metrics_long_post_chi %>%
-  group_by(period, variable) %>%
-  summarise(cvs = raster::cv(value, na.rm = TRUE))
-# join p-values to CVs
-kwl_p_cvs_and_pvalues_post_chi <-
-  kwl_p_cvs_pre_post %>%
-  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi) %>%
-  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
-  mutate(variable = factor(variable, ordered = TRUE)) %>%
-  arrange(variable)
-# making table for CV
-kwl_p_cvs_table_post_chi <-
-  kwl_p_cvs_and_pvalues_post_chi %>%
-  select(-data, -significant) %>%
-  pivot_wider(names_from = period, values_from = cvs) %>%
-  select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
-  mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
-
-# join two table together
-kwl_p_cvs_table_all <-
-  kwl_p_cvs_table_pre_post %>% 
-  left_join(kwl_p_cvs_table_post_chi, "variable") %>% 
-  select(-`post-e.y`) %>% 
-  rename(`before European` = "pre-e", `European` = "post-e.x", Chinese = "ch-con",
-         `D_AD-1` = "D_AD.x", `D_AD-2` = "D_AD.y",
-         `P value-1` = `p_value.x`, `P value-2` = `p_value.y`) %>% 
-  select(variable, `before European`, European, Chinese,
-         `D_AD-1`, `P value-1`, `D_AD-2`, `P value-2`)
-
-knitr::kable(kwl_p_cvs_table_all,
-             caption = "Coefficient of Variation for metric attributes by three phases using Asymptotic test [@Feltz1996]. The first set of P-value represents the comparison between before European and European periods, while the second represents the comparison between European and Chinese periods ")
-```
-
 # Methods
 
-A total of `r total_no` largely intact vessels from pre-contact contexts (n = `r pre_no`), post-European contexts (n = `r Euro_no`), and Chinese contact contexts (n = `r Chi_no`) were selected for elliptic Fourier analysis. Most of them cover every vessel component from rim to bottom. The shape of vessel is the major object analyzed in this paper, however, to fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of `r metric_all` reconstructed pots (pre-European = `r pre`, European = `r post_e`, Chinese = `r chi`) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were taken to compute an average value. To obtain information about the pottery shape, we compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. In addition, we use Monte Carlo method to test for randomness in spatial locations of pots to explore whether the distribution is meaningful indicated by clustered or dispersed pattern. As craft specialization increases, pottery distribution might present a shift from dispersed pattern to concentrated clusters that hints the emergence of specialized groups.
+A total of `r total_no` largely intact vessels from pre-contact contexts (n = `r pre_no`), post-European contexts (n = `r Euro_no`), and Chinese contact contexts (n = `r Chi_no`) were selected for elliptic Fourier analysis. Most of them cover every vessel component from rim to bottom. The shape of vessel is the major object analyzed in this paper, however, to fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of `r metric_all` reconstructed pots (pre-European = `r pre`, European = `r euro`, Chinese = `r chi`) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were taken to compute an average value. To obtain information about the pottery shape, we compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. In addition, we use Monte Carlo test for randomness in spatial locations of pots to explore whether their distribution is meaningful, such as clustered or dispersed pattern. As craft specialization increases, pottery distribution might shift from a dispersed pattern to concentrated clusters that reflects the location of production [@Costin2001].
 
 ## Digitising and analysing by EFA
 
-We used scans of pottery drawings acquired from the Bureau of Cultural Affairs in Yilan. All drawings present a two-dimensional view of vessel cross-sections with indications of metric measurements. The scanned drawings were imported into Inkscape (http://inkscape.org) where outlines were traced manually. Where only half cross-section images were available, these were duplicated, flipped, and then joined with another one to create a 2D closed outline for each vessel. Geometric morphometric analyses were conducted using the R software [@Rlanguage2019] using the functions included in the Momocs, a R package intended to quantify and analyze shapes, especially for outline analysis [@Bonhomme2014]. The digilized outlines were converted into a list of successive x-y pixel coordinates for elliptic Fourier analysis (EFA), to investigate morphological differences among pottery shapes from our three occupation phases. The harmonic coefficients generated by EFA were analyzed by principal component analysis (PCA) for dimensionality reduction to illustrate the diversity of the shape data and identify major patterns of variation. 
+We used scans of pottery drawings acquired from the Bureau of Cultural Affairs in Yilan. All drawings present a two-dimensional view of vessel cross-sections with indications of metric measurements. The scanned drawings were imported into Inkscape (http://inkscape.org) where outlines were traced manually. Where only half cross-section images were available, these were duplicated, flipped, and then joined with another one to create a 2D closed outline for each vessel. Geometric morphometric analyses were conducted using the R software [@Rlanguage2019] and the functions included in the Momocs, a R package intended to quantify and analyze shapes, especially for outline analysis [@Bonhomme2014]. The digilized outlines were converted into a list of successive xy pixel coordinates for elliptic Fourier analysis (EFA), to investigate morphological differences among pottery shapes from our three occupation phases. The harmonic coefficients generated by EFA were analyzed by principal component analysis (PCA) for dimensionality reduction to illustrate the diversity of the shape data and identify major patterns of variation. 
 
 ## Statistical analysis 
 
@@ -263,9 +137,9 @@ The principal component (PC) scores were analyzed with a multivariate analysis o
 
 $$c_v = \frac{\sigma}{\mu}$$
 
-By standardizing standard deviation in each data set, the coefficients of variation (CV) values allows us to directly compare variation in samples measured with different units or means. CV values are robust to different sample sizes in the condition that the mean-standard deviation relationship is linear and positive since standard deviation is scaled to the mean [@Eerkens2001, pp.496]. We take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. 
+By standardizing standard deviation in each data set, the coefficients of variation (CV) values allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles since CV scales standard deviation to the mean that enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. We take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. 
 
-To answer the question of whether CV values for vessel samples across our three occupational phases are significantly different or not, we used the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996 asymptotic test for the equality of coefficients of variation from k populations [@Lycett2008; @Okumura2014; @Eerkens2000; @Eerkens2001; @Hoggard2017], we prefer the MSLR test as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
+To answer the question of whether CV values for vessel samples across our three occupational phases are significantly different or not, we used the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996 asymptotic test for the equality of coefficients of variation from k populations [@Lycett2008; @Okumura2014; @Eerkens2000; @Eerkens2001; @Hoggard2017], we prefer the MSLR test for shape variables as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
 
 # Reproducibility and open source materials 
 
@@ -579,6 +453,132 @@ Previous investigations at Kiwulan have suggested an unequal distribution of pre
 Our CV tests indicate that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. This suggests pottery shape became more homogeneous and standardized after foreign contacts with European colonizers and even more so after contact with Chinese immigrants. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if shape changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
 
 We compare the result of shape variable with the result of metric data for six measurements and two ratio values using CV test (Table \@ref(tab:metricCVstest)). Metric measurements show there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results show the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantial way reflected by overall shapes of pottery, not only limited to diameter variables. In addition, the result of spatial analysis (Figure \@ref(fig:kernel-plot)) for pottery shape samples presents multiple clusters with high density of pottery during the European presence. However, the hypothesis testing on spatial randomness indicates a non-randomly dispersed distribution before European contact and more extreme dispersed after European presence. In contrast, the distribution of pottery is more similar to the random distributions during the Chinese period. This contradicts our expectation that clustered pattern will be observed with an increase in pottery standardization since the emergence of specialized groups. Or, this may indicate that there are other factors lead to pottery standardization instead of a small number of artisans. 
+
+```{r metricCVstest}
+library(cvequality)
+# read metric data
+kwl_p_ave <- readr::read_csv(here("analysis", "data", "raw_data", "KWL-pottery-metrics-tidy-ave.csv"))
+# number for each phase 
+kwl_p_ave_total <-
+  kwl_p_ave %>% 
+  count(period)
+# inline code
+metric_all <- sum(kwl_p_ave_total$n)
+pre <- kwl_p_ave_total$n[3]
+euro <- kwl_p_ave_total$n[2]
+chi <- kwl_p_ave_total$n[1]
+
+# select metric attributes and tidy data for computing CV
+kwl_p_metrics_long <-
+  kwl_p_ave %>%
+  mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
+         thi_rim_body = Thick_Rim_ave/Thick_Body_ave) %>%
+  select(period, 
+         Dia_Rim_ave, Dia_Neck_ave, 
+         Dia_Body_ave, Thick_Rim_ave, 
+         Thick_Neck_ave, Thick_Body_ave,
+         dia_rim_body, thi_rim_body,) %>%
+  rename(`Rim diameter (mm)` = Dia_Rim_ave,
+         `Neck diameter (mm)` = Dia_Neck_ave,
+         `Body diameter (mm)` = Dia_Body_ave,
+         `Rim thickness (mm)` = Thick_Rim_ave,
+         `Neck thickness (mm)` = Thick_Neck_ave,
+         `Body thickness (mm)` = Thick_Body_ave,
+         `Ratio of Rim/Body diameter` = dia_rim_body,
+         `Ratio of Rim/Body thickness` = thi_rim_body) %>%
+  gather(variable, value, -period) %>%
+  filter(!is.na(period), !is.na(value)) %>% 
+  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
+                                                "Neck thickness (mm)",
+                                                "Body thickness (mm)",
+                                                "Ratio of Rim/Body thickness",
+                                                "Rim diameter (mm)",
+                                                "Neck diameter (mm)",
+                                                "Body diameter (mm)",
+                                                "Ratio of Rim/Body diameter"))) %>%
+  arrange(variable)
+
+# filter pre-e and post-e periods
+kwl_p_metrics_long_pre_post <-
+  kwl_p_metrics_long %>%
+  filter(!period == "ch-con")
+# filter post-e and chi periods
+kwl_p_metrics_long_post_chi <-
+  kwl_p_metrics_long %>%
+  filter(!period == "pre-e")
+
+#---------------------------CV test for pre-e and post-e pair
+kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_pre_post %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_pre_post <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+# making table for CV
+kwl_p_cvs_table_pre_post <-
+  kwl_p_cvs_and_pvalues_pre_post %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
+  mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
+
+#---------------------------CV test for post-e and ch-con pair
+kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi <-
+  kwl_p_metrics_long_post_chi %>%
+  nest(-variable) %>%  # or nest(period, value) %>%
+  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
+                               ~bind_cols(asymptotic_test (
+                                 .x$value,
+                                 .x$period)))) %>%
+  unnest(asymptotic_test)
+# compute CV
+kwl_p_cvs_pre_post <-
+  kwl_p_metrics_long_post_chi %>%
+  group_by(period, variable) %>%
+  summarise(cvs = raster::cv(value, na.rm = TRUE))
+# join p-values to CVs
+kwl_p_cvs_and_pvalues_post_chi <-
+  kwl_p_cvs_pre_post %>%
+  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi) %>%
+  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
+  mutate(variable = factor(variable, ordered = TRUE)) %>%
+  arrange(variable)
+# making table for CV
+kwl_p_cvs_table_post_chi <-
+  kwl_p_cvs_and_pvalues_post_chi %>%
+  select(-data, -significant) %>%
+  pivot_wider(names_from = period, values_from = cvs) %>%
+  select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
+  mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
+
+# join two table together
+kwl_p_cvs_table_all <-
+  kwl_p_cvs_table_pre_post %>% 
+  left_join(kwl_p_cvs_table_post_chi, "variable") %>% 
+  select(-`post-e.y`) %>% 
+  rename(`before European` = "pre-e", `European` = "post-e.x", Chinese = "ch-con",
+         `D_AD-1` = "D_AD.x", `D_AD-2` = "D_AD.y",
+         `P value-1` = `p_value.x`, `P value-2` = `p_value.y`) %>% 
+  select(variable, `before European`, European, Chinese,
+         `D_AD-1`, `P value-1`, `D_AD-2`, `P value-2`)
+
+knitr::kable(kwl_p_cvs_table_all,
+             caption = "Coefficient of Variation for metric attributes by three phases using Asymptotic test [@Feltz1996]. The first set of P-value represents the comparison between before European and European periods, while the second represents the comparison between European and Chinese periods ")
+```
 
 ```{r kernel-plot, fig.cap= "Kernel density map visulizes the probability of the density of pottery across space. The map shows  major core area during the pre-European period, multiple core areas during the European period, and a single core during the Chinese period. Used the bandwidth based on Silverman (1986)'s rule of thumb"}
 knitr::include_graphics(here("analysis", "figures", "plot-kde-maps.jpg"))
