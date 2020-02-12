@@ -161,3 +161,39 @@ kwl_p_cvs_table_all <-
 ```
 
 CV is more robust in the condition that the mean-standard deviation relationship is linear and positive [@Eerkens2001, pp.498]
+
+```{r mean-sd-relationship, eval = FALSE}
+# mean and sd by phases for PC scores
+pc1_mean_sd_by_phase <-
+  pc1 %>% 
+  group_by(y) %>% 
+  summarize(mean = mean(x),
+            sd = sd(x))
+
+pc1_mean_sd_plot <-
+  pc1_mean_sd_by_phase %>% 
+  ggplot(aes(mean, sd)) +
+  geom_point()
+
+pc2_mean_sd_by_phase <-
+  pc2 %>% 
+  group_by(y) %>% 
+  summarize(mean = mean(x),
+            sd = sd(x))
+
+pc2_mean_sd_plot <-
+  pc2_mean_sd_by_phase %>% 
+  ggplot(aes(mean, sd)) +
+  geom_point()
+
+pc3_mean_sd_by_phase <-
+  pc3 %>% 
+  group_by(y) %>% 
+  summarize(mean = mean(x),
+            sd = sd(x))
+
+pc3_mean_sd_plot <-
+  pc3_mean_sd_by_phase %>% 
+  ggplot(aes(mean, sd)) +
+  geom_point()
+```

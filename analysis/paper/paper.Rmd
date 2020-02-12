@@ -137,7 +137,7 @@ The principal component (PC) scores were analyzed with a multivariate analysis o
 
 $$c_v = \frac{\sigma}{\mu}$$
 
-By standardizing standard deviation in each data set, the coefficients of variation (CV) values allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles since CV scales standard deviation to the mean that enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. We take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. 
+By standardizing standard deviation in each data set, the coefficients of variation (CV) values allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles since CV scales standard deviation to the mean that enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. We take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by ratio, we normalized PC scores to a range between 0 and 1 before computation of CV.
 
 To answer the question of whether CV values for vessel samples across our three occupational phases are significantly different or not, we used the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996 asymptotic test for the equality of coefficients of variation from k populations [@Lycett2008; @Okumura2014; @Eerkens2000; @Eerkens2001; @Hoggard2017], we prefer the MSLR test for shape variables as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
 
@@ -255,6 +255,7 @@ jpgs_imported_coo <- readr::read_rds(here("analysis/data/derived_data/jpgs_impor
 # default is 13 harmonics that gather 99% of the harmonic power
 op <- efourier(jpgs_imported_coo, norm = FALSE, 13)
 
+
 # mean shape, per group
 pot.ms <- MSHAPES(op, 'phase')
 mshp <- pot.ms$shp
@@ -330,8 +331,23 @@ To test for differences in the distributions of shape variables indicated by the
 To compare pottery shape standardization across the three phases we investigate the distributions of the first three PC scores, taking the PC scores as proxy variables for vessel shape (Figure \@ref(fig:PCs-distribution)). The first PC, vessel height, shows higher variation in the pre-European period compared to the Chinese period. That indicates that shape standardization was higher in the Chinese period compared to the pre-European period. The second PC also presents a similar pattern of higher shape standardization in the Chinese period compared to the other two phases. To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European (Figure \@ref(fig:CV-test-PCs-plot), Table \@ref(tab:CV-test-PCs-table)). A significant difference is also detected between the pre-European and post-European periods.
 
 ```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
+
+# function for normalized data
+normalize <- function(x) (x-min(x))/(max(x)-min(x))
+
+# for one matrix
+op.p_tmp <- 
+op.p$x %>% 
+  as_tibble() %>% 
+  mutate_all(normalize) %>% 
+  as.matrix() 
+
+row.names(op.p_tmp) <- row.names(op.p$x )
+
+op.p$x <- op.p_tmp
+
+
 # what are the variences for each PC in each period?
-# CVs on shape PCs for standardization
 len <- length(op.p$x[,1])
 # plot PC1-3 distribution by phase
 pc_plot <- tibble(pc = c(op.p$x[,1],
@@ -357,6 +373,7 @@ ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
 ```
 
 ```{r CV-test-PCs-table}
+# CVs on shape PCs for standardization
 pc1 <- data.frame(
 x = op.p$x[,1],
 y = as.character(op.p$fac$phase),
