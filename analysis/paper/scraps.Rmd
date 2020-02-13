@@ -160,7 +160,7 @@ kwl_p_cvs_table_all <-
          `D_AD.1`, `P value.1`, `D_AD.2`, `P value.2`)
 ```
 
-CV is more robust in the condition that the mean-standard deviation relationship is linear and positive [@Eerkens2001, pp.498]
+CV is more robust in the condition that the mean-standard deviation relationship is linear and positive [@Eerkens2001, pp.498]. We examine the relationship between mean and sd for our observations for PC scores, three points referring to three phases here. The results show that some of them have negative relationships. However, it might be not reliable because we only have three data points.
 
 ```{r mean-sd-relationship, eval = FALSE}
 # mean and sd by phases for PC scores
@@ -173,7 +173,9 @@ pc1_mean_sd_by_phase <-
 pc1_mean_sd_plot <-
   pc1_mean_sd_by_phase %>% 
   ggplot(aes(mean, sd)) +
-  geom_point()
+  geom_point() +
+  geom_text(aes(label=y), 
+            hjust= 0, vjust= 0)
 
 pc2_mean_sd_by_phase <-
   pc2 %>% 
@@ -184,7 +186,9 @@ pc2_mean_sd_by_phase <-
 pc2_mean_sd_plot <-
   pc2_mean_sd_by_phase %>% 
   ggplot(aes(mean, sd)) +
-  geom_point()
+  geom_point() +
+  geom_text(aes(label=y), 
+            hjust= 0, vjust= 0)
 
 pc3_mean_sd_by_phase <-
   pc3 %>% 
@@ -195,5 +199,7 @@ pc3_mean_sd_by_phase <-
 pc3_mean_sd_plot <-
   pc3_mean_sd_by_phase %>% 
   ggplot(aes(mean, sd)) +
-  geom_point()
+  geom_point() +
+  geom_text(aes(label=y), 
+            hjust= 0, vjust= 0)
 ```
