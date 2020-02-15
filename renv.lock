@@ -466,16 +466,10 @@
     },
     "geomorph": {
       "Package": "geomorph",
-      "Version": "3.2.0.0900",
+      "Version": "3.2.1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "RemoteType": "github",
-      "RemoteHost": "api.github.com",
-      "RemoteRepo": "geomorph",
-      "RemoteUsername": "geomorphR",
-      "RemoteRef": "Develop",
-      "RemoteSha": "ad6ba5728f5c53c466774a6fa5b69a6bfb741398",
-      "Hash": "a2cad0e182d3c8664f42310941bb8f3b"
+      "Hash": "466e5c4bc868706076d3c3f9ea20cfaf"
     },
     "ggforce": {
       "Package": "ggforce",

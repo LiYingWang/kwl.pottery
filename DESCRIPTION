@@ -27,7 +27,7 @@ Imports:
     spatstat,
     viridis,
     ggsn
-Remotes: benmarwick/wordcountaddin
+Remotes: benmarwick/wordcountaddin, benmarwick/rrtools
 Suggests1: devtools
 Suggests2: git2r
 URL: https://github.com/LiYingWang/kwl.pottery
