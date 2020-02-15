@@ -1,9 +1,9 @@
 on: [push, pull_request]
 
 jobs:
-  run-dockerfile:
+  build:
     runs-on: ubuntu-latest
-        steps:
-          - uses: actions/checkout@master
-          - name: Build the Docker image
-            run: docker build . --file Dockerfile
+    steps:
+     - uses: actions/checkout@master
+     - name: Build the Docker image
+       run: docker build . --file Dockerfile
