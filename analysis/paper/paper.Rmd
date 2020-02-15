@@ -121,6 +121,20 @@ total_no <- sum(phase_fre$n)
 pre_no <- phase_fre$n[1]
 Euro_no <- phase_fre$n[2]
 Chi_no <- phase_fre$n[3]
+
+# read metric data
+kwl_p_ave <- readr::read_csv(here("analysis", "data", "raw_data", "KWL-pottery-metrics-tidy-ave.csv"))
+
+# number for each phase 
+kwl_p_ave_total <-
+  kwl_p_ave %>% 
+  count(period)
+
+# inline code later in the paper
+metric_all <- sum(kwl_p_ave_total$n)
+pre <- kwl_p_ave_total$n[3]
+euro <- kwl_p_ave_total$n[2]
+chi <- kwl_p_ave_total$n[1]
 ```
 
 # Methods
@@ -373,6 +387,7 @@ ggsave(here("analysis/figures/pcs-boxplot-for-shape-variation.png"),
 ```
 
 ```{r CV-test-PCs-table}
+library(cvequality)
 # CVs on shape PCs for standardization
 pc1 <- data.frame(
 x = op.p$x[,1],
@@ -472,18 +487,6 @@ Our CV tests indicate that there are significant differences in shape standardiz
 We compare the result of shape variable with the result of metric data for six measurements and two ratio values using CV test (Table \@ref(tab:metricCVstest)). Metric measurements show there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results show the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantial way reflected by overall shapes of pottery, not only limited to diameter variables. In addition, the result of spatial analysis (Figure \@ref(fig:kernel-plot)) for pottery shape samples presents multiple clusters with high density of pottery during the European presence. However, the hypothesis testing on spatial randomness indicates a non-randomly dispersed distribution before European contact and more extreme dispersed after European presence. In contrast, the distribution of pottery is more similar to the random distributions during the Chinese period. This contradicts our expectation that clustered pattern will be observed with an increase in pottery standardization since the emergence of specialized groups. Or, this may indicate that there are other factors lead to pottery shape standardization instead of a small number of artisans. 
 
 ```{r metricCVstest}
-library(cvequality)
-# read metric data
-kwl_p_ave <- readr::read_csv(here("analysis", "data", "raw_data", "KWL-pottery-metrics-tidy-ave.csv"))
-# number for each phase 
-kwl_p_ave_total <-
-  kwl_p_ave %>% 
-  count(period)
-# inline code
-metric_all <- sum(kwl_p_ave_total$n)
-pre <- kwl_p_ave_total$n[3]
-euro <- kwl_p_ave_total$n[2]
-chi <- kwl_p_ave_total$n[1]
 
 # select metric attributes and tidy data for computing CV
 kwl_p_metrics_long <-
