@@ -3,5 +3,7 @@ on: [push, pull_request]
 jobs:
   run-dockerfile:
     runs-on: ubuntu-latest
-    name: Run Dockerfile
-    run: docker build -t .
+        steps:
+        - uses: actions/checkout@master
+        - name: Build the Docker image
+          run: docker build . --file Dockerfile
