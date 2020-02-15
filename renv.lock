@@ -1111,10 +1111,10 @@
     },
     "sf": {
       "Package": "sf",
-      "Version": "0.7-7",
+      "Version": "0.8-1",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8544364b75661f709f5a31cbd0716ea2"
+      "Hash": "954e31b782ac3c991dd3e185a8dcac14"
     },
     "shiny": {
       "Package": "shiny",
