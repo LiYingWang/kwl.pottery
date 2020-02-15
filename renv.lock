@@ -326,10 +326,10 @@
     },
     "data.table": {
       "Package": "data.table",
-      "Version": "1.12.2",
+      "Version": "1.12.8",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "f2f76b5c5394350c4d4ee77dab51d35c"
+      "Hash": "da4d0e37591cc3088e1b0d96dc421d72"
     },
     "dbplyr": {
       "Package": "dbplyr",
@@ -905,10 +905,10 @@
     },
     "ps": {
       "Package": "ps",
-      "Version": "1.3.1",
+      "Version": "1.3.2",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "8d6ece2d0ce061b6a221a1a6836d0fef"
+      "Hash": "27e021336290792dd8e277fc73a562ae"
     },
     "purrr": {
       "Package": "purrr",
@@ -1058,8 +1058,14 @@
     "rrtools": {
       "Package": "rrtools",
       "Version": "0.1.0",
-      "Source": "unknown",
-      "Hash": "516dc74c8f034bc7e49ac6c0c8cb2a80"
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "rrtools",
+      "RemoteUsername": "benmarwick",
+      "RemoteRef": "master",
+      "RemoteSha": "c0a408534a40cc5ddf002ac69234ae0297ae7549",
+      "Hash": "9dec729210ee1afff997881d8dab6f48"
     },
     "rstudioapi": {
       "Package": "rstudioapi",
@@ -1321,8 +1327,14 @@
     "wordcountaddin": {
       "Package": "wordcountaddin",
       "Version": "0.3.0.9000",
-      "Source": "unknown",
-      "Hash": "a0803d8c2d63d778f984dec8fc8ee8fc"
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "wordcountaddin",
+      "RemoteUsername": "benmarwick",
+      "RemoteRef": "master",
+      "RemoteSha": "be8c0ec64d1503d32539a8cf2e0ede462bebd05e",
+      "Hash": "b4a23b9148b385299dc016a7332ee5e6"
     },
     "xfun": {
       "Package": "xfun",
@@ -1340,8 +1352,8 @@
       "RemoteRepo": "xml2",
       "RemoteUsername": "hadley",
       "RemoteRef": "master",
-      "RemoteSha": "a0b698eafda094ee19412bcd89de391179e06935",
-      "Hash": "4ed56c972d647530e5f978057a41ee08"
+      "RemoteSha": "a7a50deb1ad39b9141661b9d196363200b15c4c5",
+      "Hash": "bf81e06aca5e6a89ec0a3dd76f7f9bd8"
     },
     "xopen": {
       "Package": "xopen",
