@@ -1,9 +1,6 @@
 on: [push, pull_request]
-name: 'Run Dockerfile'
-inputs:
-  REPO:  kwl.pottery
-runs:
-  using: 'docker'
-  image: 'Dockerfile'
-  args:
-    - ${{ inputs.REPO }}
+
+jobs:
+    runs-on: ubuntu-latest
+    name: Run Dockerfile
+    run: docker build -t .
