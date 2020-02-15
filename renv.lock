@@ -1251,10 +1251,10 @@
     },
     "units": {
       "Package": "units",
-      "Version": "0.6-4",
+      "Version": "0.6-5",
       "Source": "Repository",
       "Repository": "CRAN",
-      "Hash": "00332e4ec4ed784de32dfc35f3125c16"
+      "Hash": "194e118b972a32f95ed36ad474836a3c"
     },
     "usethis": {
       "Package": "usethis",
