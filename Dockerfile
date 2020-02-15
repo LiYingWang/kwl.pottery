@@ -11,7 +11,7 @@ RUN . /etc/environment \
   # Install linux depedendencies here
   # e.g. need this for sf
   && sudo apt-get update \
-  && sudo apt-get install libudunits2-dev gdal-bin libcurl4-openssl-dev libgdal-dev libproj-dev libssl-dev -y \
+  && sudo apt-get install libudunits2-dev gdal-bin libcurl4-openssl-dev libgdal-dev libproj-dev libssl-dev xorg libx11-dev  libglu1-mesa-dev  libfreetype6-dev -y \
   # build this compendium package
   && R -e "devtools::install('/kwl.pottery', dep=TRUE)" \
   # render the manuscript into a docx, you'll need to edit this if you've
