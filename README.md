@@ -3,8 +3,8 @@
 
 # kwl.pottery
 
-[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LiYingWang/kwl.pottery/master?urlpath=rstudio)
-![R-CMD-check-compendium](https://github.com/LiYingWang/kwl.pottery/workflows/R-CMD-check-compendium/badge.svg)
+[![Binder](https://mybinder.org/badge_logo.svg)](https://mybinder.org/v2/gh/LiYingWang/kwl.pottery/master?urlpath=rstudio) [![R-CMD-check-compendium](https://github.com/LiYingWang/kwl.pottery/workflows/R-CMD-check-compendium/badge.svg)](https://github.com/LiYingWang/kwl.pottery/actions)
+
 
 This repository contains the data and code for our paper:
 
