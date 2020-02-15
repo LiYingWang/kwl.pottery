@@ -1,6 +1,5 @@
-# action.yml
-name: 'Hello World'
-description: 'Greet someone and record the time'
+on: [push, pull_request]
+name: 'Run Dockerfile'
 inputs:
   REPO:  kwl.pottery
 runs:
