@@ -25,20 +25,11 @@ jobs:
           brew install pandoc
           brew install pandoc-citeproc
 
-      - name: Cache Renv packages
-        uses: actions/cache@v1
-        with:
-          path: $HOME/.local/share/renv
-          key: r-${{ hashFiles('renv.lock') }}
-          restore-keys: r-
-
-      - name: Install packages
-        run: |
-          R -e 'install.packages("renv")'
-          R -e 'renv::restore()'
-
       - name: Render all Rmd files
         run: |
-          rmds <- list.files(pattern = "Rmd|rmd")
+          install.packages(c("bookdown", "rmarkdown", "knitr", "devtools"))
+          devtools::install_github("ThinkR-open/attachment")
+          attachment::install_if_missing(attachment::att_from_rmds(path = "."))
+          rmds <- list.files(pattern = "Rmd|rmd", recursive = TRUE)
           lapply(rmds, rmarkdown::render)
         shell: Rscript {0}
