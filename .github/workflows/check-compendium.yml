@@ -29,6 +29,6 @@ jobs:
         run: |
           install.packages(c("bookdown", "rmarkdown", "knitr", "devtools"))
           devtools::install_github("ThinkR-open/attachment")
-          lapply(attachment::att_from_rmds(path = "."), attachment::install_if_missing())
+          lapply(attachment::att_from_rmds(path = "."), attachment::install_if_missing)
           lapply(list.files(pattern = "Rmd|rmd", recursive = TRUE), rmarkdown::render)
         shell: Rscript {0}
