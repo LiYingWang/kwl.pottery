@@ -6,7 +6,7 @@ MAINTAINER Your Name <your_email@somewhere.com>
 
 COPY . /kwl.pottery
 
-ENV DEBIAN_FRONTEND noninteractive
+ENV DEBIAN_FRONTEND=noninteractive
 
 # go into the repo directory
 RUN . /etc/environment \
