@@ -16,7 +16,7 @@ RUN . /etc/environment \
   # build this compendium package
   && R -e "options(repos = 'http://cran.rstudio.com/')" \
   && R -e "remotes::install_deps('/kwl.pottery', dep=TRUE)" \
-  && R -e "devtools::install_github('benmarwick/wordcountaddin', type = 'source', dependencies=TRUE)" \
+  && R -e "remotes::install_github('benmarwick/wordcountaddin', type = 'source', dependencies=TRUE, repos='http://cran.rstudio.com/')" \
   && R -e "remotes::install_github('benmarwick/rrtools')" \
   # render the manuscript into a docx, you'll need to edit this if you've
   # customised the location and name of your main Rmd file
