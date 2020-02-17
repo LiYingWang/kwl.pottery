@@ -17,7 +17,7 @@ RUN . /etc/environment \
   && R -e "options(repos = 'http://cran.rstudio.com/')" \
   && R -e "remotes::install_deps('/kwl.pottery', dep=TRUE)" \
   && R -e "remotes::install_github('benmarwick/wordcountaddin', type = 'source', dependencies=TRUE, repos='http://cran.rstudio.com/')" \
-  && R -e "remotes::install_github('benmarwick/rrtools')" \
+  && R -e "remotes::install_github('benmarwick/rrtools', type = 'source', dependencies=TRUE, repos='http://cran.rstudio.com/')" \
   # render the manuscript into a docx, you'll need to edit this if you've
   # customised the location and name of your main Rmd file
   && R -e "rmarkdown::render('/kwl.pottery/analysis/paper/paper.Rmd')"
