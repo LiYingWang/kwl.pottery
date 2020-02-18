@@ -1,5 +1,5 @@
 # get the base image, the rocker/verse has R, RStudio and pandoc
-FROM rocker/geospatial:3.6.0
+FROM rocker/geospatial:3.6.2
 
 # required
 MAINTAINER Your Name <your_email@somewhere.com>
