@@ -10,7 +10,7 @@ COPY . /kwl.pottery
 # go into the repo directory
 RUN . /etc/environment \
   # build this compendium package
-  && R -e "remotes::install_deps('/kwl.pottery', dep=TRUE)" \
+  && R -e "devtools::install('/kwl.pottery', dep=TRUE)" \
   # install non-CRAN pkgs
   && R -e "remotes::install_github('benmarwick/wordcountaddin', type = 'source', dependencies=TRUE)" \
   && R -e "remotes::install_github('benmarwick/rrtools', type = 'source', dependencies=TRUE)" \
