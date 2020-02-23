@@ -2,7 +2,7 @@
 FROM rocker/geospatial:3.6.2
 
 # required
-MAINTAINER Your Name <your_email@somewhere.com>
+MAINTAINER Li-Ying Wang <liying15@uw.edu>
 
 COPY . /kwl.pottery
 
