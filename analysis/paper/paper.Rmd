@@ -136,7 +136,7 @@ chi <- kwl_p_ave_total$n[1]
 
 # Methods
 
-A total of `r total_no` largely intact vessels from pre-contact contexts (n = `r pre_no`), post-European contexts (n = `r Euro_no`), and Chinese contact contexts (n = `r Chi_no`) were selected for elliptic Fourier analysis. Most of them cover every vessel component from rim to bottom. The shape of vessel is the major object analyzed in this paper, however, to fully explore the pottery standardization, we also take the metric measurements into account for comparison. The total of `r metric_all` reconstructed pots (pre-European = `r pre`, European = `r euro`, Chinese = `r chi`) were measured. The metric attributes include thickness of rim, neck, and body, and diameter of rim, neck, and body. For each pot, two measurements for thickness and diameter were taken to compute an average value. To obtain information about the pottery shape, we compare the ratio of Rim/Body thickness, and the ratio of Rim/Body diameter. In addition, we use Monte Carlo test for randomness in spatial locations of pots to explore whether their distribution is meaningful, such as clustered or dispersed pattern. As craft specialization increases, pottery distribution might shift from a dispersed pattern to concentrated clusters that reflects the location of production [@Costin2001].
+We used all `r total_no` vessels that could be reconstructed with rim, body and base parts and securely provenanced to pre-contact contexts (n = `r pre_no`), post-European contexts (n = `r Euro_no`), and Chinese contact contexts (n = `r Chi_no`) for elliptic Fourier analysis. 
 
 ## Digitising and analysing by EFA
 
