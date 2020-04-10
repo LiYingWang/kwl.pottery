@@ -144,21 +144,21 @@ drawings present a two-dimensional view of vessel cross-sections with indication
 
 ## Statistical analysis 
 
-The principal component (PC) scores were analyzed with a multivariate analysis of variance (MANOVA) test to identify significant differences in shapes between occupation phases. We also computed coefficients of variation values (CVs) for the PCs, treating the PCs as shape variables that are more informative than linear dimensions. The coefficient of variation is a common and widely-used statistical measure of the spread of a set of measurements of a sample. It is defined as the standard deviation divided by the mean in a ratio scale format:
+The principal component (PC) scores were analyzed with a multivariate analysis of variance (MANOVA) test to identify significant differences in shapes between occupation phases. We also computed coefficients of variation values (CVs) for the PCs, treating the PCs as shape variables that are more informative than linear dimensions. The coefficient of variation is a common and widely-used statistical measure of the spread of a set of measurements of a sample. It is defined as the standard deviation divided by the mean:
 
 $$c_v = \frac{\sigma}{\mu}$$
 
-By standardizing standard deviation in each data set, the coefficients of variation (CV) values allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles since CV scales standard deviation to the mean that enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. We take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by ratio, we normalized PC scores to a range between 0 and 1 before computation of CV.
+As a standardized measure of the spread of data, coefficients of variation (CV) allow us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles and enables comparison of variation across different sample sizes (Eerkens and Bettinger, 2001, p. 498). Following [citations of previous work that has used CVs like this] we take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by ratio, we normalized PC scores to a range between 0 and 1 before computation of CV
 
 To answer the question of whether CV values for vessel samples across our three occupational phases are significantly different or not, we used the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996 asymptotic test for the equality of coefficients of variation from k populations [@Lycett2008; @Okumura2014; @Eerkens2000; @Eerkens2001; @Hoggard2017], we prefer the MSLR test for shape variables as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
+
+To complement our investigation of craft specialization through shape standardization, we investigated spatial patterns of ceramic vessels at Kiwulan. As craft specialization increases, pottery distribution we expect a shift from a pattern of vessels dispersed across the site to a pattern of clusters that reflects the loci of production (Costin, 2001). We used a Monte Carlo test for randomness in spatial locations of pots to explore whether their distribution is significantly clustered or dispersed. 
 
 # Reproducibility and open source materials 
 
 To enable re-use of materials and improve reproducibility and transparency [@Marwick2017], the entire R code [@Rlanguage2019] used for all the analysis and visualizations contained in this paper is openly available online at https://doi.org/10.17605/OSF.IO/ABVGF. Also in this version-controlled compendium [@Marwick2018] are the raw data for all the visualizations and tests reported here. All of the figures, tables, and statistical test results presented here can be independently reproduced with the code and data in this repository. The code is released under the MIT license, the data as CC-0, and figures as CC-BY, to enable maximum re-use. 
 
 # Results
-
-To investigate the effect of the historically-documented decline of Indigenous population in the Chinese period [@Chen2007; @Hsieh2009] on pottery production we examined the spatial distribution of pots in our sample in each period. Our concern is that the smaller population size during the Chinese period could confound our investigations into craft specialization because of reduced numbers of potters and pottery production shrinking a few locations in the settlement during this time. Although the overall number of vessels is smaller during the Chinese contact period, Figure \@ref(fig:pottery-spatial-pattern) shows that pottery is distributed randomly across the sampling area without any distinctive clusters. This suggests that differences in population across our three occupation phases are probably not driving variation in craft specialization.
 
 ```{r pottery-spatial-pattern, fig.cap= "The spatial distribution of the pottery selected for shape analysis. The quantity is indicated by the color scale."}
 library(sf)
@@ -251,9 +251,9 @@ saveRDS(jpgs_imported_coo,
 
 <!-- basic description of shape -->
 
-The elliptic Fourier coefficients of `r total_no` pottery from three phases were calculated. Reliable pottery outlines were captured by 13 harmonics that gather 99% of the total harmonic power. Figure \@ref(fig:thin-plate-splines) shows the shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods. The average shape of vessels from each phase was visualized and it shows more obvious differences between post-European and Chinese periods.
+We found that 13 harmonics captured 99% of the total harmonic power in our elliptic Fourier coefficients of `r total_no` vessels from three phases. Figure \@ref(fig:thin-plate-splines) shows vessel shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods, with the most greatest differences between pre-European and Chinese periods.
 
-```{r thin-plate-splines, fig.cap= "Compare the average shapes across phases using thin plate splines (TPS) with outline deformations required to pass from an extreme of the morphospace to the other."}
+```{r thin-plate-splines, fig.cap= "Comparison of average vessel shapes across phases using thin plate splines (TPS) with outline deformations required to pass from an extreme of one morphospace to another."}
 # Thin plate spline analysis (TPS)
 # visualize the outline deformations required to pass from an extreme of the morphospace to the other
 # Deformation grids
