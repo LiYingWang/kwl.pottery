@@ -270,15 +270,17 @@ knitr::include_graphics(here("analysis/figures/iso_pca_composit_crop.png"))
 # We can test for a difference in the distribution of PC scores by calculating a pairwise combination between every levels of a fac. 
 
 manv <- rrtools:::quietly ( MANOVA_PW(op.p, "phase") ) 
-su_manv <- as.data.frame(manv$summary)
+su_manv <- as.data.frame(manv$summary) %>% 
+  rownames_to_column()
 
 su_manv_tab <- 
   su_manv %>% 
-  mutate_all(round, 4) %>% 
+  mutate_if(is.numeric, round, 4) %>% 
   select(-Df, -`num Df`) %>% 
-  rename(`Pillai's trace` = Pillai,
+  rename(Comnparison = rowname,
+         `Pillai's trace` = Pillai,
          `Approximate F value` = `approx F`,
-         `degrees of freedom` = `den Df`)
+         `degrees of freedom` = `den Df`) 
 
 pval_chi_pre <- signif(unname(su_manv_tab[,'Pr(>F)'][2]), 4)
 pval_post_pre <- signif(unname(su_manv_tab[,'Pr(>F)'][3]), 4)
