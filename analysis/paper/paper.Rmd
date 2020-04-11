@@ -145,72 +145,8 @@ To enable re-use of materials and improve reproducibility and transparency [@Mar
 
 # Results
 
-```{r pottery-spatial-pattern, fig.cap= "The spatial distribution of the pottery selected for shape analysis. The quantity is indicated by the color scale."}
-library(sf)
-library(viridis)
-
-# read in the spatial data
-AD_zone <- invisible(st_read(here("analysis", "data", "raw_data", "AD_zone.shp"), quiet = TRUE))
-units_40 <- invisible(read.csv(here("analysis", "data", "raw_data", "kwl-list-of-sampling-squares.csv")))
-
-AD_zone_tidy <-
-  AD_zone %>% 
-  mutate(Pit =paste0("P0",Id)) %>% 
-  inner_join(units_40, by = c("Pit" = "the_sq")) %>% 
-  select(Pit, geometry)
-
-# tidy pottery data
-pottery_count <-
-  pottery_data %>% 
-  select(Site, Context, Pit, Layer, No., phase) %>% 
-  count(Pit, phase)
-
-# join two dataset to get coordinate
-pottery_count_join <-
-  pottery_count %>%
-  mutate(phase = as.factor(phase)) %>% # seems need this line first
-  inner_join(AD_zone_tidy) %>% 
-  filter(!is.na(phase)) %>% 
-  mutate(phase = case_when(
-    phase %in% "pre-e"~ "Before European Contact",
-    phase %in% "post-e" ~ "European Presence",
-    phase %in% "ch-con" ~ "Chinese Presence")) %>% 
-  mutate(phase = factor(phase,
-                        level = c("Before European Contact",
-                                  "European Presence",
-                                  "Chinese Presence")))
-# plot spatial pattern for pottery
-plot_spatial_distribution_pottery_by_phase <- 
-  ggplot() +
-  geom_sf(data = AD_zone_tidy, fill = NA) +
-  geom_sf(data = pottery_count_join, 
-          aes(geometry = geometry, 
-              fill =n), 
-          alpha = 0.9)+
-  facet_wrap(~ phase) +
-  labs(fill = "frequency") +
-  scale_fill_viridis(direction = -1) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        strip.text.x = element_text(size = 6),
-        legend.text = element_text(size = 6),
-        legend.title = element_text(size = 6),
-        legend.key.size =  unit(3, "mm"))
-
-plot_spatial_distribution_pottery_by_phase
-
-ggsave(plot = plot_spatial_distribution_pottery_by_phase,
-       here("analysis", "figures",
-            "plot-spatial-distribution-pottery-by-period.jpg"),
-       width = 135, 
-       height = 31,
-       dpi = 300,
-       units = "mm")
-```
-
 ```{r jpg-coordinates, eval=FALSE}
+# this takes some time, so we don't run the code each time we knit, we run it once and save the output
 # start shape exploration
 library(Momocs)
 #  it freezes on the empty ones...
@@ -236,9 +172,9 @@ saveRDS(jpgs_imported_coo,
 
 <!-- basic description of shape -->
 
-We found that 13 harmonics captured 99% of the total harmonic power in our elliptic Fourier coefficients of `r total_no` vessels from three phases. Figure \@ref(fig:thin-plate-splines) shows vessel shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods, with the most greatest differences between pre-European and Chinese periods.
+We found that 13 harmonics captured 99% of the total harmonic power in our elliptic Fourier coefficients of `r total_no` vessels from three phases. Figure \@ref(fig:first-two-PCs-byplot-and-tps-plot) shows vessel shape changes described using thin-plate spline warping for paired periods, pre- and post-European periods, and post-European and Chinese periods, with the most greatest differences between pre-European and Chinese periods.
 
-```{r thin-plate-splines, fig.cap= "Comparison of average vessel shapes across phases using thin plate splines (TPS) with outline deformations required to pass from an extreme of one morphospace to another."}
+```{r thin-plate-splines}
 # Thin plate spline analysis (TPS)
 # visualize the outline deformations required to pass from an extreme of the morphospace to the other
 # Deformation grids
@@ -261,16 +197,30 @@ names(mshp) <- c("chi", "poe", "pre")
 `Pre-European` <-  mshp$pre
 `Chinese` <-       mshp$chi
 
-par(mfrow=c(1,2)) # plot them side by side
+# save figure
+source(here("analysis/paper/my_tps_grid.R"))
+png(here("analysis/figures/tps-iso.png"), res = 300, w = 1800, h = 1000)
+par(mfrow=c(2,1)) # plot them side by side
 
-tps_grid(`Pre-European`, `Post-European`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
-           amp = 1, grid.size = 18, legend = T)
+my_tps_grid(`Pre-European`, 
+         `Post-European`, 
+         shp.lwd = c(2, 2), 
+         shp.border = c("red", "blue"),
+           amp = 1, 
+         grid.size = 18, 
+         legend = T)
 
-tps_grid(`Pre-European`, `Chinese`, shp.lwd = c(2, 2), shp.border = c("red", "blue"),
-           amp = 1, grid.size = 18, legend = T)
+my_tps_grid(`Pre-European`, 
+         `Chinese`, 
+         shp.lwd = c(2, 2), 
+         shp.border = c("red", "blue"),
+           amp = 1, 
+         grid.size = 18, 
+         legend = T)
 
 # Isodeformation lines
-png(here("analysis/figures/tps-iso.png"), res = 600, w = 1200, h = 1800)
+dev.off()
+
 
 #knitr::include_graphics(here::here("analysis", "figures", "tps-pre-Euro-to-post-Euro.png"))
 ```
@@ -288,13 +238,32 @@ vari_three <- round(pro_vari$cumsum[3],4)*100
 
 <!-- further description of shape and differences between phases -->
 
-The first two principal components (PCs) of the PCA on the elliptic Fourier coefficients explain `r vari_two`% of the total variance, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variance. PC1 captures the height of the vessels, from tall to short, and the roundness of the body from round to oval-shaped (Figure \@ref(fig:first-two-PCs-byplot)). PC2 relates to the neck and mouth constriction, from narrow to wide. PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck, from a curved to straight shape. The results reflect a large overlap in shapes from three occupations phases, especially for shapes in the pre-European and post-European periods. However, the spread of shape distribution indicates a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, we find a decrease in shape variance in the Chinese period that is evident in the shorter height and narrower mouth of vessels used in that period.
+The first two principal components (PCs) of the PCA on the elliptic Fourier coefficients explain `r vari_two`% of the total variance, of which `r pc1`% is explained by the first principle component. With the third component, the first three principal components explain `r vari_three`% of the total variance. PC1 captures the height of the vessels, from tall to short, and the roundness of the body from round to oval-shaped (Figure \@ref(fig:first-two-PCs-byplot-and-tps-plot)). PC2 relates to the neck and mouth constriction, from narrow to wide. PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare of the neck, from a curved to straight shape. The results reflect a large overlap in shapes from three occupations phases, especially for shapes in the pre-European and post-European periods. However, the spread of shape distribution indicates a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, we find a decrease in shape variance in the Chinese period that is evident in the shorter height and narrower mouth of vessels used in that period.
 
-```{r first-two-PCs-byplot, fig.cap= "Pottery shape distribution by each occupation phase according to the first two PCs"}
-
-# PCA byplot
+```{r}
+# PCA byplot, we save it to disk to use in the next chunk
+png(here("analysis/figures/pca-chull.png"), res = 300, w = 1800, h = 1000)
 plot_PCA(op.p, ~phase, chullfilled = TRUE)
+dev.off()
 ```
+
+```{r}
+# composite composite image of thin plate spline and PCA output
+iso_plot <- image_read(here("analysis/figures/tps-iso.png"))
+iso_plot <- image_trim(iso_plot)
+pca_plot <- image_read(here("analysis/figures/pca-chull.png"))
+
+iso_plot_back <- image_scale(image_background(iso_plot, "none"), 360)
+iso_pca <- image_composite(pca_plot, iso_plot_back, offset = "+50+50")
+iso_pca_crop <- image_crop(iso_pca, geometry = geometry_area(1800, 750, 0, 0))
+image_write(iso_pca_crop, here("analysis/figures/iso_pca_composit_crop.png"))
+```
+
+
+```{r, first-two-PCs-byplot-and-tps-plot, echo=FALSE, fig.cap="caption", fig.align='Left: Comparison of average vessel shapes across phases using thin plate splines (TPS) with outline deformations required to pass from an extreme of one morphospace to another. Right: Pottery shape distribution by each occupation phase according to the first two PCs.'}
+knitr::include_graphics(here("analysis/figures/iso_pca_composit_crop.png"))
+```
+
 
 ```{r MANOVA-table}
 # MANOVA: Multivariate Analysis of (co)variace
@@ -469,6 +438,73 @@ Previous investigations at Kiwulan have suggested an unequal distribution of pre
 Our CV tests indicate that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. Pottery shape became more homogeneous and standardized after contact with Europeans and even more so after contact with the Chinese. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if shape changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
 
 The spatial analysis (Figure \@ref(fig:kernel-plot)) for pottery samples presents multiple clusters with high densities of pottery during European presence. Hypothesis testing on spatial randomness indicates a non-randomly dispersed distribution before European contact and more extreme dispersed distribution after European presence. In contrast, the distribution of pottery is more similar to random distributions during the Chinese period. This contradicts our expectation that clustered pattern will be observed with an increase in pottery standardization since the emergence of specialized groups. The absence of clusters in the Chinese period is notable because this was a time of a historically-documented decline of Indigenous population [@Chen2007; @Hsieh2009]. We might expect reduced numbers of potters to result in pottery production shrinking to a few locations in the settlement during this time. Although the overall number of vessels is smaller during the Chinese contact period, (Figure \@ref(fig:kernel-plot)) shows that pottery is distributed randomly across the sampling area without any distinctive clusters during this time. This suggests that differences in population across our three occupation phases are probably not driving variation in craft specialization.
+
+
+```{r pottery-spatial-pattern, fig.cap= "The spatial distribution of the pottery selected for shape analysis. The quantity is indicated by the color scale."}
+library(sf)
+library(viridis)
+
+# read in the spatial data
+AD_zone <- invisible(st_read(here("analysis", "data", "raw_data", "AD_zone.shp"), quiet = TRUE))
+units_40 <- invisible(read.csv(here("analysis", "data", "raw_data", "kwl-list-of-sampling-squares.csv")))
+
+AD_zone_tidy <-
+  AD_zone %>% 
+  mutate(Pit =paste0("P0",Id)) %>% 
+  inner_join(units_40, by = c("Pit" = "the_sq")) %>% 
+  select(Pit, geometry)
+
+# tidy pottery data
+pottery_count <-
+  pottery_data %>% 
+  select(Site, Context, Pit, Layer, No., phase) %>% 
+  count(Pit, phase)
+
+# join two dataset to get coordinate
+pottery_count_join <-
+  pottery_count %>%
+  mutate(phase = as.factor(phase)) %>% # seems need this line first
+  inner_join(AD_zone_tidy) %>% 
+  filter(!is.na(phase)) %>% 
+  mutate(phase = case_when(
+    phase %in% "pre-e"~ "Before European Contact",
+    phase %in% "post-e" ~ "European Presence",
+    phase %in% "ch-con" ~ "Chinese Presence")) %>% 
+  mutate(phase = factor(phase,
+                        level = c("Before European Contact",
+                                  "European Presence",
+                                  "Chinese Presence")))
+# plot spatial pattern for pottery
+plot_spatial_distribution_pottery_by_phase <- 
+  ggplot() +
+  geom_sf(data = AD_zone_tidy, fill = NA) +
+  geom_sf(data = pottery_count_join, 
+          aes(geometry = geometry, 
+              fill =n), 
+          alpha = 0.9)+
+  facet_wrap(~ phase) +
+  labs(fill = "frequency") +
+  scale_fill_viridis(direction = -1) +
+  theme_minimal() +
+  theme(plot.title = element_text(hjust = 0.5),
+        axis.text.x = element_blank(),
+        axis.text.y = element_blank(),
+        strip.text.x = element_text(size = 6),
+        legend.text = element_text(size = 6),
+        legend.title = element_text(size = 6),
+        legend.key.size =  unit(3, "mm"))
+
+plot_spatial_distribution_pottery_by_phase
+
+ggsave(plot = plot_spatial_distribution_pottery_by_phase,
+       here("analysis", "figures",
+            "plot-spatial-distribution-pottery-by-period.jpg"),
+       width = 135, 
+       height = 31,
+       dpi = 300,
+       units = "mm")
+```
+
 
  
 ```{r kernel-plot, fig.cap= "Kernel density map visulizes the probability of the density of pottery across space. The map shows  major core area during the pre-European period, multiple core areas during the European period, and a single core during the Chinese period. Used the bandwidth based on Silverman (1986)'s rule of thumb"}
