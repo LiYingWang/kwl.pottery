@@ -35,27 +35,6 @@ pottery_count_join <-
                         level = c("Before European Contact",
                                   "European Presence",
                                   "Chinese Presence")))
-# plot spatial pattern for pottery
-plot_spatial_distribution_pottery_by_phase <-
-  ggplot() +
-  geom_sf(data = AD_zone_tidy, fill = NA) +
-  geom_sf(data = pottery_count_join,
-          aes(geometry = geometry,
-              fill =n),
-          alpha = 0.9)+
-  facet_wrap(~ phase) +
-  labs(fill = "frequency") +
-  scale_fill_viridis(direction = -1) +
-  theme_minimal() +
-  theme(plot.title = element_text(hjust = 0.5),
-        axis.text.x = element_blank(),
-        axis.text.y = element_blank(),
-        strip.text.x = element_text(size = 6),
-        legend.text = element_text(size = 6),
-        legend.title = element_text(size = 6),
-        legend.key.size =  unit(3, "mm"))
-
-plot_spatial_distribution_pottery_by_phase
 
 # --------------------------------point pattern analysis-------------------------------------------
 # get centroid and make a list of three periods
@@ -91,9 +70,12 @@ density_analysis <- function(x, ...) {
   # kernel density estimation with contour
   kernel_tmp <- density(pottery_point_ppp_tmp)
   kernel_to_plot <-
-    plot(kernel_tmp, main = "")
-  contour(kernel_tmp, add = TRUE)
-  title(..., line = -0.3, adj = 0.4, cex.main = 0.8)
+    graphics::plot(kernel_tmp,
+                   main = "",
+                   ribbon=TRUE,
+                   ribside=c("bottom"))
+    graphics::contour(kernel_tmp, add = TRUE)
+   #title(..., line = -0.3, adj = 0.4, cex.main = 1.5)
   return(list(pottery_point_ppp = pottery_point_ppp_tmp,
               kernel_to_plot = kernel_to_plot))
 }
@@ -102,8 +84,8 @@ titles <- names(pottery_period_join_cen)
 jpeg(
   here::here("analysis", "figures",
              "plot-kde-maps.jpg"),
-  width = 135,
-  height = 40,
+  width = 265,
+  height = 80,
   units = "mm",
   res = 300)
 par(mfrow = c(1, 3),
@@ -113,11 +95,8 @@ kernels_for_plotting <-
   map2(pottery_period_join_cen,
        titles,
        ~density_analysis(.x, main = .y))
-
 invisible(dev.off())
-knitr::include_graphics(here::here("analysis",
-                             "figures",
-                             "plot-kde-maps.jpg"))
+
 
 #--------------------------hypothesis testing for spatial distribution--------------
 
@@ -143,18 +122,18 @@ nndist_hypo_testing <- function(x, n = 1e3L,  ... ) {
       col = "bisque",
       xlim = range(ann_tmp, ann_r_tmp),
       ...)
-  abline(v = ann_tmp, col = "blue")
+  abline(v = ann_tmp, col = "blue", lwd = 4)
   return(the_plot)
 }
 
-# make the blue lines thicker to be more visible
+
 jpeg(
   here::here("analysis", "figures",
        "plot-kde-ann-histograms.jpg"),
   width = 90,
   height = 150,
   units = "mm",
-  res = 300)
+  res = 600)
 par(mfrow = c(3, 1))
 invisible(
   map2(kernels_for_plotting,
@@ -162,6 +141,4 @@ invisible(
        ~invisible(nndist_hypo_testing(.x,
                                       main = .y))))
 invisible(dev.off())
-knitr::include_graphics(here::here("analysis",
-                             "figures",
-                             "plot-kde-ann-histograms.jpg"))
+
