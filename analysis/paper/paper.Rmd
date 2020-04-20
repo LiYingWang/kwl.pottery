@@ -15,7 +15,11 @@ abstract: |
 keywords: |
   Geometric Morphometrics; craft specialization; Iron age; culture contact; ceramic standardization
 highlights: |
-  These are the highlights. 
+  1. Iron Age pottery shapes from Kiwulan, Taiwan, were analyzed using elliptical fourier analysis
+  2. Statistical test for the equality of coefficients of variation of shape coefficients was applied
+  3. Significant differences in pottery shape were identified between culture contact phases
+  4. Pottery shapes show high standardization after contact with mainland Han Chinese groups
+  
 ---
 
 <!-- This is the format for text comments that will be ignored during renderings. Do not put R code in these comments because it will not be ignored. -->
