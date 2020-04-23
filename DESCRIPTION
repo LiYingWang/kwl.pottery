@@ -33,7 +33,8 @@ Imports:
     mclust (>= 5.4.5),
     Momocs (>= 1.3.0),
     readr (>= 1.3.1),
-    remotes (>= 2.1.0)
+    remotes (>= 2.1.0),
+    magick
 Remotes: benmarwick/wordcountaddin, benmarwick/rrtools
 Suggests: devtools, git2r
 URL: https://github.com/LiYingWang/kwl.pottery
