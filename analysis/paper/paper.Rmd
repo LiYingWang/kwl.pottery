@@ -48,19 +48,17 @@ Indigenous societies' responses to colonial contact ranges from passive acceptan
 
 This research investigates if there was increasing ceramic specialization resulting from Indigenous interaction with Europeans in the 17th century or Chinese in the 19th century, two major foreign influences in early historical Taiwan, which may indicate social changes in local Indigenous societies. We predict that competition within the Indigenous community at Kiwulan for foreign resources and trade partnerships with European or Chinese colonizers may have led to the emergence of craft specialization caused by greater economic and social control of ceramic production by a small group of individuals. Using standardization in ceramic shapes as a proxy for craft specialization, we ask: Did colonial trade impact the shape of locally-produced Indigenous pottery vessels? Did pottery shape become more homogeneous and standardized after foreign contacts with European colonizers or Chinese immigrants?
 
-Several measurements have been used for investigating ceramic standardization that include metric, compositional, and technological variables [@Arnold2000; @Blackman1993; @Boness2015; @Costin1991; @Rice1991; @Roux2015; @Tite1999]. Among those variables, metric measurements are most widely applied to archaeological assemblages. The coefficient of variation (CV) statistic is regularly used to quantify the degree of standardization in ceramic assemblages [@Eerkens2001; @Roux2003; @Stark1995; @Junker1999]. However, because pottery vessels typically have curved shapes, linear measurements have limited sensitivity to many kinds of shape variations. Thus, to capture subtle shape variations that might also be relevant to standardization, we analyze ceramic shapes using geometric morphometric (GM) methods. 
+Several measurements have been used for investigating ceramic standardization that include metric, compositional, and technological variables [@Arnold2000; @Blackman1993; @Boness2015; @Costin1991; @Rice1991; @Roux2015; @Tite1999]. Among those variables, metric measurements are most widely applied to archaeological assemblages. The coefficient of variation (CV) statistic is regularly used to quantify the degree of standardization in ceramic assemblages [@Eerkens2001; @Roux2003; @Stark1995; @Junker1999]. However, because pottery vessels typically have curved shapes, linear measurements have limited sensitivity to many kinds of shape variations. Thus, to capture subtle shape variations that might also be relevant to standardization, we analyze ceramic shapes using geometric morphometric methods (GMM). 
 
 ## Geometric Morphometrics
 
-Geometric morphometrics differs from traditional linear measurements through its use of Cartesian coordinates of morphological structures to define and analyze shape [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates in terms of their unique point locations with respect to numerical values on coordinate axes. There are two common morphometric methods: landmark and outline approaches [@Adams2004]. Landmark GM approaches assign a set of landmarks and/or semilandmarks onto objects as reference points that can be specified on a coordinate system. Landmark-based morphometrics are widely applied to archaeological objects with obvious morphological features that provide unambiguous reference points for landmark placement, such as tips and edges of stone tools or iron weapons[@Birch2019; @Buchanan2019; @Cardillo2010; @Lycett2013; @Selden2018], visually distinctive bone features [@Haruda2019; @Meloro2015], or ceramic assemblages with clear distinct components [@Selden2019; @Topi2017].
+Geometric morphometrics differs from traditional linear measurements through its use of Cartesian coordinates of morphological structures to quantify and analyze shape [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates in terms of their unique point locations with respect to numerical values on coordinate axes. There are two common morphometric methods: landmark and outline approaches [@Adams2004]. Landmark GMM approaches assign a set of landmarks and/or semilandmarks onto objects as reference points that can be specified on a coordinate system. Landmark-based morphometrics are widely applied to archaeological objects with obvious morphological features that provide unambiguous reference points for landmark placement, such as tips and edges of stone tools or iron weapons[@Birch2019; @Buchanan2019; @Cardillo2010; @Lycett2013; @Selden2018], visually distinctive bone features [@Haruda2019; @Meloro2015], or ceramic assemblages with clear distinct components [@Selden2019; @Topi2017]. The applications of GMM couple with multivariate statistics for shape variables of artifacts are commonly associated with topics of topological evolution or variations in assemblages to identify groups [@Doyon2019; @Eren2015; @Selden2018]. 
 
-Geometric morphometrics methods can provide a useful framework for further statistical evaluation on shape variability of archaeological assemblages to explore how they change over time or across geographic areas to answer questions related to variation in morphology and standardization. A common procedure is using multivariate statistical methods, such as principal component analysis or canonical variate analysis, to capture the important variances of the overall variation in shape variables generated by GM and then visualize the variances to identify any clustered analytical groups that suggest less variability or high standardization. For example, the application of GM to stone tools coupled with statistical tests, such as coefficient of variation on principal component scores [@Archer2015], and on a series of metric variables including length, width, or thickness [@Buchanan2018; @Okumura2014; @Smith2016], or Kruskal-Wallis test on flake scar patterns [@Eren2015], which allows further discussion of causes of standardization and variability that may relate to degree of tool reduction, specialized function, or lack of innovation in a small group. In addition, cluster analysis such as k-mean aggregation for shape variables generated by GM is another way to discuss the variability among shape groups [@Doyon2019]. 
+In addition to vibrations, shape standardization of artifacts and its causes is another topic. A common procedure is using dimensional reduction techniques, such as principal components analysis or canonical variate analysis, to capture the essential features that can represent the overall shape. This enables the identification of clustered analytical groups through visualization for the results, followed by statistical tests on the shape variables. In this way, we can explore whether there is less variations or high standardization in the same assemblage over time or between assemblages over larger geographical areas. For example, @Archer2015's case study of Still Bay points in Southern Africa suggests an increase in point shape standardization over time that may relate to a maintenance of finished points. For comparison between several sites, @Buchanan2018 identified a more uniform base-shape of Folsom points than Clovis points across the western US, which indicates the specific function for hafting. Similarly, @Smith2016 suggested that the humongous fluted point base in Alaska and northern Yukon is a risk management strategy to ensure the ease of replacement during long-distance travel. There are also other factors could lead to an increase in standardization of point shapes such as low level of cultural innovation in a small group [@Okumura2014]. 
 
-<!--discussion of standardization in material culture using GM approaches-->
+However, a key limitation of the landmark approach is that landmarks may be difficult to reproducibly locate for structures that are mostly or entirely curves if not mathematically-defined. In those cases, outline approach, Elliptic Fourier Analysis (EFA), is a better mean for assessing morphological variation in whole structure of two-dimensional closed shapes. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions [@Adams2004; @Bonhomme2014; @Claude2008]. To be specific, EFA converts coordinates along a curve into Fourier function coefficients, called harmonic coefficients or harmonics [@Kuhl1982]. The number of harmonics determines the quality and precision of the geometric representation of an object. The harmonic power, a cumulative sum of squared harmonic coefficients, provides a robust rule for determining the desired number of harmonics [@Bonhomme2014]. EFA was first introduced to study shapes of artifacts in archaeology in 1980s [@Gero1984], and has been increasing applied to different archaeological materials. Most applications are associated with human remains and animal bones to examine biological variation, and also stone artifacts to explore stone tool topology and technological evolution [@Fox2015; @Hoggard2019; @Iovictua2010].
 
-However, a key limitation of the landmark approach is that landmarks may be difficult to reproducibly locate for structures that are mostly or entirely curves if not mathematically-defined. In those cases, Elliptic Fourier Analysis (EFA) is an excellent mean for assessing morphological variation in whole structure of two-dimensional closed shapes. EFA was first introduced to study shapes of artifacts in archaeology in 1980s [@Gero1984]. Most applications are associated with human remains and animal bones to study biological variation, and has been increasing for stone artifacts to explore stone tool topology and technology [@Fox2015; @Hoggard2019; @Iovictua2010]. Despite the EFA applications for ceramics is rare, this approach is promising for answering questions related to ceramic taxonomy [@Topi2017; @Wilczek2014]. For example, @Wilczek2014 evaluate the concordance between EFA and Discrete Cosine Transform (DCT), and a traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. The results show the variation indicated by EFA and DCT matches the traditional ceramic typology, which supports that claim that outline-based approaches can be efficiently used for studying variations in ceramic shapes. Furthermore, @Wilczek2014's EFA results help us understand the level of production standardization over time across the region. 
-
-EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions [@Adams2004; @Bonhomme2014; @Claude2008]. To be specific, EFA converts coordinates along a curve into Fourier function coefficients, called harmonic coefficients or harmonics [@Kuhl1982]. The number of harmonics determines the quality and precision of the geometric representation of an object. The harmonic power, a cumulative sum of squared harmonic coefficients, provides a robust rule for determining the desired number of harmonics [@Bonhomme2014]. EFA is suitable for analyzing shapes lacking representative landmarks, or where curves contain the most meaningful variation. In such cases, the focus is the whole shape instead of the different components of a shape. We use EFA to evaluate the level of standardization of ceramics data from Kiwulan, northeastern Taiwan, in relation to the European presence in the 17th century to gain insights into the emergence of ceramic specialization. The reason of using EFA is because there is no sufficient landmarks could be identified straightforwardly due to the globular body of ceramics. We use a significance test for the equality of coefficient of variations of shape variables to statistically compare the vessel standardization from different periods. 
+Despite the EFA applications for ceramics is rare, this approach is promising for answering questions related to ceramic taxonomy [@Topi2017; @Wilczek2014]. For example, @Wilczek2014 evaluate the concordance between EFA and Discrete Cosine Transform (DCT), and a traditional typology by studying 154 complete ceramic vessels with varied shapes from the Bibracte oppidum in France. The results show the variation indicated by EFA and DCT matches the traditional ceramic typology, which supports that claim that outline-based approaches can be efficiently used for studying variations in ceramic shapes. Furthermore, @Wilczek2014's EFA results help us understand the level of production standardization over time across the region. EFA is suitable for analyzing shapes lacking representative landmarks, or where curves contain the most meaningful variation. In such cases, the focus is the whole shape instead of the different components of a shape. We use EFA to evaluate the level of standardization of ceramics data from Kiwulan, northeastern Taiwan, in relation to the European presence in the 17th century to gain insights into the emergence of ceramic specialization. The reason of using EFA is because there is no sufficient landmarks could be identified straightforwardly due to the globular body of ceramics. We use a significance test for the equality of coefficient of variations of shape variables to statistically compare the vessel standardization from different periods. 
 
 # Archaeological background and materials 
 
@@ -444,116 +442,6 @@ bind_rows(PC1_cv_tests,
 
 knitr::kable(PC1_PC2_cv_tests,
              caption = "P-values of the CV equality test of PC1 and PC2 between phases")
-```
-
-We compare the result of shape variable with the result of metric data for six measurements and two ratio values using CV test (Table \@ref(tab:metricCVstest)). Metric measurements show there is a significant difference (p-value less than 0.01) between CV values for two metric measurements across phases, the rim diameter and the neck diameter before and after the European presence. After the arrival of the Chinese, there is only one metric attribute, the rim diameter, showing significant difference compared with post-European period (p-value less than 0.05). Although these results show the differences between different contact phases that corresponds to part of the results of shape variable, elliptic Fourier analysis captures more subtle differences in a substantial way reflected by overall shapes of pottery, not only limited to diameter variables. In addition, the result of spatial analysis (Figure \@ref(fig:kernel-plot)) for pottery shape samples presents multiple clusters with high density of pottery during the European presence. However, the hypothesis testing on spatial randomness indicates a non-randomly dispersed distribution before European contact and more extreme dispersed after European presence. In contrast, the distribution of pottery is more similar to the random distributions during the Chinese period. This contradicts our expectation that clustered pattern will be observed with an increase in pottery standardization since the emergence of specialized groups. Or, this may indicate that there are other factors lead to pottery shape standardization instead of a small number of artisans. 
-
-```{r metricCVstest}
-# select metric attributes and tidy data for computing CV
-kwl_p_metrics_long <-
-  kwl_p_ave %>%
-  mutate(dia_rim_body = Dia_Rim_ave/Dia_Body_ave,
-         thi_rim_body = Thick_Rim_ave/Thick_Body_ave) %>%
-  select(period, 
-         Dia_Rim_ave, Dia_Neck_ave, 
-         Dia_Body_ave, Thick_Rim_ave, 
-         Thick_Neck_ave, Thick_Body_ave,
-         dia_rim_body, thi_rim_body,) %>%
-  rename(`Rim diameter (mm)` = Dia_Rim_ave,
-         `Neck diameter (mm)` = Dia_Neck_ave,
-         `Body diameter (mm)` = Dia_Body_ave,
-         `Rim thickness (mm)` = Thick_Rim_ave,
-         `Neck thickness (mm)` = Thick_Neck_ave,
-         `Body thickness (mm)` = Thick_Body_ave,
-         `Ratio of Rim/Body diameter` = dia_rim_body,
-         `Ratio of Rim/Body thickness` = thi_rim_body) %>%
-  gather(variable, value, -period) %>%
-  filter(!is.na(period), !is.na(value)) %>% 
-  mutate(variable = factor(variable, levels = c("Rim thickness (mm)",
-                                                "Neck thickness (mm)",
-                                                "Body thickness (mm)",
-                                                "Ratio of Rim/Body thickness",
-                                                "Rim diameter (mm)",
-                                                "Neck diameter (mm)",
-                                                "Body diameter (mm)",
-                                                "Ratio of Rim/Body diameter"))) %>%
-  arrange(variable)
-# filter pre-e and post-e periods
-kwl_p_metrics_long_pre_post <-
-  kwl_p_metrics_long %>%
-  filter(!period == "ch-con")
-# filter post-e and chi periods
-kwl_p_metrics_long_post_chi <-
-  kwl_p_metrics_long %>%
-  filter(!period == "pre-e")
-#---------------------------CV test for pre-e and post-e pair
-kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post <-
-  kwl_p_metrics_long_pre_post %>%
-  nest(-variable) %>%  # or nest(period, value) %>%
-  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
-                               ~bind_cols(asymptotic_test (
-                                 .x$value,
-                                 .x$period)))) %>%
-  unnest(asymptotic_test)
-# compute CV
-kwl_p_cvs_pre_post <-
-  kwl_p_metrics_long_pre_post %>%
-  group_by(period, variable) %>%
-  summarise(cvs = raster::cv(value, na.rm = TRUE))
-# join p-values to CVs
-kwl_p_cvs_and_pvalues_pre_post <-
-  kwl_p_cvs_pre_post %>%
-  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_pre_post) %>%
-  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
-  mutate(variable = factor(variable, ordered = TRUE)) %>%
-  arrange(variable)
-# making table for CV
-kwl_p_cvs_table_pre_post <-
-  kwl_p_cvs_and_pvalues_pre_post %>%
-  select(-data, -significant) %>%
-  pivot_wider(names_from = period, values_from = cvs) %>%
-  select(variable, `pre-e`, `post-e`, `D_AD`, `p_value`) %>%
-  mutate_at(c("pre-e", "post-e", "D_AD", "p_value"), round, 4)
-#---------------------------CV test for post-e and ch-con pair
-kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi <-
-  kwl_p_metrics_long_post_chi %>%
-  nest(-variable) %>%  # or nest(period, value) %>%
-  mutate(asymptotic_test = map(data, # change from mslr_test to asymptotic_test
-                               ~bind_cols(asymptotic_test (
-                                 .x$value,
-                                 .x$period)))) %>%
-  unnest(asymptotic_test)
-# compute CV
-kwl_p_cvs_pre_post <-
-  kwl_p_metrics_long_post_chi %>%
-  group_by(period, variable) %>%
-  summarise(cvs = raster::cv(value, na.rm = TRUE))
-# join p-values to CVs
-kwl_p_cvs_and_pvalues_post_chi <-
-  kwl_p_cvs_pre_post %>%
-  left_join(kiwulan_pottery_metrics_cvs_plot_cv_test_asym_post_chi) %>%
-  mutate(significant = ifelse(p_value <= 0.05, 'yes', 'no')) %>%
-  mutate(variable = factor(variable, ordered = TRUE)) %>%
-  arrange(variable)
-# making table for CV
-kwl_p_cvs_table_post_chi <-
-  kwl_p_cvs_and_pvalues_post_chi %>%
-  select(-data, -significant) %>%
-  pivot_wider(names_from = period, values_from = cvs) %>%
-  select(variable, `post-e`, `ch-con`, `D_AD`, `p_value`) %>%
-  mutate_at(c("post-e", "ch-con", "D_AD", "p_value"), round, 4)
-# join two table together
-kwl_p_cvs_table_all <-
-  kwl_p_cvs_table_pre_post %>% 
-  left_join(kwl_p_cvs_table_post_chi, "variable") %>% 
-  select(-`post-e.y`) %>% 
-  rename(`before European` = "pre-e", `European` = "post-e.x", Chinese = "ch-con",
-         `D_AD-1` = "D_AD.x", `D_AD-2` = "D_AD.y",
-         `P value-1` = `p_value.x`, `P value-2` = `p_value.y`) %>% 
-  select(variable, `before European`, European, Chinese,
-         `D_AD-1`, `P value-1`, `D_AD-2`, `P value-2`)
-knitr::kable(kwl_p_cvs_table_all,
-             caption = "Coefficient of Variation for metric attributes by three phases using Asymptotic test [@Feltz1996]. The first set of P-value represents the comparison between before European and European periods, while the second represents the comparison between European and Chinese periods ")
 ```
 
 # Discussion
