@@ -444,13 +444,25 @@ knitr::kable(PC1_PC2_cv_tests,
              caption = "P-values of the CV equality test of PC1 and PC2 between phases")
 ```
 
-```{r size-regression}
-# calculate centroid size
-jpgs_imported_coo_size <-
-  jpgs_imported_coo %>% 
-  mutate(size =  coo_centsize(jpgs_imported_coo)) 
+```{r size-regression, fig.cap= "Measure "}
+library(ggpubr)
+library(geomorph)
 
-# create pcs dataframe for joining
+jpgs_imported_coo_size <- coo_centsize(jpgs_imported_coo)
+jpgs_imported_coo_size_df <- as.data.frame(jpgs_imported_coo_size) 
+jpgs_imported_coo_size_df <-
+  bind_cols(filename = rownames(jpgs_imported_coo_size_df), 
+            jpgs_imported_coo_size_df) %>% 
+  mutate(filename = parse_number(filename))
+
+# prepare metric data for joining
+pottery_data_tidy <-
+  pottery_data %>%
+  mutate_at(vars(starts_with(c("Thick", "Diameter"))), as.numeric) %>% 
+  mutate(Height = as.numeric(Hight)) %>% 
+  mutate(filename = parse_number(filename))
+
+# prepare pcs dataframe for joining
 pc1_df_with_filename <-
   bind_cols(filename = rownames(pc1), pc1) %>% 
   rename(c("pc1" = "x")) %>% 
@@ -462,29 +474,76 @@ pc2_df_with_filename <-
   mutate(filename = parse_number(filename))
 
 # make a dataframe for centroid size and join with pc1
-jpgs_imported_coo_size_df <-
-  as.data.frame(jpgs_imported_coo_size$fac) %>% 
+jpgs_imported_coo_size_pcs_metric <-
+  jpgs_imported_coo_size_df %>% 
   mutate(filename = parse_number(as.character(filename))) %>% 
   left_join(pc1_df_with_filename) %>% 
-  left_join(pc2_df_with_filename)
+  left_join(pc2_df_with_filename) %>% 
+  left_join(pottery_data_tidy)
 
 # size boxplot by period
-ggplot(jpgs_imported_coo_size_df,
-       aes(size, fct_rev(phase))) +
-  coord_flip() +
+boxplot_size <-
+  ggplot(jpgs_imported_coo_size_pcs_metric,
+         aes(Diameter1_Body, fct_rev(y))) +
   geom_boxplot() +
-  labs(x = "phase",
-       y = "centroid size")
+  coord_flip() +
+  labs(x = "body diameter (mm)", y = "") +
+  scale_y_discrete(breaks = c("Pre-European", "Post-European", "Chinese"),
+                   labels = c("Pre-\nEuropean", "Post-\nEuropean", "Chinese")) +
+  theme(axis.text = element_text(size = 8))
 
-# build regression model
-linearMod <- lm( size ~ pc1, data = jpgs_imported_coo_size_df)
+# can pc1 predict size by period?
+pc1_size_reg <- 
+  ggscatter(jpgs_imported_coo_size_pcs_metric, 
+            x = "Diameter1_Body", 
+            y = "pc1",
+            add = "reg.line",
+            size = 1) +
+    facet_wrap(~ fct_rev(y)) +
+    stat_cor(label.y = 1.25, label.sep = "\n") +
+    #stat_regline_equation(label.y = 1) +
+    labs(x = "") +
+    theme(axis.text = element_text(size = 8)) +
+    #scale_x_continuous(breaks = c(75, 200)) +
+    scale_y_continuous(limits = c(0, 1.5),
+                       breaks = c(seq(0, 1, 0.5)),
+                       labels = c(seq(0, 1, 0.5)))
 
-ggplot(jpgs_imported_coo_size_df, 
-       aes(size, pc1)) +
-  geom_point() +
-  geom_smooth(method = "lm") +
-  facet_wrap(~ fct_rev(phase)) +
-  labs(x = "centroid size")
+# can pc1 predict size by period?
+pc2_size_reg <- 
+  ggscatter(jpgs_imported_coo_size_pcs_metric, 
+            x = "Diameter1_Body", 
+            y = "pc2",
+            add = "reg.line",
+            size = 1) +
+    facet_wrap(~ fct_rev(y)) +
+    stat_cor(label.y = 1.25, label.sep = "\n") +
+    #stat_regline_equation(label.y = 1) +
+    labs(x = "body diameter (mm)") +
+    theme(axis.text = element_text(size = 8)) +
+    #scale_x_continuous(breaks = c(75, 200)) +
+    scale_y_continuous(limits = c(0, 1.5),
+                       breaks = c(seq(0, 1, 0.5)),
+                       labels = c(seq(0, 1, 0.5)))
+
+# plot boxplot and regression together 
+right_column <-
+  plot_grid(pc1_size_reg, pc2_size_reg, ncol =1)
+
+size_boxplot_regression <-
+  plot_grid(boxplot_size,
+            right_column,
+            labels = c("A", "B"),
+            label_size = 12,
+            rel_widths = c(1.8, 3.7))
+
+ggsave(plot = size_boxplot_regression,
+       here("analysis", "figures",
+            "size-boxplot-regression.jpg"),
+       width = 180, 
+       height = 100,
+       dpi = 300,
+       units = "mm")
 ```
 
 # Discussion
