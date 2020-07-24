@@ -444,7 +444,11 @@ knitr::kable(PC1_PC2_cv_tests,
              caption = "P-values of the CV equality test of PC1 and PC2 between phases")
 ```
 
-```{r size-regression, fig.cap= "Measure "}
+<!-- size analysis -->
+
+We also conducted size analysis by examining the body diameter of the vessels to explore any differences in vessel form reflected by size and shape. Body diameter is a suitable metric measurement to represent size for ceramics since it is associated with volume as a utilitarian function, and could present differences in the situation of similar shape. The body diameter of the vessels from Chinese period is larger than those from the two earlier periods, and the vessels before European contact have the smallest body diameter on average (Figure \@ref(fig:size-regression): A). It is interesting that linear regression model (Figure \@ref(fig:size-regression): B) predicts that shape, captured by PC1 and PC2, changes with size across three phases, except PC1 in Chinese period. That is, the shorter vessels are larger in body diameter according to the significant positive correlation between PC1 and size; however, the vessel from Chinese period does not show this pattern. On the contrary, the negative relationship between PC2 and size suggests that the vessels with narrower neck and mouth tend to have a larger body diameter. 
+
+```{r size-regression, fig.cap= "A: Distribution of body diamater of vessels across three phases. B: Scatter plots of shape variable, pc1 at the top and pc2 at the bottom, as a function of body dimater"}
 library(ggpubr)
 library(geomorph)
 
@@ -496,7 +500,7 @@ boxplot_size <-
 pc1_size_reg <- 
   ggscatter(jpgs_imported_coo_size_pcs_metric, 
             x = "Diameter1_Body", 
-            y = "pc1",
+            y = "PC1",
             add = "reg.line",
             size = 1) +
     facet_wrap(~ fct_rev(y)) +
@@ -509,11 +513,11 @@ pc1_size_reg <-
                        breaks = c(seq(0, 1, 0.5)),
                        labels = c(seq(0, 1, 0.5)))
 
-# can pc1 predict size by period?
+# can pc2 predict size by period?
 pc2_size_reg <- 
   ggscatter(jpgs_imported_coo_size_pcs_metric, 
             x = "Diameter1_Body", 
-            y = "pc2",
+            y = "PC2",
             add = "reg.line",
             size = 1) +
     facet_wrap(~ fct_rev(y)) +
@@ -548,9 +552,9 @@ ggsave(plot = size_boxplot_regression,
 
 # Discussion
 
-Previous investigations at Kiwulan suggested an unequal distribution of prestige goods, trade ornaments in particular, following the appearance of Europeans [@Cheng2008; @Wang2011], which hinted at the emergence of social inequality within the Indigenous community. Ceramic vessel shape standardization was examined to measure craft specialization as a proxy for social differentiation [@Costin2001; @Junker1999]. The result of our MANOVA demonstrates a significant difference in shapes between the pre-European and Post-European periods, and between the pre-European and the Chinese periods. The average shape presents as a round body with a wide rim and neck before European contact, which shifts to a more oval-shaped body with narrower rim and neck after the European presence. Shape changes are more pronounced during the Chinese contact period. In general, vessels become shorter in height over time, leading to an oval-shaped body.
+Previous investigations at Kiwulan suggested an unequal distribution of prestige goods, trade ornaments in particular, following the appearance of Europeans [@Cheng2008; @Wang2011], which hinted at the emergence of social inequality within the Indigenous community. Ceramic vessel shape standardization was examined to measure craft specialization as a proxy for social differentiation [@Costin2001; @Junker1999]. The result of our MANOVA demonstrates a significant difference in shapes between the pre-European and Post-European periods, and between the pre-European and the Chinese periods. The average shape presents as a round body with a wide rim and neck before European contact, which shifts to a more oval-shaped body with narrower rim and neck after the European presence. Shape changes are more pronounced during the Chinese contact period. In general, vessels become shorter in height over time, leading to an oval-shaped body. Moreover, size significantly varies with shape for vessels before and after the European presence, which presents that shorter vessels with narrower opening tend to have a larger body diameter. This correlation between narrower opening and larger diameter can be also observed during the Chinese period without the effect of height.
 
-Our CV tests indicate that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. Pottery shape became more homogeneous and standardized after contact with Europeans and even more so after contact with the Chinese. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if shape changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
+Our CV tests indicate that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. Pottery shape became more homogeneous and standardized after contact with Europeans and even more so after contact with the Chinese. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if form changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
 
 The spatial analysis (Figure \@ref(fig:kernel-plot)) for pottery samples presents multiple clusters with high densities of pottery during European presence. Hypothesis testing on spatial randomness indicates a non-randomly dispersed distribution before European contact and more extreme dispersed distribution after European presence. In contrast, the distribution of pottery is more similar to random distributions during the Chinese period. This contradicts our expectation that clustered pattern will be observed with an increase in pottery standardization since the emergence of specialized groups. The absence of clusters in the Chinese period is notable because this was a time of a historically-documented decline of Indigenous population [@Chen2007; @Hsieh2009]. We might expect reduced numbers of potters to result in pottery production shrinking to a few locations in the settlement during this time. Although the overall number of vessels is smaller during the Chinese contact period, Figure \@ref(fig:kernel-plot) shows that pottery is distributed randomly across the sampling area without any distinctive clusters during this time. This suggests that differences in population across our three occupation phases are probably not driving variation in craft specialization.
 
