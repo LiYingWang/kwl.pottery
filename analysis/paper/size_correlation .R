@@ -42,11 +42,20 @@ fit.shapephase <-
            print.progress = FALSE,
            iter = 9999)
 
-# morphological disparity
+# morphological disparity, only works for landmarks
 morphol.disparity(fit.shapephase,
                   groups = jpgs_imported_coo_size_pcs_metric$y,
                   data = geomorph_df,
                   print.progress = FALSE,
                   iter = 9999)
 
+# using dispRity example:
+
+phase_group <- crown.stem(op.p)
+
+subset <- custom.subsets(data = op.p$x, group= op.p$phase)
+sum_of_variances <- dispRity(data = op.p$x,
+                             group= op.p$phase,
+                             metric = c(sum, variances))
+summary(sum_of_variances)
 
