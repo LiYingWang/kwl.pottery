@@ -145,7 +145,7 @@ The principal component (PC) scores were analyzed with a multivariate analysis o
 
 $$c_v = \frac{\sigma}{\mu}$$
 
-As a standardized measure of the spread of data, coefficients of variation (CV) allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles and enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. Following @Eerkens2001 and @Roux2003, we take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by ratio, we normalized PC scores to a range between 0 and 1 before computation of CV.
+As a standardized measure of the spread of data, coefficients of variation (CV) allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles and enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. Following @Eerkens2001 and @Roux2003, we take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by ratio, we normalized PC scores to a range between 1 and 2 before computation of CV.
 
 To answer the question of whether CV values for vessel samples across our three occupational phases are significantly different or not, we used the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996's asymptotic test for the equality of coefficients of variation from k populations [@Eerkens2000; @Eerkens2001; @Hoggard2017; @Lycett2008; @Okumura2014], we prefer the MSLR test for shape variables as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
 
@@ -303,14 +303,15 @@ To test for differences in the distributions of shape variables indicated by the
 
 <!-- CV equality testing -->
 
-To compare pottery shape standardization across the three phases we investigate the distributions of the first three PC scores, taking the PC scores as proxy variables for vessel shape (Figure \@ref(fig:PCs-distribution)). The first PC, capturing vessel height and roundness, shows higher variation in the pre-European period compared to the Chinese period. That indicates that shape standardization was higher in the Chinese period compared to the pre-European period. The second PC also presents a similar pattern of higher shape standardization in the Chinese period compared to the other two phases.
+To compare pottery shape standardization across the three phases we investigate the distributions of the first three PC scores, taking the PC scores as proxy variables for vessel shape (Figure \@ref(fig:PCs-distribution)). The first PC, capturing vessel height and roundness, shows higher variation in the pre-European period compared to the Chinese period. That indicates that shape standardization was higher in the Chinese period compared to the pre-European period. The second PC also presents a similar pattern of higher shape standardization in the Chinese period compared to the other two phases. The CVs calculated of the three PC also support a general trend toward a more standardized shape over time, especially for first PC.
 
 To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs [@Krishnamoorthy2014; @Marwick2019]. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European (Figure \@ref(fig:PCs-distribution), Table \@ref(tab:CV-test-PCs-table)). A significant difference was also detected between the pre-European and post-European periods.
 
 ```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
 
-# function for normalized data
-normalize <- function(x) (x-min(x))/(max(x)-min(x))
+# function for normalized data 
+# normalize <- function(x) (x-min(x))/(max(x)-min(x)) # between 0-1
+normalize <- function(x) (1 + ((x-min(x))* 2))/(max(x)-min(x))
 
 # for one matrix
 op.p_tmp <- 
@@ -373,7 +374,7 @@ ggplot(pc_plot,
   facet_wrap(~ pcn, ncol = 1) +
   geom_text(data = cv_pcs_all,
             mapping = aes(x = c(2.1, 1.1, 3.1, 2.1, 1.1, 3.1, 2.1, 1.1, 3.1), 
-                          y = 0.8, 
+                          y = 2.1, 
                           label = cv_label),
             size = 3,
             color= "red",
@@ -399,6 +400,13 @@ pc2 <- data.frame(
   x  = op.p$x[,2],
   y = as.character(op.p$fac$phase),
   stringsAsFactors = F)
+
+
+pc2_chinese <-
+  pc2 %>% 
+  filter(y == "Chinese") %>% 
+  mutate(cv = round(sd(x)/ mean(x), digits = 2)*100)
+
 
 cv_test_pc2 <- mslr_test(nr = 1000, pc2$x, pc2$y)
 
@@ -482,7 +490,6 @@ knitr::kable(PC1_PC2_cv_tests,
 We also conducted size analysis by examining the body diameter of the vessels to explore any differences in vessel form reflected by size and shape. We measured body diameter directly from each physical vessel in the collection, and we focus on this metric because it is available for more vessels than any other metric. The body diameter of vessels from the Chinese period is larger than those from the two earlier periods, and the vessels before European contact have the smallest body diameter on average (Figure \@ref(fig:size-shape-regression-plots): A). Our linear regression models (Figure \@ref(fig:size-shape-regression-plots): B) show that shape, captured by PC1 and PC2, changes with size across the three phases, except for PC1 in the Chinese period. That is, the shorter vessels are larger in body diameter according to the significant positive correlation between PC1 and size. However, vessels from the Chinese period does not show this pattern. On the contrary, the negative relationship between PC2 and size suggests that vessels with a narrower neck and mouth tend to have a larger body diameter. 
 
 ```{r size-analysis}
-
 library(ggpubr)
 library(geomorph)
 
