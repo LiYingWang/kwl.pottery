@@ -45,15 +45,18 @@ image_width_2_col_inch = 190/25.4 # image Double column w = 190 mm
 A major historical factor often linked to social change in small-scale societies is the introduction of foreign or exotic trade goods to local Indigenous societies [@Mullins2011]. Monopolization of long-distance trade goods has caused substantial transformations in Indigenous economic, cultural, and socio-political systems [@Dietler2005; @Dietler1997; @Junker1993; @Silliman2005]. Pericolonial archaeology is the study of these indirect effects of colonialism, investigating areas where direct European colonial rule was limited, their conquests were often short-lived and unsuccessful, but commercial activities yielded economic and political impacts on Indigenous peoples living on the periphery of colonial control [@Acabado2017; @Trabert2017]. Pericolonial situations were common during the seventeenth to nineteenth centuries in East and Southeast Asia where European trading activity was extensive, but direct European rule less widespread. An emerging priority in archaeological research in Asia is identifying the indirect influences are apparent on Indigenous communities during the colonial period. For example, @Acabado2017’s study of Ifugao society in the Philippines highland suggests economic and political intensification during the Spanish presence in the lowlands as a strategy of Indigenous peoples to resist Spanish conquests.
 
 Indigenous societies' responses to colonial contact ranges from passive acceptance to active negotiation with the colonists, and accommodation or resistance of foreign intrusion, which can be identified through their daily cultural practices, such as their consumption patterns of foreign goods [@Dietler2015; @Given2004; @Mullins2011; @Scaramelli2005; @Silliman2001; @TorrenceandClarke2000]. In this paper we investigate the archaeology of a pericolonial situation at Kiwulan (ca. AD 1350-1850), a large multi-component archaeological site in Yilan County, northeastern Taiwan [@Chen2007], to identify the indirect impacts of colonial settler activity on local Indigenous societies. Yilan is an ideal context to study peripheral colonial influences because the Indigenous communities were isolated by geographical barriers, limiting the frequency of direct contact with the Spanish and the Dutch settlers in northern Taiwan. Kiwulan is situated on a hill near a riverside at the northern margin of Yilan County, which is characterized by a triangular alluvial plain facing east toward the Pacific with high mountains on three other sides. 
+
 This research investigates if there was increasing ceramic specialization resulting from Indigenous interaction with Europeans in the 17th century or Chinese in the 19th century, two major foreign influences in early historical Taiwan, which may indicate social changes in local Indigenous societies. We predict that competition within the Indigenous community at Kiwulan for foreign resources and trade partnerships with European or Chinese colonizers may have led to the emergence of craft specialization caused by greater economic and social control of ceramic production by a small group of individuals. Using standardization in ceramic shapes as a proxy for craft specialization, we ask: Did colonial trade impact the shape of locally-produced Indigenous pottery vessels? Did pottery shape become more homogeneous and standardized after foreign contacts with European colonizers or Chinese immigrants?
 
 Several measurements have been used for investigating ceramic standardization that include metric, compositional, and technological variables [@Arnold2000; @Blackman1993; @Boness2015; @Costin1991; @Rice1991; @Roux2015; @Tite1999]. Among those variables, metric measurements are most widely applied to archaeological assemblages. The coefficient of variation (CV) statistic is regularly used to quantify the degree of standardization in ceramic assemblages [@Eerkens2001; @Roux2003; @Stark1995; @Junker1999]. However, because pottery vessels typically have curved shapes, linear measurements have limited sensitivity to many kinds of shape variations. Thus, to capture subtle shape variations that might also be relevant to standardization, we analyze ceramic shapes using geometric morphometric methods (GMM). 
 
 ## Geometric Morphometrics
 
-Geometric morphometrics (GMM) differs from traditional linear measurements through its use of Cartesian coordinates of morphological structures to quantify and analyze shape [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates in terms of their unique point locations with respect to numerical values on coordinate axes. There are two common morphometric methods: landmark and outline approaches [@Adams2004]. Landmark GMM approaches assign a set of landmarks and/or semilandmarks onto objects as reference points. Generalized Procrustes analysis (GPA) is used to superimpose landmark data on a common coordinate system by translating, rotating, and scaling [@Bookstein1991]. After the procedure of GPA, superimposed landmark coordinates become shape variables that allow further statistical analyses [@Slice2007]. Landmark-based morphometrics have been widely applied to archaeological objects with obvious morphological features that provide unambiguous reference points for landmark placement, such as tips and edges of stone tools or iron weapons [@Birch2019; @Lycett2013], visually distinctive bone features [@Haruda2019; @Meloro2015], or ceramic assemblages with distinct components [@Selden2019; @Topi2017]. With univariate or multivariate statistics, the GMM applications can answer research questions related to lithic typological and technological change [@Doyon2019; @Eren2015; @Selden2018lithic; @Perez2007; @Presnyakova2018], animal domestication or mobility [@Haruda2019; @Owen2014], and hominid activities through cutmarks and taphonomic traces [@Aramendi2019; @Courtenay2019]. A common procedure is using dimensional reduction techniques, such as Principal Components Analysis or Canonical Variate Analysis, to capture the key features that represent overall shape. Visualization of the reduced data enables the identification of groups, followed by statistical tests to robustly distinguish them.
+Geometric morphometrics (GMM) differs from traditional linear measurements through its use of Cartesian coordinates of morphological structures to quantify and analyze shape [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates in terms of their unique point locations with respect to numerical values on coordinate axes. There are two common morphometric methods: landmark and outline approaches [@Adams2004]. Landmark GMM approaches assign a set of landmarks and/or semilandmarks onto objects as reference points. Generalized Procrustes analysis (GPA) is used to superimpose landmark data on a common coordinate system by translating, rotating, and scaling [@Bookstein1991]. After the procedure of GPA, superimposed landmark coordinates become shape variables that allow further statistical analyses [@Slice2007]. A common procedure is using dimensional reduction techniques, such as Principal Components Analysis or Canonical Variate Analysis, to capture the key features that represent overall shape. Visualization of the reduced data enables the identification of groups, followed by statistical tests to robustly distinguish them. Landmark-based morphometrics have been widely applied to archaeological objects with obvious morphological features that provide unambiguous reference points for landmark placement, such as tips and edges of stone tools or iron weapons [@Birch2019; @Lycett2013], visually distinctive bone features [@Haruda2019; @Meloro2015], or ceramic assemblages with distinct components [@Selden2019; @Topi2017]. GMM applications can answer research questions related to lithic typological and technological change [@Doyon2019; @Eren2015; @Selden2018lithic; @Perez2007; @Presnyakova2018], animal domestication or mobility [@Haruda2019; @Owen2014], or hominid activities through cutmarks and taphonomic traces [@Aramendi2019; @Courtenay2019]. 
 
-Key questions in archaeological shape analysis normally involve measuring shape standardization over time, or between geographical areas. Standardization is often investigated using multivariate analysis of shape variables computed from landmark data, or coefficients of variation on associated metric data, especially for lithic assemblages. For example, @Archer2015's case study of stone points in Southern Africa suggests an increase in shape standardization over time that may relate to increased maintenance of finished points. @Buchanan2018 studied metric data and GMM to identify a more uniform base-shape of Folsom points than Clovis points across the western US [@Buchanan2019]. Also using metric data and GMM, @Smith2016 found standardized bases of fluted point in Alaska and northern Yukon that might indicate a risk management strategy to ensure the ease of replacement during long-distance travel. Other factors, such as low levels of cultural innovation in a small group, could also lead to an increase in standardization of point shapes [@Okumura2014]. For ceramics, @Topi2017 identified standardized vessel shapes from the Casas Grandes culture in northwest Mexico using coefficients of variation for the positions of semi-landmarks across shape groups. They suggested standardization might hint the presence of specialized producers, reflecting social complexity. Another way to explore standardization is pairwise testing of variations in morphological disparity among groups of shape variables based on the calculation of distances between groups in morphospace they occupy [@Wills2001]. In this manner, @Selden2018ceramic2 examined Caddo ceramics using semi-landmark approaches in northeast Texas and found a gradual increase in shape standardization over time that provides a basis for further discussion of craft specialization or group identity [@Selden2019]. Similar applications to lithic assemblages suggests that the Gahagan bifaces from the central Texas exhibit less size standardization than those from the southern Caddo area, indicative of different uses  [@Selden2020]. Other applications, such as the study of cranial deformation, demonstrate that landmark approaches with multivariate analyses of shape variances are an effective method to evaluate shape standardization [@Kuzminsky2016; @Natahi2019; @Perez2007].
+Key questions in archaeological shape analysis normally involve measuring shape standardization over time, or between geographical areas. Standardization is often investigated using multivariate analysis of shape variables computed from landmark data, or coefficients of variation on associated metric data, especially for lithic assemblages. For example, @Archer2015's case study of stone points in Southern Africa suggests an increase in shape standardization over time that may relate to increased maintenance of finished points. @Buchanan2018 studied metric data and GMM to identify a more uniform base-shape of Folsom points than Clovis points across the western US [@Buchanan2019]. Also using metric data and GMM, @Smith2016 found standardized bases of fluted point in Alaska and northern Yukon that might indicate a risk management strategy to ensure the ease of replacement during long-distance travel. Other factors, such as low levels of cultural innovation in a small group, could also lead to an increase in standardization of point shapes [@Okumura2014]. 
+
+For ceramics, @Topi2017 identified standardized vessel shapes from the Casas Grandes culture in northwest Mexico using coefficients of variation for the positions of semi-landmarks across shape groups. They suggested standardization might hint the presence of specialized producers, reflecting social complexity. Another way to explore standardization is pairwise testing of variations in morphological disparity among groups of shape variables based on the calculation of distances between groups in morphospace they occupy [@Wills2001]. In this manner, @Selden2018ceramic2 examined Caddo ceramics using semi-landmark approaches in northeast Texas and found a gradual increase in shape standardization over time that provides a basis for further discussion of craft specialization or group identity [@Selden2019]. Similar applications to lithic assemblages suggests that the Gahagan bifaces from the central Texas exhibit less size standardization than those from the southern Caddo area, indicative of different uses  [@Selden2020]. Other applications, such as the study of cranial deformation, demonstrate that landmark approaches with multivariate analyses of shape variances are an effective method to evaluate shape standardization [@Kuzminsky2016; @Natahi2019; @Perez2007]. 
 
 Despite the wide use of landmark approaches in archaeology, a key limitation is that landmarks may be difficult to reproducibly locate for structures that are mostly or entirely curves if not mathematically-defined. In those cases, outline approaches, such as Elliptic Fourier Analysis (EFA), is better for assessing morphological variations in the whole structure of two-dimensional closed shapes [@Cardillo2010]. EFA uses periodic functions to capture geometric information, where an outline is decomposed into a series of ellipses described by trigonometric functions [@Adams2004; @Bonhomme2014; @Claude2008]. In other words, EFA converts coordinates along a curve into Fourier function coefficients, called harmonic coefficients or harmonics [@Kuhl1982]. The number of harmonics determines the quality and precision of the geometric representation of an object. The harmonic power, a cumulative sum of squared harmonic coefficients, provides a robust rule for determining the desired number of harmonics [@Bonhomme2014]. The first systematic use of  Fourier series to analyze shapes of artifacts in archaeology was @Gero1984's study of lithic flakes in Peru that suggests the changes in shape from a more angular to rounded tool over time. Later, @Saragusti2005 introduced more functions for the further calculation of specific shape attributes, including symmetry, roughness, and deformation, which demonstrates the potential of EFA for analysis of curves. To compare resharpening trajectories in European Middle Paleolithic stone tools, @Iovictua2009 presented a protocol from outline digitization, EFA procedure, to multivariate linear regression for shape variables. Recent lithic studies desmotrate the wide range of application of EFA to answer questions about typological classification of Late Woodland points [@Fox2015], the function of flaked obsidian tools in Easter Island [@Lipo2016], shape and symmetry standardization of the British Acheulean [@Hoggard2019], and cultural taxonomies for the European Late Palaeolithic [@Ivanovaite2020].
 
@@ -307,11 +310,11 @@ To compare pottery shape standardization across the three phases we investigate 
 
 To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs [@Krishnamoorthy2014; @Marwick2019]. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European (Figure \@ref(fig:PCs-distribution), Table \@ref(tab:CV-test-PCs-table)). A significant difference was also detected between the pre-European and post-European periods.
 
-```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
+```{r PCs-distribution, fig.cap= "The distribution of mormalized PC scores by phases with CV values (%)"}
 
 # function for normalized data 
 # normalize <- function(x) (x-min(x))/(max(x)-min(x)) # between 0-1
-normalize <- function(x) (1 + ((x-min(x))* 2))/(max(x)-min(x))
+normalize <- function(x) (1 + (x-min(x)))/(max(x)-min(x))
 
 # for one matrix
 op.p_tmp <- 
@@ -335,8 +338,8 @@ pc_plot <- tibble(pc = c(op.p$x[,1],
                   pcn = str_glue('PC{sort(rep(1:3, len))}'))
 
 pc_plot$phase <- fct_relevel(pc_plot$phase, 
-                            c("Pre-European", 
-                              "Post-European"))
+                             c("Pre-European", 
+                               "Post-European"))
 
 # transform the data to wider format
 pc_all_wide  <- 
@@ -374,7 +377,7 @@ ggplot(pc_plot,
   facet_wrap(~ pcn, ncol = 1) +
   geom_text(data = cv_pcs_all,
             mapping = aes(x = c(2.1, 1.1, 3.1, 2.1, 1.1, 3.1, 2.1, 1.1, 3.1), 
-                          y = 2.1, 
+                          y = 1.8, 
                           label = cv_label),
             size = 3,
             color= "red",
@@ -400,13 +403,6 @@ pc2 <- data.frame(
   x  = op.p$x[,2],
   y = as.character(op.p$fac$phase),
   stringsAsFactors = F)
-
-
-pc2_chinese <-
-  pc2 %>% 
-  filter(y == "Chinese") %>% 
-  mutate(cv = round(sd(x)/ mean(x), digits = 2)*100)
-
 
 cv_test_pc2 <- mslr_test(nr = 1000, pc2$x, pc2$y)
 
@@ -545,14 +541,14 @@ pc1_size_reg <-
             add = "reg.line",
             size = 1) +
     facet_wrap(~ fct_rev(y)) +
-    stat_cor(label.y = 1.25, label.sep = "\n") +
+    stat_cor(label.y = 2.25, label.sep = "\n") +
     #stat_regline_equation(label.y = 1) +
     labs(x = "", y = "PC1") +
     theme(axis.text = element_text(size = 8)) +
     #scale_x_continuous(breaks = c(75, 200)) +
-    scale_y_continuous(limits = c(0, 1.5),
-                       breaks = c(seq(0, 1, 0.5)),
-                       labels = c(seq(0, 1, 0.5)))
+    scale_y_continuous(limits = c(1, 2.5),
+                       breaks = c(seq(1, 2.5, 0.5)),
+                       labels = c(seq(1, 2.5, 0.5)))
 
 # can pc2 predict size by period?
 pc2_size_reg <- 
@@ -562,14 +558,14 @@ pc2_size_reg <-
             add = "reg.line",
             size = 1) +
     facet_wrap(~ fct_rev(y)) +
-    stat_cor(label.y = 1.25, label.sep = "\n") +
+    stat_cor(label.y = 2.25, label.sep = "\n") +
     #stat_regline_equation(label.y = 1) +
     labs(x = "body diameter (mm)", y = "PC2") +
     theme(axis.text = element_text(size = 8)) +
     #scale_x_continuous(breaks = c(75, 200)) +
-    scale_y_continuous(limits = c(0, 1.5),
-                       breaks = c(seq(0, 1, 0.5)),
-                       labels = c(seq(0, 1, 0.5)))
+    scale_y_continuous(limits = c(1, 2.5),
+                       breaks = c(seq(1, 2.5, 0.5)),
+                       labels = c(seq(1, 2.5, 0.5)))
 
 # plot boxplot and regression together 
 right_column <-
@@ -591,13 +587,27 @@ ggsave(plot = size_boxplot_regression,
        units = "mm")
 ```
 
+
 ```{r boxplot-pc1-ave-size}
 size_pcs_cv_join <-
   jpgs_imported_coo_size_pcs_metric %>% 
-  left_join(cv_pcs_all, by = c("y", "phase"))
+  group_by(y) %>% 
+  mutate(Diameter1_Body_ave = round(mean(Diameter1_Body), 2),
+         cv_body_diameter = round(sd(Diameter1_Body)/mean(Diameter1_Body), 
+                                  digits = 2)*100) %>%
+  mutate(phase = as.factor(y)) %>% 
+  left_join(cv_pcs_all) %>% 
+  left_join(pc1_df_with_filename)
+  #distinct(phase, cv_pc1, cv_pc2, cv_pc3, Diameter1_Body_ave, cv_body_diameter)
 
+boxplot_ave_size_cv_pc <-
+  size_pcs_cv_join %>% 
+  ggplot(aes(cv_body_diameter, cv_pc1, shape = phase)) +
+  geom_point() +
+  coord_flip() +
+  labs(x = "CV of Body diameter (%)",
+       y = "CV of PC1 (%)")
 ```
-
 
 
 ```{r, size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of the vessels across three phases. B: Scatter plots of shape variable, PC1 at the top and PC2 at the bottom, as a function of body diamater"}
