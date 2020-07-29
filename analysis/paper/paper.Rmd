@@ -547,7 +547,7 @@ size_pcs_cv_join <-
 size_cv_df <-
   size_pcs_cv_join %>% 
   distinct(phase, Diameter1_Body_ave, cv_body_diameter, cv_pc1) %>% 
-  mutate(cv_body_diameter_label = paste("CV=", cv_body_diameter, "%"),
+  mutate(cv_body_diameter_label = paste("CV =", cv_body_diameter, "%"),
          Diameter1_Body_ave_label = paste("mean=", Diameter1_Body_ave))
 
 cv_diameter_label <- size_cv_df$cv_body_diameter_label
@@ -561,35 +561,33 @@ boxplot_size <-
   labs(x = "body diameter\n(mm)", y = "") +
   scale_y_discrete(breaks = c("Pre-European", "Post-European", "Chinese"),
                    labels = c("Pre-\nEuropean", "Post-\nEuropean", "Chinese")) +
-  theme(axis.text = element_text(size = 8)) +
-<<<<<<< HEAD
-  annotate("text", x = c(126,122,145), y = c(2,1,3), 
-           size = 3, label = cv_diameter_label) +
-  theme_minimal()
+  annotate("text", x = c(126,122,144), y = c(2,1,3), 
+           size = 2, label = cv_diameter_label) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = rel(0.9)),
+        axis.text.y = element_text(size = rel(0.9)))
 ```
 
 ```{r boxplot-pc1-ave-size}
+library(ggrepel)
+y_limits <- c(NA, 32)
 boxplot_ave_size_cv_pc <-
   size_cv_df %>% 
   ggplot(aes(cv_body_diameter, cv_pc1)) +
   geom_point() +
-  geom_text(label = size_cv_df$phase,
-            size = 3.5,
-            nudge_x = - 0.1, nudge_y = 0.5,
-            vjust="inward",hjust="inward") +
+  geom_text_repel(label = size_cv_df$phase, 
+                  size = 2.5) + 
   labs(x = "CV of body diameter (%)",
        y = "CV of PC1\n(%)") +
   theme(legend.position = "none") +
-  theme_minimal()
-=======
-  theme_bw()
->>>>>>> ed52b8c815c2c9003bae727b45f8e1e52fb373d5
+  theme_bw() +
+  theme(axis.text.x = element_text(size = rel(0.9)),
+        axis.text.y = element_text(size = rel(0.9)))
 ```
 
 
-  scale_y_continuous(limits = c(10, 35),
-                       breaks = c(seq(10, 35, 5)),
-                       labels = c(seq(10, 35, 5))) +
+label = size_cv_df$phase,
+                   size = 2.5, ylim = y_limits
 
 ```{r pcs-size-regression}
 # can pc1 predict size by period?
@@ -606,7 +604,6 @@ pc1_size_reg <-
     #stat_regline_equation(label.y = 1) +
     labs(x = "", y = "PC1") +
     theme(axis.text = element_text(size = 8)) +
-    #scale_x_continuous(breaks = c(75, 200)) +
     scale_y_continuous(limits = c(0, 12),
                        breaks = c(seq(0, 10, 2)),
                        labels = c(seq(0, 10, 2)))
@@ -625,7 +622,6 @@ pc2_size_reg <-
     #stat_regline_equation(label.y = 1) +
     labs(x = "body diameter (mm)", y = "PC2") +
     theme(axis.text = element_text(size = 8)) +
-    #scale_x_continuous(breaks = c(75, 200)) +
     scale_y_continuous(limits = c(0, 12),
                        breaks = c(seq(0, 10, 2)),
                        labels = c(seq(0, 10, 2)))
@@ -635,7 +631,7 @@ pc2_size_reg <-
 # plot boxplot and regression together 
 left_column <-
   plot_grid(boxplot_size, boxplot_ave_size_cv_pc, 
-            ncol = 1, rel_heights = c(1.2,1), 
+            ncol = 1, rel_heights = c(1.1,1), 
             labels = c("A", "B"), label_size = 12 )
 
 right_column <-
