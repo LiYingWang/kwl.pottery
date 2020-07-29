@@ -484,7 +484,7 @@ knitr::kable(PC1_PC2_cv_tests,
 
 We also conducted size analysis by examining the body diameter of the vessels to explore any differences in vessel form reflected by size and shape. We measured body diameter directly from each physical vessel in the collection, and we focus on this metric because it is available for more vessels than any other metric. The body diameter of vessels from the Chinese period is larger than those from the two earlier periods, and the vessels before European contact have the smallest body diameter on average (Figure \@ref(fig:size-shape-regression-plots): A). Our linear regression models (Figure \@ref(fig:size-shape-regression-plots): B) show that shape, captured by PC1 and PC2, changes with size across the three phases, except for PC1 in the Chinese period. That is, the shorter vessels are larger in body diameter according to the significant positive correlation between PC1 and size. However, vessels from the Chinese period does not show this pattern. On the contrary, the negative relationship between PC2 and size suggests that vessels with a narrower neck and mouth tend to have a larger body diameter. 
 
-```{r size-analysis-prep}
+```{r size-analysis-prep-1}
 library(ggpubr)
 
 jpgs_imported_coo_size <- coo_centsize(jpgs_imported_coo)
@@ -521,18 +521,63 @@ jpgs_imported_coo_size_pcs_metric <-
   left_join(pottery_data_tidy)
 ```
 
+```{r size-analysis-prep-2}
+# combine with cv information 
+size_pcs_cv_join <-
+  jpgs_imported_coo_size_pcs_metric %>% 
+  group_by(y) %>% 
+  mutate(Diameter1_Body_ave = round(mean(Diameter1_Body), 2),
+         cv_body_diameter = round(sd(Diameter1_Body)/mean(Diameter1_Body), 
+                                  digits = 2)*100) %>%
+  mutate(phase = as.factor(y)) %>% 
+  left_join(cv_pcs_all) %>% 
+  left_join(pc1_df_with_filename)
+  #distinct(phase, cv_pc1, cv_pc2, cv_pc3, Diameter1_Body_ave, cv_body_diameter)
+```
+
 ```{r boxplot-size-by-phase}
+size_cv_df <-
+  size_pcs_cv_join %>% 
+  distinct(phase, Diameter1_Body_ave, cv_body_diameter, cv_pc1) %>% 
+  mutate(cv_body_diameter_label = paste("CV=", cv_body_diameter, "%"),
+         Diameter1_Body_ave_label = paste("mean=", Diameter1_Body_ave))
+
+cv_diameter_label <- size_cv_df$cv_body_diameter_label
+
 # size boxplot by period
 boxplot_size <-
   ggplot(jpgs_imported_coo_size_pcs_metric,
          aes(Diameter1_Body, fct_rev(y))) +
   geom_boxplot() +
   coord_flip() +
-  labs(x = "body diameter (mm)", y = "") +
+  labs(x = "body diameter\n(mm)", y = "") +
   scale_y_discrete(breaks = c("Pre-European", "Post-European", "Chinese"),
                    labels = c("Pre-\nEuropean", "Post-\nEuropean", "Chinese")) +
-  theme(axis.text = element_text(size = 8))
+  theme(axis.text = element_text(size = 8)) +
+  annotate("text", x = c(126,122,145), y = c(2,1,3), 
+           size = 3, label = cv_diameter_label) +
+  theme_minimal()
 ```
+
+```{r boxplot-pc1-ave-size}
+boxplot_ave_size_cv_pc <-
+  size_cv_df %>% 
+  ggplot(aes(cv_body_diameter, cv_pc1)) +
+  geom_point() +
+  geom_text(label = size_cv_df$phase,
+            size = 3.5,
+            nudge_x = - 0.1, nudge_y = 0.5,
+            vjust="inward",hjust="inward") +
+  labs(x = "CV of body diameter (%)",
+       y = "CV of PC1\n(%)") +
+  theme(legend.position = "none") +
+  theme_minimal()
+```
+
+
+  scale_y_continuous(limits = c(10, 35),
+                       breaks = c(seq(10, 35, 5)),
+                       labels = c(seq(10, 35, 5))) +
 
 ```{r pcs-size-regression}
 # can pc1 predict size by period?
@@ -572,13 +617,18 @@ pc2_size_reg <-
 
 ```{r size-regression-plot-together}
 # plot boxplot and regression together 
+left_column <-
+  plot_grid(boxplot_size, boxplot_ave_size_cv_pc, 
+            ncol = 1, rel_heights = c(1.2,1), 
+            labels = c("A", "B"), label_size = 12 )
+
 right_column <-
   plot_grid(pc1_size_reg, pc2_size_reg, ncol = 1)
 
 size_boxplot_regression <-
-  plot_grid(boxplot_size,
+  plot_grid(left_column,
             right_column,
-            labels = c("A", "B"),
+            labels = c("", "C", "B"),
             label_size = 12,
             rel_widths = c(1.8, 3.7))
 
@@ -590,28 +640,6 @@ ggsave(plot = size_boxplot_regression,
        dpi = 300,
        units = "mm")
 ```
-
-```{r boxplot-pc1-ave-size}
-size_pcs_cv_join <-
-  jpgs_imported_coo_size_pcs_metric %>% 
-  group_by(y) %>% 
-  mutate(Diameter1_Body_ave = round(mean(Diameter1_Body), 2),
-         cv_body_diameter = round(sd(Diameter1_Body)/mean(Diameter1_Body), 
-                                  digits = 2)*100) %>%
-  mutate(phase = as.factor(y)) %>% 
-  left_join(cv_pcs_all) %>% 
-  left_join(pc1_df_with_filename)
-  #distinct(phase, cv_pc1, cv_pc2, cv_pc3, Diameter1_Body_ave, cv_body_diameter)
-
-boxplot_ave_size_cv_pc <-
-  size_pcs_cv_join %>% 
-  ggplot(aes(cv_body_diameter, cv_pc1, shape = phase)) +
-  geom_point() +
-  coord_flip() +
-  labs(x = "CV of Body diameter (%)",
-       y = "CV of PC1 (%)")
-```
-
 
 ```{r, size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of the vessels across three phases. B: Scatter plots of shape variable, PC1 at the top and PC2 at the bottom, as a function of body diamater"}
 knitr::include_graphics(here("analysis/figures/size-boxplot-regression.jpg"))
