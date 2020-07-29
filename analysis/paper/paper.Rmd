@@ -310,21 +310,25 @@ To see whether the differences in the distribution of PCs between any two phases
 ```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
 
 # function for normalized data
-normalize <- function(x) (x-min(x))/(max(x)-min(x))
+# o scale your variable 𝑥 into a range (a, b) you can use:
+normalize <- function(a, b, x) (b - a) * (x - min(x)) / (max(x) - min(x)) + a
+
+scales::rescale(1:10, to = c(5, 7))
+
 
 # for one matrix
 op.p_tmp <- 
 op.p$x %>% 
   as_tibble() %>% 
-  mutate_all(normalize) %>% 
+  # mutate_all(~normalize(a = 1, b = 10, x = .)) %>% 
+  mutate_all(~scales::rescale(., to = c(1, 10))) %>% 
   as.matrix() 
 
 row.names(op.p_tmp) <- row.names(op.p$x )
 
 op.p$x <- op.p_tmp
 
-
-# what are the variences for each PC in each period?
+# what are the variances for each PC in each period?
 len <- length(op.p$x[,1])
 # plot PC1-3 distribution by phase
 pc_plot <- tibble(pc = c(op.p$x[,1],
@@ -332,6 +336,12 @@ pc_plot <- tibble(pc = c(op.p$x[,1],
                          op.p$x[,3]),
                   phase = rep(op.p$fac$phase, 3),
                   pcn = str_glue('PC{sort(rep(1:3, len))}'))
+
+pc_plot %>% 
+  group_by(phase, pcn) %>% 
+  summarise(cvs = raster::cv(pc)) %>% 
+  pivot_wider(names_from = pcn, 
+              values_from = cvs)
 
 pc_plot$phase <- fct_relevel(pc_plot$phase, 
                             c("Pre-European", 
