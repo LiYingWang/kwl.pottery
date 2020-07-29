@@ -312,15 +312,11 @@ To see whether the differences in the distribution of PCs between any two phases
 
 ```{r PCs-distribution, fig.cap= "The distribution of mormalized PC scores by phases with CV values (%)"}
 
-# function for normalized data 
-# normalize <- function(x) (x-min(x))/(max(x)-min(x)) # between 0-1
-normalize <- function(x) (1 + (x-min(x)))/(max(x)-min(x))
-
 # for one matrix
 op.p_tmp <- 
 op.p$x %>% 
   as_tibble() %>% 
-  mutate_all(normalize) %>% 
+  mutate_all(~scales::rescale(., to = c(1, 10))) %>% # normalize to 1-10
   as.matrix() 
 
 row.names(op.p_tmp) <- row.names(op.p$x )
@@ -357,7 +353,10 @@ cv_pcs_all <-
   mutate(cv_pc1 = round(sd(PC1)/ mean(PC1), digits = 2)*100,
          cv_pc2 = round(sd(PC2)/ mean(PC2), digits = 2)*100,
          cv_pc3 = round(sd(PC3)/ mean(PC3), digits = 2)*100)%>% 
-  distinct(cv_pc1, cv_pc2, cv_pc3)
+  mutate(mean_pc1 = mean(PC1),
+         mean_pc2 = mean(PC2),
+         mean_pc3 = mean(PC3)) %>% 
+  distinct(cv_pc1, cv_pc2, cv_pc3, mean_pc1, mean_pc2, mean_pc3)
 
 # making the cv label
 cv_label <-
@@ -377,7 +376,7 @@ ggplot(pc_plot,
   facet_wrap(~ pcn, ncol = 1) +
   geom_text(data = cv_pcs_all,
             mapping = aes(x = c(2.1, 1.1, 3.1, 2.1, 1.1, 3.1, 2.1, 1.1, 3.1), 
-                          y = 1.8, 
+                          y = 8.5, 
                           label = cv_label),
             size = 3,
             color= "red",
@@ -485,9 +484,8 @@ knitr::kable(PC1_PC2_cv_tests,
 
 We also conducted size analysis by examining the body diameter of the vessels to explore any differences in vessel form reflected by size and shape. We measured body diameter directly from each physical vessel in the collection, and we focus on this metric because it is available for more vessels than any other metric. The body diameter of vessels from the Chinese period is larger than those from the two earlier periods, and the vessels before European contact have the smallest body diameter on average (Figure \@ref(fig:size-shape-regression-plots): A). Our linear regression models (Figure \@ref(fig:size-shape-regression-plots): B) show that shape, captured by PC1 and PC2, changes with size across the three phases, except for PC1 in the Chinese period. That is, the shorter vessels are larger in body diameter according to the significant positive correlation between PC1 and size. However, vessels from the Chinese period does not show this pattern. On the contrary, the negative relationship between PC2 and size suggests that vessels with a narrower neck and mouth tend to have a larger body diameter. 
 
-```{r size-analysis}
+```{r size-analysis-prep}
 library(ggpubr)
-library(geomorph)
 
 jpgs_imported_coo_size <- coo_centsize(jpgs_imported_coo)
 jpgs_imported_coo_size_df <- as.data.frame(jpgs_imported_coo_size) 
@@ -521,7 +519,9 @@ jpgs_imported_coo_size_pcs_metric <-
   left_join(pc1_df_with_filename) %>% 
   left_join(pc2_df_with_filename) %>% 
   left_join(pottery_data_tidy)
+```
 
+```{r boxplot-size-by-phase}
 # size boxplot by period
 boxplot_size <-
   ggplot(jpgs_imported_coo_size_pcs_metric,
@@ -532,7 +532,9 @@ boxplot_size <-
   scale_y_discrete(breaks = c("Pre-European", "Post-European", "Chinese"),
                    labels = c("Pre-\nEuropean", "Post-\nEuropean", "Chinese")) +
   theme(axis.text = element_text(size = 8))
+```
 
+```{r pcs-size-regression}
 # can pc1 predict size by period?
 pc1_size_reg <- 
   ggscatter(jpgs_imported_coo_size_pcs_metric, 
@@ -541,14 +543,14 @@ pc1_size_reg <-
             add = "reg.line",
             size = 1) +
     facet_wrap(~ fct_rev(y)) +
-    stat_cor(label.y = 2.25, label.sep = "\n") +
+    stat_cor(label.y = 10, label.sep = "\n") +
     #stat_regline_equation(label.y = 1) +
     labs(x = "", y = "PC1") +
     theme(axis.text = element_text(size = 8)) +
     #scale_x_continuous(breaks = c(75, 200)) +
-    scale_y_continuous(limits = c(1, 2.5),
-                       breaks = c(seq(1, 2.5, 0.5)),
-                       labels = c(seq(1, 2.5, 0.5)))
+    scale_y_continuous(limits = c(0, 12),
+                       breaks = c(seq(0, 10, 2)),
+                       labels = c(seq(0, 10, 2)))
 
 # can pc2 predict size by period?
 pc2_size_reg <- 
@@ -558,18 +560,20 @@ pc2_size_reg <-
             add = "reg.line",
             size = 1) +
     facet_wrap(~ fct_rev(y)) +
-    stat_cor(label.y = 2.25, label.sep = "\n") +
+    stat_cor(label.y = 10, label.sep = "\n") +
     #stat_regline_equation(label.y = 1) +
     labs(x = "body diameter (mm)", y = "PC2") +
     theme(axis.text = element_text(size = 8)) +
     #scale_x_continuous(breaks = c(75, 200)) +
-    scale_y_continuous(limits = c(1, 2.5),
-                       breaks = c(seq(1, 2.5, 0.5)),
-                       labels = c(seq(1, 2.5, 0.5)))
+    scale_y_continuous(limits = c(0, 12),
+                       breaks = c(seq(0, 10, 2)),
+                       labels = c(seq(0, 10, 2)))
+```
 
+```{r size-regression-plot-together}
 # plot boxplot and regression together 
 right_column <-
-  plot_grid(pc1_size_reg, pc2_size_reg, ncol =1)
+  plot_grid(pc1_size_reg, pc2_size_reg, ncol = 1)
 
 size_boxplot_regression <-
   plot_grid(boxplot_size,
@@ -586,7 +590,6 @@ ggsave(plot = size_boxplot_regression,
        dpi = 300,
        units = "mm")
 ```
-
 
 ```{r boxplot-pc1-ave-size}
 size_pcs_cv_join <-
