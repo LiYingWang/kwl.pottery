@@ -310,40 +310,21 @@ To compare pottery shape standardization across the three phases we investigate 
 
 To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs [@Krishnamoorthy2014; @Marwick2019]. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European (Figure \@ref(fig:PCs-distribution), Table \@ref(tab:CV-test-PCs-table)). A significant difference was also detected between the pre-European and post-European periods.
 
-<<<<<<< HEAD
-```{r PCs-distribution, fig.cap= "The distribution of PC scores by phases"}
-
-# function for normalized data
-# o scale your variable 𝑥 into a range (a, b) you can use:
-normalize <- function(a, b, x) (b - a) * (x - min(x)) / (max(x) - min(x)) + a
-
-scales::rescale(1:10, to = c(5, 7))
-
-=======
 ```{r PCs-distribution, fig.cap= "The distribution of mormalized PC scores by phases with CV values (%)"}
->>>>>>> 6babc674b9dbc77746ffba98ceea0f39471ee2b9
+
 
 # for one matrix
 op.p_tmp <- 
 op.p$x %>% 
   as_tibble() %>% 
-<<<<<<< HEAD
-  # mutate_all(~normalize(a = 1, b = 10, x = .)) %>% 
-  mutate_all(~scales::rescale(., to = c(1, 10))) %>% 
-=======
   mutate_all(~scales::rescale(., to = c(1, 10))) %>% # normalize to 1-10
->>>>>>> 6babc674b9dbc77746ffba98ceea0f39471ee2b9
   as.matrix() 
 
 row.names(op.p_tmp) <- row.names(op.p$x )
 
 op.p$x <- op.p_tmp
 
-<<<<<<< HEAD
 # what are the variances for each PC in each period?
-=======
-# what are the variences for each PC in each period?
->>>>>>> 6babc674b9dbc77746ffba98ceea0f39471ee2b9
 len <- length(op.p$x[,1])
 
 # plot PC1-3 distribution by phase
