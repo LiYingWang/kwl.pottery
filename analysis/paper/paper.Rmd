@@ -54,7 +54,7 @@ Several measurements have been used for investigating ceramic standardization th
 
 Geometric morphometrics (GMM) differs from traditional linear measurements through its use of Cartesian coordinates of morphological structures to quantify and analyze shape [@Adams2004; @Bookstein1997; @Lawing2010; @Slice2007]. Landmarks, curves or outlines of objects can be represented by coordinates in terms of their unique point locations with respect to numerical values on coordinate axes. There are two common morphometric methods: landmark and outline approaches [@Adams2004]. Landmark GMM approaches assign a set of landmarks and/or semilandmarks onto objects as reference points. Generalized Procrustes analysis (GPA) is used to superimpose landmark data on a common coordinate system by translating, rotating, and scaling [@Bookstein1991]. After the procedure of GPA, superimposed landmark coordinates become shape variables that allow further statistical analyses [@Slice2007]. A common procedure is using dimensional reduction techniques, such as Principal Components Analysis or Canonical Variate Analysis, to capture the key features that represent overall shape. Visualization of the reduced data enables the identification of groups, followed by statistical tests to robustly distinguish them. Landmark-based morphometrics have been widely applied to archaeological objects with obvious morphological features that provide unambiguous reference points for landmark placement, such as tips and edges of stone tools or iron weapons [@Birch2019; @Lycett2013], visually distinctive bone features [@Haruda2019; @Meloro2015], or ceramic assemblages with distinct components [@Selden2019; @Topi2017]. GMM applications can answer research questions related to lithic typological and technological change [@Doyon2019; @Eren2015; @Selden2018lithic; @Perez2007; @Presnyakova2018], animal domestication or mobility [@Haruda2019; @Owen2014], or hominid activities through cutmarks and taphonomic traces [@Aramendi2019; @Courtenay2019]. 
 
-Key questions in archaeological shape analysis normally involve measuring shape standardization over time, or between geographical areas. Standardization is often investigated using multivariate analysis of shape variables computed from landmark data, or coefficients of variation on associated metric data, especially for lithic assemblages. For example, @Archer2015's case study of stone points in Southern Africa suggests an increase in shape standardization over time that may relate to increased maintenance of finished points. @Buchanan2018 studied metric data and GMM to identify a more uniform base-shape of Folsom points than Clovis points across the western US [@Buchanan2019]. Also using metric data and GMM, @Smith2016 found standardized bases of fluted point in Alaska and northern Yukon that might indicate a risk management strategy to ensure the ease of replacement during long-distance travel. Other factors, such as low levels of cultural innovation in a small group, could also lead to an increase in standardization of point shapes [@Okumura2014]. 
+Key questions in archaeological shape analysis normally involve measuring shape standardization over time, or between geographical areas. Standardization is often investigated using multivariate analysis of shape variables computed from landmark data, or coefficients of variation on associated metric data, especially for lithic assemblages. For example, @Archer2015's case study of stone points in Southern Africa suggests an increase in shape standardization over time that may relate to increased maintenance of finished points. @Buchanan2018 studied metric data and GMM to identify a more uniform base-shape of Folsom points than Clovis points across the western US [@Buchanan2019]. Also using metric data and GMM, @Smith2016 found standardized bases of fluted point in Alaska and northern Yukon that might indicate a risk management strategy to ensure the ease of replacement during long-distance travel. Other factors, such as low levels of cultural innovation in a small group, could also lead to an increase in standardization of point shapes [@Okumura2014]. To test the effectiveness of measuring standardization, @Birch2019 compared landmark-based GMM to traditional metric analysis with CV using European iron weapons as an example. They demonstrated that landmark-based GMM can capture more variation in not only overall shape, but also bilateral symmetry.
 
 For ceramics, @Topi2017 identified standardized vessel shapes from the Casas Grandes culture in northwest Mexico using coefficients of variation for the positions of semi-landmarks across shape groups. They suggested standardization might hint the presence of specialized producers, reflecting social complexity. Another way to explore standardization is pairwise testing of variations in morphological disparity among groups of shape variables based on the calculation of distances between groups in morphospace they occupy [@Wills2001]. In this manner, @Selden2018ceramic2 examined Caddo ceramics using semi-landmark approaches in northeast Texas and found a gradual increase in shape standardization over time that provides a basis for further discussion of craft specialization or group identity [@Selden2019]. Similar applications to lithic assemblages suggests that the Gahagan bifaces from the central Texas exhibit less size standardization than those from the southern Caddo area, indicative of different uses  [@Selden2020]. Other applications, such as the study of cranial deformation, demonstrate that landmark approaches with multivariate analyses of shape variances are an effective method to evaluate shape standardization [@Kuzminsky2016; @Natahi2019; @Perez2007]. 
 
@@ -148,7 +148,7 @@ The principal component (PC) scores were analyzed with a multivariate analysis o
 
 $$c_v = \frac{\sigma}{\mu}$$
 
-As a standardized measure of the spread of data, coefficients of variation (CV) allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles and enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. Following @Eerkens2001 and @Roux2003, we take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by ratio, we normalized PC scores to a range between 1 and 2 before computation of CV.
+As a standardized measure of the spread of data, coefficients of variation (CV) allows us to directly compare variation in samples measured with different units or means. This is useful to compare the degree of standardization for archaeological assembles and enables comparison of variation across different sample sizes [@Eerkens2001, pp.498]. Following @Eerkens2001 and @Roux2003, we take this as our measurement of standardization in vessel shape variables: lower CV values reflect higher standardization, and thus increased craft specialization in the community. Given that CV is robust for positive values due to the representation by a ratio scale, we normalized PC scores to a range between 1 and 10 before computation of CV.
 
 To answer the question of whether CV values for vessel samples across our three occupational phases are significantly different or not, we used the Modified signed-likelihood ratio (MSLR) test for equality of CVs [@Krishnamoorthy2014]. While previous work has used the @Feltz1996's asymptotic test for the equality of coefficients of variation from k populations [@Eerkens2000; @Eerkens2001; @Hoggard2017; @Lycett2008; @Okumura2014], we prefer the MSLR test for shape variables as a more recent development with lower rates of type I error, better performance with uneven sample numbers, and more power across a range of conditions [@Krishnamoorthy2014]. 
 
@@ -311,7 +311,6 @@ To compare pottery shape standardization across the three phases we investigate 
 To see whether the differences in the distribution of PCs between any two phases are substantive or due to chance, we used a modified signed-likelihood ratio test to assess the equality of CVs [@Krishnamoorthy2014; @Marwick2019]. P-values for this significance test of CVs for PC1 and PC2 show significant differences in the standardization of vessel shapes across periods, especially between Chinese contact with either pre-European or post-European (Figure \@ref(fig:PCs-distribution), Table \@ref(tab:CV-test-PCs-table)). A significant difference was also detected between the pre-European and post-European periods.
 
 ```{r PCs-distribution, fig.cap= "The distribution of mormalized PC scores by phases with CV values (%)"}
-
 
 # for one matrix
 op.p_tmp <- 
@@ -490,7 +489,7 @@ knitr::kable(PC1_PC2_cv_tests,
 
 <!-- size analysis -->
 
-We also conducted size analysis by examining the body diameter of the vessels to explore any differences in vessel form reflected by size and shape. We measured body diameter directly from each physical vessel in the collection, and we focus on this metric because it is available for more vessels than any other metric. The body diameter of vessels from the Chinese period is larger than those from the two earlier periods, and the vessels before European contact have the smallest body diameter on average (Figure \@ref(fig:size-shape-regression-plots): A). Our linear regression models (Figure \@ref(fig:size-shape-regression-plots): B) show that shape, captured by PC1 and PC2, changes with size across the three phases, except for PC1 in the Chinese period. That is, the shorter vessels are larger in body diameter according to the significant positive correlation between PC1 and size. However, vessels from the Chinese period does not show this pattern. On the contrary, the negative relationship between PC2 and size suggests that vessels with a narrower neck and mouth tend to have a larger body diameter. 
+We also conducted size analysis by examining the body diameter of vessels to examine any differences in vessel size and their relationships with vessel shape. We measured body diameter directly from each physical vessel in the collection, and we focus on this metric because it is available for more vessels than any other metric. The body diameter of vessels from the Chinese period is larger than those from the two earlier periods, and the vessels before European contact have the smallest body diameter on average (Figure \@ref(fig:size-shape-regression-plots): A). To investigate standardization of vessel form reflected by both shape and size, we calculated CV for PC1 (shape) in relation to CV for body diameter (size). The result (Figure \@ref(fig:size-shape-regression-plots): B) presents a higher form standardization in the Chinese period according to smaller CV values compared to CV values from the other two phases. However, there is no big differences in form standardization between and after the European presence. To understand the relationship between shape and size, we created linear regression models for PCs and the measurement of body diameter, with an examination of Pearson's correlation coefficient and p-value (Figure \@ref(fig:size-shape-regression-plots): C). The results demonstrate that shape changes significantly with size in all phases indicated by moderate positive relationships (0.3 ≤ r ≤ 0.7) and small p-values (≤ 0.05), except for PC1 in the Chinese period and PC2 in the pre-European period. That is, the shorter vessels are larger in body diameter according to the positive correlation between PC1 and body diameter. However, vessels from the Chinese period do not show this pattern. On the contrary, the negative relationship between PC2 and body diameter suggests that vessels with a narrower neck and mouth tend to have a larger body diameter.
 
 ```{r size-analysis-prep-1}
 library(ggpubr)
@@ -529,26 +528,29 @@ jpgs_imported_coo_size_pcs_metric <-
   left_join(pottery_data_tidy)
 ```
 
-```{r size-analysis-prep-2}
+```{r cv-metric-table-with-pc1-prep}
 # combine with cv information 
 size_pcs_cv_join <-
   jpgs_imported_coo_size_pcs_metric %>% 
   group_by(y) %>% 
-  mutate(Diameter1_Body_ave = round(mean(Diameter1_Body), 2),
-         cv_body_diameter = round(sd(Diameter1_Body)/mean(Diameter1_Body), 
-                                  digits = 2)*100) %>%
+  mutate(cv_body_diameter = round(raster::cv(Diameter1_Body), 2),
+         cv_neck_diameter = round(raster::cv(Diameter1_Neck), 2),
+         cv_rim_diameter = round(raster::cv(Diameter1_Rim), 2),
+         Diameter1_Body_mean = round(mean(Diameter1_Body), 2)) %>% 
   mutate(phase = as.factor(y)) %>% 
   left_join(cv_pcs_all) %>% 
-  left_join(pc1_df_with_filename)
-  #distinct(phase, cv_pc1, cv_pc2, cv_pc3, Diameter1_Body_ave, cv_body_diameter)
+  left_join(pc1_df_with_filename) %>% 
+  select(-y)
+  #distinct(phase, cv_pc1, cv_pc2, cv_pc3, Diameter1_Body_mean, cv_body_diameter)
 ```
 
 ```{r boxplot-size-by-phase}
+# prepare label
 size_cv_df <-
   size_pcs_cv_join %>% 
-  distinct(phase, Diameter1_Body_ave, cv_body_diameter, cv_pc1) %>% 
+  distinct(phase, Diameter1_Body_mean, cv_body_diameter, cv_pc1) %>% 
   mutate(cv_body_diameter_label = paste("CV =", cv_body_diameter, "%"),
-         Diameter1_Body_ave_label = paste("mean=", Diameter1_Body_ave))
+         Diameter1_Body_mean_label = paste("mean=", Diameter1_Body_mean))
 
 cv_diameter_label <- size_cv_df$cv_body_diameter_label
 
@@ -568,10 +570,10 @@ boxplot_size <-
         axis.text.y = element_text(size = rel(0.9)))
 ```
 
-```{r boxplot-pc1-ave-size}
+```{r byplot-cvs-pc1-size}
 library(ggrepel)
 y_limits <- c(NA, 32)
-boxplot_ave_size_cv_pc <-
+byplot_cvs_pc1_diameter <-
   size_cv_df %>% 
   ggplot(aes(cv_body_diameter, cv_pc1)) +
   geom_point() +
@@ -584,10 +586,6 @@ boxplot_ave_size_cv_pc <-
   theme(axis.text.x = element_text(size = rel(0.9)),
         axis.text.y = element_text(size = rel(0.9)))
 ```
-
-
-label = size_cv_df$phase,
-                   size = 2.5, ylim = y_limits
 
 ```{r pcs-size-regression}
 # can pc1 predict size by period?
@@ -627,10 +625,10 @@ pc2_size_reg <-
                        labels = c(seq(0, 10, 2)))
 ```
 
-```{r size-regression-plot-together}
+```{r plot-size-regression-together}
 # plot boxplot and regression together 
 left_column <-
-  plot_grid(boxplot_size, boxplot_ave_size_cv_pc, 
+  plot_grid(boxplot_size, byplot_cvs_pc1_diameter, 
             ncol = 1, rel_heights = c(1.1,1), 
             labels = c("A", "B"), label_size = 12 )
 
@@ -646,22 +644,22 @@ size_boxplot_regression <-
 
 ggsave(plot = size_boxplot_regression,
        here("analysis", "figures",
-            "size-boxplot-regression.jpg"),
+            "plot-size-boxplot-regression.jpg"),
        width = 180, 
        height = 100,
        dpi = 300,
        units = "mm")
 ```
 
-```{r, size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of the vessels across three phases. B: Scatter plots of shape variable, PC1 at the top and PC2 at the bottom, as a function of body diamater"}
+```{r, size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of vessels with coefficients of variation by phases. B: Coefficients of variation of vessel shape represented by PC1 in relation to vessel size represetnted by body diameter, showing a more standardization in vessel form in the Chinese period. C: Correlation between shape variables (PC1 and PC2) and body diameter of vessles with Person's r and P-values by phases"}
 knitr::include_graphics(here("analysis/figures/size-boxplot-regression.jpg"))
 ```
 
 # Discussion
 
-Previous investigations at Kiwulan suggested an unequal distribution of prestige goods, trade ornaments in particular, following the appearance of Europeans [@Cheng2008; @Wang2011], which hinted at the emergence of social inequality within the Indigenous community. Ceramic vessel shape standardization was examined to measure craft specialization as a proxy for social differentiation [@Costin2001; @Junker1999]. The result of our MANOVA demonstrates a significant difference in shapes between the pre-European and Post-European periods, and between the pre-European and the Chinese periods. The average shape presents as a round body with a wide rim and neck before European contact, which shifts to a more oval-shaped body with narrower rim and neck after the European presence. Shape changes are more pronounced during the Chinese contact period. In general, vessels become shorter in height over time, leading to an oval-shaped body. Moreover, size significantly varies with shape for vessels before and after the European presence. Shorter vessels with a narrower opening tended to have a larger body diameter. This correlation between size and shape can be also observed during the Chinese period, but there is no relationship with height. 
+Previous investigations at Kiwulan suggested an unequal distribution of prestige goods, trade ornaments in particular, following the appearance of Europeans [@Cheng2008; @Wang2011], which hinted at the emergence of social inequality within the Indigenous community. Ceramic vessel shape standardization was examined to measure craft specialization as a proxy for social differentiation [@Costin2001; @Junker1999]. The result of our MANOVA demonstrates a significant difference in shapes between the pre-European and Post-European periods, and between the pre-European and the Chinese periods. The average shape presents as a round body with a wide rim and neck before European contact, which shifts to a more oval-shaped body with narrower rim and neck after the European presence. Shape changes are more pronounced during the Chinese contact period. In general, vessels become shorter in height over time, leading to an oval-shaped body. This can be also supported by an increase in body diameter of vessels. Also, the correlation between shape and body diameter suggests that size significantly varies with vessel shape. Shorter vessels with a narrower opening tended to have a larger body diameter, indicative of a change in overall vessel form. 
 
-Our CV tests indicate that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. Pottery shape became more homogeneous and standardized after contact with Europeans and even more so after contact with the Chinese. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if form changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
+Our CV tests indicate that there are significant differences in shape standardization between the pre-European period and post-European period, and between the Chinese contact and either pre-European or post-European periods. Pottery shape became more homogeneous and standardized after contact with Europeans and even more so after contact with the Chinese. In addition, we found a larger and more standardized body diameter of vessels in the Chinese period. We notice the possibility of more human errors could be involved in hand-crafting when the size of artifacts increases [@Eerkens2001]. However, it is opposite for the ceramics in the Chinese period when we examining body diameter. This might support the intent to achieve a homogeneous form of vessels, but we still need to compare it with other metric variables to validate this claim. Compositional analysis shows that the clay pastes are similar, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. To determine if form changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909].
 
 The spatial analysis (Figure \@ref(fig:kernel-plot)) for pottery samples presents multiple clusters with high densities of pottery during European presence. Hypothesis testing on spatial randomness indicates a non-randomly dispersed distribution before European contact and more extreme dispersed distribution after European presence. In contrast, the distribution of pottery is more similar to random distributions during the Chinese period. This contradicts our expectation that clustered pattern will be observed with an increase in pottery standardization since the emergence of specialized groups. The absence of clusters in the Chinese period is notable because this was a time of a historically-documented decline of Indigenous population [@Chen2007; @Hsieh2009]. We might expect reduced numbers of potters to result in pottery production shrinking to a few locations in the settlement during this time. Although the overall number of vessels is smaller during the Chinese contact period, Figure \@ref(fig:kernel-plot) shows that pottery is distributed randomly across the sampling area without any distinctive clusters during this time. This suggests that differences in population across our three occupation phases are probably not driving variation in craft specialization.
 

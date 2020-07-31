@@ -59,3 +59,22 @@ sum_of_variances <- dispRity(data = op.p$x,
                              metric = c(sum, variances))
 summary(sum_of_variances)
 
+
+library(ggrepel)
+byplot_cv_pc_metric_diameter <-
+  size_pcs_cv_join %>%
+  rename(body = Diameter1_Body, neck =Diameter1_Neck, rim = Diameter1_Rim) %>%
+  select(body, neck, rim, cv_pc1, phase) %>%
+  pivot_longer(-c(cv_pc1, y, phase), names_to = "diameter", values_to = "width") %>%
+  ggplot(aes(x = width, y = cv_pc1, color = diameter)) +
+  geom_point() +
+  annotate("text", x = c(126, 120, 145), y = c(32, 30, 16),
+           label = c("Pre-European", "Post-European", "Chinese")) +
+  labs(x = "diameter (mm)",
+       y = "CV of PC1 (%)") +
+  scale_color_viridis(discrete = TRUE, option = "D") +
+  scale_fill_viridis(discrete = TRUE) +
+  theme_bw() +
+  theme(axis.text.x = element_text(size = rel(0.9)),
+        axis.text.y = element_text(size = rel(0.9)))
+```
