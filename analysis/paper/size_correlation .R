@@ -19,6 +19,8 @@ summary(linearMod)
 # are residuals normally distributed? Yes
 qqnorm(jpgs_imported_coo_size_pcs_metric$Diameter1_Body)
 
+
+-----------trying morphological disparity------------
 # assign landmarks and GPA
 jpgs_imported_coo_land <-
   jpgs_imported %>%
@@ -50,7 +52,7 @@ morphol.disparity(fit.shapephase,
                   iter = 9999)
 
 # using dispRity example:
-
+package(dispRity)
 phase_group <- crown.stem(op.p)
 
 subset <- custom.subsets(data = op.p$x, group= op.p$phase)
