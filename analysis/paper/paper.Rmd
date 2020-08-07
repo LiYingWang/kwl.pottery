@@ -655,15 +655,30 @@ ggsave(plot = size_boxplot_regression,
 knitr::include_graphics(here("analysis/figures/size-boxplot-regression.jpg"))
 ```
 
+```{r poisson-linear-model}
+total_potsherds <- read.csv(here("analysis", "data", "raw_data", "Kwl_total_potsherds.csv"))
+
+# poisson model
+fit <- glm(formula = sum_pot ~ cv_pc1,
+            family = "poisson",
+            data = total_potsherds)
+
+pval <- unname(coef(summary(fit))[,'Pr(>|z|)'][2])
+# how to print with a reasonable number of significant figures:
+pval_print <- signif(pval, 4)
+
+beta <- unname(coef(summary(fit))[,'Estimate'][2])
+# how to print with a reasonable number of significant figures:
+beta_print <- signif(beta, 4)
+```
+
 # Discussion
 
 Previous investigations at Kiwulan suggested an unequal distribution of prestige goods, trade ornaments in particular, following the appearance of Europeans with a high diversity of types [@Cheng2008; @Wang2011]. This hinted at the emergence of social inequality within the Indigenous community. To understand the relationship between social inequality and foreign presences, we examined ceramic vessel shape standardization to measure craft specialization as a proxy for social change [@Costin2001; @Junker1999]. The result of our MANOVA demonstrates a significant difference in shapes between the pre-European and Post-European periods, and the pre-European and Chinese periods. The average shape presents as a round body with a wide rim and neck before European contact, which shifts to a more oval-shaped body with narrower rim and neck after the European presence. Such shape is more pronounced in the Chinese period. In general, vessels become oval-shaped with a restricted mouth over time, which corresponds with an increase in body diameter of vessels. The correlation between shape and body diameter suggests that body diameter significantly varies with vessel shape. Oval-shaped vessels with a narrower opening tended to have a larger body diameter, indicative of a change in overall vessel form. 
 
-
-
 For the degree of shape standardization across periods, our CV tests on PC1 indicate that there are significant differences between Chinese contact and either pre-European or post-European periods. A test of morphological disparity also demonstrates a similar result as well (See Online Supplementary Materials), suggesting that pottery shape became more standardized after contact with the Chinese. In addition, we found a more homogeneous shape accompanied by standardized size, represented by the body diameter of vessels, in the Chinese period. Humans tend to make mistakes in hand-crafting when the size of an object increases, leading to higher variations in larger artifacts [@Eerkens2001]. However, it is opposite for the ceramics in the Chinese period when we use body diameter as our proxy variable of size. This might hint an intentional behavior to achieve a homogeneous form of vessels, but we still need more metric variables to assess the variation in size. Mineral composition shows that the clay pastes are similar throughout three phases, regardless of the increasing standardization of the pottery shape, reflecting continuity in the raw material sources. We can thus rule out changes in clay fabric as a factor in explaining changes in vessel shape. We note that a small sample size in the Chinese period may lead to a more standardized shape. However, this effect can be reduced using CV that scales variation to magnitude, allowing reliable comparison across uneven sample numbers, even at small sample size [@Eerkens2001]. Moreover, the MSLR test for equality of CVs enables a robust test between different sample numbers [@Krishnamoorthy2014].
 
-Whether standardization reflects an emergence of specialized production is associated with the number of producers, which distinguishes mechanical standardization from intentional standardization [@Costin2001; @Costin1995]. In other words, mechanical standardization depends on potter's skills and experiences that increased uniformity normally reflects fewer producers.
+Whether standardization reflects an emergence of specialized production is associated with the number of producers, which distinguishes mechanical standardization from intentional standardization expressed by stylish and functional attributes [@Costin2001; @Costin1995]. In other words, mechanical standardization depends on potter's skills and experiences that increased morphological uniformity normally reflects fewer producers. The population could be an indicator to estimate potential number of producer. According to the historical records [@Nakamura1938, pp. 12], the population in Kiwulan reached higher number in the 17th century as the European presence and then decreased in the Chinese period due to a movement of indigenous people to the south [@Chen2007]. The decline in population is supported by ceramic abundance in total, which indicates less population might be a factor leading to higher standardization in the Chinese period. 
 
 To determine if shape changes might be related to changes in the function of pots at Kiwulan, we used geochemical methods to extract and identify lipids trapped in the fabric of potsherds to identify foods that may have contributed residues absorbed into the clay [cf. @Kwak2015]. Unfortunately, we did not obtain useful results due to extremely low lipid yields, which is probably due to the very thin, dense, and low porosity fabric of Kiwulan pottery. These physical characteristics of the clay offer limited spaces to trap and protect organic molecules from microbiological degradation [cf. @Evershed2008, pp. 909]. 
 
