@@ -16,5 +16,13 @@ summary(disparity_data)
 
 plot(disparity_data)
 
-test.dispRity(disparity_data, test = wilcox.test,
-              correction = "bonferroni", details = TRUE)
+disparity <-
+  test.dispRity(disparity_data,
+                test = wilcox.test,
+                correction = "bonferroni",
+                details = TRUE)
+
+pre_post <- signif(disparity[[1]][[1]]$p.value, 4)
+pre_chi <- signif(disparity[[2]][[1]]$p.value, 4)
+post_chi <- signif(disparity[[3]][[1]]$p.value, 4)
+
