@@ -13,6 +13,8 @@ kw_dates_with_error$id <- with(kw_dates_with_error,
                                paste0(Square,"-",Layer))
 
 # Use oxcAAR to clibrate
+library(devtools)
+install_github('ISAAKiel/oxcAAR')
 library(oxcAAR)
 quickSetupOxcal()
 date_kwl <- oxcalCalibrate(kw_dates_with_error$rce,
