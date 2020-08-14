@@ -1,0 +1,65 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>JSON-reader</title>
+<script type="text/javascript" src="fs_utils.js"></script>
+<script type="text/javascript">
+    function openURL()
+    {
+     var url=document.getElementById("URL").value;
+     if(url)
+     {
+      getFromServer(url,function (txt){
+      parent.setFileContent(url,txt)},function (err){alert("Cannot open: "+url);})
+     };
+    };
+	function openFile(event) 
+	{
+     var input = event.target;
+     var fo;
+     var reader = new FileReader();
+     fo=document.getElementById("fileBrowser").files.item(0);
+     if(fo.type!="application/json")
+     {
+      alert("File type needs to be JSON");
+     };
+     fo.name;
+     reader.onload = function()
+     {
+      var dataText = reader.result;
+      if(!parent){return;};
+      parent.setFileContent(fo.name,dataText);
+     };
+     reader.readAsText(input.files[0]);
+    };
+    function initialise()
+    {
+     var a=getArgs();
+     if(a.source && (a.source=='url'))
+     {
+      document.getElementById('remote').style.display='block';
+      document.getElementById('local').style.display='none';
+     };
+     if(a.url)
+     {
+      document.getElementById('URL').value=a.url;
+      openURL();
+     };
+    };
+</script>
+  <link rel="stylesheet" type="text/css" href="../style/app.css">
+</head>
+<body onload="initialise()" style="padding:10px">
+  <div id='remote' style="display:none">
+  <h3>Remote URL</h3>
+  <input type="text" id="URL" value="" style="width:200px"/></br>
+  <button onclick="openURL()">Ok</button> 
+  </div>
+  <div id='local' style="display:block">
+  <h3>Local file</h3>
+  <input id="fileBrowser" type='file' accept='application/json' onchange='openFile(event)' style="width:200px"/><br/>
+  </div>
+</body>
+</html>

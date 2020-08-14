@@ -36,7 +36,8 @@ Imports:
     remotes (>= 2.1.0),
     magick,
     ggpubr,
-    geomorph
+    geomorph,
+    dispRity
 Remotes: benmarwick/wordcountaddin, benmarwick/rrtools
 Suggests: devtools, git2r
 URL: https://github.com/LiYingWang/kwl.pottery
