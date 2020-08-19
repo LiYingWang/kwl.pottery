@@ -43,9 +43,9 @@ three_phases <- 'Plot()
       Phase()
       {
         R_Date("NTU-3791", 340, 30);
-        R_Date("NTU-4292", 510, 75);
-        R_Date("NTU-4310", 360, 100);
         R_Date("NTU-4320", 340, 100);
+        R_Date("NTU-4310", 360, 100);
+        R_Date("NTU-4292", 510, 75);
         Interval( "Duration of Pre-European");
       };
         Boundary("End of Pre-European");
@@ -57,8 +57,8 @@ three_phases <- 'Plot()
         {
         R_Date("NTU-3993", 250, 40);
         R_Date("NTU-4016", 270, 45);
-        R_Date("NTU-4311", 310, 100);
         R_Date("NTU-4419", 280, 70);
+        R_Date("NTU-4311", 310, 100);
         Interval("Duration of Post-European");
         };
       Boundary("End of Post-European");
