@@ -1,5 +1,5 @@
 ---
-title: "Standardization of ceramic shape: A case studay from the Iron Age pottery from northeastern Taiwan"
+title: "Standardization of ceramic shape: A case study from the Iron Age pottery from northeastern Taiwan"
 
 author:
   - Li-Ying Wang

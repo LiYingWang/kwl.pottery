@@ -1,0 +1,103 @@
+---
+title: "Supplementary Data: 14C Modeling for Kiwualn Chronology"
+author: "Liying Wang and Ben Marwick"
+date: "8/18/2020"
+output: html_document
+bibliography: references.bib
+---
+
+# Introduction
+
+This document provides data and code for modeling the chronology of the upper component of Kiwulan. The full discussion of chronology is in the paper: The paper Standardization of ceramic shape: A case study from the Iron Age pottery from northeastern Taiwan. In this document, we calibrated all C14 dates [@Chen2007] first and then further modeled different phases related to foreign influences, pre- and post- European periods. Our purpose is to answer whether the C14 dates support a time range that corresponds to historical events of the presence of Europeans in Taiwan. The methods and results are included below. 
+
+```{r load-data}
+kw_dates <- readxl::read_excel(here::here("analysis", "data", "raw_data", "KWL_C14_dates.xlsx"))
+```
+
+```{r tidy-data}
+library(tidyverse)
+
+# subset dates with error value
+kw_dates_with_error <-
+  kw_dates  %>%
+  filter(!is.na(se))
+
+# convert rce to numeric
+kw_dates_with_error$rce <- as.numeric(kw_dates_with_error$rce)
+
+# make some kind of ID
+kw_dates_with_error$id <- with(kw_dates_with_error,
+                               paste0(Square,"-",Layer))
+```
+
+# Calibration
+
+We calibrated 23 dates from different contexts, including normal deposit, burials, and middens, at Kiwulan using oxcAAR package, which executes OxCal v4.4.1 with radiocarbon calibration curve IntCal20 [@Reimer2020].
+
+```{r calibrate-C14data}
+# Use oxcAAR to calibrate, run the following two lines to download ocxAAR 
+# library(devtools)
+# install_github('ISAAKiel/oxcAAR')
+library(oxcAAR)
+quickSetupOxcal()
+date_kwl <- oxcalCalibrate(kw_dates_with_error$rce,
+                           kw_dates_with_error$se,
+                           kw_dates_with_error$`Lab code`)
+date_kwl
+plot(date_kwl)
+calcurve_plot(date_kwl)
+```
+
+```{r data-for-modeling}
+# upper layer with estimation of phases
+kw_dates_with_error_three_phases <-
+  kw_dates_with_error %>%
+  filter(rce < 600) %>%
+  mutate(phase = rce) %>%
+  mutate(phase = ifelse(rce > 324, "Pre European", phase),
+         phase = ifelse(rce < 324, "Post European", phase)) %>%
+  select(`Lab code`, "rce", "se", "phase")
+```
+
+# Chronological model 
+
+We then constructed a Bayesian radiocarbon calibration model to obtain the range of pre-European and post-European we examined. We assume the phases are in an order that represents before and after the European arrival in 1624 [@Andrade2007]. The end of post-European is identified by the start of the Chinese migration to Yilan in 1780s [@Chen2007]. The results suggest that pre-European started between 1331–1635 cal AD at a 95.4% probability range and ended between 1458–1670 cal AD at a 99.7% probability range. The end date of pre-European also represents the start date of post-European, while the end date of post-European is 1517-1753 cal AD at a 95.4% probability range. The overall model is consistent with the historical data. 
+
+```{r modeling-upper-layer}
+# contiguous phases, not overlapping
+three_phases_con <- 'Plot()
+{
+    Sequence("Upper Layer")
+    {
+      Boundary("Start of Pre-European");
+      Phase()
+      {
+        R_Date("NTU-3791", 340, 30);
+        R_Date("NTU-4292", 510, 75);
+        R_Date("NTU-4310", 360, 100);
+        R_Date("NTU-4320", 340, 100);
+        Interval( "Duration of Pre-European");
+      };
+        Boundary("Pre-European - Post-European");
+      Phase()
+      {
+        R_Date("NTU-3993", 250, 40);
+        R_Date("NTU-4016", 270, 45);
+        R_Date("NTU-4311", 310, 100);
+        R_Date("NTU-4419", 280, 70);
+        Interval("Duration of Post-European");
+      };
+      Boundary("End of Post-European");
+    };
+};
+'
+```
+
+```{r plot}
+three_phases_con_results <- executeOxcalScript(three_phases_con)
+three_phases_con_text <- readOxcalOutput(three_phases_con_results)
+three_phases_result_con_data <- parseOxcalOutput(three_phases_con_text, only.R_Date = F)
+str(three_phases_result_con_data)
+print(three_phases_result_con_data)
+plot(three_phases_result_con_data)
+```
