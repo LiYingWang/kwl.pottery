@@ -32,7 +32,7 @@ kw_dates_with_error$id <- with(kw_dates_with_error,
 
 # Calibration
 
-We calibrated 23 dates from different contexts, including normal deposit, burials, and middens, at Kiwulan using oxcAAR package, which executes OxCal v4.4.1 with radiocarbon calibration curve IntCal20 [@Reimer2020].
+We calibrated 23 dates from different contexts, including normal deposit, burials, and middens, at Kiwulan using oxcAAR package, which executes OxCal v4.4.1 with radiocarbon calibration curve IntCal20 [@Reimer2020]. <!-- if this is not the full set of ages in Chen, then please explain how you choose them -->
 
 ```{r calibrate-C14data}
 # Use oxcAAR to calibrate, run the following two lines to download ocxAAR 
@@ -61,7 +61,9 @@ kw_dates_with_error_three_phases <-
 
 # Chronological model 
 
-We then constructed a Bayesian radiocarbon calibration model to obtain the range of pre-European and post-European we examined. We assume the phases are in an order that represents before and after the European arrival in 1624 [@Andrade2007]. The end of post-European is identified by the start of the Chinese migration to Yilan in 1780s [@Chen2007]. The results suggest that pre-European started between 1331–1635 cal AD at a 95.4% probability range and ended between 1458–1670 cal AD at a 99.7% probability range. The end date of pre-European also represents the start date of post-European, while the end date of post-European is 1517-1753 cal AD at a 95.4% probability range. The overall model is consistent with the historical data. 
+We then constructed a Bayesian radiocarbon calibration model to obtain the range of pre-European and post-European we examined. We assume the phases are in an order that represents before and after the European arrival in 1624 [@Andrade2007]. The end of post-European is identified by the start of the Chinese migration to Yilan in 1780s [@Chen2007].  <!-- please explain how you choose the subset of ages to go into this model -->
+
+The results suggest that the re-European period started between 1331–1635 cal AD at a 95.4% probability range and ended between 1458–1670 cal AD at a 99.7% probability range. The end date of pre-European also represents the start date of post-European, while the end date of post-European is 1517-1753 cal AD at a 95.4% probability range. The overall model is consistent with the historical data. 
 
 ```{r modeling-upper-layer}
 # contiguous phases, not overlapping
@@ -97,7 +99,7 @@ three_phases_con <- 'Plot()
 three_phases_con_results <- executeOxcalScript(three_phases_con)
 three_phases_con_text <- readOxcalOutput(three_phases_con_results)
 three_phases_result_con_data <- parseOxcalOutput(three_phases_con_text, only.R_Date = F)
-str(three_phases_result_con_data)
-print(three_phases_result_con_data)
+# str(three_phases_result_con_data)
+# print(three_phases_result_con_data)
 plot(three_phases_result_con_data)
 ```
