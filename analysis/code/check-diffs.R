@@ -21,8 +21,8 @@ tbl_out <- parse_log_detailed() %>%
 
 # choose two commits to compare, here I've got the most recent
 # one (the last row of the table), and the one 2-3 before that
-i <- nrow(tbl_out)
-j <- nrow(tbl_out) - 3
+i <- nrow(tbl_out) -1
+j <- nrow(tbl_out) -4
 
 # construct the terminal commands using the SHA of the commits we want to
 # compare, and the file path
@@ -38,8 +38,6 @@ later_commit <- system(git_show_str_1, intern = TRUE)
 diffobj::diffChr(earlier_commit,
                   later_commit,
                   mode = "sidebyside")
-
-
 
 ### --------------------------------------------------------------------
 # How to see rich diffs of two commits of a single R Markdown document on a GitHub repo
