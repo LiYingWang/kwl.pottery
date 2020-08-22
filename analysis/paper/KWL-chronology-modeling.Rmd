@@ -1,5 +1,5 @@
 ---
-title: "Supplementary Data: 14C Modeling for Kiwulan Chronology"
+title: "Supplementary Data: Radiocarbon Age Modeling for Kiwulan Chronology"
 author: "Li-Ying Wang and Ben Marwick"
 date: "8/18/2020"
 output: html_document
@@ -8,7 +8,7 @@ bibliography: references.bib
 
 # Introduction
 
-This document provides data and code for calibrating C14 dates and modeling the chronology of the upper component of Kiwulan. The full discussion of chronology is in the paper: Standardization of ceramic shape: A case study from the Iron Age pottery from northeastern Taiwan. There are 17 C14 dates from the upper component according to the excavation report [@Chen2007]. We calibrated 11 C14 dates after removing 6 dates that are not informative due to a long time range without standard deviation (< 200 yr). We further modeled two phases related to the European influence, pre- and post- European periods. Our purpose is to answer whether the C14 dates support a time range that corresponds to the historical events of the presence of the Europeans in Taiwan. 
+This document provides data and code for calibrating radiocarbon dates and modeling the chronology of the upper component of Kiwulan. The full discussion of chronology is in the paper: Standardization of ceramic shape: A case study from the Iron Age pottery from northeastern Taiwan. There are 17 radiocarbon dates from the upper component according to the excavation report [@Chen2007]. We calibrated 11 radiocarbon dates after removing 6 dates that are not informative due to their long time ranges without standard deviation (< 200 yr). We then modeled two phases related to the European influence, pre- and post- European periods. Our purpose is to answer whether the radiocarbon dates support a time range that corresponds to our artifact-based chronology in terms of the presence of Europeans in Taiwan. 
 
 ```{r load-data}
 kw_dates <- readxl::read_excel(here::here("analysis", "data", "raw_data", "KWL_C14_dates.xlsx"))
@@ -59,9 +59,9 @@ calcurve_plot(date_kwl)
 
 # Chronological model 
 
-We then constructed a Bayesian radiocarbon calibration model for the 11 dates to obtain the range of the pre-European and the post-European periods we examined. We assume that the two phases are in a time sequence with the arrival of the Europeans in 1624 as a break [@Andrade2007]. The end of the post-European period is identified by the start of the Chinese migration to Yilan in 1780s [@Chen2007]. 
+We constructed a Bayesian radiocarbon calibration model for the 11 dates to obtain the range of the pre-European and the post-European periods we examined. We assume that those two phases are in a time sequence with the arrival of the Europeans in 1624 as a break [@Andrade2007]. The end of the post-European period is identified by the start of the Chinese migration to Yilan in 1780s [@Chen2007]. 
 
-The results suggest that the pre-European period started between 998–1386 cal AD at a 95.4% probability range and ended between 1496–1656 cal AD at a 95.4% probability range. The end date of pre-European is the same as the start date of post-European (1496–1656 cal AD). The end date of post-European is 1524-1770 cal AD at a 93.4% probability range. In general, the overall model is consistent with the historical data that we expect.
+The results suggest that the pre-European period started between 998–1386 cal AD at a 95.4% probability range and ended between 1496–1656 cal AD at a 95.4% probability range. The start date of the post-European period is the same as the end date of the pre-European period (1496–1656 cal AD). The end date of the post-European period is 1524-1770 cal AD at a 93.4% probability range. In general, the overall model for radiocarbon age relative to the European contact is consistent with our artifact-based chronology.
 
 ```{r modeling-upper-layer}
 # contiguous phases, not overlapping
