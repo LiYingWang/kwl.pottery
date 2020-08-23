@@ -14,7 +14,7 @@ LazyData: true
 Imports:
     bookdown,
     here,
-    tidyverse, 
+    tidyverse (>= 1.3.0), 
     sf,
     git2r,
     devtools,
