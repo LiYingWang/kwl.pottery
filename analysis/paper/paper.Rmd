@@ -368,7 +368,7 @@ pc_plot <- tibble(pc = c(op.p$x[,1],
                          op.p$x[,2],
                          op.p$x[,3]),
                   phase = rep(op.p$fac$phase, 3),
-                  pcn = str_glue('PC{sort(rep(1:3, len))}'))
+                  pcn = as.character(str_glue('PC{sort(rep(1:3, len))}')))
 
 pc_cv_table <- 
 pc_plot %>% 
