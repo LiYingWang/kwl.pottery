@@ -1,4 +1,5 @@
 # read data
+library(tidyverse)
 library(readxl)
 thin_section <- read_excel(here::here("analysis", "data", "raw_data", "kwl_petrography.xlsx"), 2)
 sherd <- read_excel(here::here("analysis", "data", "raw_data", "kwl_petrography.xlsx"), 1)
@@ -91,7 +92,7 @@ ggplot(data = scores,
   ggtitle("PCA plot of thin sections - Mineral")
 
 # MANOVA
-man_pca <- manova(pca1$x ~pca1$phase)
+man_pca <- manova(pca1$x ~ pca1$phase)
 sum_man_all <- summary(man_pca, test="Pillai")
 summary.aov(man_pca)
 
@@ -114,4 +115,7 @@ sum_man_all_df <-
          `degrees of freedom` = `stats.den.Df`,
          `Pr(>F)` = `stats.Pr..F.`)
 
+#  Pillai’s Trace = 0.465, F = 0.775, df = 46,
+
 pval_all <- signif(unname(sum_man_all_df[,'Pr(>F)'][1]), 4)
+
