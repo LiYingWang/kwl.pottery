@@ -8,22 +8,20 @@
 
 This repository contains the data and code for our paper:
 
-> Wang, L.-Y., Marwick, B., (2020). *Standardization of ceramic shape: A case study of Iron Age pottery from northeastern Taiwan*. Journal of Archaeological Science: Reports 33
+> Wang, L.-Y., Marwick, B., (2020). Standardization of ceramic shape: A case study of Iron Age pottery from northeastern Taiwan. *Journal of Archaeological Science: Reports 33*
 > <https://doi.org/10.1016/j.jasrep.2020.102554>
 
 Our pre-print is online here:
 
-> Authors, (YYYY). *Title of your paper goes here*. Name of
-> journal/book, Accessed 15 Feb 2020. Online at
-> <https://doi.org/xxx/xxx>
+> Wang, L.-Y., Marwick, B., (2020). Standardization of ceramic shape: A case study from the Iron Age pottery from northeastern Taiwan. *Journal of Archaeological Science: Reports*, Accessed Aug 2020. Online at
+> <https://osf.io/preprints/socarxiv/q8hn9/>
 
 ### How to cite
 
 Please cite this compendium as:
 
-> Authors, (2020). *Compendium of R code and data for Title of your
-> paper goes here*. Accessed 15 Feb 2020. Online at
-> <https://doi.org/xxx/xxx>
+> Wang, L.-Y., Marwick, B., (2020). *Compendium of R code and data for Standardization of ceramic shape: A case study from the Iron Age pottery from northeastern Taiwan*. Accessed Aug 2020. Online at
+> <https://doi.org/10.17605/OSF.IO/ABVGF>
 
 ### How to download or install
 
