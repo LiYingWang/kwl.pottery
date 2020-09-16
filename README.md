@@ -8,8 +8,8 @@
 
 This repository contains the data and code for our paper:
 
-> Authors, (YYYY). *Title of your paper goes here*. Name of journal/book
-> <https://doi.org/xxx/xxx>
+> Wang, L.-Y., Marwick, B., (2020). *Standardization of ceramic shape: A case study of Iron Age pottery from northeastern Taiwan*. Journal of Archaeological Science: Reports 33
+> <https://doi.org/10.1016/j.jasrep.2020.102554>
 
 Our pre-print is online here:
 
