@@ -693,7 +693,7 @@ ggsave(plot = size_boxplot_regression,
 ```
 
 ```{r, size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of vessels with coefficients of variation by phases. B: Coefficients of variation of vessel shape represented by PC1 in relation to vessel size represented by body diameter, showing more standardization (lower CV values) in vessel form and size in the Chinese period. C: Correlation between shape variables (PC1 and PC2) and body diameter of vessels with Pearson's r and p-values by phases"}
-knitr::include_graphics(here("analysis/figures/size-boxplot-regression.jpg"))
+knitr::include_graphics(here("analysis/figures/plot-size-boxplot-regression.jpg"))
 ```
 
 ```{r morphological-disparity}
@@ -856,9 +856,9 @@ ggsave(here("analysis/figures/kde-and-pottery-distribution-composite-plot.png"))
 
 ```{r Monte-Carlo-spatial-pattern, fig.cap= "Histograms of simulated average nearest-neighbour distances (ANN) values from 1000 simulations for three phases. X-axis values based on meteres represent ANN expected value. Each sample distribution presents the null hypothesis with the blue line indicating the observed ANN value", fig.width=3}
 
-  image_resize(image_read( here("analysis", 
-                                "figures", 
-                                "plot-kde-ann-histograms.jpg")), 
+image_resize(image_read( here("analysis", 
+                              "figures", 
+                              "plot-kde-ann-histograms.jpg")), 
                geometry_area(width = 1000))
                         
 ```
