@@ -8,7 +8,14 @@ sherd <- read_excel(here::here("analysis", "data", "raw_data", "kwl_petrography.
 thin_section_combine <-
   thin_section %>%
   mutate(Quartz = `Monocrystalline quartz` + `Polycrystalline quartz`,
-         Argillite_all = `Argillite` + `Reddish-brown Argillite`)
+         Argillite_all = `Argillite` + `Reddish-brown Argillite`) %>%
+  mutate(phase = case_when(
+    `phase` == "pre" ~ "pre-European",
+    `phase` == "post" ~ "post-European",
+    `phase` == "chi" ~ "Chinese",
+    TRUE ~ "NA"))
+
+table(thin_section_combine$phase)
 
 # prepare data for pca
 thin_section_combine_pca <-
@@ -25,15 +32,17 @@ kwl_th_hulls <-
   unnest(hulls)
 
 library(ggplot2)
-ggplot(thin_section_combine,
-       aes(Quartz,
-           Argillite_all,
-           colour = phase,
-           fill = phase)) +
+argi_quartz <-
+  ggplot(thin_section_combine,
+         aes(Quartz,
+             Argillite_all,
+             colour = phase,
+             fill = phase)) +
   geom_point() +
   geom_polygon(data = kwl_th_hulls,
                alpha = 0.1,
                color  = NA) +
+  labs(y = "Argillite") +
   theme_minimal()
 
 # convex hulls for time periods by argillite and metasandstone
@@ -45,16 +54,27 @@ kwl_th_hulls2 <-
   select(phase, hulls) %>%
   unnest(hulls)
 
-ggplot(thin_section_combine,
-       aes(Metasandstone,
-           Argillite_all,
-           colour = phase,
-           fill = phase)) +
+argi_metasand <-
+  ggplot(thin_section_combine,
+         aes(Metasandstone,
+             Argillite_all,
+             colour = phase,
+             fill = phase)) +
   geom_point() +
   geom_polygon(data = kwl_th_hulls2,
                alpha = 0.1,
                color  = NA) +
-  theme_minimal()
+  labs(y = "Argillite") +
+  theme_minimal() +
+  theme(legend.position = "none")
+
+library(cowplot)
+plot_grid(argi_metasand, argi_quartz,
+          labels = c('A', 'B'), label_size = 12,
+          rel_widths = c(0.7, 1))
+
+ggsave(here::here("analysis/figures/byplot_minerals.png"),
+       w = 8, h = 3)
 
 # PCA
 pca1 <- prcomp(thin_section_combine_pca, scale. = TRUE)
@@ -86,10 +106,11 @@ ggplot(data = scores,
   geom_point() +
   # geom_text(aes(label = rownames(scores)), alpha = 0.8, size = 4) +
   geom_polygon(data = pca_hulls,
-               alpha = 0.1,
+               alpha = 0.2,
                color  = NA) +
-  theme_minimal() +
-  ggtitle("PCA plot of thin sections - Mineral")
+  theme_minimal()
+
+ggsave(here::here("analysis/figures/pca-for-minerals.png"))
 
 # MANOVA
 man_pca <- manova(pca1$x ~ pca1$phase)
