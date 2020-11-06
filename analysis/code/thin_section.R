@@ -110,7 +110,7 @@ ggplot(data = scores,
                color  = NA) +
   theme_minimal()
 
-ggsave(here::here("analysis/figures/pca-for-minerals.png"))
+ggsave(here::here("analysis/figures/pca-for-minerals.png"), w = 5, h = 3)
 
 # MANOVA
 man_pca <- manova(pca1$x ~ pca1$phase)
