@@ -66,16 +66,16 @@ Despite few ceramic studies using EFA to date, this approach is promising for an
 
 Ceramics analyzed in this study come from 40 units (4m by 4m each) sampled from the central, undisturbed area of archaeological excavations at Kiwulan (Figure \@ref(fig:KWL-map); Figure \@ref(fig:KWL-sam-area)). The chronology of the archaeological deposits consists of two cultural components, the upper and the lower, with a sterile layer in between [@Chen2007]. We focus on the upper component, dated from AD 1350 to 1850, because it spans the late Iron Age and the historical period. The historical period in Taiwan started with the presence of the Europeans in the early 17th century. The Dutch first occupied southern Taiwan in 1624, followed by the Spanish in northern Taiwan in 1626 [@Andrade2007]. In 1642, the Spanish were expelled by the Dutch, who then took over the Spanish forts at Helping Dau in Keelung, and in Tamsui. Western Taiwan remained under Dutch colonial rule until 1662 when the Kingdom of Tungning in Taiwan was founded by Koxinga, a loyalist of the Ming dynasty of China [@Andrade2007]. 
 
-```{r, KWL-map, fig.cap = "Map illustrating the location of Kiwulan, and other locations in northern Taiwan that are named in the text. Map data is from naturalearthdata.com", fig.width=image_width_2_col_inch}
+```{r KWL-map, fig.cap = "Map illustrating the location of Kiwulan, and other locations in northern Taiwan that are named in the text. Map data is from naturalearthdata.com", fig.width=image_width_2_col_inch}
 library(here)
 knitr::include_graphics(here("analysis", "figures", "kiwulan-location-map.jpg"))
 ```
 
-```{r, KWL-sam-area, fig.cap = "Map showing the largest section of excavation areas at Kiwulan, and the distribution of forty squares sampled in this paper presented in red with square ID number. Small dots represent the location of post-holes. Each square is 4 x 4 m", fig.width=image_width_2_col_inch}
+```{r KWL-sam-area, fig.cap = "Map showing the largest section of excavation areas at Kiwulan, and the distribution of forty squares sampled in this paper presented in red with square ID number. Small dots represent the location of post-holes. Each square is 4 x 4 m", fig.width=image_width_2_col_inch}
 knitr::include_graphics(here("analysis", "figures", "KWL-excavation-map.jpg"))
 ```
 
-```{r}
+```{r thin-section-stats}
 library(readxl)
 library(tidyverse)
 thin_section <- read_excel(here::here("analysis", "data", "raw_data", "kwl_petrography.xlsx"), 2)
@@ -123,7 +123,7 @@ The most abundant artifacts in the upper component are locally manufactured cera
 
 Petrographic analysis for 34 thin sections presents a high percentage of inclusions (15-50%), including argillite (15-40%), metasandstone (1-10%), sandstone fragments (1-6%), quartz (1-5%), and trace amounts of feldspar and slate. Particle sizes range from 500 to 1300 microns. In general, the vessel fabric presents a mixture of fine, rounded argillite with a small amount of rounded metasandstone and rounded sub-angular monocrystalline quartz. This composition is consistent with the mineralogical composition of local raw materials found in the Yilan Plain [@Chen2016]. There are no significant changes in the inclusions over time, indicating continuity in pottery fabric composition across the three periods (Pillai's Trace = $`r pillai`$, F = $`r F_value`$, df = $`r df`$, p = $`r pval_all`$) [@WangandMarwick2020]. 
 
-```{r, KWL-pots, fig.cap = "A typical pot from Kiwulan (left) and an example of a pottery drawing used for outline analysis (right)", fig.width=image_width_2_col_inch}
+```{r KWL-pots-image, fig.cap = "A typical pot from Kiwulan (left) and an example of a pottery drawing used for outline analysis (right)", fig.width=image_width_2_col_inch}
 knitr::include_graphics(here("analysis", "figures", "pots.png"))
 ```
 
@@ -291,14 +291,14 @@ vari_three <- round(pro_vari$cumsum[3],4)*100
 
 The first two principal components (PCs) of the PCA on the elliptic Fourier coefficients explain `r vari_two`% of the total variance, of which `r pc1`% is explained by the first principal component. With the third component, the first three principal components explain `r vari_three`% of the total variance. PC1 captures the height of the vessels, from tall to short, and the roundness of the body from round to oval-shaped (Figure \@ref(fig:first-two-PCs-byplot-and-tps-plot)). PC2 relates to the neck and mouth constriction, from narrow to wide. PC3 explains a smaller portion of the variance (`r pc3`%), which relates to the degree of the flare in the neck, from a curved to a straight shape. The results reflect a large overlap in shapes from three occupations phases, especially for shapes in the pre-European and post-European periods. However, the spread of shape distribution indicates a wider variation in shapes in the pre-European and post-European periods compared to those in the Chinese period along both PC1 and PC2 axes. In other words, we find a decrease in shape variance in the Chinese period evidenced in the shorter height and narrower mouth of vessels used in that period.
 
-```{r}
+```{r PCA-byplot}
 # PCA byplot, we save it to disk to use in the next chunk
 png(here("analysis/figures/pca-chull.png"), res = 300, w = 1800, h = 1000)
 plot_PCA(op.p, ~phase, chullfilled = TRUE)
 invisible(dev.off())
 ```
 
-```{r}
+```{r combine-multiple-plots}
 library(magick)
 # composite composite image of thin plate spline and PCA output
 iso_plot <- image_read(here("analysis/figures/tps-iso.png"))
@@ -311,7 +311,7 @@ iso_pca_crop <- image_crop(iso_pca, geometry = geometry_area(1800, 750, 0, 0))
 image_write(iso_pca_crop, here("analysis/figures/iso_pca_composit_crop.png"))
 ```
 
-```{r, first-two-PCs-byplot-and-tps-plot, echo=FALSE, fig.cap='Left: Significant differences in average vessel shapes between the Chinese and the post-European period are visible using thin plate splines (TPS), with outline deformations required to pass from an extreme of one morphospace to another. Right: Pottery shape distribution by each occupation phase according to the first two PCs.'}
+```{r first-two-PCs-byplot-and-tps-plot, echo=FALSE, fig.cap='Left: Significant differences in average vessel shapes between the Chinese and the post-European period are visible using thin plate splines (TPS), with outline deformations required to pass from an extreme of one morphospace to another. Right: Pottery shape distribution by each occupation phase according to the first two PCs.'}
 knitr::include_graphics(here("analysis/figures/iso_pca_composit_crop.png"))
 ```
 
@@ -692,7 +692,7 @@ ggsave(plot = size_boxplot_regression,
        units = "mm")
 ```
 
-```{r, size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of vessels with coefficients of variation by phases. B: Coefficients of variation of vessel shape represented by PC1 in relation to vessel size represented by body diameter, showing more standardization (lower CV values) in vessel form and size in the Chinese period. C: Correlation between shape variables (PC1 and PC2) and body diameter of vessels with Pearson's r and p-values by phases"}
+```{r size-shape-regression-plots, echo=FALSE, fig.cap= "A: Distribution of the body diameter of vessels with coefficients of variation by phases. B: Coefficients of variation of vessel shape represented by PC1 in relation to vessel size represented by body diameter, showing more standardization (lower CV values) in vessel form and size in the Chinese period. C: Correlation between shape variables (PC1 and PC2) and body diameter of vessels with Pearson's r and p-values by phases"}
 knitr::include_graphics(here("analysis/figures/plot-size-boxplot-regression.jpg"))
 ```
 
@@ -898,7 +898,7 @@ if ("devtools" %in% installed.packages()) devtools::session_info()
 
 The current Git commit details are:
 
-```{r}
+```{r git-commit-file}
 # what commit is this file at? 
 if ("git2r" %in% installed.packages() & git2r::in_repository(path = ".")) git2r::repository(here::here())  
 ```
